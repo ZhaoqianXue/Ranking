@@ -5121,7 +5121,7 @@ ui.run(
     title='Spectral Ranking',
     reload=True,
     dark=False,
-    port=8080,
+    port=int(os.getenv('PORT', 8080)),
     host='0.0.0.0',
     favicon='Σ',
     show=True
