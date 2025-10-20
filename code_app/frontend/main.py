@@ -731,7 +731,7 @@ body {
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-API_BASE = 'http://127.0.0.1:8001/api/ranking'
+API_BASE = f'{API_BASE_URL}/api/ranking' 
 
 # Global references for shared UI containers and elements
 report_container_ref = None
@@ -3126,7 +3126,7 @@ async def send_initial_analysis_request(messages_container, file_id):
         async with aiohttp.ClientSession() as session:
             payload = {'messages': messages}
             try:
-                async with session.post('http://127.0.0.1:8001/api/agent/chat', json=payload, timeout=60) as resp:
+                async with session.post(f'{API_BASE_URL}/api/agent/chat', json=payload, timeout=60) as resp:
                     if resp.status == 200:
                         result = await resp.json()
 
@@ -3692,7 +3692,7 @@ def show_main_report(result):
 
     except Exception as e:
         print(f"Error displaying main report: {e}")
-        ui.notification(f'Error displaying report: {str(e)}', type='negative')
+        ui.notify(f'Error displaying report: {str(e)}', type='negative')
 
 def show_report(report):
     with ui.element('div').classes('report-card').style('max-width: 1400px; margin: 0 auto; width: 100%;'):
@@ -4775,7 +4775,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 
                 # Validate input file
                 if not uploaded_state['content']:
-                    ui.notification('🚨 Please upload a CSV file', type='negative')
+                    ui.notify('🚨 Please upload a CSV file', type='negative')
                     status_container.clear()
                     return
 
@@ -4790,7 +4790,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 job_id, err = await create_job_async(file_name, file_bytes, (ranking_direction_state['value'] == 'True'), b_value, seed_value)
                 if err or not job_id:
                     logger.error(f"Create job failed: {err}")
-                    ui.notification(f'🚨 Analysis Failed: {err}', type='negative')
+                    ui.notify(f'🚨 Analysis Failed: {err}', type='negative')
                     with status_container:
                         with ui.element('div').classes('status-card info-card error').style('''
                             background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
@@ -4814,13 +4814,13 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 # Poll status
                 status = await poll_status_async(job_id)
                 if status.get('status') != 'succeeded':
-                    ui.notification(f'🚨 Analysis Failed: {status.get("message","Unknown error")}', type='negative')
+                    ui.notify(f'🚨 Analysis Failed: {status.get("message","Unknown error")}', type='negative')
                     return
 
                 # Fetch results
                 result, err = await fetch_results_async(job_id)
                 if err or not result:
-                    ui.notification(f'🚨 Fetch Results Failed: {err}', type='negative')
+                    ui.notify(f'🚨 Fetch Results Failed: {err}', type='negative')
                     return
 
                 status_container.clear()
@@ -4852,7 +4852,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
             except Exception as e:
                 error_msg = f"Unexpected system error: {str(e)}"
                 logger.error(error_msg)
-                ui.notification(f'🚨 System Error: {error_msg}', type='negative')
+                ui.notify(f'🚨 System Error: {error_msg}', type='negative')
                 status_container.clear()
                 with status_container:
                     with ui.element('div').classes('status-card info-card error'):
