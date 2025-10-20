@@ -1,0 +1,11 @@
+"method","theta_hat","rank","ci_two_left","ci_two_right","ci_left","ci_uniform_left"
+"calme-3.2-instruct-78b",0.925746370865313,1,1,7,1,1
+"calme-3.1-instruct-78b",0.441798668301609,2,1,10,1,1
+"CalmeRys-78B-Orpo-v0.1",0.400423063563406,3,1,10,1,1
+"calme-2.4-rys-78b",0.315203091799392,4,1,10,1,1
+"Qwen2.5-72B-Instruct-abliterat",-0.306352058835333,7,2,10,2,1
+"Qwen2.5-72B-Instruct",-0.194202918025633,6,1,10,2,1
+"calme-2.1-qwen2.5-72b",-0.349035296392538,8,2,10,2,1
+"Homer-v1.0-Qwen2.5-72B",0.105106318557678,5,1,10,1,1
+"qwen2.5-test-32b-it",-0.703997881782908,10,2,10,4,2
+"Linkbricks-Horizon-AI-Avengers",-0.634689358050986,9,2,10,4,2

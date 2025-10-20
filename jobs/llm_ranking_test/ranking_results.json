@@ -1,0 +1,235 @@
+{
+  "job_id": "jobs",
+  "params": {
+    "bigbetter": true,
+    "B": 2000,
+    "seed": 42
+  },
+  "methods": [
+    {
+      "name": "calme-3.2-instruct-78b",
+      "theta_hat": 0.7597,
+      "rank": 1,
+      "ci_two_sided": [
+        1,
+        11
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "calme-3.1-instruct-78b",
+      "theta_hat": 0.5572,
+      "rank": 3,
+      "ci_two_sided": [
+        1,
+        13
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "CalmeRys-78B-Orpo-v0.1",
+      "theta_hat": 0.4844,
+      "rank": 4,
+      "ci_two_sided": [
+        1,
+        14
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "calme-2.4-rys-78b",
+      "theta_hat": 0.4472,
+      "rank": 5,
+      "ci_two_sided": [
+        1,
+        14
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct-abliterat",
+      "theta_hat": -0.1424,
+      "rank": 12,
+      "ci_two_sided": [
+        2,
+        20
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct",
+      "theta_hat": -0.0654,
+      "rank": 11,
+      "ci_two_sided": [
+        1,
+        20
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "calme-2.1-qwen2.5-72b",
+      "theta_hat": -0.2898,
+      "rank": 13,
+      "ci_two_sided": [
+        4,
+        20
+      ],
+      "ci_left": 5,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "Homer-v1.0-Qwen2.5-72B",
+      "theta_hat": 0.3637,
+      "rank": 6,
+      "ci_two_sided": [
+        1,
+        17
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "qwen2.5-test-32b-it",
+      "theta_hat": -0.4452,
+      "rank": 16,
+      "ci_two_sided": [
+        6,
+        20
+      ],
+      "ci_left": 8,
+      "ci_uniform_left": 3
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Avengers",
+      "theta_hat": -0.4081,
+      "rank": 15,
+      "ci_two_sided": [
+        6,
+        20
+      ],
+      "ci_left": 6,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "calme-2.2-qwen2.5-72b",
+      "theta_hat": -0.5584,
+      "rank": 20,
+      "ci_two_sided": [
+        8,
+        20
+      ],
+      "ci_left": 9,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "FluentlyLM-Prinum",
+      "theta_hat": -0.3543,
+      "rank": 14,
+      "ci_two_sided": [
+        5,
+        20
+      ],
+      "ci_left": 6,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "T3Q-qwen2.5-14b-v1.0-e3",
+      "theta_hat": 0.3451,
+      "rank": 7,
+      "ci_two_sided": [
+        1,
+        17
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "T3Q-Qwen2.5-14B-Instruct-1M-e3",
+      "theta_hat": 0.6018,
+      "rank": 2,
+      "ci_two_sided": [
+        1,
+        12
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Qwen2.5-32B-Instruct-abliterat",
+      "theta_hat": -0.5222,
+      "rank": 18,
+      "ci_two_sided": [
+        8,
+        20
+      ],
+      "ci_left": 8,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "Gilgamesh-72B",
+      "theta_hat": 0.0381,
+      "rank": 9,
+      "ci_two_sided": [
+        1,
+        20
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "ultiima-72B",
+      "theta_hat": -0.0414,
+      "rank": 10,
+      "ci_two_sided": [
+        1,
+        20
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "zetasepic-abliteratedV2-Qwen2.",
+      "theta_hat": -0.5438,
+      "rank": 19,
+      "ci_two_sided": [
+        8,
+        20
+      ],
+      "ci_left": 9,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "Awqward2.5-32B-Instruct",
+      "theta_hat": -0.4779,
+      "rank": 17,
+      "ci_two_sided": [
+        6,
+        20
+      ],
+      "ci_left": 8,
+      "ci_uniform_left": 3
+    },
+    {
+      "name": "test-2.5-72B",
+      "theta_hat": 0.2518,
+      "rank": 8,
+      "ci_two_sided": [
+        1,
+        20
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    }
+  ],
+  "metadata": {
+    "n_samples": 6,
+    "k_methods": 20,
+    "runtime_sec": 0.6997
+  }
+}

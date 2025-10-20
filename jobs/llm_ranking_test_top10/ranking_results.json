@@ -1,0 +1,125 @@
+{
+  "job_id": "jobs",
+  "params": {
+    "bigbetter": true,
+    "B": 2000,
+    "seed": 42
+  },
+  "methods": [
+    {
+      "name": "calme-3.2-instruct-78b",
+      "theta_hat": 0.9257,
+      "rank": 1,
+      "ci_two_sided": [
+        1,
+        7
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "calme-3.1-instruct-78b",
+      "theta_hat": 0.4418,
+      "rank": 2,
+      "ci_two_sided": [
+        1,
+        10
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "CalmeRys-78B-Orpo-v0.1",
+      "theta_hat": 0.4004,
+      "rank": 3,
+      "ci_two_sided": [
+        1,
+        10
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "calme-2.4-rys-78b",
+      "theta_hat": 0.3152,
+      "rank": 4,
+      "ci_two_sided": [
+        1,
+        10
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct-abliterat",
+      "theta_hat": -0.3064,
+      "rank": 7,
+      "ci_two_sided": [
+        2,
+        10
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct",
+      "theta_hat": -0.1942,
+      "rank": 6,
+      "ci_two_sided": [
+        1,
+        10
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "calme-2.1-qwen2.5-72b",
+      "theta_hat": -0.349,
+      "rank": 8,
+      "ci_two_sided": [
+        2,
+        10
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Homer-v1.0-Qwen2.5-72B",
+      "theta_hat": 0.1051,
+      "rank": 5,
+      "ci_two_sided": [
+        1,
+        10
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "qwen2.5-test-32b-it",
+      "theta_hat": -0.704,
+      "rank": 10,
+      "ci_two_sided": [
+        2,
+        10
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Avengers",
+      "theta_hat": -0.6347,
+      "rank": 9,
+      "ci_two_sided": [
+        2,
+        10
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 2
+    }
+  ],
+  "metadata": {
+    "n_samples": 6,
+    "k_methods": 10,
+    "runtime_sec": 0.3683
+  }
+}

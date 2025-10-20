@@ -1,0 +1,70 @@
+{
+  "timestamp": "2025-10-13T01:36:49.703550",
+  "total_models": 21,
+  "virtual_benchmarks": [
+    "win_rate",
+    "effective_score",
+    "total_games",
+    "tie_rate",
+    "creative_writing_win_rate",
+    "math_win_rate",
+    "instruction_following_win_rate",
+    "coding_win_rate",
+    "hard_prompt_win_rate",
+    "longer_query_win_rate",
+    "multi_turn_win_rate"
+  ],
+  "models": [
+    "claude-opus-4-20250514-th",
+    "deepseek-r1-0528",
+    "grok-3-preview-02-24",
+    "claude-sonnet-4-20250514",
+    "o4-mini-2025-04-16",
+    "mistral-medium-2505",
+    "gemma-3n-e4b-it",
+    "grok-3-mini-beta",
+    "qwen3-30b-a3b",
+    "gemini-2.5-flash",
+    "claude-opus-4-20250514",
+    "gemini-2.0-flash-001",
+    "o3-mini",
+    "claude-sonnet-4-20250514-",
+    "llama-4-maverick-03-26-ex",
+    "gemma-3-27b-it",
+    "gemini-2.5-pro",
+    "claude-3-5-sonnet-2024102",
+    "claude-3-7-sonnet-2025021",
+    "claude-3-7-sonnet-2025021",
+    "command-a-03-2025"
+  ],
+  "shape": [
+    11,
+    21
+  ],
+  "source": "Arena Human Preference Dataset via arena_data_collector.py",
+  "prepared_for": "ranking_cli.R spectral ranking analysis",
+  "min_games_threshold": 5,
+  "category_min_games_threshold": 3,
+  "virtual_benchmarks_explanation": {
+    "win_rate": "Overall win rate (wins / total_games)",
+    "effective_score": "Weighted score (win=1, tie=0.5, loss=0)",
+    "total_games": "Total number of comparisons participated in",
+    "tie_rate": "Tie rate (ties / total_games)",
+    "creative_writing_win_rate": "Win rate in creative writing tasks",
+    "math_win_rate": "Win rate in mathematics reasoning tasks",
+    "instruction_following_win_rate": "Win rate in instruction following tasks",
+    "coding_win_rate": "Win rate in programming/coding tasks",
+    "hard_prompt_win_rate": "Win rate in hard/complex prompt tasks",
+    "longer_query_win_rate": "Win rate in longer query tasks (>500 tokens)",
+    "multi_turn_win_rate": "Win rate in multi-turn conversation tasks"
+  },
+  "task_categories": {
+    "Creative Writing": "Tasks requiring originality and imagination",
+    "Math": "Mathematics and logical reasoning tasks",
+    "Instruction Following": "Tasks requiring precise instruction execution",
+    "Coding": "Programming and code-related tasks",
+    "Hard Prompt": "Complex tasks meeting \u22656 difficulty criteria",
+    "Longer Query": "Queries with >500 tokens",
+    "Multi-Turn": "Conversations with >1 turns"
+  }
+}
