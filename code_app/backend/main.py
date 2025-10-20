@@ -64,6 +64,11 @@ def run_ranking_script(job_id: str):
     status_path = os.path.join(job_dir, 'status.json')
     
     try:
+        # Validate Rscript and script availability early for clearer errors on Azure
+        if not shutil.which('Rscript'):
+            raise FileNotFoundError("Rscript executable not found. Ensure R is installed in the backend environment.")
+        if not os.path.exists(R_SCRIPT_PATH):
+            raise FileNotFoundError(f"R script not found at {R_SCRIPT_PATH}")
         with open(params_path, 'r') as f:
             params = json.load(f)
         

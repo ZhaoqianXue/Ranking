@@ -183,7 +183,11 @@ async def run_custom_ranking(model_name: str, scores: Dict[str, float]) -> Dict[
 
     try:
         # 3. Run the spectral ranking R script as a subprocess
+        if not shutil.which('Rscript'):
+            raise FileNotFoundError("Rscript executable not found. Ensure R is installed in the running environment.")
         ranking_script = os.path.join(PROJECT_ROOT, 'demo_r', 'ranking_cli.R')
+        if not os.path.exists(ranking_script):
+            raise FileNotFoundError(f"R script not found at {ranking_script}")
         cmd = [
             'Rscript', ranking_script,
             '--csv', temp_csv_path,
@@ -204,7 +208,7 @@ async def run_custom_ranking(model_name: str, scores: Dict[str, float]) -> Dict[
         stdout, stderr = await proc.communicate()
 
         if proc.returncode != 0:
-            error_message = stderr.decode()
+            error_message = stderr.decode() or stdout.decode()
             logger.error(f"Spectral ranking script failed for job {job_id}: {error_message}")
             raise RuntimeError(f"Spectral ranking failed: {error_message}")
 
