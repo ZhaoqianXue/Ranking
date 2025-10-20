@@ -1,0 +1,35 @@
+# Existing entries...
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# Project specific
+agent_uploads/
+jobs/
+temp_ranking_jobs/
+data_llm/
+*.backup
+
+# Azure specific
+.env
+.env.local
+.env.production
