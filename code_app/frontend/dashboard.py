@@ -7,6 +7,7 @@ import logging
 import numpy as np
 import os
 import sys
+from plotly.subplots import make_subplots
 
 # Get project root directory dynamically and add to path for absolute imports
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
