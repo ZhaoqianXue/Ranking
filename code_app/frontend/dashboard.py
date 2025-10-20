@@ -7,7 +7,6 @@ import logging
 import numpy as np
 import os
 import sys
-from plotly.subplots import make_subplots
 
 # Get project root directory dynamically and add to path for absolute imports
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
@@ -1032,6 +1031,9 @@ def create_ranking_table(data, highlight_model: str = None):
                 # Fallback to average-based ranking
                 create_average_ranking_table(data)
 
+    # Add shared table styles
+    ui.add_head_html(f'<style>{TABLE_STYLES}</style>')
+
 def create_html_table(columns, rows, table_id, highlight_model: str = None):
     """Create HTML table with proper rendering of HTML content"""
     # Check if this is the Arena table to apply special layout
@@ -1130,15 +1132,8 @@ def create_html_table(columns, rows, table_id, highlight_model: str = None):
 
     return table_html
 
-def create_spectral_ranking_table(data, spectral_results, highlight_model=None):
-    """Creates a side-by-side comparison table of original and spectral rankings."""
-    TABLE_STYLES = get_table_styles()
-    ui.add_head_html(f'<style>{TABLE_STYLES}</style>')
-
-    if data is None or not data.get("models"):
-        ui.label("No data available for spectral ranking table.").classes('text-negative')
-        return
-
+def create_spectral_ranking_table(data, spectral_results, highlight_model: str = None):
+    """Create table using spectral ranking results with all benchmark scores"""
     is_arena = any(method.get('benchmark_scores', {}).get('creative_writing') is not None
                    for method in spectral_results.get('methods', []))
 
@@ -1394,11 +1389,10 @@ def create_spectral_ranking_table(data, spectral_results, highlight_model=None):
         ui.html(table_html).classes('spectral-table-html')
 
     # Add shared table styles
-    ui.add_css(TABLE_STYLES)
+    ui.add_head_html(f'<style>{TABLE_STYLES}</style>')
 
 def create_arena_ranking_table(spectral_results, is_arena_specific=False):
     """Create table for Arena spectral ranking results (no benchmark scores)"""
-    TABLE_STYLES = get_table_styles()
     # Create table with NiceGUI
     columns = [
         {'name': 'model', 'label': 'Model', 'field': 'model', 'align': 'left', 'style': 'width: 300px; max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;', 'sortable': True},
