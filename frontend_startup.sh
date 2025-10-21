@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Install R and required packages for spectrum ranking
-apt-get update
-apt-get install -y r-base r-base-dev libcurl4-openssl-dev libssl-dev libxml2-dev libgomp1
-
-# Install R packages needed for spectrum ranking
-R -e "install.packages(c('MASS', 'Matrix', 'stats4'), repos='https://cran.rstudio.com/', dependencies=TRUE)"
-
 # Create necessary directories
 mkdir -p /home/site/wwwroot/jobs
 mkdir -p /home/site/wwwroot/agent_uploads

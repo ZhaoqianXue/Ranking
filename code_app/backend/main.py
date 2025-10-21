@@ -6,6 +6,7 @@ import asyncio
 import math
 import csv
 import re
+import shutil
 from typing import Any, Dict, List, Optional
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,6 +14,20 @@ from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel
 import aiohttp
 import logging
+
+# Ensure the project root is in the Python path
+import sys
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+# Try to import the custom ranking function at module level
+try:
+    from code_app.backend.data_ranking.custom_model_ranking import run_custom_ranking
+    CUSTOM_RANKING_AVAILABLE = True
+except ImportError as e:
+    logger.error(f"Failed to import custom ranking function: {e}")
+    CUSTOM_RANKING_AVAILABLE = False
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -187,6 +202,28 @@ async def get_job_results(job_id: str):
         return results
     
     raise HTTPException(status_code=500, detail=f"Unknown job status: {status.get('status')}")
+
+
+@app.post("/api/ranking/custom")
+async def custom_model_ranking(
+    model_name: str = Form(...),
+    scores: str = Form(...)  # JSON string of scores dict
+):
+    """Handle custom model ranking requests from frontend"""
+    try:
+        if not CUSTOM_RANKING_AVAILABLE:
+            raise HTTPException(status_code=500, detail="Custom ranking function not available")
+
+        # Parse scores from JSON string
+        scores_dict = json.loads(scores)
+
+        # Run the custom ranking function (already imported at module level)
+        result = await run_custom_ranking(model_name, scores_dict)
+
+        return result
+    except Exception as e:
+        logger.error(f"Custom ranking failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Custom ranking failed: {str(e)}")
 
 
 @app.get("/api/health")

@@ -7,17 +7,20 @@ import logging
 import numpy as np
 import os
 import sys
+import aiohttp
 
 # Get project root directory dynamically and add to path for absolute imports
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 if PROJECT_ROOT not in sys.path:
     sys.path.append(PROJECT_ROOT)
 
-from code_app.backend.data_ranking.custom_model_ranking import run_custom_ranking
 
 # Configure logging for debugging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# API configuration - use environment variable for production
+API_BASE_URL = os.getenv('API_BASE_URL', 'http://127.0.0.1:8001')
 
 # Global references for shared UI containers and elements
 report_container_ref = None
@@ -2118,8 +2121,19 @@ async def handle_custom_ranking(model_name_input, score_inputs, result_container
     }
 
     try:
-        # Call the backend logic to run the ranking
-        new_ranking_data = await run_custom_ranking(model_name, scores)
+        # Call the backend API to run the ranking
+        form = aiohttp.FormData()
+        form.add_field('model_name', model_name)
+        form.add_field('scores', json.dumps(scores))
+
+        async with aiohttp.ClientSession() as session:
+            async with session.post(f'{API_BASE_URL}/api/ranking/custom',
+                                  data=form, timeout=120) as resp:
+                if resp.status == 200:
+                    new_ranking_data = await resp.json()
+                else:
+                    error_text = await resp.text()
+                    raise Exception(f"API call failed: HTTP {resp.status} - {error_text}")
 
         with result_container:
             result_container.clear()

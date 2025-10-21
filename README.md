@@ -64,6 +64,38 @@ R脚本运行环境：使用 rpy2 调用当前 Conda 环境中的 R 来执行 R 
 要运行分析，只需在 R Markdown 文件中执行代码块即可。
 LLM Agent：集成OpenAI GPT系列模型，实现智能对话式用户交互，提供自然语言参数配置和实时进度反馈
 
+### 4.2. 前后端架构优化
+
+#### 架构改进：
+- **前后端分离**: 前端通过HTTP API调用后端，不再直接导入后端模块
+- **依赖解耦**: 前端不再需要安装R环境，后端独立管理R依赖
+
+#### 后端API端点：
+- 新增 `/api/ranking/custom` 端点处理自定义模型排名请求
+- 支持Form数据格式：`model_name` 和 `scores` (JSON字符串)
+
+#### 前端优化：
+- 移除直接导入 `run_custom_ranking` 函数
+- 改为使用 `aiohttp` 通过HTTP API调用后端
+- 前端启动脚本不再安装R包，启动时间大幅缩短
+
+#### 后端部署优化：
+**必需的系统依赖：**
+- **R 环境**: `r-base`, `r-base-dev` - 用于谱排序算法执行
+- **R 包**: `readr`, `dplyr`, `jsonlite` - R脚本核心依赖
+- **编译工具**: `libcurl4-openssl-dev`, `libssl-dev`, `libxml2-dev` - R包编译依赖
+
+**已移除的不必要依赖：**
+- `libgomp1` - OpenMP并行库（后端不需要）
+- GTK图形界面库（后端是API服务，无GUI）
+- X11显示系统（后端不显示界面）
+- OpenGL/Vulkan图形库（后端不需要GPU渲染）
+- 终端模拟器等
+
+**R包优化：**
+- 移除了 `MASS`, `Matrix`, `stats4` 包（与R 4.0.4版本不兼容）
+- 只保留实际使用的 `readr`, `dplyr`, `jsonlite` 包
+
 ## 5. LLM Performance Dashboard
 
 LLM Performance Dashboard是集成到现有Web界面中的一个新功能模块，用于实时监控和分析LLM模型性能。
