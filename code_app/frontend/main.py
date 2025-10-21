@@ -5124,7 +5124,7 @@ ui.run(
     port=int(os.getenv('PORT', 8080)),
     host='0.0.0.0',
     favicon='Σ',
-    show=True
+    show=False  # Disable GUI window for headless deployment (Azure App Service)
 )
 # kill -9 $(lsof -ti :8001)
 # kill -9 $(lsof -ti :8080)
