@@ -2,127 +2,97 @@
 
 ## 概述
 
-您的应用采用前后端分离架构：
-- **后端**：FastAPI + R（谱排序算法）
-- **前端**：NiceGUI（Python Web UI）
+您的应用采用前后端分离架构，并通过 Docker 容器化：
+- **后端**：FastAPI + R（谱排序算法），运行在 Docker 容器中。
+- **前端**：NiceGUI（Python Web UI），运行在另一个 Docker 容器中。
 
-需要在Azure上创建两个App Service实例。
+我们将在Azure上使用 **Azure App Service for Containers** 进行部署，需要两个独立的App Service实例。
 
 ## 部署步骤
 
-### 1. 创建后端 App Service
+### 前提条件
+1.  [安装 Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+2.  [安装 Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-#### 配置基本信息：
-- **运行时栈**：Python 3.10
-- **操作系统**：Linux
-- **定价层**：F1 Free Tier 或 B1 ($13/月)
+### 1. 创建 Azure Container Registry (ACR)
+ACR 是一个私有的 Docker 镜像仓库，用于存储您的前端和后端镜像。
 
-#### 应用设置：
-在 "Configuration" > "Application settings" 中添加：
+```bash
+# 登录 Azure
+az login
 
-```
-PYTHONPATH = /home/site/wwwroot
-PORT = 8000
-OPENAI_API_KEY = your_openai_api_key_here
-OPENAI_MODEL = gpt-3.5-turbo
-```
+# 创建资源组 (如果已有，可跳过)
+az group create --name YourResourceGroup --location "East US"
 
-#### 启动命令：
-```
-./startup.sh
+# 创建 ACR 实例 (名称需全局唯一)
+az acr create --resource-group YourResourceGroup --name youruniqueregistryname --sku Basic --admin-enabled true
 ```
 
-#### 部署方式：
-推荐使用 GitHub Actions：
-1. 转到 "Deployment Center" > "GitHub"
-2. 连接您的仓库
-3. 选择主分支，启用持续部署
+### 2. 构建并推送 Docker 镜像
 
-### 2. 创建前端 App Service
+```bash
+# 登录到您的 ACR
+az acr login --name youruniqueregistryname
 
-#### 配置基本信息：
-- **运行时栈**：Python 3.10
-- **操作系统**：Linux
-- **定价层**：F1 Free Tier
+# 构建后端镜像并标记
+docker build -t youruniqueregistryname.azurecr.io/ranking-backend:latest -f Dockerfile.backend .
 
-#### 应用设置：
+# 推送后端镜像
+docker push youruniqueregistryname.azurecr.io/ranking-backend:latest
+
+# 构建前端镜像并标记
+docker build -t youruniqueregistryname.azurecr.io/ranking-frontend:latest -f Dockerfile.frontend .
+
+# 推送前端镜像
+docker push youruniqueregistryname.azurecr.io/ranking-frontend:latest
 ```
-PYTHONPATH = /home/site/wwwroot
-API_BASE_URL = https://your-backend-app-name.azurewebsites.net
-```
+**注意**: 请将 `youruniqueregistryname` 替换为您自己的ACR名称。
 
-#### 启动命令：
-```
-python code_app/frontend/main.py
-```
+### 3. 创建并配置后端 App Service
 
-#### 部署方式：
-同样使用 GitHub Actions 部署。
+#### a. 创建 App Service:
+- **发布**: 选择 "Docker 容器"
+- **操作系统**: Linux
+- **定价层**: 推荐 B1 ($13/月) 或更高，因为F1免费层可能因资源限制导致R脚本运行失败。
 
-### 3. 配置自定义域名（可选）
+#### b. 配置容器设置:
+在 "部署" > "部署中心" (或 "容器设置") 中：
+- **映像源**: Azure Container Registry
+- **注册表**: 选择您创建的 `youruniqueregistryname`
+- **映像**: `ranking-backend`
+- **标记**: `latest`
+- **启动命令**: (保持为空，将使用Dockerfile中的CMD)
 
-如果需要自定义域名：
-1. 在每个 App Service 的 "Custom domains" 中添加域名
-2. 更新DNS记录指向Azure提供的IP
-3. 启用HTTPS（Azure提供免费证书）
+#### c. 配置环境变量:
+在 "设置" > "配置" > "应用程序设置" 中添加：
+- `PORT`: `8001` (App Service会自动映射外部80/443端口到此端口)
+- `OPENAI_API_KEY`: `your_openai_api_key_here`
+- `OPENAI_MODEL`: `gpt-3.5-turbo`
 
-## 架构说明
+### 4. 创建并配置前端 App Service
 
-```
-/ (前端: https://frontend-app.azurewebsites.net)
-├── 主页面和仪表板 (NiceGUI)
-└── 调用后端API
+#### a. 创建 App Service:
+- **发布**: 选择 "Docker 容器"
+- **操作系统**: Linux
+- **定价层**: F1 免费层即可
 
-/backend (后端: https://backend-app.azurewebsites.net)
-├── /api/ranking/* - 排序API
-├── /api/agent/* - Agent API
-└── R谱排序算法执行
-```
+#### b. 配置容器设置:
+- **映像源**: Azure Container Registry
+- **注册表**: `youruniqueregistryname`
+- **映像**: `ranking-frontend`
+- **标记**: `latest`
+- **启动命令**: (保持为空)
+
+#### c. 配置环境变量:
+- `PORT`: `8080`
+- `API_BASE_URL`: `https://your-backend-app-name.azurewebsites.net` (**重要**: 替换为您的后端App Service的URL)
+
+### 5. 持续部署 (CI/CD) - 可选但推荐
+您可以设置 GitHub Actions，在每次推送到 `main` 分支时自动构建并推送新的Docker镜像到ACR，并触发App Service重新拉取最新镜像。
 
 ## 重要注意事项
 
-### R环境配置
-- Azure App Service 默认不包含R
-- `startup.sh` 脚本会自动安装R和必要包
-- 首次部署可能需要5-10分钟安装依赖
-
-### 免费额度限制
-- F1层：每月60 CPU分钟
-- 如果R计算量大，可能需要升级付费层级
-
-### 存储考虑
-- 当前使用本地文件系统
-- 生产环境建议使用Azure Blob Storage
-- App Service重启时本地文件会丢失
-
-### 安全配置
-- 不要在代码中硬编码API密钥
-- 使用环境变量存储敏感信息
-- 考虑使用Azure Key Vault
-
-## 测试部署
-
-1. 部署完成后，访问前端URL
-2. 检查前后端通信是否正常
-3. 测试文件上传和排序功能
-4. 查看应用日志排查问题
-
-## 故障排除
-
-### 常见问题：
-1. **R安装失败**：检查 `startup.sh` 日志
-2. **依赖安装失败**：确认 `requirements.txt` 完整
-3. **API调用失败**：检查 `API_BASE_URL` 配置
-4. **端口问题**：确保使用 `$PORT` 环境变量
-
-### 查看日志：
-- "App Service logs" > "Application logging" > "File System"
-- "Log stream" 查看实时日志
-
-## 后续优化
-
-1. **性能监控**：设置Application Insights
-2. **备份策略**：配置自动备份
-3. **CI/CD**：完善GitHub Actions工作流
-4. **缓存**：添加Redis缓存层
-5. **数据库**：迁移到Azure Database
+- **启动时间**: 首次部署时，App Service需要一些时间从ACR拉取镜像。后续部署会更快。
+- **端口**: Dockerfile中暴露的端口 (`8001` 和 `8080`) 会被App Service自动映射。您只需要通过标准的 `80` (http) 和 `443` (https) 端口访问您的应用。
+- **存储**: `docker-compose.yml` 中定义的卷在Azure App Service中不会直接生效。如果您需要持久化存储，应配置 "路径映射" 将 `/app/jobs` 等目录挂载到Azure文件存储。
+- **启动脚本**: `startup.sh` 和 `frontend_startup.sh` 已不再需要，所有启动逻辑都已包含在Dockerfile中。
