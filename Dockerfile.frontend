@@ -1,0 +1,23 @@
+# 1. Base Image
+FROM python:3.11-slim
+
+# 2. Set Environment Variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV NICEGUI_STORAGE_PATH=/app/storage
+
+# 3. Set Working Directory
+WORKDIR /app
+
+# 4. Install Python Dependencies
+COPY frontend_requirements.txt .
+RUN pip install --no-cache-dir -r frontend_requirements.txt
+
+# 5. Copy Application Code
+COPY . .
+
+# 6. Expose Port
+EXPOSE 8080
+
+# 7. Set Startup Command
+CMD ["python", "code_app/frontend/main.py"]

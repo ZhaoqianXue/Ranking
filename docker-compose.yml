@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8001:8001"
+    volumes:
+      - jobs_data:/app/jobs
+      - agent_uploads_data:/app/agent_uploads
+      - temp_ranking_jobs_data:/app/temp_ranking_jobs
+      - data_llm_data:/app/data_llm
+    environment:
+      - PYTHONPATH=/app
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    restart: always
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "8080:8080"
+    environment:
+      - PYTHONPATH=/app
+      - API_BASE_URL=http://backend:8001
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  jobs_data:
+  agent_uploads_data:
+  temp_ranking_jobs_data:
+  data_llm_data:
