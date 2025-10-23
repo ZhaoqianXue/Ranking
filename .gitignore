@@ -71,6 +71,10 @@ demo_r/output_*/
 # Azure deployment files
 .azure/
 
+# Render deployment files
+render.yaml.bak
+render-*.log
+
 # macOS
 .DS_Store
 

@@ -1,6 +1,0 @@
-nicegui
-requests
-plotly
-aiohttp
-pandas
-numpy

@@ -1,31 +1,39 @@
 services:
-  # Backend Service (FastAPI with R)
   - type: web
-    name: ranking-backend
+    name: spectral-ranking-backend
     env: docker
-    dockerfilePath: ./Dockerfile.backend
-    healthCheck:
-      path: /api/health
+    dockerfilePath: Dockerfile.backend
+    plan: starter
+    healthCheckPath: /api/health
     envVars:
       - key: OPENAI_API_KEY
-        sync: false # User must set this in Render dashboard
+        sync: false
       - key: OPENAI_MODEL
-        value: gpt-4-turbo
-    disk:
-      name: ranking-data
-      mountPath: /app/data_llm
-      sizeGB: 1
+        value: gpt-5-nano
+    disks:
+      - name: jobs
+        mountPath: /opt/render/project/src/jobs
+        sizeGB: 1
+      - name: agent-uploads
+        mountPath: /opt/render/project/src/agent_uploads
+        sizeGB: 1
+    autoDeploy: true
+    previews: true
+    region: oregon
+    startCommand: uvicorn code_app.backend.main:app --host 0.0.0.0 --port $PORT
 
-  # Frontend Service (NiceGUI)
   - type: web
-    name: ranking-frontend
+    name: spectral-ranking-frontend
     env: python
-    plan: free # Can be changed to a paid plan if needed
-    buildCommand: "pip install -r frontend_requirements.txt"
-    startCommand: "python code_app/frontend/main.py"
+    plan: starter
+    buildCommand: pip install -r requirements.frontend.txt
+    startCommand: python code_app/frontend/main.py
     envVars:
       - key: API_BASE_URL
-        fromService:
-          type: web
-          name: ranking-backend
-          property: url
+        sync: false
+    healthCheckPath: /dashboard
+    autoDeploy: true
+    previews: true
+    region: oregon
+
+

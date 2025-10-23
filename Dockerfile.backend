@@ -1,41 +1,30 @@
-# Use an official Python runtime as a parent image
 FROM python:3.11-slim
 
-# Set the working directory in the container
-WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-# Install R and system dependencies needed for R packages
+# Install system dependencies and R
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    r-base \
-    r-base-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libxml2-dev \
+    r-base r-base-dev build-essential gfortran \
+    libcurl4-openssl-dev libssl-dev libxml2-dev \
+    libblas-dev liblapack-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install R packages required by the ranking script
-RUN R -e "install.packages(c('readr', 'dplyr', 'jsonlite'), repos='http://cran.rstudio.com/')"
+# Install required R packages
+RUN R -e "install.packages(c('readr','dplyr','jsonlite'), repos='https://cloud.r-project.org')"
 
-# Copy the backend requirements file
-COPY requirements.txt ./
+WORKDIR /opt/render/project/src
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.backend.txt ./requirements.backend.txt
+RUN pip install --no-cache-dir -r requirements.backend.txt
 
-# Copy the application code that is necessary for the backend
-# As per user instruction, we only need a subset of files.
-# To keep it simple for deployment, we will copy the whole directory structure
-# and rely on the application only using what it needs.
-COPY code_app/backend/ ./code_app/backend/
-COPY demo_r/ ./demo_r/
-COPY data_llm/data_huggingface/data_processing/huggingface_processed_top100.csv ./data_llm/data_huggingface/data_processing/huggingface_processed_top100.csv
+# Copy project files
+COPY . .
 
-# Make sure __init__.py files exist for packages to be recognized
-RUN touch code_app/__init__.py
-RUN touch code_app/backend/__init__.py
-
-# Expose the port the app runs on
 EXPOSE 8001
 
-# Define the command to run the application
+# Default command (Render will override port with $PORT in startCommand)
 CMD ["uvicorn", "code_app.backend.main:app", "--host", "0.0.0.0", "--port", "8001"]
+
+
