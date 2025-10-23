@@ -93,7 +93,12 @@ vanilla_spectrum_method <- function(AA2, WW2, Idx, B = 2000) {
   tmp.P2 <- t(t(P2) - diag(n)) %*% (t(P2) - diag(n))
   tmp.svd2 <- svd(tmp.P2)
   pihat2 <- abs(tmp.svd2$v[, n])
-  thetahat2 <- log(pihat2) - mean(log(pihat2))
+
+  # Ensure pihat2 values are positive and not too small for log calculation
+  pihat2 <- pmax(pihat2, .Machine$double.eps)
+
+  log_pihat2 <- log(pihat2)
+  thetahat2 <- log_pihat2 - mean(log_pihat2, na.rm = TRUE)
 
   RR2 <- matrix(0, 6, n)
   colnames(RR2) <- Idx
