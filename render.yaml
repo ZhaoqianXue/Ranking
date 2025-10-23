@@ -4,9 +4,7 @@ services:
     env: docker
     dockerfilePath: Dockerfile.backend
     plan: starter
-    region: oregon
     healthCheckPath: /api/health
-    startCommand: uvicorn code_app.backend.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: OPENAI_API_KEY
         sync: false
@@ -19,17 +17,23 @@ services:
       - name: agent-uploads
         mountPath: /opt/render/project/src/agent_uploads
         sizeGB: 1
+    autoDeploy: true
+    previews: true
+    region: oregon
+    startCommand: uvicorn code_app.backend.main:app --host 0.0.0.0 --port $PORT
 
   - type: web
     name: spectral-ranking-frontend
     env: python
     plan: starter
-    region: oregon
     buildCommand: pip install -r requirements.frontend.txt
     startCommand: python code_app/frontend/main.py
-    healthCheckPath: /dashboard
     envVars:
       - key: API_BASE_URL
         sync: false
+    healthCheckPath: /dashboard
+    autoDeploy: true
+    previews: true
+    region: oregon
 
 
