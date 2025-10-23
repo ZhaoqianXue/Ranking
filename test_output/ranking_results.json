@@ -1,0 +1,48 @@
+{
+  "job_id": ".",
+  "params": {
+    "bigbetter": true,
+    "B": 100,
+    "seed": 42
+  },
+  "methods": [
+    {
+      "name": "model1",
+      "theta_hat": -12.0146,
+      "rank": 2,
+      "ci_two_sided": [
+        2,
+        3
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "model2",
+      "theta_hat": 24.0291,
+      "rank": 1,
+      "ci_two_sided": [
+        1,
+        1
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "model3",
+      "theta_hat": -12.0146,
+      "rank": 2,
+      "ci_two_sided": [
+        2,
+        3
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 2
+    }
+  ],
+  "metadata": {
+    "n_samples": 6,
+    "k_methods": 3,
+    "runtime_sec": 0.2385
+  }
+}
