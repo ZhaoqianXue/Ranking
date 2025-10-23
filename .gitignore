@@ -66,6 +66,7 @@ agent_uploads/
 jobs/
 temp_ranking_jobs/
 *.backup
+demo_r/output_*/
 
 # Azure deployment files
 .azure/

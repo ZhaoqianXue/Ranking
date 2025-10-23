@@ -1,0 +1,31 @@
+services:
+  # Backend Service (FastAPI with R)
+  - type: web
+    name: ranking-backend
+    env: docker
+    dockerfilePath: ./Dockerfile.backend
+    healthCheck:
+      path: /api/health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false # User must set this in Render dashboard
+      - key: OPENAI_MODEL
+        value: gpt-4-turbo
+    disk:
+      name: ranking-data
+      mountPath: /app/data_llm
+      sizeGB: 1
+
+  # Frontend Service (NiceGUI)
+  - type: web
+    name: ranking-frontend
+    env: python
+    plan: free # Can be changed to a paid plan if needed
+    buildCommand: "pip install -r frontend_requirements.txt"
+    startCommand: "python code_app/frontend/main.py"
+    envVars:
+      - key: API_BASE_URL
+        fromService:
+          type: web
+          name: ranking-backend
+          property: url
