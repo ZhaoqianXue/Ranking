@@ -140,15 +140,132 @@ async def _enrich_ranking_results(
     ranking_data['methods'] = enhanced_methods
     return ranking_data
 
+async def run_custom_ranking_background(job_id: str, model_name: str, scores: Dict[str, float]):
+    """
+    Background task function to execute custom model ranking.
+    Updates job status and saves results.
+    """
+    job_dir = os.path.join(DATA_DIR, 'temp_ranking_jobs', job_id)
+    status_path = os.path.join(job_dir, 'status.json')
+    results_path = os.path.join(job_dir, 'results.json')
+
+    try:
+        # Update status to running
+        with open(status_path, 'w') as f:
+            json.dump({'status': 'running', 'message': 'Processing custom model ranking...'}, f)
+
+        # 1. Prepare data by adding the user's model to the base top 100 data
+        base_data_path = os.path.join(PROJECT_ROOT, 'data_llm', 'data_huggingface', 'data_processing', 'huggingface_processed_top100.csv')
+        if not os.path.exists(base_data_path):
+            raise FileNotFoundError(f"Base ranking data not found at {base_data_path}")
+
+        df = pd.read_csv(base_data_path)
+
+        # Sanitize user model name to be a valid R data.frame column name
+        # R replaces invalid characters with '.'
+        sanitized_model_name = ''.join(c if c.isalnum() else '.' for c in model_name)
+        if not sanitized_model_name or not sanitized_model_name[0].isalpha():
+            sanitized_model_name = 'X' + sanitized_model_name
+
+        # Check for name collisions and append a suffix if necessary
+        original_sanitized_name = sanitized_model_name
+        counter = 1
+        while sanitized_model_name in df.columns:
+            sanitized_model_name = f"{original_sanitized_name}.{counter}"
+            counter += 1
+
+        # Normalize score keys to lower case to match benchmark names in the dataframe
+        scores_lower = {k.lower(): v for k, v in scores.items()}
+        # MMLU-Pro key needs special handling
+        if 'mmlu-pro' in scores_lower:
+            scores_lower['mmlu_pro'] = scores_lower.pop('mmlu-pro')
+
+        benchmark_order = df['benchmark'].astype(str).str.lower().tolist()
+        user_scores_ordered = [float(scores_lower.get(b, 0.0)) if scores_lower.get(b, None) is not None else 0.0 for b in benchmark_order]
+        df[sanitized_model_name] = user_scores_ordered
+
+        # 2. Save combined data to a temporary CSV file
+        temp_csv_path = os.path.join(job_dir, 'custom_ranking_input.csv')
+        df.to_csv(temp_csv_path, index=False)
+
+        # 3. Run the spectral ranking R script as a subprocess
+        if not shutil.which('Rscript'):
+            raise FileNotFoundError("Rscript executable not found. Ensure R is installed in the running environment.")
+        ranking_script = os.path.join(PROJECT_ROOT, 'demo_r', 'ranking_cli.R')
+        if not os.path.exists(ranking_script):
+            raise FileNotFoundError(f"R script not found at {ranking_script}")
+        cmd = [
+            'Rscript', ranking_script,
+            '--csv', temp_csv_path,
+            '--bigbetter', '1',
+            '--B', '2000',  # Using the standard number of iterations for accuracy
+            '--seed', '42',
+            '--out', job_dir
+        ]
+
+        logger.info(f"Executing R script for custom ranking job {job_id}: {' '.join(cmd)}")
+
+        # Run the subprocess in a separate thread to avoid blocking the event loop
+        proc = await asyncio.create_subprocess_exec(
+            *cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        stdout, stderr = await proc.communicate()
+
+        if proc.returncode != 0:
+            error_message = stderr.decode() or stdout.decode()
+            logger.error(f"Spectral ranking script failed for job {job_id}: {error_message}")
+            with open(status_path, 'w') as f:
+                json.dump({'status': 'failed', 'message': f"Spectral ranking failed: {error_message}"}, f)
+            return
+
+        # 4. Process the results JSON
+        results_file = os.path.join(job_dir, 'ranking_results.json')
+        if not os.path.exists(results_file):
+            logger.error(f"Ranking script did not produce an output file for job {job_id}")
+            with open(status_path, 'w') as f:
+                json.dump({'status': 'failed', 'message': "Ranking script did not produce an output file"}, f)
+            return
+
+        with open(results_file, 'r') as f:
+            ranking_data = json.load(f)
+
+        # 5. Enrich results with full benchmark data from the combined dataframe
+        enriched_results = await _enrich_ranking_results(
+            ranking_data,
+            sanitized_model_name,
+            model_name,
+            scores,
+            df
+        )
+
+        # 6. Save enriched results
+        with open(results_path, 'w') as f:
+            json.dump(enriched_results, f)
+
+        # 7. Update status to succeeded
+        with open(status_path, 'w') as f:
+            json.dump({'status': 'succeeded', 'message': 'Custom model ranking completed successfully'}, f)
+
+        logger.info(f"Custom ranking job {job_id} completed successfully")
+
+    except Exception as e:
+        error_message = str(e)
+        logger.error(f"Custom ranking job {job_id} failed with exception: {error_message}")
+        with open(status_path, 'w') as f:
+            json.dump({'status': 'failed', 'message': f"Custom ranking failed: {error_message}"}, f)
+
+
 async def run_custom_ranking(model_name: str, scores: Dict[str, float]) -> Dict[str, Any]:
     """
-    Main function to execute the on-the-fly ranking.
+    Main function to execute the on-the-fly ranking (synchronous version for backward compatibility).
     """
     # 1. Prepare data by adding the user's model to the base top 100 data
     base_data_path = os.path.join(PROJECT_ROOT, 'data_llm', 'data_huggingface', 'data_processing', 'huggingface_processed_top100.csv')
     if not os.path.exists(base_data_path):
         raise FileNotFoundError(f"Base ranking data not found at {base_data_path}")
-    
+
     df = pd.read_csv(base_data_path)
 
     # Sanitize user model name to be a valid R data.frame column name
@@ -199,7 +316,7 @@ async def run_custom_ranking(model_name: str, scores: Dict[str, float]) -> Dict[
         ]
 
         logger.info(f"Executing R script for job {job_id}: {' '.join(cmd)}")
-        
+
         # Run the subprocess in a separate thread to avoid blocking the event loop
         proc = await asyncio.create_subprocess_exec(
             *cmd,

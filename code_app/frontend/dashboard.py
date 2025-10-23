@@ -792,6 +792,36 @@ TABLE_STYLES = '''
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
 }
+/* Enhanced Progress Bar with Percentage */
+.enhanced-loading-progress-container {
+    width: 100%;
+    margin-top: 1.5rem;
+    position: relative;
+}
+.enhanced-loading-progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.enhanced-loading-progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #011f5b 0%, #3b82f6 50%, #60a5fa 100%);
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(1, 31, 91, 0.3);
+}
+.enhanced-loading-progress-text {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #011f5b;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
 /* Responsive adjustments for loading animation */
 @media (max-width: 640px) {
     .enhanced-loading-card {
@@ -2082,8 +2112,19 @@ def create_huggingface_content(data):
                 ''')
 
 async def handle_custom_ranking(model_name_input, score_inputs, result_container, original_data):
-    """Handle the custom model ranking request."""
-    # Show enhanced loading animation
+    """Handle the custom model ranking request with polling."""
+    # Collect data
+    model_name = model_name_input.value
+    scores = {key: input_el.value for key, input_el in score_inputs.items()}
+
+    # Basic validation
+    if not model_name or any(s is None for s in scores.values()):
+        with result_container:
+            result_container.clear()
+            ui.notify('Please fill in your model name and all benchmark scores.', type='negative')
+        return
+
+    # Show initial loading animation
     with result_container:
         result_container.clear()
         with ui.element('div').classes('enhanced-loading-container'):
@@ -2096,45 +2137,107 @@ async def handle_custom_ranking(model_name_input, score_inputs, result_container
 
                 # Loading text with animation
                 with ui.element('div').classes('enhanced-loading-text-container'):
-                    ui.html('<div class="enhanced-loading-title">Running Spectral Ranking</div>')
-                    ui.html('<div class="enhanced-loading-subtitle">Analyzing your model against the Top 100 leaderboard...</div>')
-                    ui.html('<div class="enhanced-loading-note">This may take up to a minute</div>')
+                    ui.html('<div class="enhanced-loading-title">Creating Analysis Job</div>')
+                    ui.html('<div class="enhanced-loading-subtitle">Submitting your model for spectral ranking...</div>')
+                    ui.html('<div class="enhanced-loading-note">This will take about 45 seconds</div>')
 
                 # Progress indicator
                 with ui.element('div').classes('enhanced-loading-progress'):
                     ui.html('<div class="enhanced-loading-bar"></div>')
 
-    # Collect data
-    model_name = model_name_input.value
-    scores = {key: input_el.value for key, input_el in score_inputs.items()}
-
-    # Basic validation
-    if not model_name or any(s is None for s in scores.values()):
-        with result_container:
-            result_container.clear()
-            ui.notify('Please fill in your model name and all benchmark scores.', type='negative')
-        return
-
-    custom_model_data = {
-        "model_name": model_name,
-        "scores": scores
-    }
-
     try:
-        # Call the backend API to run the ranking
+        # Step 1: Create the custom ranking job
         form = aiohttp.FormData()
         form.add_field('model_name', model_name)
         form.add_field('scores', json.dumps(scores))
 
         async with aiohttp.ClientSession() as session:
             async with session.post(f'{API_BASE_URL}/api/ranking/custom',
-                                  data=form, timeout=120) as resp:
+                                  data=form, timeout=30) as resp:
                 if resp.status == 200:
-                    new_ranking_data = await resp.json()
+                    job_response = await resp.json()
+                    job_id = job_response.get('job_id')
+                    if not job_id:
+                        raise Exception("No job_id returned from server")
                 else:
                     error_text = await resp.text()
-                    raise Exception(f"API call failed: HTTP {resp.status} - {error_text}")
+                    raise Exception(f"Job creation failed: HTTP {resp.status} - {error_text}")
 
+        # Step 2: Poll for status and results
+        max_attempts = 60  # 60 * 5 seconds = 5 minutes timeout
+        attempt = 0
+        start_poll_time = asyncio.get_event_loop().time()
+        estimated_total_time = 40.0  # 40 seconds estimated total time
+
+        while attempt < max_attempts:
+            attempt += 1
+            current_time = asyncio.get_event_loop().time()
+            elapsed_time = current_time - start_poll_time
+
+            # Calculate progress (0-100%)
+            progress_percent = min(95, (elapsed_time / estimated_total_time) * 100)
+            remaining_time = max(0, estimated_total_time - elapsed_time)
+
+            try:
+                # Update loading message with progress
+                with result_container:
+                    result_container.clear()
+                    with ui.element('div').classes('enhanced-loading-container'):
+                        with ui.element('div').classes('enhanced-loading-card'):
+                            with ui.element('div').classes('enhanced-loading-icon-container'):
+                                ui.html('<span class="material-symbols-outlined enhanced-loading-icon">analytics</span>')
+                                ui.html('<div class="enhanced-loading-dots"><span></span><span></span><span></span></div>')
+
+                            with ui.element('div').classes('enhanced-loading-text-container'):
+                                ui.html('<div class="enhanced-loading-title">Analyzing Your Model</div>')
+                                ui.html('<div class="enhanced-loading-subtitle">Running spectral ranking algorithm...</div>')
+                                ui.html('<div class="enhanced-loading-note">This may take up to a minute</div>')
+                                ui.html(f'<div class="enhanced-loading-note" style="font-size: 0.8rem; margin-top: 0.5rem;">Progress: {progress_percent:.1f}% complete • ~{remaining_time:.0f}s remaining</div>')
+
+                            # Enhanced progress bar with percentage
+                            with ui.element('div').classes('enhanced-loading-progress-container').props('key=progress-container'):
+                                with ui.element('div').classes('enhanced-loading-progress-bar-bg'):
+                                    ui.element('div').classes('enhanced-loading-progress-bar-fill').style(f'width: {progress_percent}%')
+                                ui.element('div').classes('enhanced-loading-progress-text').props(f'text="{progress_percent:.1f}%"')
+
+                # Check status
+                async with aiohttp.ClientSession() as session:
+                    async with session.get(f'{API_BASE_URL}/api/ranking/custom/{job_id}/status', timeout=10) as resp:
+                        if resp.status == 200:
+                            status_data = await resp.json()
+                            status = status_data.get('status')
+                            message = status_data.get('message', '')
+
+                            if status == 'succeeded':
+                                # Job completed, get results
+                                async with session.get(f'{API_BASE_URL}/api/ranking/custom/{job_id}/results', timeout=30) as results_resp:
+                                    if results_resp.status == 200:
+                                        new_ranking_data = await results_resp.json()
+                                        break  # Exit polling loop
+                                    else:
+                                        error_text = await results_resp.text()
+                                        raise Exception(f"Failed to get results: HTTP {results_resp.status} - {error_text}")
+                            elif status == 'failed':
+                                raise Exception(f"Analysis failed: {message}")
+                            elif status == 'running':
+                                # Continue polling
+                                pass
+                            else:
+                                raise Exception(f"Unknown status: {status}")
+                        else:
+                            error_text = await resp.text()
+                            raise Exception(f"Status check failed: HTTP {resp.status} - {error_text}")
+
+                # Wait before next poll (5 seconds)
+                await asyncio.sleep(5)
+
+            except Exception as poll_error:
+                logger.warning(f"Polling attempt {attempt} failed: {poll_error}")
+                if attempt >= max_attempts:
+                    raise poll_error
+                await asyncio.sleep(5)
+
+        # Display results
         with result_container:
             result_container.clear()
 
@@ -2260,7 +2363,7 @@ async def handle_custom_ranking(model_name_input, score_inputs, result_container
                         ui.html('<div class="text-xs text-gray-500">Average-based ranking position</div>')
 
             ui.html(f'<h3 class="section-title text-xl font-semibold mb-4">Full Ranking Results (101 models)</h3>')
-            
+
             # Display the new table, highlighting the user's model
             create_ranking_table({'spectral_results': new_ranking_data}, highlight_model=model_name)
 

@@ -23,7 +23,7 @@ if project_root not in sys.path:
 
 # Try to import the custom ranking function at module level
 try:
-    from code_app.backend.data_ranking.custom_model_ranking import run_custom_ranking
+    from code_app.backend.data_ranking.custom_model_ranking import run_custom_ranking, run_custom_ranking_background
     CUSTOM_RANKING_AVAILABLE = True
 except ImportError as e:
     logger.error(f"Failed to import custom ranking function: {e}")
@@ -204,11 +204,12 @@ async def get_job_results(job_id: str):
 
 
 @app.post("/api/ranking/custom")
-async def custom_model_ranking(
+async def create_custom_model_ranking_job(
+    background_tasks: BackgroundTasks,
     model_name: str = Form(...),
     scores: str = Form(...)  # JSON string of scores dict
 ):
-    """Handle custom model ranking requests from frontend"""
+    """Create a custom model ranking job and return job_id"""
     try:
         if not CUSTOM_RANKING_AVAILABLE:
             raise HTTPException(status_code=500, detail="Custom ranking function not available")
@@ -216,13 +217,75 @@ async def custom_model_ranking(
         # Parse scores from JSON string
         scores_dict = json.loads(scores)
 
-        # Run the custom ranking function (already imported at module level)
-        result = await run_custom_ranking(model_name, scores_dict)
+        # Create job directory and save parameters
+        job_id = str(uuid.uuid4())
+        job_dir = os.path.join(DATA_DIR, 'temp_ranking_jobs', job_id)
+        os.makedirs(job_dir, exist_ok=True)
 
-        return result
+        # Save parameters
+        params = {'model_name': model_name, 'scores': scores_dict}
+        params_path = os.path.join(job_dir, 'params.json')
+        with open(params_path, 'w') as f:
+            json.dump(params, f)
+
+        # Set initial status
+        status_path = os.path.join(job_dir, 'status.json')
+        with open(status_path, 'w') as f:
+            json.dump({'status': 'running', 'message': 'Initializing custom model ranking...'}, f)
+
+        # Run the custom ranking function in the background
+        background_tasks.add_task(run_custom_ranking_background, job_id, model_name, scores_dict)
+
+        return {"job_id": job_id}
+
     except Exception as e:
-        logger.error(f"Custom ranking failed: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Custom ranking failed: {str(e)}")
+        logger.error(f"Failed to create custom ranking job: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to create custom ranking job: {str(e)}")
+
+
+@app.get("/api/ranking/custom/{job_id}/status")
+async def get_custom_ranking_job_status(job_id: str):
+    """Get the status of a custom model ranking job"""
+    job_dir = os.path.join(DATA_DIR, 'temp_ranking_jobs', job_id)
+    status_path = os.path.join(job_dir, 'status.json')
+
+    if not os.path.exists(status_path):
+        raise HTTPException(status_code=404, detail="Custom ranking job not found")
+
+    with open(status_path, 'r') as f:
+        status = json.load(f)
+
+    return status
+
+
+@app.get("/api/ranking/custom/{job_id}/results")
+async def get_custom_ranking_job_results(job_id: str):
+    """Get the results of a custom model ranking job"""
+    job_dir = os.path.join(DATA_DIR, 'temp_ranking_jobs', job_id)
+    status_path = os.path.join(job_dir, 'status.json')
+    results_path = os.path.join(job_dir, 'results.json')
+
+    if not os.path.exists(status_path):
+        raise HTTPException(status_code=404, detail="Custom ranking job not found")
+
+    with open(status_path, 'r') as f:
+        status = json.load(f)
+
+    if status['status'] == 'running':
+        return JSONResponse(status_code=202, content={"status": "running", "message": "Job is still processing."})
+
+    if status['status'] == 'failed':
+        return JSONResponse(status_code=500, content=status)
+
+    if status['status'] == 'succeeded':
+        if not os.path.exists(results_path):
+            raise HTTPException(status_code=404, detail="Results file not found, though job succeeded.")
+
+        with open(results_path, 'r') as f:
+            results = json.load(f)
+        return results
+
+    raise HTTPException(status_code=500, detail=f"Unknown job status: {status.get('status')}")
 
 
 @app.get("/api/health")
