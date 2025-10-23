@@ -2582,7 +2582,7 @@ def create_dashboard():
         with ui.element('nav').classes('top-navbar'):
             # Brand/Logo section
             with ui.element('div').classes('navbar-brand'):
-                ui.html('<span class="navbar-brand-icon">Σ</span>')
+                ui.html('<span class="material-symbols-outlined navbar-brand-icon">sort</span>')
                 ui.html('<a href="#" onclick="window.location.href=\'/\'" class="navbar-brand-link">Spectral Ranking</a>')
 
             # Main navigation menu (hidden on mobile)

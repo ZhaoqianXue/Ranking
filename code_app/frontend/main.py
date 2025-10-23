@@ -118,17 +118,17 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 2000;
   background: rgba(1, 31, 91, 0.95);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 0 2rem;
-  height: 4rem;
+  padding: 0 1.5rem;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: var(--transition-base);
-  box-shadow: var(--shadow-colored);
+  box-shadow: var(--shadow-sm);
 }
 
 .dashboard-container .top-navbar.scrolled {
@@ -157,7 +157,7 @@ body {
 
 .dashboard-container .navbar-brand-icon {
   font-size: 1.5rem;
-  color: var(--accent-400);
+  color: white;
 }
 
 .dashboard-container .navbar-nav {
@@ -196,7 +196,7 @@ body {
   left: 50%;
   width: 0;
   height: 2px;
-  background: var(--accent-400);
+  background: white;
   transition: var(--transition-base);
   transform: translateX(-50%);
 }
@@ -212,7 +212,7 @@ body {
 
 .dashboard-container .nav-link.active::after {
   width: 100%;
-  background: var(--accent-400);
+  background: white;
 }
 
 .dashboard-container .navbar-actions {
@@ -1099,8 +1099,9 @@ body, html {
   font-size: 2.5rem;
   margin-bottom: 0.7rem;
   display: block;
-  opacity: 0.7;
+  opacity: 1;
   animation: none;
+  color: #011f5b !important;
 }
 
 .hero-feature-title {
@@ -1637,6 +1638,207 @@ body {
   .info-card.error .highlight-box {
     border-left: 4px solid var(--error-500) !important;
   }
+
+/* Enhanced Card Header Styles (matching dashboard.py style) */
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.card-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background-color: #eef2ff;
+  border-radius: 50%;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.card-icon {
+  font-size: 2.25rem;
+  color: #011f5b;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+}
+
+.card-description {
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+/* Step Card Styles (matching dashboard.py) */
+.step-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.07), 0 15px 30px rgba(0,0,0,0.07);
+}
+
+/* Metric Card Styles */
+.metric-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-base);
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary-900);
+  margin-bottom: 0.5rem;
+}
+
+.metric-label {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Enhanced Button Styles */
+.primary-btn {
+  background-color: #011f5b !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  box-shadow: 0 2px 4px rgba(1, 31, 91, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.primary-btn:hover {
+  background-color: #1e40af !important;
+  box-shadow: 0 4px 8px rgba(1, 31, 91, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+.secondary-btn {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.secondary-btn:hover {
+  background-color: #e2e8f0 !important;
+  border-color: #cbd5e1 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Mode Selection Cards */
+.mode-card {
+  flex: 1;
+  max-width: 684px;
+  padding: 2.5rem;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border: 2px solid transparent;
+}
+.mode-card.active {
+  border-color: #011f5b;
+  background-color: #ffffff;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08), 0 6px 6px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+}
+.mode-card.inactive {
+  background-color: #f1f5f9;
+  border-color: #e2e8f0;
+  opacity: 0.8;
+}
+.mode-card.inactive:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+.mode-card .card-icon-wrapper {
+  margin-bottom: 1rem;
+  background-color: #eef2ff;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mode-card .card-icon-wrapper .material-symbols-outlined {
+  font-size: 2.5rem;
+  color: #011f5b;
+}
+.mode-card .card-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  color: #011f5b;
+}
+.mode-card .card-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+.mode-card .card-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.mode-card .card-features li {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.mode-card .card-features li .material-symbols-outlined {
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+  color: #011f5b;
+}
+.mode-card.inactive .card-title,
+.mode-card.inactive .card-features li .material-symbols-outlined {
+  color: #475569;
+}
 
 /* Responsive Agent Layout */
 @media (max-width: 1024px) {
@@ -2233,7 +2435,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (uploadArea && uploadContent) {
             uploadArea.classList.remove('uploaded');
             uploadContent.innerHTML = `
-                <span style="font-size: 1.2rem; margin-bottom: 0.25rem; display: block;">📄</span>
+                <span class="material-symbols-outlined" style="font-size: 1.2rem; margin-bottom: 0.25rem; display: block;">upload_file</span>
                 <div style="font-weight: 600; font-size: 0.8rem;">Upload CSV</div>
                 <div style="font-size: 0.7rem; color: var(--gray-600); margin-top: 0.1rem;">Click or drag file</div>
             `;
@@ -2248,7 +2450,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (previewContainer) {
             previewContainer.innerHTML = `
                 <div style="text-align: center; color: var(--gray-600); padding: 1rem;">
-                    <span style="font-size: 1.5rem; margin-bottom: 0.5rem; display: block;">📋</span>
+                    <span class="material-symbols-outlined" style="font-size: 1.5rem; margin-bottom: 0.5rem; display: block;">description</span>
                     <div style="font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">No Data Uploaded</div>
                     <div style="font-size: 0.8rem;">Click above to upload CSV file</div>
                 </div>
@@ -2351,7 +2553,7 @@ def show_results(result):
             ui.html(f'''
                 <div style="position: relative; z-index: 10;">
                     <div class="hero-title" style="font-size: 2.5rem; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        📊 Robust Ranking Report
+                        <span class="material-symbols-outlined" style="font-size: 2.5rem; margin-right: 0.5rem; vertical-align: middle;">analytics</span> Robust Ranking Report
                     </div>
                     <div style="font-size: 1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; line-height: 1.5;">
                         Vanilla Spectral Method ranking with bootstrap confidence intervals
@@ -2367,7 +2569,7 @@ def show_results(result):
 
         # Add Analysis Results summary card (shared across modes)
         with ui.element('div').classes('info-card').style('padding: 1.25rem 1.5rem; margin: 1.5rem 1rem;'):
-            ui.html('<div class="section-title">📋 Analysis Results</div>')
+            ui.html('<div class="section-title"><span class="material-symbols-outlined" style="font-size: 1.2rem; margin-right: 0.5rem; vertical-align: middle;">description</span> Analysis Results</div>')
             header = ['Method', 'θ̂', 'Rank', 'CI (Two-Sided)', 'CI Left']
             rows_html = []
             for m in methods[:6]:
@@ -2468,7 +2670,10 @@ def show_results(result):
         )
 
         with ui.element('div').classes('info-card').style('padding: 2rem;'):
-            ui.html('<div class="section-title">🧮 Summary</div>')
+            with ui.element('div').classes('card-header'):
+                with ui.element('div').classes('card-icon-container'):
+                    ui.html('<span class="material-symbols-outlined card-icon">calculate</span>')
+                ui.html('<h3 class="card-title">Analysis Summary</h3>')
             meta = result.get('metadata', {})
             ui.html(f'<div class="highlight-box">n={meta.get("n_samples", "-")}, k={meta.get("k_methods", "-")}, runtime={meta.get("runtime_sec", "-")}s, B={result.get("params",{}).get("B","-")}</div>')
 
@@ -2494,7 +2699,11 @@ def show_results(result):
             })
         if rows:
             with ui.element('div').classes('info-card').style('padding: 1rem 2rem 2rem;'):
-                ui.html('<div class="section-title">📋 Detailed Results</div>')
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">description</span>')
+                    ui.html('<h3 class="card-title">Detailed Results</h3>')
+                ui.html('<p class="card-description">Comprehensive ranking results with confidence intervals and statistical metrics</p>')
                 columns = [
                     {'name': 'Method', 'label': 'Method', 'field': 'Method', 'sortable': True},
                     {'name': 'theta_hat', 'label': 'theta.hat', 'field': 'theta_hat', 'sortable': True},
@@ -2545,13 +2754,14 @@ def handle_enter_key(e, input_field, messages_container, status_area, send_butto
     """Handle Enter key press to send message"""
     if e.args and e.args.get('key') == 'Enter' and not e.args.get('shiftKey'):
         # Prevent default behavior by triggering the send button click
-        send_button.run_method('click')
+        # For HTML button, use JavaScript click with the button ID
+        ui.run_javascript('document.getElementById("send-button").click()')
 
 async def handle_agent_file_upload(e, messages_container, input_field):
     """Enhanced file upload handling with better validation and user feedback"""
     # Validate file type
     if not e.name or not e.name.lower().endswith('.csv'):
-        add_message_to_chat(messages_container, 'assistant', '❌ Please upload a CSV file only.')
+        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> Please upload a CSV file only.')
         return
 
     # Validate file size (client-side check)
@@ -2564,11 +2774,11 @@ async def handle_agent_file_upload(e, messages_container, input_field):
         file_size = len(content)
 
     if file_size > 50 * 1024 * 1024:  # 50MB limit
-        add_message_to_chat(messages_container, 'assistant', '❌ File is too large (>50MB). Please use a smaller CSV file.')
+        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> File is too large (>50MB). Please use a smaller CSV file.')
         return
 
     if file_size == 0:
-        add_message_to_chat(messages_container, 'assistant', '❌ File appears to be empty. Please check your CSV file.')
+        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> File appears to be empty. Please check your CSV file.')
         return
 
     # Show uploading state
@@ -2601,7 +2811,7 @@ async def handle_agent_file_upload(e, messages_container, input_field):
                     file_id = result.get('file_id')
 
                     if not file_id:
-                        add_message_to_chat(messages_container, 'assistant', '❌ Upload failed: No file ID returned from server.')
+                        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> Upload failed: No file ID returned from server.')
                         ui.run_javascript('resetAgentUpload();')
                         return
 
@@ -2612,7 +2822,7 @@ async def handle_agent_file_upload(e, messages_container, input_field):
                         if (uploadArea && uploadContent) {{
                             uploadContent.innerHTML = `
                                 <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                                    <span style="font-size: 1.2rem;">✅</span>
+                                    <span class="material-symbols-outlined" style="font-size: 1.2rem;">check_circle</span>
                                     <div style="text-align: left;">
                                         <div style="font-weight: 600; font-size: 0.8rem; color: var(--gray-700);">Ready for Analysis</div>
                                         <div style="font-size: 0.7rem; color: var(--gray-500); margin-top: 0.1rem;">{e.name}</div>
@@ -2624,10 +2834,10 @@ async def handle_agent_file_upload(e, messages_container, input_field):
                     ''')
 
                     # Add user message
-                    add_message_to_chat(messages_container, 'user', f'📄 Uploaded: {e.name}')
+                    add_message_to_chat(messages_container, 'user', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">description</span> Uploaded: {e.name}')
 
                     # Start intelligent data analysis and parameter recommendation
-                    add_message_to_chat(messages_container, 'assistant', '🔍 **Data Analysis Initiated!** I\'m examining your dataset structure and preparing optimal analysis parameters for you...')
+                    add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">search</span> **Data Analysis Initiated!** I\'m examining your dataset structure and preparing optimal analysis parameters for you...')
 
                     # Send initial analysis request to trigger backend workflow
                     ui.timer(2.0, lambda: send_initial_analysis_request(messages_container, file_id), once=True)
@@ -2667,9 +2877,9 @@ async def handle_agent_file_upload(e, messages_container, input_field):
     except Exception as ex:
         error_msg = str(ex)
         if "connection" in error_msg.lower():
-            add_message_to_chat(messages_container, 'assistant', '🌐 Upload failed due to connection issues. Please check your internet connection and try again.')
+            add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">language</span> Upload failed due to connection issues. Please check your internet connection and try again.')
         else:
-            add_message_to_chat(messages_container, 'assistant', f'❌ Upload error: {error_msg}')
+            add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> Upload error: {error_msg}')
 
         # Reset upload area on error
         ui.run_javascript('resetAgentUpload();')
@@ -2694,7 +2904,7 @@ def update_data_preview(content, filename):
         if not rows:
             preview_html = '''
                 <div style="text-align: center; color: var(--error-600); padding: 2rem;">
-                    <span style="font-size: 2rem; margin-bottom: 1rem; display: block;">❌</span>
+                    <span class="material-symbols-outlined" style="font-size: 2rem; margin-bottom: 1rem; display: block;">cancel</span>
                     <div style="font-weight: 600; margin-bottom: 0.5rem;">Empty File</div>
                     <div style="font-size: 0.9rem;">The uploaded file appears to be empty</div>
                 </div>
@@ -2706,16 +2916,16 @@ def update_data_preview(content, filename):
 
             # Build compact preview table with file info at top
             table_html = f'<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; font-size: 0.85rem;">'
-            table_html += f'<div style="font-weight: 600; color: var(--primary-700);">📊 {filename}</div>'
+            table_html += f'<div style="font-weight: 600; color: #011f5b;"><span class="material-symbols-outlined" style="font-size: 1rem; margin-right: 0.25rem; vertical-align: middle; color: #011f5b;">analytics</span> {filename}</div>'
             table_html += f'<div style="color: var(--gray-600);">{len(rows)-1} rows × {len(headers)} cols</div>'
             table_html += '</div>'
 
             # More compact table styling with horizontal scroll support
-            table_html += '<div style="overflow-x: auto; max-width: 100%;"><table style="width: 100%; border-collapse: collapse; font-size: 0.75rem; line-height: 1.2; min-width: max-content; table-layout: auto;">'
+            table_html += '<div style="overflow-x: auto; max-width: 100%; border-radius: 8px; overflow: hidden;"><table style="width: 100%; border-collapse: collapse; font-size: 0.75rem; line-height: 1.2; min-width: max-content; table-layout: auto;">'
             # Header row - show all columns with horizontal scrolling
-            table_html += '<thead><tr style="background: var(--primary-50);">'
+            table_html += '<thead><tr style="background: #011f5b;">'
             for header in headers:  # Show all columns with horizontal scrolling
-                table_html += f'<th style="padding: 0.4rem 0.3rem; text-align: left; border: 1px solid var(--gray-200); font-weight: 600; color: var(--primary-700); min-width: 80px; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{header}</th>'
+                table_html += f'<th style="padding: 0.4rem 0.3rem; text-align: left; border: 1px solid var(--gray-200); font-weight: 600; color: white; min-width: 80px; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{header}</th>'
             table_html += '</tr></thead>'
 
             # Data rows - show all columns with horizontal scrolling
@@ -2738,7 +2948,7 @@ def update_data_preview(content, filename):
     except Exception as ex:
         preview_html = f'''
             <div style="text-align: center; color: var(--error-600); padding: 2rem;">
-                <span style="font-size: 2rem; margin-bottom: 1rem; display: block;">⚠️</span>
+                <span class="material-symbols-outlined" style="font-size: 2rem; margin-bottom: 1rem; display: block;">warning</span>
                 <div style="font-weight: 600; margin-bottom: 0.5rem;">Preview Error</div>
                 <div style="font-size: 0.9rem;">Unable to preview file: {str(ex)}</div>
             </div>
@@ -2774,13 +2984,13 @@ def add_message_to_chat(messages_container, role, content):
             align-items: flex-start;
         '''):
             if role == 'assistant':
-                ui.html('<div class="message-avatar" style="background: var(--primary-600); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0;">🤖</div>')
+                ui.html('<div class="message-avatar" style="background: #011f5b; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;"><span class="material-symbols-outlined" style="font-size: 1.2rem;">support_agent</span></div>')
                 sender = 'AI Assistant'
                 avatar_bg = 'var(--primary-600)'
             else:
-                ui.html('<div class="message-avatar" style="background: var(--accent-500); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0;">👤</div>')
+                ui.html('<div class="message-avatar" style="background: white; color: #011f5b; width: 32px; height: 32px; border-radius: 50%; border: 2px solid #011f5b; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;"><span class="material-symbols-outlined" style="font-size: 1.2rem; color: #011f5b;">person</span></div>')
                 sender = 'You'
-                avatar_bg = 'var(--accent-500)'
+                avatar_bg = '#011f5b'
 
             with ui.element('div').classes('message-content').style('flex: 1;'):
                 ui.html(f'<div class="message-sender" style="font-weight: 600; color: {avatar_bg}; font-size: 0.85rem; margin-bottom: 0.25rem;">{sender}</div>')
@@ -2797,7 +3007,7 @@ async def send_agent_message(input_field, messages_container, status_area):
     validation = validate_user_input(message, current_stage)
 
     if not validation["valid"]:
-        add_message_to_chat(messages_container, 'assistant', f'❌ {validation["reason"]}')
+        add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> {validation["reason"]}')
         return
 
     # Update context with user activity
@@ -2806,7 +3016,7 @@ async def send_agent_message(input_field, messages_container, status_area):
     # Check if file is uploaded before allowing complex operations
     global current_agent_file_id
     if not current_agent_file_id and any(keyword in message.lower() for keyword in ['analyze', 'run', 'process', 'start']):
-        add_message_to_chat(messages_container, 'assistant', '📄 Please upload a CSV file first before requesting analysis.')
+        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">upload_file</span> Please upload a CSV file first before requesting analysis.')
         return
 
     # Clear input
@@ -2825,9 +3035,8 @@ async def send_agent_message(input_field, messages_container, status_area):
             align-items: flex-start;
         ''')
         with typing_indicator:
-            ui.html('<div class="message-avatar" style="background: var(--primary-600); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0;">🤖</div>')
+            ui.html('<div class="message-avatar" style="background: #011f5b; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;"><span class="material-symbols-outlined" style="font-size: 1.2rem;">support_agent</span></div>')
             with ui.element('div').classes('message-content').style('flex: 1;'):
-                ui.html('<div class="message-sender" style="font-weight: 600; color: var(--primary-700); font-size: 0.85rem; margin-bottom: 0.25rem;">AI Assistant</div>')
                 ui.html('<div class="message-text" style="background: white; padding: 0.75rem; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); font-size: 0.9rem;"><em>Analyzing your request...</em></div>')
 
     ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
@@ -2889,9 +3098,9 @@ async def send_agent_message(input_field, messages_container, status_area):
                         if "timeout" in error_msg.lower():
                             add_message_to_chat(messages_container, 'assistant', '⏰ Request timed out. Please try again or use a smaller dataset.')
                         elif "file" in error_msg.lower():
-                            add_message_to_chat(messages_container, 'assistant', f'📄 File issue: {error_msg}. Please check your CSV file and try again.')
+                            add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">description</span> File issue: {error_msg}. Please check your CSV file and try again.')
                         else:
-                            add_message_to_chat(messages_container, 'assistant', f'❌ Error: {error_msg}')
+                            add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> Error: {error_msg}')
                     else:
                         # Get the last assistant message
                         assistant_message = result.get('assistant_message', {})
@@ -2900,7 +3109,7 @@ async def send_agent_message(input_field, messages_container, status_area):
                         if content:
                             # Check if this is a workflow guidance message
                             if any(phrase in content.lower() for phrase in ['next step', 'would you like', 'please confirm']):
-                                add_message_to_chat(messages_container, 'assistant', f'📋 {content}')
+                                add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">description</span> {content}')
                             else:
                                 add_message_to_chat(messages_container, 'assistant', content)
 
@@ -2913,15 +3122,15 @@ async def send_agent_message(input_field, messages_container, status_area):
 
                                 # Provide user-friendly tool descriptions
                                 tool_descriptions = {
-                                    'inspect_dataset': '🔍 Analyzing your dataset structure...',
-                                    'infer_direction': '🧭 Determining ranking direction...',
-                                    'estimate_runtime': '⏱️ Estimating analysis time...',
-                                    'create_job': '🚀 Starting analysis job...',
-                                    'poll_status': '📊 Checking progress...',
-                                    'get_results': '📈 Retrieving results...'
+                                    'inspect_dataset': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">search</span> Analyzing your dataset structure...',
+                                    'infer_direction': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">compass_calibration</span> Determining ranking direction...',
+                                    'estimate_runtime': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">schedule</span> Estimating analysis time...',
+                                    'create_job': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">rocket_launch</span> Starting analysis job...',
+                                    'poll_status': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">analytics</span> Checking progress...',
+                                    'get_results': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">bar_chart</span> Retrieving results...'
                                 }
 
-                                friendly_msg = tool_descriptions.get(tool_name, f'🔧 Executing: {tool_name}...')
+                                friendly_msg = tool_descriptions.get(tool_name, f'<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">build</span> Executing: {tool_name}...')
                                 add_message_to_chat(messages_container, 'assistant', friendly_msg)
 
                         # Check if we should display analysis results
@@ -2951,12 +3160,12 @@ async def send_agent_message(input_field, messages_container, status_area):
                         typing_indicator.clear()
 
                     if resp.status == 429:
-                        add_message_to_chat(messages_container, 'assistant', '⚡ Too many requests. Please wait a moment before trying again.')
+                        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">bolt</span> Too many requests. Please wait a moment before trying again.')
                     elif resp.status >= 500:
-                        add_message_to_chat(messages_container, 'assistant', '🔧 Server error. Please try again in a few moments.')
+                        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">build</span> Server error. Please try again in a few moments.')
                     else:
                         error_text = await resp.text()
-                        add_message_to_chat(messages_container, 'assistant', f'❌ API Error: {resp.status} - {error_text}')
+                        add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> API Error: {resp.status} - {error_text}')
 
     except asyncio.TimeoutError:
         # Remove typing indicator
@@ -2971,9 +3180,9 @@ async def send_agent_message(input_field, messages_container, status_area):
 
         error_msg = str(ex)
         if "connection" in error_msg.lower():
-            add_message_to_chat(messages_container, 'assistant', '🌐 Connection error. Please check your internet connection and try again.')
+            add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">language</span> Connection error. Please check your internet connection and try again.')
         else:
-            add_message_to_chat(messages_container, 'assistant', f'❌ Unexpected error: {error_msg}')
+            add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> Unexpected error: {error_msg}')
 
     # Scroll to bottom
     ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
@@ -3039,12 +3248,12 @@ def get_workflow_guidance(stage):
             'tips': 'Ensure your CSV contains performance metrics columns for best results.'
         },
         'data_analysis': {
-            'welcome': '📊 Great! I\'ve analyzed your data. Let\'s configure the analysis.',
+            'welcome': '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">analytics</span> Great! I\'ve analyzed your data. Let\'s configure the analysis.',
             'next_steps': ['Review data insights', 'Set ranking direction', 'Choose parameters', 'Start analysis'],
             'tips': 'I can help you understand your data structure and recommend optimal settings.'
         },
         'analysis_running': {
-            'welcome': '🚀 Analysis is running! I\'ll notify you when results are ready.',
+            'welcome': '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">rocket_launch</span> Analysis is running! I\'ll notify you when results are ready.',
             'next_steps': ['Monitor progress', 'View results when complete'],
             'tips': 'The analysis time depends on your dataset size and parameters chosen.'
         }
@@ -3199,7 +3408,7 @@ def handle_suggestion_click(suggestion, input_field, messages_container, status_
         # Check if file is uploaded
         global current_agent_file_id
         if not current_agent_file_id:
-            add_message_to_chat(messages_container, 'assistant', '📄 Please upload a CSV file first before requesting analysis.')
+            add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">upload_file</span> Please upload a CSV file first before requesting analysis.')
             return
 
         # Clear input
@@ -3454,9 +3663,9 @@ async def process_agent_analysis_async(message, messages_container, typing_indic
                         if "timeout" in error_msg.lower():
                             add_message_to_chat(messages_container, 'assistant', '⏰ Request timed out. Please try again or use a smaller dataset.')
                         elif "file" in error_msg.lower():
-                            add_message_to_chat(messages_container, 'assistant', f'📄 File issue: {error_msg}. Please check your CSV file and try again.')
+                            add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">description</span> File issue: {error_msg}. Please check your CSV file and try again.')
                         else:
-                            add_message_to_chat(messages_container, 'assistant', f'❌ Error: {error_msg}')
+                            add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> Error: {error_msg}')
                     else:
                         # Get the last assistant message
                         assistant_message = result.get('assistant_message', {})
@@ -3465,7 +3674,7 @@ async def process_agent_analysis_async(message, messages_container, typing_indic
                         if content:
                             # Check if this is a workflow guidance message
                             if any(phrase in content.lower() for phrase in ['next step', 'would you like', 'please confirm']):
-                                add_message_to_chat(messages_container, 'assistant', f'📋 {content}')
+                                add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">description</span> {content}')
                             else:
                                 add_message_to_chat(messages_container, 'assistant', content)
 
@@ -3478,15 +3687,15 @@ async def process_agent_analysis_async(message, messages_container, typing_indic
 
                                 # Provide user-friendly tool descriptions
                                 tool_descriptions = {
-                                    'inspect_dataset': '🔍 Analyzing your dataset structure...',
-                                    'infer_direction': '🧭 Determining ranking direction...',
-                                    'estimate_runtime': '⏱️ Estimating analysis time...',
-                                    'create_job': '🚀 Starting analysis job...',
-                                    'poll_status': '📊 Checking progress...',
-                                    'get_results': '📈 Retrieving results...'
+                                    'inspect_dataset': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">search</span> Analyzing your dataset structure...',
+                                    'infer_direction': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">compass_calibration</span> Determining ranking direction...',
+                                    'estimate_runtime': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">schedule</span> Estimating analysis time...',
+                                    'create_job': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">rocket_launch</span> Starting analysis job...',
+                                    'poll_status': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">analytics</span> Checking progress...',
+                                    'get_results': '<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">bar_chart</span> Retrieving results...'
                                 }
 
-                                friendly_msg = tool_descriptions.get(tool_name, f'🔧 Executing: {tool_name}...')
+                                friendly_msg = tool_descriptions.get(tool_name, f'<span class="material-symbols-outlined" style="font-size: 0.9rem; vertical-align: middle; margin-right: 0.25rem;">build</span> Executing: {tool_name}...')
                                 add_message_to_chat(messages_container, 'assistant', friendly_msg)
 
                         # Check if we should display analysis results
@@ -3516,12 +3725,12 @@ async def process_agent_analysis_async(message, messages_container, typing_indic
                         typing_indicator.clear()
 
                     if resp.status == 429:
-                        add_message_to_chat(messages_container, 'assistant', '⚡ Too many requests. Please wait a moment before trying again.')
+                        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">bolt</span> Too many requests. Please wait a moment before trying again.')
                     elif resp.status >= 500:
-                        add_message_to_chat(messages_container, 'assistant', '🔧 Server error. Please try again in a few moments.')
+                        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">build</span> Server error. Please try again in a few moments.')
                     else:
                         error_text = await resp.text()
-                        add_message_to_chat(messages_container, 'assistant', f'❌ API Error: {resp.status} - {error_text}')
+                        add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> API Error: {resp.status} - {error_text}')
 
     except asyncio.TimeoutError:
         # Remove typing indicator
@@ -3536,9 +3745,9 @@ async def process_agent_analysis_async(message, messages_container, typing_indic
 
         error_msg = str(ex)
         if "connection" in error_msg.lower():
-            add_message_to_chat(messages_container, 'assistant', '🌐 Connection error. Please check your internet connection and try again.')
+            add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">language</span> Connection error. Please check your internet connection and try again.')
         else:
-            add_message_to_chat(messages_container, 'assistant', f'❌ Unexpected error: {error_msg}')
+            add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> Unexpected error: {error_msg}')
 
     # Set completion flag to trigger UI updates in main thread
     _analysis_completed = True
@@ -3696,26 +3905,22 @@ def show_main_report(result):
 
 def show_report(report):
     with ui.element('div').classes('report-card').style('max-width: 1400px; margin: 0 auto; width: 100%;'):
-        # Enhanced Report Header
+        # Enhanced Report Header with Card Structure
         with ui.element('div').classes('report-header'):
-            ui.html(f'''
-                <div style="position: relative; z-index: 10;">
-                    <div class="hero-title" style="font-size: 2.5rem; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        📊 Genetic Analysis Report
-                    </div>
-                    <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;">
-                        <div class="badge primary" style="padding: 0.75rem 1.5rem; font-size: 1rem;">
-                            👤 User: {report["user_id"]}
-                        </div>
-                        <div class="badge primary" style="padding: 0.75rem 1.5rem; font-size: 1rem;">
-                            🔬 Job: {report["job_id"]}
-                        </div>
-                    </div>
-                    <div style="font-size: 1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; line-height: 1.5;">
-                        Comprehensive genomic analysis with personalized risk assessment and phenotype associations
-                    </div>
-                </div>
-            ''')
+            with ui.element('div').classes('card-header').style('justify-content: center; flex-direction: column; text-align: center; margin-bottom: 2rem;'):
+                with ui.element('div').classes('card-icon-container').style('margin: 0 auto 1rem; width: 80px; height: 80px;'):
+                    ui.html('<span class="material-symbols-outlined card-icon" style="font-size: 3rem;">analytics</span>')
+                ui.html(f'<h1 class="card-title" style="font-size: 2.5rem; margin-bottom: 1rem;">Genetic Analysis Report</h1>')
+                ui.html('<p class="card-description" style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem;">Comprehensive genomic analysis with personalized risk assessment and phenotype associations</p>')
+
+                # User and Job Info with Metric Cards
+                with ui.element('div').style('display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;'):
+                    with ui.element('div').classes('metric-card').style('min-width: 150px;'):
+                        ui.html(f'<div class="metric-value" style="font-size: 1.5rem;">👤 {report["user_id"]}</div>')
+                        ui.html('<div class="metric-label">User ID</div>')
+                    with ui.element('div').classes('metric-card').style('min-width: 150px;'):
+                        ui.html(f'<div class="metric-value" style="font-size: 1.5rem;">🔬 {report["job_id"]}</div>')
+                        ui.html('<div class="metric-label">Job ID</div>')
 
         # Enhanced Container for Tabs and Content
         with ui.element('div').style('padding: 2rem;'):
@@ -3767,14 +3972,10 @@ def show_report(report):
                             border-left: 6px solid var(--primary-600);
                             margin-bottom: 2rem;
                         '''):
-                            ui.html('''
-                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                    <div style="font-size: 2rem;">📈</div>
-                                    <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                        Statistical Summary
-                                    </h4>
-                                </div>
-                            ''')
+                            with ui.element('div').classes('card-header'):
+                                with ui.element('div').classes('card-icon-container'):
+                                    ui.html('<span class="material-symbols-outlined card-icon">analytics</span>')
+                                ui.html('<h3 class="card-title">Statistical Summary</h3>')
                             for line in statistical_summary:
                                 ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1rem; border-left: 4px solid var(--primary-400);">• {line}</div>')
 
@@ -3785,14 +3986,10 @@ def show_report(report):
                         border-left: 6px solid var(--primary-700);
                         margin-bottom: 2rem;
                     '''):
-                        ui.html('''
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                <div style="font-size: 2rem;">💡</div>
-                                <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                    Clinical Interpretation & Recommendations
-                                </h4>
-                            </div>
-                        ''')
+                        with ui.element('div').classes('card-header'):
+                            with ui.element('div').classes('card-icon-container'):
+                                ui.html('<span class="material-symbols-outlined card-icon">lightbulb</span>')
+                            ui.html('<h3 class="card-title">Clinical Interpretation & Recommendations</h3>')
                         ui.html(f'''
                             <div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">
                                 <div style="margin-bottom: 1rem;"><strong style="color: var(--primary-800);">Summary:</strong> {explanation.get("summary", "N/A")}</div>
@@ -3815,16 +4012,10 @@ def show_report(report):
                                     ui.html(f'<div class="highlight-box" style="margin: 0.5rem 0; padding: 0.75rem; font-family: monospace; font-size: 0.9rem;">• {line}</div>')
                     
                     # Enhanced Visualizations Section
-                    ui.html('''
-                        <div style="margin: 3rem 0 2rem 0;">
-                            <div class="section-title" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
-                                <div style="font-size: 2rem;">📊</div>
-                                <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.5rem;">
-                                    Risk Distribution Visualizations
-                                </h4>
-                            </div>
-                        </div>
-                    ''')
+                    with ui.element('div').classes('section-title').style('margin: 3rem 0 2rem 0; display: flex; align-items: center; gap: 1rem;'):
+                        with ui.element('div').classes('card-icon-container').style('width: 60px; height: 60px;'):
+                            ui.html('<span class="material-symbols-outlined card-icon">bar_chart</span>')
+                        ui.html('<h3 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.5rem;">Risk Distribution Visualizations</h3>')
                     
                     with ui.row().classes('w-full gap-6'):
                         prs_dist_fig = report['visualizations'].get('prs_distribution')
@@ -3853,14 +4044,10 @@ def show_report(report):
                             border-left: 6px solid var(--primary-600);
                             margin-bottom: 2rem;
                         '''):
-                            ui.html('''
-                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                    <div style="font-size: 2rem;">📈</div>
-                                    <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                        Statistical Summary
-                                    </h4>
-                                </div>
-                            ''')
+                            with ui.element('div').classes('card-header'):
+                                with ui.element('div').classes('card-icon-container'):
+                                    ui.html('<span class="material-symbols-outlined card-icon">analytics</span>')
+                                ui.html('<h3 class="card-title">Statistical Summary</h3>')
                             for line in statistical_summary_integrated:
                                 ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1rem; border-left: 4px solid var(--primary-500);">• {line}</div>')
 
@@ -3871,14 +4058,10 @@ def show_report(report):
                         border-left: 6px solid var(--primary-700);
                         margin-bottom: 2rem;
                     '''):
-                        ui.html('''
-                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                <div style="font-size: 2rem;">💡</div>
-                                <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                    Clinical Interpretation & Recommendations
-                                </h4>
-                            </div>
-                        ''')
+                        with ui.element('div').classes('card-header'):
+                            with ui.element('div').classes('card-icon-container'):
+                                ui.html('<span class="material-symbols-outlined card-icon">lightbulb</span>')
+                            ui.html('<h3 class="card-title">Clinical Interpretation & Recommendations</h3>')
                         ui.html(f'''
                             <div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">
                                 <div style="margin-bottom: 1rem;"><strong style="color: var(--primary-800);">Overall Summary:</strong> {explanation.get("summary", "N/A")}</div>
@@ -3937,14 +4120,10 @@ def show_report(report):
                             border-left: 6px solid var(--accent-500);
                             margin-bottom: 2rem;
                         '''):
-                            ui.html('''
-                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                    <div style="font-size: 2rem;">📋</div>
-                                    <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                        PheWAS Analysis Summary
-                                    </h4>
-                                </div>
-                            ''')
+                            with ui.element('div').classes('card-header'):
+                                with ui.element('div').classes('card-icon-container'):
+                                    ui.html('<span class="material-symbols-outlined card-icon">assignment</span>')
+                                ui.html('<h3 class="card-title">PheWAS Analysis Summary</h3>')
                             ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">{phewas_exp.get("summary", "N/A")}</div>')
                         
                         # Enhanced Methodology Section
@@ -3954,14 +4133,10 @@ def show_report(report):
                             border-left: 6px solid var(--gray-600);
                             margin-bottom: 2rem;
                         '''):
-                            ui.html('''
-                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                    <div style="font-size: 2rem;">🔬</div>
-                                    <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                        Analysis Methodology
-                                    </h4>
-                                </div>
-                            ''')
+                            with ui.element('div').classes('card-header'):
+                                with ui.element('div').classes('card-icon-container'):
+                                    ui.html('<span class="material-symbols-outlined card-icon">science</span>')
+                                ui.html('<h3 class="card-title">Analysis Methodology</h3>')
                             ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">{phewas_exp.get("methodology", "N/A")}</div>')
                         
                         # Enhanced Significant Findings Section
@@ -3973,14 +4148,10 @@ def show_report(report):
                                 border-left: 6px solid var(--warning-500);
                                 margin-bottom: 2rem;
                             '''):
-                                ui.html('''
-                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                        <div style="font-size: 2rem;">⚠️</div>
-                                        <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                            Significant Genetic Associations
-                                        </h4>
-                                    </div>
-                                ''')
+                                with ui.element('div').classes('card-header'):
+                                    with ui.element('div').classes('card-icon-container'):
+                                        ui.html('<span class="material-symbols-outlined card-icon">warning</span>')
+                                    ui.html('<h3 class="card-title">Significant Genetic Associations</h3>')
                                 for finding in significant_findings:
                                     ui.html(f'''
                                         <div class="highlight-box" style="margin: 1.5rem 0; padding: 1.5rem; border-left: 4px solid var(--warning-500); background: rgba(255,255,255,0.8); border-radius: var(--radius-lg);">
@@ -4125,7 +4296,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
     with ui.element('nav').classes('top-navbar'):
         # Brand/Logo section
         with ui.element('div').classes('navbar-brand'):
-            ui.html('<span class="navbar-brand-icon">📊</span>')
+            ui.html('<span class="material-symbols-outlined navbar-brand-icon">sort</span>')
             ui.html('<a href="#" class="navbar-brand-link">Spectral Ranking</a>')
         
         # Main navigation menu (hidden on mobile)
@@ -4249,21 +4420,21 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
             ui.html('''
                 <div class="hero-features">
                     <div class="hero-feature">
-                        <span class="hero-feature-icon">🔬</span>
+                        <span class="material-symbols-outlined hero-feature-icon">biotech</span>
                         <div class="hero-feature-title">Spectral Method</div>
                         <div class="hero-feature-description">
                             Utilizes a powerful spectral method to derive robust rankings from complex, heterogeneous comparison data.
                         </div>
                     </div>
                     <div class="hero-feature">
-                        <span class="hero-feature-icon">⚖️</span>
+                        <span class="material-symbols-outlined hero-feature-icon">balance</span>
                         <div class="hero-feature-title">Uncertainty Quantification</div>
                         <div class="hero-feature-description">
                             Employs weighted bootstrap to construct confidence intervals, assessing the reliability and stability of ranks.
                         </div>
                     </div>
                     <div class="hero-feature">
-                        <span class="hero-feature-icon">🌐</span>
+                        <span class="material-symbols-outlined hero-feature-icon">public</span>
                         <div class="hero-feature-title">Broad Applicability</div>
                         <div class="hero-feature-description">
                            Applicable to diverse fields like machine learning, sports analytics, market research, and academic journal rankings.
@@ -4287,55 +4458,41 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
         # Mode Selection Cards (side-by-side) between hero and analysis
         with ui.element('div').style('display: flex; gap: 2rem; margin: 0rem auto; max-width: 1400px; justify-content: center; flex-wrap: wrap;').props('id="mode-selection"'):
             # Agent Mode (Left)
-            with ui.element('div').classes('info-card').style('''
-                flex: 1;
-                max-width: 684px;
-                height: 342px;
-                text-align: center;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                border: 3px solid #011f5b;
-                background: rgba(255,255,255,0.9);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            ''').props('id="agent-mode-card"') as agent_mode_card:
+            with ui.element('div').classes('mode-card active').props('id="agent-mode-card"') as agent_mode_card:
                 ui.html('''
-                    <div style="padding: 1rem;">
-                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🚀</div>
-                        <h3 style="color: var(--primary-900); font-weight: 800; font-size: 1.2rem; margin-bottom: 0.5rem;">Agent Mode</h3>
-                        <p style="color: var(--gray-600); font-size: 0.9rem; line-height: 1.5;">
-                            Chat with AI assistant to configure analysis parameters
+                    <div class="card-content">
+                        <div class="card-icon-wrapper"><span class="material-symbols-outlined">chat_bubble</span></div>
+                        <h3 class="card-title">Agent Mode</h3>
+                        <p class="card-description">
+                            Chat with AI assistant to configure analysis parameters and get intelligent recommendations
                         </p>
+                        <ul class="card-features">
+                            <li><span class="material-symbols-outlined">smart_toy</span> AI-Powered Configuration</li>
+                            <li><span class="material-symbols-outlined">chat</span> Interactive Guidance</li>
+                            <li><span class="material-symbols-outlined">auto_fix_high</span> Automated Suggestions</li>
+                        </ul>
                     </div>
                 ''')
 
             # Manual Mode (Right)
-            with ui.element('div').classes('info-card').style('''
-                flex: 1;
-                max-width: 684px;
-                height: 342px;
-                text-align: center;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                border: 3px solid #011f5b;
-                background: rgba(255,255,255,0.9);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            ''').props('id="manual-mode-card"') as manual_mode_card:
+            with ui.element('div').classes('mode-card inactive').props('id="manual-mode-card"') as manual_mode_card:
                 ui.html('''
-                    <div style="padding: 1rem;">
-                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🛠️</div>
-                        <h3 style="color: var(--primary-900); font-weight: 800; font-size: 1.2rem; margin-bottom: 0.5rem;">Manual Mode</h3>
-                        <p style="color: var(--gray-600); font-size: 0.9rem; line-height: 1.5;">
-                            Manually configure all analysis parameters for precise control
+                    <div class="card-content">
+                        <div class="card-icon-wrapper"><span class="material-symbols-outlined">build</span></div>
+                        <h3 class="card-title">Manual Mode</h3>
+                        <p class="card-description">
+                            Manually configure all analysis parameters with full control over every setting
                         </p>
+                        <ul class="card-features">
+                            <li><span class="material-symbols-outlined">tune</span> Full Parameter Control</li>
+                            <li><span class="material-symbols-outlined">precision_manufacturing</span> Precise Configuration</li>
+                            <li><span class="material-symbols-outlined">settings</span> Advanced Options</li>
+                        </ul>
                     </div>
                 ''')
 
         # Agent Mode Analysis Section (initially hidden)
-        agent_analysis_section = ui.element('section').style('width: 100%; max-width: 1400px; margin: 0 auto; padding: 1rem; height: 90vh; display: none;').props('id="agent-analysis"')
+        agent_analysis_section = ui.element('section').style('width: 100%; max-width: 1400px; margin: 1rem auto; padding: 0; height: 90vh; display: none;').props('id="agent-analysis"')
 
         with agent_analysis_section:
             with ui.element('div').classes('info-card').style('text-align: center; margin: 0; border: 3px solid #011f5b; height: 100%;'):
@@ -4372,13 +4529,13 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                         # File upload section
                         with ui.element('div').style('margin-bottom: 0.5rem;'):
                             # File upload area - taller for better text fit
-                            agent_upload_area = ui.element('div').props('id="agent-upload-area"').style('margin: 0; max-width: 100%; position: relative; height: 75px; cursor: pointer; border: 2px dashed var(--primary-600); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; background: rgba(1, 31, 91, 0.05); transition: all 0.3s ease;')
+                            agent_upload_area = ui.element('div').props('id="agent-upload-area"').style('margin: 0; max-width: 100%; position: relative; height: 75px; cursor: pointer; border: 2px dashed #011f5b; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; background: rgba(1, 31, 91, 0.1); transition: all 0.3s ease;')
                             with agent_upload_area:
                                 ui.html('''
-                                    <div id="agent-upload-content" style="text-align: center; color: var(--primary-700); padding: 0.5rem 0;">
-                                        <span style="font-size: 1.2rem; margin-bottom: 0.25rem; display: block;">📄</span>
+                                    <div id="agent-upload-content" style="text-align: center; color: #011f5b; padding: 0.5rem 0;">
+                                        <span class="material-symbols-outlined" style="font-size: 1.2rem; margin-bottom: 0.25rem; display: block; color: #011f5b;">upload_file</span>
                                         <div style="font-weight: 600; font-size: 0.8rem;">Upload CSV</div>
-                                        <div style="font-size: 0.7rem; color: var(--gray-600); margin-top: 0.1rem;">Click or drag file</div>
+                                        <div style="font-size: 0.7rem; color: #666; margin-top: 0.1rem;">Click or drag file</div>
                                     </div>
                                 ''')
                                 agent_file_input = ui.upload(on_upload=lambda e: handle_agent_file_upload(e, messages_container, input_field), multiple=False, auto_upload=True).props('accept=.csv').style('position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; z-index: 10; cursor: pointer;')
@@ -4413,7 +4570,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                             with data_preview_container.classes('data-preview-container'):
                                 ui.html('''
                                     <div style="text-align: center; color: var(--gray-600); padding: 1rem;">
-                                        <span style="font-size: 1.5rem; margin-bottom: 0.5rem; display: block;">📋</span>
+                                        <span class="material-symbols-outlined" style="font-size: 1.5rem; margin-bottom: 0.5rem; display: block;">description</span>
                                         <div style="font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">No Data Uploaded</div>
                                         <div style="font-size: 0.8rem;">Click above to upload CSV file</div>
                                     </div>
@@ -4446,9 +4603,8 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                                     margin-bottom: 1rem;
                                     align-items: flex-start;
                                 '''):
-                                    ui.html('<div class="message-avatar" style="background: var(--primary-600); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0;">🤖</div>')
+                                    ui.html('<div class="message-avatar" style="background: #011f5b; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;"><span class="material-symbols-outlined" style="font-size: 1.2rem;">support_agent</span></div>')
                                     with ui.element('div').classes('message-content').style('flex: 1;'):
-                                        ui.html('<div class="message-sender" style="font-weight: 600; color: var(--primary-700); font-size: 0.85rem; margin-bottom: 0.25rem;">AI Assistant</div>')
                                         ui.html('<div class="message-text" style="background: white; padding: 0.75rem; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); font-size: 0.9rem; line-height: 1.5;">Hello! I\'m here to help you configure your spectral ranking analysis. Please upload a CSV file with your performance data, and I\'ll guide you through the process.</div>')
 
                             # Smart suggestions area
@@ -4468,11 +4624,13 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
 
                             # Input area - compact and flexible (only text input and send button)
                             with ui.element('div').classes('chat-input-area').style('display: flex; gap: 0.75rem; align-items: flex-end; flex-shrink: 0;'):
-                                # Send button
-                                send_button = ui.button(
-                                    '',
-                                    icon='send'
-                                ).props('round color=primary').style('height: 40px; width: 40px; flex-shrink: 0;').on('click', lambda: send_agent_message(input_field, messages_container, status_area))
+                                # Send button with explicit Material Symbols icon
+                                send_button = ui.html('''
+                                    <button id="send-button" class="q-btn q-btn-round q-btn--primary q-btn--actionable q-hoverable q-focusable"
+                                            style="height: 40px; width: 40px; flex-shrink: 0; border-radius: 50%; background: #011f5b; border: none; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                                        <span class="material-symbols-outlined" style="font-size: 1.2rem;">send</span>
+                                    </button>
+                                ''').on('click', lambda: send_agent_message(input_field, messages_container, status_area))
 
                                 # Text input
                                 input_field = ui.textarea(
@@ -4495,19 +4653,14 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
 
             # Keep report container available for agent mode results
 
-            # Highlight agent mode, gray out manual mode
+            # Update card styles
             ui.run_javascript('''
-                document.getElementById("agent-mode-card").style.borderColor = "#011f5b";
-                document.getElementById("agent-mode-card").style.background = "rgba(255,255,255,0.9)";
-                document.getElementById("agent-mode-card").querySelector("h3").style.color = "var(--primary-900)";
-                document.getElementById("agent-mode-card").querySelector("p").style.color = "var(--gray-600)";
-                document.getElementById("agent-mode-card").querySelector("div > div:first-child").style.filter = "none";
-
-                document.getElementById("manual-mode-card").style.borderColor = "#6b7280";
-                document.getElementById("manual-mode-card").style.background = "rgba(107, 114, 128, 0.25)";
-                document.getElementById("manual-mode-card").querySelector("h3").style.color = "#6b7280";
-                document.getElementById("manual-mode-card").querySelector("p").style.color = "#6b7280";
-                document.getElementById("manual-mode-card").querySelector("div > div:first-child").style.filter = "grayscale(100%)";
+                const agentCard = document.getElementById("agent-mode-card");
+                const manualCard = document.getElementById("manual-mode-card");
+                agentCard.classList.add("active");
+                agentCard.classList.remove("inactive");
+                manualCard.classList.add("inactive");
+                manualCard.classList.remove("active");
             ''')
 
             # Scroll to AI Assistant section (slightly above center)
@@ -4526,19 +4679,14 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
 
             # Keep report container available for manual mode results
 
-            # Highlight manual mode, gray out agent mode
+            # Update card styles
             ui.run_javascript('''
-                document.getElementById("manual-mode-card").style.borderColor = "#011f5b";
-                document.getElementById("manual-mode-card").style.background = "rgba(255,255,255,0.9)";
-                document.getElementById("manual-mode-card").querySelector("h3").style.color = "var(--primary-900)";
-                document.getElementById("manual-mode-card").querySelector("p").style.color = "var(--gray-600)";
-                document.getElementById("manual-mode-card").querySelector("div > div:first-child").style.filter = "none";
-
-                document.getElementById("agent-mode-card").style.borderColor = "#6b7280";
-                document.getElementById("agent-mode-card").style.background = "rgba(107, 114, 128, 0.25)";
-                document.getElementById("agent-mode-card").querySelector("h3").style.color = "#6b7280";
-                document.getElementById("agent-mode-card").querySelector("p").style.color = "#6b7280";
-                document.getElementById("agent-mode-card").querySelector("div > div:first-child").style.filter = "grayscale(100%)";
+                const agentCard = document.getElementById("agent-mode-card");
+                const manualCard = document.getElementById("manual-mode-card");
+                manualCard.classList.add("active");
+                manualCard.classList.remove("inactive");
+                agentCard.classList.add("inactive");
+                agentCard.classList.remove("active");
             ''')
 
             # Scroll to Generate Analysis Report section (slightly below AI Assistant position)
@@ -4564,30 +4712,16 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
             if (analysisSection) analysisSection.style.display = "none";
             if (resultsSection) resultsSection.style.display = "none";
 
-            // Style Agent Mode as active
+            // Set initial card styles (Agent Mode active, Manual Mode inactive)
             var agentCard = document.getElementById("agent-mode-card");
-            if (agentCard) {
-                agentCard.style.borderColor = "#011f5b";
-                agentCard.style.background = "rgba(255,255,255,0.9)";
-                var agentTitle = agentCard.querySelector("h3");
-                var agentDesc = agentCard.querySelector("p");
-                var agentEmoji = agentCard.querySelector("div > div:first-child");
-                if (agentTitle) agentTitle.style.color = "var(--primary-900)";
-                if (agentDesc) agentDesc.style.color = "var(--gray-600)";
-                if (agentEmoji) agentEmoji.style.filter = "none";
-            }
-
-            // Style Manual Mode as inactive
             var manualCard = document.getElementById("manual-mode-card");
+            if (agentCard) {
+                agentCard.classList.add("active");
+                agentCard.classList.remove("inactive");
+            }
             if (manualCard) {
-                manualCard.style.borderColor = "#6b7280";
-                manualCard.style.background = "rgba(107, 114, 128, 0.25)";
-                var manualTitle = manualCard.querySelector("h3");
-                var manualDesc = manualCard.querySelector("p");
-                var manualEmoji = manualCard.querySelector("div > div:first-child");
-                if (manualTitle) manualTitle.style.color = "#6b7280";
-                if (manualDesc) manualDesc.style.color = "#6b7280";
-                if (manualEmoji) manualEmoji.style.filter = "grayscale(100%)";
+                manualCard.classList.add("inactive");
+                manualCard.classList.remove("active");
             }
         });
         </script>
@@ -4602,7 +4736,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 ui.html('''
                     <div style="margin-bottom: 0rem;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
-                            <span style="font-size: 2rem;">🔍</span>
+                            <span class="material-symbols-outlined" style="font-size: 2rem;">search</span>
                             <h2 style="color: var(--primary-900); font-weight: 800; margin: 0; font-size: 1.5rem;">Generate Analysis Report</h2>
                         </div>
                         <p style="color: var(--gray-600); font-size: 0.9rem; max-width: 1000px; margin: 0 auto; line-height: 1.6;">
@@ -4629,7 +4763,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                             uploadArea.classList.add('uploaded');
                             uploadContent.innerHTML = `
                                 <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                                    <span style="font-size: 1.2rem;">✅</span>
+                                    <span class="material-symbols-outlined" style="font-size: 1.2rem;">check_circle</span>
                                     <div style="text-align: left;">
                                         <div style="font-weight: 600; font-size: 0.8rem; color: #e5e7eb;">File Uploaded</div>
                                         <div style="font-size: 0.7rem; color: #d1d5db; margin-top: 0.1rem;">{e.name}</div>
@@ -4647,7 +4781,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                         # CSV File Upload Card
                         with ui.element('div').classes('highlight-box').style('text-align: center; background: #011f5b; color: #fff; padding: 2rem; position: relative; min-height: 380px; display: flex; flex-direction: column;'):
                             with ui.element('div').style('display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff;'):
-                                ui.html('<span style="font-size: 1.5rem;">📄</span>')
+                                ui.html('<span class="material-symbols-outlined" style="font-size: 1.5rem;">upload_file</span>')
                                 ui.html('<h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>CSV File Upload</b></h4>')
                             ui.html('<p style="color: #fff; margin-bottom: 1.5rem;">Upload your CSV file containing method performance data</p>')
                             with ui.element('div').style('text-align: center;'):
@@ -4668,7 +4802,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                         # Analysis Parameters Card
                         with ui.element('div').classes('highlight-box').style('text-align: center; background: #011f5b; color: #fff; padding: 2rem; min-height: 380px; display: flex; flex-direction: column; justify-content: flex-start;'):
                             with ui.element('div').style('display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff;'):
-                                ui.html('<span style="font-size: 1.5rem;">⚙️</span>')
+                                ui.html('<span class="material-symbols-outlined" style="font-size: 1.5rem;">settings</span>')
                                 ui.html('<h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>Analysis Parameters</b></h4>')
                             ui.html('<p style="color: #fff; margin-bottom: 1.5rem;">Configure ranking algorithm settings</p>')
                             with ui.element('div').style('display: flex; flex-direction: column; gap: 1.5rem; text-align: left;'):
@@ -4737,9 +4871,8 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
 
                 # Generate button
                 with ui.element('div').style('display: flex; justify-content: center; margin-top: 3.5rem;'):
-                    query_button = ui.button('').classes('modern-button').style('background: linear-gradient(90deg, #011f5b 60%, #1e40af 100%) !important; border: none; border-radius: 2rem; padding: 1.25rem 3rem; color: white; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: box-shadow 0.2s, transform 0.2s; box-shadow: 0 6px 24px rgba(1,31,91,0.18); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 0.8rem;')
+                    query_button = ui.button('', icon='rocket_launch').classes('primary-btn').style('padding: 1.25rem 3rem; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 2rem; box-shadow: 0 6px 24px rgba(1,31,91,0.18);')
                     with query_button:
-                        ui.icon('rocket_launch').props('size=1.3rem')
                         ui.html('<span style="font-weight: 800; font-size: 1.1rem;">Generate Report</span>')
 
         # Status and Report containers are now initialized globally for both modes
@@ -4891,7 +5024,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
             ui.html('''
                 <div style="margin-bottom: 0rem;">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
-                        <span style="font-size: 2rem;">📚</span>
+                        <span class="material-symbols-outlined" style="font-size: 2rem;">menu_book</span>
                         <h2 style="color: var(--primary-900); font-weight: 800; margin: 0; font-size: 1.5rem;">How to Use This Tool</h2>
                     </div>
                     <p style="color: var(--gray-600); font-size: 0.9rem; max-width: 600px; margin: 0 auto;">
@@ -4901,21 +5034,21 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1.5rem;">
                     <div class="highlight-box" style="text-align: left; background: #011f5b; color: #fff;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff; text-align: center;">
-                            <span style="font-size: 1.5rem;">①</span>
+                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">counter_1</span>
                             <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem; display: inline-block;"><b>Upload Data</b></h4>
                         </div>
                         <p style="color: #fff;">Upload a CSV file where rows represent samples and columns represent the methods to be ranked.</p>
                     </div>
                     <div class="highlight-box" style="text-align: left; background: #011f5b; color: #fff;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff; text-align: center;">
-                            <span style="font-size: 1.5rem;">②</span>
+                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">counter_2</span>
                             <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem; display: inline-block;"><b>Set Parameters</b></h4>
                         </div>
                         <p style="color: #fff;">Specify whether higher or lower values indicate better performance. Adjust advanced settings if needed.</p>
                     </div>
                     <div class="highlight-box" style="text-align: left; background: #011f5b; color: #fff;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff; text-align: center;">
-                            <span style="font-size: 1.5rem;">③</span>
+                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">counter_3</span>
                             <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem; display: inline-block;"><b>Generate Report</b></h4>
                         </div>
                         <p style="color: #fff;">Click the "Generate Report" button to receive your ranking analysis with confidence intervals.</p>
@@ -4929,7 +5062,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
             ui.html('''
                 <div style="margin-bottom: 0rem;">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
-                        <span style="font-size: 2rem;">💡</span>
+                        <span class="material-symbols-outlined" style="font-size: 2rem;">lightbulb</span>
                         <h2 style="color: var(--primary-900); font-weight: 800; margin: 0; font-size: 1.5rem;">About This Framework</h2>
                     </div>
                     <p style="color: var(--gray-600); font-size: 0.9rem; max-width: 800px; margin: 0 auto; line-height: 1.6;">
@@ -4939,28 +5072,28 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1.5rem;">
                     <div class="highlight-box" style="text-align: center; background: #011f5b; color: #fff;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff;">
-                            <span style="font-size: 1.5rem;">🎯</span>
+                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">target</span>
                             <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>General Fixed Graph</b></h4>
                         </div>
                         <p style="color: #fff;">Circumvents restrictive assumptions, allowing for flexible, real-world comparison structures.</p>
                     </div>
                     <div class="highlight-box" style="text-align: center; background: #011f5b; color: #fff;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff;">
-                            <span style="font-size: 1.5rem;">🔬</span>
+                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">science</span>
                             <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>Asymptotic Efficiency</b></h4>
                         </div>
                         <p style="color: #fff;">Our two-step spectral method can achieve the same asymptotic efficiency as the MLE.</p>
                     </div>
                     <div class="highlight-box" style="text-align: center; background: #011f5b; color: #fff;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff;">
-                            <span style="font-size: 1.5rem;">🏥</span>
+                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">analytics</span>
                             <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>Ranking Inferences</b></h4>
                         </div>
                         <p style="color: #fff;">Provides a comprehensive framework for both one-sample and two-sample ranking inferences.</p>
                     </div>
                     <div class="highlight-box" style="text-align: center; background: #011f5b; color: #fff;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff;">
-                            <span style="font-size: 1.5rem;">🛡️</span>
+                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">verified</span>
                             <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>Proven Methodology</b></h4>
                         </div>
                         <p style="color: #fff;">Validated through comprehensive simulations and applied to real-world datasets.</p>
@@ -5112,7 +5245,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                     </div>
                 </div>
                 <p style="opacity: 0.6; font-size: 0.9rem;">
-                    © 2024 Robust Spectral Ranking Framework | University of Pennsylvania
+                    © 2024 Robust Spectral Ranking Framework | University of Pennsylvania & Washington University in St. Louis
                 </p>
             ''')
 
