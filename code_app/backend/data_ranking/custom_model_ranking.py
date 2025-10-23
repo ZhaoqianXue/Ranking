@@ -19,8 +19,9 @@ from typing import Dict, Any
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Project root to locate necessary files and scripts
+# Project root and data directory to locate necessary files and scripts
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../'))
+DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
 
 async def _enrich_ranking_results(
     ranking_data: Dict,
@@ -176,7 +177,7 @@ async def run_custom_ranking(model_name: str, scores: Dict[str, float]) -> Dict[
     # 2. Save combined data to a temporary CSV file
     # Use a unique ID for the temporary directory to handle concurrent requests
     job_id = str(uuid.uuid4())
-    temp_dir = os.path.join(PROJECT_ROOT, 'temp_ranking_jobs', job_id)
+    temp_dir = os.path.join(DATA_DIR, 'temp_ranking_jobs', job_id)
     os.makedirs(temp_dir, exist_ok=True)
     temp_csv_path = os.path.join(temp_dir, 'custom_ranking_input.csv')
     df.to_csv(temp_csv_path, index=False)
