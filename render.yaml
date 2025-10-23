@@ -12,11 +12,8 @@ services:
       - key: OPENAI_MODEL
         value: gpt-5-nano
     disks:
-      - name: jobs
-        mountPath: /opt/render/project/src/jobs
-        sizeGB: 1
-      - name: agent-uploads
-        mountPath: /opt/render/project/src/agent_uploads
+      - name: data
+        mountPath: /opt/render/project/src/data
         sizeGB: 1
 
   - type: web

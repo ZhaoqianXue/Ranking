@@ -44,14 +44,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Base directory for jobs
-JOBS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../jobs'))
+# Base directory for jobs and uploads (shared disk on Render)
+DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data'))
+JOBS_DIR = os.path.join(DATA_DIR, 'jobs')
+AGENT_UPLOADS_DIR = os.path.join(DATA_DIR, 'agent_uploads')
 R_SCRIPT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../demo_r/ranking_cli.R'))
 
 os.makedirs(JOBS_DIR, exist_ok=True)
-
-# Agent uploads directory
-AGENT_UPLOADS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../agent_uploads'))
 os.makedirs(AGENT_UPLOADS_DIR, exist_ok=True)
 
 # OpenAI API configuration from environment variables
