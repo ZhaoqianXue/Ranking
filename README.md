@@ -2,6 +2,9 @@
 
 本项目提供了一个统计框架，旨在根据多个方法（例如，机器学习模型、治疗方案）在一系列样本或评估案例上的表现进行鲁棒排序，并量化该排序结果的不确定性。该框架的核心是 **Vanilla Spectral Method**，它不仅能提供最终排名，还能通过置信区间来评估排名的可靠性。
 
+## 0. Spectral Ranking Inferences based on General Multiway Comparisons: https://arxiv.org/html/2308.02918
+
+Spectral Ranking Inferences based on General Multiway Comparisons 这篇论文是该项目理论基础，该项目在
 ## 1. 核心方法论
 
 排序过程基于对每个样本中方法之间的成对比较分析。

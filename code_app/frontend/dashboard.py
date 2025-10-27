@@ -77,7 +77,8 @@ TABLE_STYLES = '''
     font-weight: bold;
     color: #1e293b;
 }
-.spectral-table-html .rank-cell {
+.spectral-table-html .rank-cell,
+.spectral-table-html .rank-header {
     font-weight: 600;
     color: #0284c7;
 }
@@ -94,11 +95,11 @@ TABLE_STYLES = '''
     right: 4px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 0.8em;
+    font-size: 1.2em;
     opacity: 0.7;
 }
 .spectral-table-html .second-place-cell {
-    background-color: #f1f5f9 !important;
+    background-color: #e8f0f8 !important;
     color: #334155 !important;
     font-weight: 600 !important;
     position: relative !important;
@@ -109,7 +110,7 @@ TABLE_STYLES = '''
     right: 4px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 0.8em;
+    font-size: 1.2em;
     opacity: 0.7;
 }
 .spectral-table-html .third-place-cell {
@@ -124,13 +125,13 @@ TABLE_STYLES = '''
     right: 4px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 0.8em;
+    font-size: 1.2em;
     opacity: 0.7;
 }
 .top-3-legend {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.25rem;
     padding: 0.75rem;
     background: #f8fafc;
     border-radius: 8px;
@@ -154,7 +155,7 @@ TABLE_STYLES = '''
     border-color: #f59e0b;
 }
 .legend-color.second {
-    background-color: #f1f5f9;
+    background-color: #e8f0f8;
     border-color: #64748b;
 }
 .legend-color.third {
@@ -361,7 +362,18 @@ TABLE_STYLES = '''
 }
 /* Spectral Ranking Detail button styling */
 .spectral-detail-button {
-    color: white !important;
+    color: #011f5b !important;
+    background-color: rgba(1, 31, 91, 0.05) !important;
+    border: 1px solid #011f5b !important;
+    border-radius: 6px !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+.spectral-detail-button:hover {
+    background-color: rgba(1, 31, 91, 0.1) !important;
+    box-shadow: 0 2px 4px rgba(1, 31, 91, 0.2) !important;
+    transform: translateY(-1px) !important;
 }
 /* Responsive layout for smaller screens */
 @media (max-width: 992px) {
@@ -456,6 +468,122 @@ TABLE_STYLES = '''
 .mode-card.inactive .card-features li .material-symbols-outlined {
     color: #475569;
 }
+/* Benchmark selection card styles */
+.benchmark-selection-card {
+    border-radius: 12px;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    transition: all 0.3s ease;
+    padding: 1rem;
+    margin: 0.25rem 0;
+}
+.benchmark-selection-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.benchmark-selection-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+.benchmark-selection-icon {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    border-radius: 9999px;
+    background: #eef2ff;
+    align-items: center;
+    justify-content: center;
+    color: #011f5b;
+    font-size: 1rem;
+}
+.benchmark-selection-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+.benchmark-selection-subtitle {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+    margin-top: 0.125rem;
+}
+.benchmark-content-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0;
+}
+.benchmark-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex: 1;
+    margin-bottom: 0;
+}
+.benchmark-button-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 0.25rem;
+}
+/* Enhanced checkbox styling for benchmark selection */
+.benchmark-checkboxes .q-checkbox {
+    margin-bottom: 0.5rem;
+}
+.benchmark-checkboxes .q-checkbox__inner {
+    border-radius: 6px !important;
+    border: 2px solid #e2e8f0 !important;
+    transition: all 0.2s ease !important;
+}
+.benchmark-checkboxes .q-checkbox__inner::before {
+    border-radius: 3px !important;
+    background-color: #0d2b64 !important;
+    transition: all 0.2s ease !important;
+}
+.benchmark-checkboxes .q-checkbox:hover .q-checkbox__inner {
+    border-color: #0d2b64 !important;
+    box-shadow: 0 0 0 3px rgba(13, 43, 100, 0.1) !important;
+}
+.benchmark-checkboxes .q-checkbox.q-checkbox--checked .q-checkbox__inner {
+    background-color: #0d2b64 !important;
+    border-color: #0d2b64 !important;
+}
+.benchmark-checkboxes .q-checkbox__label {
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    color: #374151 !important;
+    padding-left: 0.75rem !important;
+    transition: color 0.2s ease !important;
+}
+.benchmark-checkboxes .q-checkbox:hover .q-checkbox__label {
+    color: #0d2b64 !important;
+}
+/* Enhanced button styling for benchmark selection */
+.benchmark-button-container .q-btn {
+    background: #0d2b64 !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    font-size: 0.95rem !important;
+    min-width: 160px !important;
+    box-shadow: 0 2px 4px rgba(13, 43, 100, 0.15) !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+}
+.benchmark-button-container .q-btn:hover {
+    background: #0a244d !important;
+    box-shadow: 0 3px 8px rgba(13, 43, 100, 0.2) !important;
+    transform: translateY(-1px);
+}
+.benchmark-button-container .q-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(13, 43, 100, 0.15) !important;
+}
+
 /* Compare card styles */
 .compare-card {
     border-radius: 12px;
@@ -470,8 +598,8 @@ TABLE_STYLES = '''
 .compare-card .compare-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    gap: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 .compare-card .compare-icon {
     display: inline-flex;
@@ -487,7 +615,7 @@ TABLE_STYLES = '''
 .compare-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    gap: 0.5rem;
     align-items: start;
 }
 @media (min-width: 640px) {
@@ -840,6 +968,269 @@ TABLE_STYLES = '''
 }
 '''
 
+# Arena virtual benchmarks: display name -> virtual key in CSV / filenames
+ARENA_DISPLAY_TO_VIRTUAL = {
+    'Creative Writing': 'creative_writing_bt_prob',
+    'Math': 'math_bt_prob',
+    'Instruction Following': 'instruction_following_bt_prob',
+    'Coding': 'coding_bt_prob',
+    'Hard Prompt': 'hard_prompt_bt_prob',
+    'Longer Query': 'longer_query_bt_prob',
+    'Multi-turn': 'multi_turn_bt_prob',
+}
+
+# Arena table field keys (used in benchmark_scores dict) mapped from virtual keys
+ARENA_VIRTUAL_TO_FIELD = {
+    'creative_writing_bt_prob': 'creative_writing',
+    'math_bt_prob': 'math',
+    'instruction_following_bt_prob': 'instruction_following',
+    'coding_bt_prob': 'coding',
+    'hard_prompt_bt_prob': 'hard_prompt',
+    'longer_query_bt_prob': 'longer_query',
+    'multi_turn_bt_prob': 'multi_turn',
+}
+
+ALL_COMBINATIONS_DIR = os.path.join(
+    PROJECT_ROOT, 'data_llm', 'data_arena', 'data_ranking', 'current', 'all_combinations'
+)
+
+HF_ALL_COMBINATIONS_DIR = os.path.join(
+    PROJECT_ROOT, 'data_llm', 'data_huggingface', 'data_ranking', 'current', 'all_combinations'
+)
+
+def _load_arena_benchmark_matrix():
+    """Load arena_ranking_full.csv and return (benchmarks_virtual:list, model_names:list, scores_matrix: np.ndarray models x benchmarks)."""
+    benchmark_file = os.path.join(PROJECT_ROOT, 'data_llm', 'data_arena', 'data_processing', 'arena_ranking_full.csv')
+    benchmark_df = pd.read_csv(benchmark_file)
+    benchmarks_virtual = benchmark_df.iloc[:, 0].tolist()
+    model_names = benchmark_df.columns[1:].tolist()
+    scores = benchmark_df.iloc[:, 1:].values.T  # models x benchmarks
+    try:
+        scores = scores.astype(float)
+    except (ValueError, TypeError):
+        scores = np.zeros((len(model_names), len(benchmarks_virtual)))
+    return benchmarks_virtual, model_names, scores
+
+def _load_huggingface_benchmark_matrix():
+    """Load huggingface_processed_top100.csv and return (benchmarks:list, model_names:list, scores_matrix: np.ndarray models x benchmarks)."""
+    benchmark_file = os.path.join(PROJECT_ROOT, 'data_llm', 'data_huggingface', 'data_processing', 'huggingface_processed_top100.csv')
+    benchmark_df = pd.read_csv(benchmark_file)
+
+    # CSV structure: first column is 'benchmark' with benchmark names, rest are model names with scores
+    benchmarks = benchmark_df.iloc[:, 0].tolist()  # First column contains benchmark names
+    model_names = benchmark_df.columns[1:].tolist()  # Column names from second column are model names
+
+    # Create scores matrix (models x benchmarks) - transpose to get models x benchmarks
+    scores = benchmark_df.iloc[:, 1:].values.T  # Transpose to get models x benchmarks
+    try:
+        scores = scores.astype(float)
+    except (ValueError, TypeError):
+        scores = np.zeros((len(model_names), len(benchmarks)))
+
+    return benchmarks, model_names, scores
+
+def _fuzzy_find_model_index(model_name: str, model_names: list) -> int:
+    """Find model index in model_names with simple fuzzy rules used elsewhere in this file."""
+    if model_name in model_names:
+        return model_names.index(model_name)
+
+    # Handle truncated names with "..."
+    if '...' in model_name:
+        base = model_name.split('...')[0]
+        for i, m in enumerate(model_names):
+            if m.startswith(base):
+                return i
+
+    # Handle special cases: all variants should match any model with the same base name
+    if 'Linkbricks-Horizon-AI-Ave' in model_name:
+        # Find any Linkbricks model in the target list
+        for i, m in enumerate(model_names):
+            if 'Linkbricks-Horizon-AI-Ave' in m:
+                return i
+
+    if 'NQLSG-Qwen2.5-14B-MegaFus' in model_name:
+        # Find any NQLSG model in the target list
+        for i, m in enumerate(model_names):
+            if 'NQLSG-Qwen2.5-14B-MegaFus' in m:
+                return i
+
+    if 'Qwen2.5-72B-Instruct-abli' in model_name:
+        # Find any Qwen2.5 model in the target list
+        for i, m in enumerate(model_names):
+            if 'Qwen2.5-72B-Instruct-abli' in m:
+                return i
+
+    if len(model_name) > 10:
+        for i, m in enumerate(model_names):
+            if model_name.startswith(m) or m.startswith(model_name):
+                return i
+    return -1
+
+def load_arena_combination_spectral_results(selected_virtual_keys: list, base_spectral_results: dict = None) -> dict:
+    """Load spectral results for a selected Arena combination (2-6). If 7, return full results.
+
+    - selected_virtual_keys: list of virtual benchmark keys (e.g., 'creative_writing_bt_prob').
+    - base_spectral_results: optional full 7-benchmark spectral results (to enrich model URLs).
+    Returns: spectral_results dict compatible with create_spectral_ranking_table (with benchmark_scores attached).
+    """
+    # If all 7 selected, reuse full results
+    if len(selected_virtual_keys) == 7:
+        spectral_results = load_spectral_results(arena=True)
+        # Ensure benchmark_scores and average_score exist using all 7
+        benchmarks_virtual, model_names, scores_matrix = _load_arena_benchmark_matrix()
+        # Build mapping from virtual to index
+        vkey_to_idx = {v: i for i, v in enumerate(benchmarks_virtual)}
+        selected_indices = [vkey_to_idx[v] for v in selected_virtual_keys if v in vkey_to_idx]
+        # For each method, attach scores
+        updated_methods = []
+        if spectral_results and 'methods' in spectral_results:
+            for method in spectral_results['methods']:
+                idx = _fuzzy_find_model_index(method['name'], model_names)
+                if idx >= 0:
+                    # Per-benchmark values for display columns (always 7 fields)
+                    benchmark_scores = {}
+                    for vkey, field in ARENA_VIRTUAL_TO_FIELD.items():
+                        col_idx = vkey_to_idx.get(vkey)
+                        if col_idx is not None:
+                            benchmark_scores[field] = float(scores_matrix[idx, col_idx])
+                    # Average for selected set only
+                    if selected_indices:
+                        avg_selected = float(np.mean(scores_matrix[idx, selected_indices]))
+                    else:
+                        avg_selected = 0.0
+                    benchmark_scores['average_score'] = avg_selected
+                    method['benchmark_scores'] = benchmark_scores
+                updated_methods.append(method)
+            spectral_results['methods'] = updated_methods
+        return spectral_results
+
+    # 2-6 selection: load from all_combinations
+    benchmarks_virtual, model_names, scores_matrix = _load_arena_benchmark_matrix()
+    # Keep original order as in CSV for directory naming
+    virtual_in_order = [v for v in benchmarks_virtual if v in selected_virtual_keys]
+    if len(virtual_in_order) != len(selected_virtual_keys):
+        # Some keys not recognized
+        raise FileNotFoundError('Unrecognized benchmark keys in selection.')
+    combination_name = "_".join(virtual_in_order)
+    result_path = os.path.join(ALL_COMBINATIONS_DIR, combination_name, 'ranking_results.json')
+    if not os.path.exists(result_path):
+        raise FileNotFoundError(f'Combination results not found: {combination_name}')
+
+    with open(result_path, 'r') as f:
+        spectral_results = json.load(f)
+
+    # Attach benchmark_scores (all 7 fields) and average for selected set
+    vkey_to_idx = {v: i for i, v in enumerate(benchmarks_virtual)}
+    selected_indices = [vkey_to_idx[v] for v in virtual_in_order]
+    updated_methods = []
+    for method in spectral_results.get('methods', []):
+        idx = _fuzzy_find_model_index(method['name'], model_names)
+        if idx >= 0:
+            benchmark_scores = {}
+            for vkey, field in ARENA_VIRTUAL_TO_FIELD.items():
+                col_idx = vkey_to_idx.get(vkey)
+                if col_idx is not None:
+                    benchmark_scores[field] = float(scores_matrix[idx, col_idx])
+            # Average for selected subset
+            avg_selected = float(np.mean(scores_matrix[idx, selected_indices])) if selected_indices else 0.0
+            benchmark_scores['average_score'] = avg_selected
+            method['benchmark_scores'] = benchmark_scores
+
+        # Add model_url if we have it - use fuzzy matching with base results
+        if base_spectral_results and 'methods' in base_spectral_results:
+            base_model_names = [m['name'] for m in base_spectral_results['methods']]
+            base_idx = _fuzzy_find_model_index(method['name'], base_model_names)
+            if base_idx >= 0:
+                base_method = base_spectral_results['methods'][base_idx]
+                if 'model_url' in base_method:
+                    method['model_url'] = base_method['model_url']
+        updated_methods.append(method)
+    spectral_results['methods'] = updated_methods
+    return spectral_results
+
+def load_huggingface_combination_spectral_results(selected_benchmark_keys: list, base_spectral_results: dict = None) -> dict:
+    """Load spectral results for a selected Hugging Face combination (2-6). If 6, return full results.
+
+    - selected_benchmark_keys: list of benchmark keys (e.g., 'ifeval', 'bbh').
+    - base_spectral_results: optional full 6-benchmark spectral results (to enrich model URLs).
+    Returns: spectral_results dict compatible with create_spectral_ranking_table (with benchmark_scores attached).
+    """
+    # If all 6 selected, reuse full results
+    if len(selected_benchmark_keys) == 6:
+        spectral_results = load_spectral_results(arena=False)
+        # Ensure benchmark_scores exist using all 6
+        benchmarks, model_names, scores_matrix = _load_huggingface_benchmark_matrix()
+        # Build mapping from benchmark to index
+        bench_to_idx = {b: i for i, b in enumerate(benchmarks)}
+        selected_indices = [bench_to_idx[b] for b in selected_benchmark_keys if b in bench_to_idx]
+        # For each method, attach scores
+        updated_methods = []
+        if spectral_results and 'methods' in spectral_results:
+            for method in spectral_results['methods']:
+                idx = _fuzzy_find_model_index(method['name'], model_names)
+                if idx >= 0:
+                    # Per-benchmark values for display columns (always 6 fields + average_score)
+                    benchmark_scores = {}
+                    for bench in benchmarks:
+                        col_idx = bench_to_idx.get(bench)
+                        if col_idx is not None:
+                            benchmark_scores[bench] = float(scores_matrix[idx, col_idx])
+                    # Average for selected set only
+                    if selected_indices:
+                        avg_selected = float(np.mean(scores_matrix[idx, selected_indices]))
+                    else:
+                        avg_selected = 0.0
+                    benchmark_scores['average_score'] = avg_selected
+                    method['benchmark_scores'] = benchmark_scores
+                updated_methods.append(method)
+            spectral_results['methods'] = updated_methods
+        return spectral_results
+
+    # 2-5 selection: load from all_combinations
+    benchmarks, model_names, scores_matrix = _load_huggingface_benchmark_matrix()
+    # Keep original order as in CSV for directory naming
+    bench_in_order = [b for b in benchmarks if b in selected_benchmark_keys]
+    if len(bench_in_order) != len(selected_benchmark_keys):
+        # Some keys not recognized
+        raise FileNotFoundError('Unrecognized benchmark keys in selection.')
+    combination_name = "_".join(bench_in_order)
+    result_path = os.path.join(HF_ALL_COMBINATIONS_DIR, combination_name, 'ranking_results.json')
+    if not os.path.exists(result_path):
+        raise FileNotFoundError(f'Combination results not found: {combination_name}')
+
+    with open(result_path, 'r') as f:
+        spectral_results = json.load(f)
+
+    # Attach benchmark_scores (all 6 fields + average_score) and average for selected set
+    bench_to_idx = {b: i for i, b in enumerate(benchmarks)}
+    selected_indices = [bench_to_idx[b] for b in bench_in_order]
+    updated_methods = []
+    for method in spectral_results.get('methods', []):
+        idx = _fuzzy_find_model_index(method['name'], model_names)
+        if idx >= 0:
+            benchmark_scores = {}
+            for bench in benchmarks:
+                col_idx = bench_to_idx.get(bench)
+                if col_idx is not None:
+                    benchmark_scores[bench] = float(scores_matrix[idx, col_idx])
+            # Average for selected subset
+            avg_selected = float(np.mean(scores_matrix[idx, selected_indices])) if selected_indices else 0.0
+            benchmark_scores['average_score'] = avg_selected
+            method['benchmark_scores'] = benchmark_scores
+
+        # Add model_url if we have it - use fuzzy matching with base results
+        # This should be done for ALL methods, regardless of whether they have benchmark_scores
+        if base_spectral_results and 'methods' in base_spectral_results:
+            base_model_names = [m['name'] for m in base_spectral_results['methods']]
+            base_idx = _fuzzy_find_model_index(method['name'], base_model_names)
+            if base_idx >= 0:
+                base_method = base_spectral_results['methods'][base_idx]
+                if 'model_url' in base_method:
+                    method['model_url'] = base_method['model_url']
+        updated_methods.append(method)
+    spectral_results['methods'] = updated_methods
+    return spectral_results
+
 # CSS is now added in main.py dashboard route - no need to add here
 
 def toggle_mobile_nav():
@@ -897,7 +1288,7 @@ def load_llm_data():
             scores = np.random.rand(len(models), len(benchmarks))
 
         # Try to load additional ranking results from spectral analysis
-        spectral_results = load_spectral_results()
+        spectral_results = load_spectral_results(arena=False)
 
         if spectral_results:
             # Use spectral ranking results if available
@@ -973,82 +1364,164 @@ def load_llm_data():
         logger.error(f"Error loading LLM data: {e}")
         return None
 
-def load_spectral_results():
-    """Load enhanced spectral ranking results with leaderboard data"""
-    try:
-        # Try enhanced results first
-        enhanced_file = os.path.join(PROJECT_ROOT, 'data_llm', 'data_huggingface', 'data_ranking', 'current', 'huggingface_ranking_result_enhanced.json')
-        if os.path.exists(enhanced_file):
-            with open(enhanced_file, 'r') as f:
-                data = json.load(f)
-            logger.info("Loaded enhanced spectral ranking results with leaderboard data")
-            return data
-
-        # Fallback to basic ranking results
-        basic_file = os.path.join(PROJECT_ROOT, 'data_llm', 'data_huggingface', 'data_ranking', 'current', 'huggingface_ranking_result_basic.json')
-        if os.path.exists(basic_file):
-            with open(basic_file, 'r') as f:
-                data = json.load(f)
-            logger.info("Loaded basic spectral ranking results")
-            return data
-
-        logger.info("Spectral results file not found, using average-based ranking")
-        return None
-    except Exception as e:
-        logger.error(f"Error loading spectral results: {e}")
-        return None
 
 def create_ranking_table(data, highlight_model: str = None):
     """Create ranking table visualization based on spectral ranking results"""
     with ui.element('div').classes('ranking-table'):
         with ui.element('div').classes('ranking-header'):
-            # Use a row to align title and button
-            with ui.row().style('width: 100%; justify-content: space-between; align-items: center;'):
-                # Title part
-                with ui.element('div').classes('flex items-center'):
-                    ui.html('<span class="material-symbols-outlined ranking-header-icon">leaderboard</span>')
-                    # Determine table type and show appropriate title
-                    spectral_results = data.get('spectral_results')
-                    if spectral_results and 'methods' in spectral_results:
-                        has_benchmark_scores = any(method.get('benchmark_scores') for method in spectral_results.get('methods', []))
-                        if has_benchmark_scores:
-                            is_arena = any(method.get('benchmark_scores', {}).get('creative_writing') is not None
-                                         for method in spectral_results.get('methods', []))
-                            if is_arena:
-                                title_text = 'Arena Spectral Rankings'
-                            else:
-                                title_text = 'Hugging Face Spectral Rankings'
+            # Title part
+            with ui.element('div').classes('flex items-center'):
+                ui.html('<span class="material-symbols-outlined ranking-header-icon">leaderboard</span>')
+                # Determine table type and show appropriate title
+                spectral_results = data.get('spectral_results')
+                is_arena_detected = False
+                if spectral_results and 'methods' in spectral_results:
+                    has_benchmark_scores = any(method.get('benchmark_scores') for method in spectral_results.get('methods', []))
+                    if has_benchmark_scores:
+                        is_arena_detected = any(method.get('benchmark_scores', {}).get('creative_writing') is not None
+                                                for method in spectral_results.get('methods', []))
+                        if is_arena_detected:
+                            title_text = 'Arena Spectral Rankings'
                         else:
-                            title_text = 'LLM Spectral Rankings'
+                            title_text = 'Hugging Face Spectral Rankings'
                     else:
                         title_text = 'LLM Spectral Rankings'
-                    ui.html(f'<span>{title_text}</span>')
+                else:
+                    title_text = 'LLM Spectral Rankings'
+                ui.html(f'<span>{title_text}</span>')
 
-                # Toggle button part
-                spectral_results = data.get('spectral_results')
-                if spectral_results and 'methods' in spectral_results:
-                    ui.button('Spectral Ranking Detail', on_click=lambda: ui.run_javascript(
-                        '''
-                        const tables = document.querySelectorAll('.spectral-table-html table');
-                        tables.forEach(table => {
-                            table.classList.toggle('show-details');
-                        });
-                        '''
-                    )).props('flat dense').classes('spectral-detail-button').style('text-transform: none;')
+        # Arena combinations selection card (between title and Top 3 legend)
+        if is_arena_detected:
+            with ui.element('div').classes('benchmark-selection-card'):
+                with ui.element('div').classes('benchmark-selection-header'):
+                    ui.html('<div class="benchmark-selection-icon"><span class="material-symbols-outlined">tune</span></div>')
+                    with ui.element('div'):
+                        ui.html('<div class="benchmark-selection-title">Select Benchmarks</div>')
+                        ui.html('<div class="benchmark-selection-subtitle">Choose which virtual benchmarks to include in your spectral ranking analysis. You must select between 2 and 7 benchmarks.</div>')
 
-        # Top 3 Legend
-        with ui.element('div').classes('top-3-legend'):
-            with ui.element('div').classes('legend-item'):
-                ui.html('<div class="legend-color first"></div>')
-                ui.html('<span>First Place</span>')
-            with ui.element('div').classes('legend-item'):
-                ui.html('<div class="legend-color second"></div>')
-                ui.html('<span>Second Place</span>')
-            with ui.element('div').classes('legend-item'):
-                ui.html('<div class="legend-color third"></div>')
-                ui.html('<span>Third Place</span>')
+                def on_confirm_click():
+                    try:
+                        selected_labels = [lbl for lbl, cb in checkbox_elements.items() if cb.value]
+                        # Build selected virtual keys in CSV order
+                        selected_virtual = [ARENA_DISPLAY_TO_VIRTUAL[lbl] for lbl in selected_labels]
 
-        with ui.element('div').classes('ranking-content'):
+                        ranking_content_container.clear()
+                        with ranking_content_container:
+                            if len(selected_virtual) < 2:
+                                ui.html('<div style="padding:1rem; border:1px dashed #e2e8f0; border-radius:8px; color:#b91c1c; background:#fef2f2;">Please select at least two benchmarks.</div>')
+                                return
+
+                            # Load base full results to enrich URLs if available
+                            base_results = load_spectral_results(arena=True)
+                            try:
+                                combo_results = load_arena_combination_spectral_results(selected_virtual, base_spectral_results=base_results)
+                            except Exception as e:
+                                ui.notify(f'Failed to load combination results: {e}', type='negative')
+                                return
+
+                            # Render table for the selected combination
+                            try:
+                                create_spectral_ranking_table(data, combo_results, highlight_model=highlight_model, selected_benchmarks=selected_labels)
+                            except Exception as e:
+                                ui.notify(f'Failed to render table: {e}', type='negative')
+                    except Exception as e:
+                        ui.notify(f'Error: {e}', type='negative')
+
+                with ui.element('div').classes('benchmark-content-row'):
+                    with ui.element('div').classes('benchmark-checkboxes'):
+                        checkbox_elements = {}
+                        for label in ['Creative Writing', 'Math', 'Instruction Following', 'Coding', 'Hard Prompt', 'Longer Query', 'Multi-turn']:
+                            checkbox_elements[label] = ui.checkbox(label, value=True)
+
+                    with ui.element('div').classes('benchmark-button-container'):
+                        ui.button('Confirm Selection', on_click=on_confirm_click).style('color: #011f5b !important; background-color: rgba(1, 31, 91, 0.05) !important; border: 1px solid #011f5b !important; border-radius: 6px !important; padding: 8px 16px !important; font-weight: 500 !important; font-size: 0.875rem !important; min-height: 36px !important; transition: all 0.2s ease !important; text-transform: none;').props('outline')
+
+        # Hugging Face benchmark selection card (between title and Top 3 legend)
+        elif not is_arena_detected and spectral_results and 'methods' in spectral_results:
+            has_benchmark_scores = any(method.get('benchmark_scores') for method in spectral_results.get('methods', []))
+            if has_benchmark_scores:
+                with ui.element('div').classes('benchmark-selection-card'):
+                    with ui.element('div').classes('benchmark-selection-header'):
+                        ui.html('<div class="benchmark-selection-icon"><span class="material-symbols-outlined">tune</span></div>')
+                        with ui.element('div'):
+                            ui.html('<div class="benchmark-selection-title">Select Benchmarks</div>')
+                            ui.html('<div class="benchmark-selection-subtitle">Choose which benchmarks to include in your spectral ranking analysis. You must select between 2 and 6 benchmarks.</div>')
+
+                    def hf_on_confirm_click():
+                        try:
+                            selected_labels = [lbl for lbl, cb in hf_checkbox_elements.items() if cb.value]
+                            # Convert display labels to benchmark keys
+                            hf_display_to_key = {
+                                'IFEval': 'ifeval',
+                                'BBH': 'bbh',
+                                'MATH': 'math',
+                                'GPQA': 'gpqa',
+                                'MUSR': 'musr',
+                                'MMLU-Pro': 'mmlu_pro'
+                            }
+                            selected_keys = [hf_display_to_key[lbl] for lbl in selected_labels]
+
+                            ranking_content_container.clear()
+                            with ranking_content_container:
+                                if len(selected_keys) < 2:
+                                    ui.html('<div style="padding:1rem; border:1px dashed #e2e8f0; border-radius:8px; color:#b91c1c; background:#fef2f2;">Please select at least two benchmarks.</div>')
+                                    return
+
+                                # Load base full results to enrich URLs if available
+                                base_results = load_spectral_results(arena=False)
+                                try:
+                                    combo_results = load_huggingface_combination_spectral_results(selected_keys, base_spectral_results=base_results)
+                                except Exception as e:
+                                    ui.notify(f'Failed to load combination results: {e}', type='negative')
+                                    return
+
+                                # Render table for the selected combination
+                                try:
+                                    create_spectral_ranking_table(data, combo_results, highlight_model=highlight_model, selected_benchmarks=selected_labels)
+                                except Exception as e:
+                                    ui.notify(f'Failed to render table: {e}', type='negative')
+                        except Exception as e:
+                            ui.notify(f'Error: {e}', type='negative')
+
+                    with ui.element('div').classes('benchmark-content-row'):
+                        with ui.element('div').classes('benchmark-checkboxes'):
+                            hf_checkbox_elements = {}
+                            # Hugging Face benchmarks: IFEval, BBH, MATH, GPQA, MUSR, MMLU-Pro (excluding Average)
+                            hf_benchmarks = ['IFEval', 'BBH', 'MATH', 'GPQA', 'MUSR', 'MMLU-Pro']
+                            for label in hf_benchmarks:
+                                hf_checkbox_elements[label] = ui.checkbox(label, value=True)
+
+                        with ui.element('div').classes('benchmark-button-container'):
+                            ui.button('Confirm Selection', on_click=hf_on_confirm_click).style('color: #011f5b !important; background-color: rgba(1, 31, 91, 0.05) !important; border: 1px solid #011f5b !important; border-radius: 6px !important; padding: 8px 16px !important; font-weight: 500 !important; font-size: 0.875rem !important; min-height: 36px !important; transition: all 0.2s ease !important; text-transform: none;').props('outline')
+
+        # Top 3 Legend with Detail Button
+        with ui.element('div').style('display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.25rem; padding: 0.75rem; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;'):
+            # Left side: Top 3 Legend
+            with ui.element('div').classes('top-3-legend').style('margin: 0; padding: 0; background: transparent; border: none;'):
+                with ui.element('div').classes('legend-item'):
+                    ui.html('<div class="legend-color first"></div>')
+                    ui.html('<span>First Place</span>')
+                with ui.element('div').classes('legend-item'):
+                    ui.html('<div class="legend-color second"></div>')
+                    ui.html('<span>Second Place</span>')
+                with ui.element('div').classes('legend-item'):
+                    ui.html('<div class="legend-color third"></div>')
+                    ui.html('<span>Third Place</span>')
+
+            # Right side: Detail Button
+            spectral_results = data.get('spectral_results')
+            if spectral_results and 'methods' in spectral_results:
+                ui.button('Spectral Ranking Detail', on_click=lambda: ui.run_javascript(
+                    '''
+                    const tables = document.querySelectorAll('.spectral-table-html table');
+                    tables.forEach(table => {
+                        table.classList.toggle('show-details');
+                    });
+                    '''
+                )).props('color=primary outline').classes('spectral-detail-button').style('text-transform: none;')
+
+        ranking_content_container = ui.element('div').classes('ranking-content')
+        with ranking_content_container:
             # Check if spectral results are available
             spectral_results = data.get('spectral_results')
             if spectral_results and 'methods' in spectral_results:
@@ -1165,8 +1638,15 @@ def create_html_table(columns, rows, table_id, highlight_model: str = None):
 
     return table_html
 
-def create_spectral_ranking_table(data, spectral_results, highlight_model: str = None):
-    """Create table using spectral ranking results with all benchmark scores"""
+def create_spectral_ranking_table(data, spectral_results, highlight_model: str = None, selected_benchmarks: list = None):
+    """Create table using spectral ranking results with all benchmark scores
+
+    Args:
+        data: The data object containing benchmarks and other info
+        spectral_results: The spectral ranking results
+        highlight_model: Model to highlight in the table
+        selected_benchmarks: List of selected benchmark display names (for Arena mode only)
+    """
     is_arena = any(method.get('benchmark_scores', {}).get('creative_writing') is not None
                    for method in spectral_results.get('methods', []))
 
@@ -1174,18 +1654,19 @@ def create_spectral_ranking_table(data, spectral_results, highlight_model: str =
     if is_arena:
         # Tooltips for Arena table
         spectral_rank_tooltip = 'The model\'s rank calculated using the Spectral Ranking algorithm. This method provides a more robust result by considering pairwise comparisons across 7 virtual benchmarks derived from human preference data (e.g., Creative Writing, Math, Coding).'
-        score_rank_tooltip = 'The model\'s rank based on the simple average score across the 7 virtual benchmarks. Used for comparison against the more robust Spectral Rank.'
+        score_rank_tooltip = 'The model\'s rank based on the simple average score across the selected virtual benchmarks. Used for comparison against the more robust Spectral Rank.'
         # Column definitions for Arena table
         columns = [
             {'name': 'model', 'label': 'Model', 'field': 'model', 'align': 'left', 'style': 'width: 150px; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;', 'sortable': True, 'class': 'core-column'},
-            {'name': 'rank', 'label': 'Spectral Rank', 'field': 'rank', 'align': 'left', 'sortable': True, 'tooltip': spectral_rank_tooltip, 'class': 'core-column'},
+            {'name': 'rank', 'label': 'Spectral Rank', 'field': 'rank', 'align': 'left', 'sortable': True, 'tooltip': spectral_rank_tooltip, 'class': 'core-column rank-header'},
             {'name': 'theta_hat', 'label': 'θ-hat Score', 'field': 'theta_hat', 'align': 'left', 'style': 'width: 90px; min-width: 90px; max-width: 90px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The estimated performance score from the Spectral Ranking algorithm. Higher is better.', 'class': 'core-column'},
             {'name': 'ci_95', 'label': '95% CI', 'field': 'ci_95', 'align': 'left', 'style': 'width: 80px; min-width: 80px; max-width: 80px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% two-sided confidence interval for the rank. For example, an interval of [1, 3] means we are 95% confident the model\'s true rank is between 1 and 3.', 'class': 'core-column'},
             {'name': 'ci_left', 'label': 'Left CI', 'field': 'ci_left', 'align': 'left', 'style': 'width: 70px; min-width: 70px; max-width: 70px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% one-sided confidence interval (lower bound) for the rank. A value of 2 means we are 95% confident the true rank is no better than 2nd place.', 'class': 'core-column'},
             {'name': 'ci_uniform', 'label': 'Uniform CI', 'field': 'ci_uniform', 'align': 'left', 'style': 'width: 80px; min-width: 80px; max-width: 80px;', 'sortable': False, 'toggleable': True, 'tooltip': 'A more conservative, uniform one-sided confidence interval for the rank that holds simultaneously for all models with 95% confidence.', 'class': 'core-column'},
-            {'name': 'avg_rank', 'label': 'Score Rank', 'field': 'avg_rank', 'align': 'left', 'sortable': True, 'tooltip': score_rank_tooltip, 'class': 'core-column'},
+            {'name': 'avg_rank', 'label': 'Average Score Rank', 'field': 'avg_rank', 'align': 'left', 'sortable': True, 'tooltip': score_rank_tooltip, 'class': 'core-column'},
         ]
-        benchmark_columns = [
+        # Define all possible benchmark columns
+        all_benchmark_columns = [
             {'name': 'creative_writing', 'label': 'Creative Writing', 'field': 'creative_writing', 'align': 'left', 'sortable': True, 'tooltip': 'The model\'s rank in the "Creative Writing" category. This category evaluates the ability to generate original, imaginative, and emotionally resonant content based on human preference votes.'},
             {'name': 'math', 'label': 'Math', 'field': 'math', 'align': 'left', 'sortable': True, 'tooltip': 'The model\'s rank in the "Math" category. This category evaluates the ability to apply mathematical reasoning and problem-solving skills based on human preference votes.'},
             {'name': 'instruction_following', 'label': 'Instruction Following', 'field': 'instruction_following', 'align': 'left', 'sortable': True, 'tooltip': 'The model\'s rank in the "Instruction Following" category. This category evaluates the ability to accurately follow specific and detailed user instructions based on human preference votes.'},
@@ -1194,30 +1675,47 @@ def create_spectral_ranking_table(data, spectral_results, highlight_model: str =
             {'name': 'longer_query', 'label': 'Longer Query', 'field': 'longer_query', 'align': 'left', 'sortable': True, 'tooltip': 'The model\'s rank in the "Longer Query" category. This category includes user prompts that are longer than 500 tokens, testing long-context understanding.'},
             {'name': 'multi_turn', 'label': 'Multi-turn', 'field': 'multi_turn', 'align': 'left', 'sortable': True, 'tooltip': 'The model\'s rank in the "Multi-Turn" category. This category evaluates performance in conversational interactions that involve more than one turn.'},
         ]
+
+        # Filter benchmark columns based on selected_benchmarks
+        if selected_benchmarks:
+            benchmark_columns = [
+                col for col in all_benchmark_columns
+                if col['label'] in selected_benchmarks
+            ]
+        else:
+            benchmark_columns = all_benchmark_columns
     else:
         # Tooltips for Hugging Face table
         spectral_rank_tooltip = 'The model\'s rank calculated using the Spectral Ranking algorithm. This method provides a more robust result by considering pairwise comparisons based on scores from 6 key benchmarks: IFEval, BBH, MATH, GPQA, MUSR, and MMLU-Pro.'
-        score_rank_tooltip = 'The model\'s rank based on its average score across all benchmarks. Used for comparison against Spectral Rank.'
+        score_rank_tooltip = 'The model\'s rank based on its average score across the selected benchmarks. Used for comparison against Spectral Rank.'
         # Column definitions for Hugging Face table
         columns = [
             {'name': 'model', 'label': 'Model', 'field': 'model', 'align': 'left', 'style': 'width: 125px; max-width: 125px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;', 'sortable': True, 'class': 'core-column'},
-            {'name': 'rank', 'label': 'Spectral Rank', 'field': 'rank', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': spectral_rank_tooltip, 'class': 'core-column'},
+            {'name': 'rank', 'label': 'Spectral Rank', 'field': 'rank', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': spectral_rank_tooltip, 'class': 'core-column rank-header'},
             {'name': 'theta_hat', 'label': 'θ-hat Score', 'field': 'theta_hat', 'align': 'left', 'style': 'width: 80px;', 'sortable': True, 'toggleable': True, 'tooltip': 'The estimated performance score from the Spectral Ranking algorithm. Higher is better.', 'class': 'core-column'},
             {'name': 'ci_95', 'label': '95% CI', 'field': 'ci_95', 'align': 'left', 'style': 'width: 85px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% two-sided confidence interval for the rank. For example, an interval of [1, 3] means we are 95% confident the model\'s true rank is between 1 and 3.', 'class': 'core-column'},
             {'name': 'ci_left', 'label': 'Left CI', 'field': 'ci_left', 'align': 'left', 'style': 'width: 60px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% one-sided confidence interval (lower bound) for the rank. A value of 2 means we are 95% confident the true rank is no better than 2nd place.', 'class': 'core-column'},
             {'name': 'ci_uniform', 'label': 'Uniform CI', 'field': 'ci_uniform', 'align': 'left', 'style': 'width: 75px;', 'sortable': False, 'toggleable': True, 'tooltip': 'A more conservative, uniform one-sided confidence interval for the rank that holds simultaneously for all models with 95% confidence.', 'class': 'core-column'},
-            {'name': 'avg_rank', 'label': 'Score Rank', 'field': 'avg_rank', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': score_rank_tooltip, 'class': 'core-column'},
+            {'name': 'avg_rank', 'label': 'Average Score Rank', 'field': 'avg_rank', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': score_rank_tooltip, 'class': 'core-column'},
         ]
-        # Hugging Face benchmark score columns
-        benchmark_columns = [
+        # Define all possible Hugging Face benchmark columns (excluding Average)
+        all_hf_benchmark_columns = [
             {'name': 'ifeval', 'label': 'IFEval', 'field': 'ifeval', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': 'Instruction Following Evaluation (IFEval): Assesses the model\'s ability to follow complex and detailed instructions, focusing on precision and adherence to constraints, not creativity.'},
             {'name': 'bbh', 'label': 'BBH', 'field': 'bbh', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': 'Big-Bench Hard (BBH): A challenging subset of the Big-Bench benchmark, featuring 23 tasks that require significant multi-step reasoning abilities from the language models.'},
             {'name': 'math', 'label': 'MATH', 'field': 'math', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': 'A benchmark consisting of 12,500 challenging competition mathematics problems from high school level contests, designed to test mathematical problem-solving and reasoning.'},
             {'name': 'gpqa', 'label': 'GPQA', 'field': 'gpqa', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': 'Graduate-Level Google-Proof Q&A (GPQA): A difficult dataset of questions written by domain experts that are hard to find answers for using search engines, testing deep domain knowledge.'},
             {'name': 'musr', 'label': 'MUSR', 'field': 'musr', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': 'Multi-Step Reasoning (MuSR): Evaluates the model\'s ability to perform complex, multi-step reasoning by solving problems that require chaining together facts and inferences.'},
             {'name': 'mmlu_pro', 'label': 'MMLU-Pro', 'field': 'mmlu_pro', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': 'An advanced version of the MMLU benchmark that features more challenging questions requiring deeper knowledge and reasoning, curated by subject matter experts.'},
-            {'name': 'average', 'label': 'Average', 'field': 'average', 'align': 'left', 'style': 'width: 70px; font-weight: bold;', 'sortable': True, 'tooltip': 'The arithmetic mean of the scores from all the benchmarks displayed, providing an overall performance indicator.'},
         ]
+
+        # Filter Hugging Face benchmark columns based on selected_benchmarks
+        if selected_benchmarks:
+            benchmark_columns = [
+                col for col in all_hf_benchmark_columns
+                if col['label'] in selected_benchmarks
+            ]
+        else:
+            benchmark_columns = all_hf_benchmark_columns
 
     columns.extend(benchmark_columns)
 
@@ -1534,7 +2032,7 @@ def create_average_ranking_table(data):
     columns = [
         {'name': 'model', 'label': 'Model', 'field': 'model', 'align': 'left', 'sortable': True},
         {'name': 'rank', 'label': 'Rank', 'field': 'rank', 'align': 'left', 'sortable': True},
-        {'name': 'avg_rank', 'label': 'Score Rank', 'field': 'avg_rank', 'align': 'left', 'sortable': True},
+        {'name': 'avg_rank', 'label': 'Average Score Rank', 'field': 'avg_rank', 'align': 'left', 'sortable': True},
         {'name': 'avg_score', 'label': 'Avg Score', 'field': 'avg_score', 'align': 'left', 'sortable': True},
     ]
 
@@ -2033,8 +2531,8 @@ def create_huggingface_content(data):
             ).props('outlined dense clearable').classes('w-full md:w-1/2 enhanced-input')
 
             with ui.card_section():
-                ui.label('Benchmark Scores').classes('text-md font-medium text-gray-700 mb-1')
-                ui.html('<div class="helper-text" style="margin-bottom:0.5rem;">Scores are percentages. Recommended range: 0–100.</div>')
+                ui.label('Benchmark Scores').classes('text-md font-medium text-gray-700 mb-0.5')
+                ui.html('<div class="helper-text" style="margin-bottom:0.125rem;">Scores are percentages. Recommended range: 0–100.</div>')
                 with ui.element('div').classes('compare-grid'):
                     ifeval_input = ui.number(label='IFEval (%)', value=50.0, format='%.2f', step=0.01).props('outlined dense').classes('enhanced-number-input')
                     bbh_input = ui.number(label='BBH (%)', value=50.0, format='%.2f', step=0.01).props('outlined dense').classes('enhanced-number-input')
@@ -2044,14 +2542,14 @@ def create_huggingface_content(data):
                     mmlu_pro_input = ui.number(label='MMLU-Pro (%)', value=50.0, format='%.2f', step=0.01).props('outlined dense').classes('enhanced-number-input')
             
             # Container for results and button
-            custom_ranking_container = ui.element('div').classes('w-full mt-4')
+            custom_ranking_container = ui.element('div').classes('w-full mt-1')
             
             def clear_inputs():
                 model_name_input.value = ''
                 for el in [ifeval_input, bbh_input, math_input, gpqa_input, musr_input, mmlu_pro_input]:
                     el.value = None
 
-            with ui.card_actions().classes('justify-end gap-2'):
+            with ui.card_actions().classes('justify-end gap-0.5'):
                 score_inputs = {
                     'IFEval': ifeval_input,
                     'BBH': bbh_input,
@@ -2065,9 +2563,9 @@ def create_huggingface_content(data):
                     on_click=lambda: clear_inputs()
                 ).props('flat').classes('enhanced-clear-btn')
                 ui.button(
-                    'Run Spectral Ranking',
+                    'Run spectral ranking',
                     on_click=lambda: handle_custom_ranking(model_name_input, score_inputs, custom_ranking_container, data)
-                ).props('unelevated').classes('enhanced-run-btn')
+                ).style('color: #011f5b !important; background-color: rgba(1, 31, 91, 0.05) !important; border: 1px solid #011f5b !important; border-radius: 6px !important; padding: 8px 16px !important; font-weight: 500 !important; font-size: 0.875rem !important; min-height: 36px !important; transition: all 0.2s ease !important; text-transform: none;').props('outline')
 
     # Hugging Face Data Processing Steps
     with ui.element('section').style('width: 100%; max-width: 1400px; margin: 2rem auto; padding: 0 2rem;'):
@@ -2098,10 +2596,10 @@ def create_huggingface_content(data):
                     ui.html('<h3 class="card-title">Step 2: Spectral Ranking</h3>')
                 ui.html(r'''
                     <div class="card-description">
-                        <p>This final step aggregates the scores from the 6 key benchmarks into a single, highly robust global ranking using the <strong>Vanilla Spectral Method</strong>.</p>
+                        <p>This is the final step that takes all the scores from the benchmarks you selected (you can choose anywhere from 2 to 6) and combines them into one final ranking using advanced math called the <strong>Vanilla Spectral Method</strong>. This creates a more reliable and fair overall ranking than just averaging the scores.</p>
                         <ul>
                             <li><span class="material-symbols-outlined">hub</span><div class="benchmark-item"><strong>Core Idea: A "Tournament Network"</strong>
-                                 <p>The algorithm treats the 6 benchmarks as judges in a tournament. It then calculates a global <strong>"Power Score" (<code>theta.hat</code>)</strong> for each model by analyzing the entire network of comparisons. A model's score depends not just on its raw scores, but on how it performs relative to strong and weak competitors across all benchmarks, creating a more context-aware ranking.</p>
+                                 <p>The algorithm treats your selected benchmarks as judges in a tournament. It then calculates a global <strong>"Power Score" (<code>theta.hat</code>)</strong> for each model by analyzing the entire network of comparisons. A model's score depends not just on its raw scores, but on how it performs relative to strong and weak competitors across all selected benchmarks, creating a more context-aware ranking.</p>
                              </div></li>
                             <li><span class="material-symbols-outlined">query_stats</span><div class="benchmark-item"><strong>Uncertainty & Confidence:</strong>
                                  <p>To test the stability of the ranking, the system runs thousands of simulations (via Weighted Bootstrap), slightly varying the data in each run. If a model consistently ranks high across these simulations, we have strong confidence in its position. This process generates the <strong>Confidence Intervals (CI)</strong> shown in the table.</p>
@@ -2358,7 +2856,7 @@ async def handle_custom_ranking(model_name_input, score_inputs, result_container
                     # Add Score Rank next to Average
                     with ui.element('div').classes('benchmark-feature p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-all duration-200 hover:border-gray-300'):
                         with ui.element('div').classes('flex items-center justify-between mb-2'):
-                            ui.html('<span class="text-sm font-semibold text-gray-700">Score Rank</span>')
+                            ui.html('<span class="text-sm font-semibold text-gray-700">Average Score Rank</span>')
                             ui.html(f'<span class="text-lg font-bold text-gray-600">{score_rank}</span>')
                         ui.html('<div class="text-xs text-gray-500">Average-based ranking position</div>')
 
@@ -2496,7 +2994,7 @@ def create_arena_content(data):
                     ui.html('<h3 class="card-title">Step 4: Spectral Ranking</h3>')
                 ui.html(r'''
                     <div class="card-description">
-                        <p>This final, crucial step aggregates the nuanced scores from the 7 virtual benchmarks into a single, highly robust global ranking using the <strong>Vanilla Spectral Method</strong>.</p>
+                        <p>This is the final step that takes all the scores from the virtual benchmarks you selected (you can choose anywhere from 2 to 7) and combines them into one final ranking using advanced math called the <strong>Vanilla Spectral Method</strong>. This creates a more reliable and fair overall ranking than just averaging the scores.</p>
                         <ul>
                             <li><span class="material-symbols-outlined">hub</span><div class="benchmark-item"><strong>Core Idea: A "Tournament Network"</strong>
                                  <p>The algorithm treats all comparisons as a large tournament network. It then calculates a global <strong>"Power Score"</strong> (<code>theta.hat</code>) for each model. A model's score depends not just on winning, but on the strength of the opponents it beats, creating a much more context-aware and fair ranking than a simple average.</p>
