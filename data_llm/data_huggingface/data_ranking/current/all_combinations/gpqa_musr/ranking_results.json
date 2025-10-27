@@ -1,0 +1,1115 @@
+{
+  "job_id": "all_combinations",
+  "params": {
+    "bigbetter": true,
+    "B": 2000,
+    "seed": 42
+  },
+  "methods": [
+    {
+      "name": "calme-3.2-instruct-78b",
+      "theta_hat": 4.0718,
+      "rank": 8,
+      "ci_two_sided": [
+        1,
+        24
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "calme-3.1-instruct-78b",
+      "theta_hat": 3.6793,
+      "rank": 13,
+      "ci_two_sided": [
+        2,
+        32
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "CalmeRys-78B-Orpo-v0.1",
+      "theta_hat": 3.8453,
+      "rank": 11,
+      "ci_two_sided": [
+        1,
+        26
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "calme-2.4-rys-78b",
+      "theta_hat": 3.9284,
+      "rank": 10,
+      "ci_two_sided": [
+        1,
+        26
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct-abli",
+      "theta_hat": 0.4209,
+      "rank": 52,
+      "ci_two_sided": [
+        38,
+        100
+      ],
+      "ci_left": 39,
+      "ci_uniform_left": 23
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct",
+      "theta_hat": -1.515,
+      "rank": 67,
+      "ci_two_sided": [
+        54,
+        100
+      ],
+      "ci_left": 54,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "calme-2.1-qwen2.5-72b",
+      "theta_hat": -2.1272,
+      "rank": 74,
+      "ci_two_sided": [
+        59,
+        100
+      ],
+      "ci_left": 60,
+      "ci_uniform_left": 28
+    },
+    {
+      "name": "Homer-v1.0-Qwen2.5-72B",
+      "theta_hat": 2.4686,
+      "rank": 27,
+      "ci_two_sided": [
+        14,
+        48
+      ],
+      "ci_left": 15,
+      "ci_uniform_left": 6
+    },
+    {
+      "name": "qwen2.5-test-32b-it",
+      "theta_hat": 0.936,
+      "rank": 45,
+      "ci_two_sided": [
+        29,
+        100
+      ],
+      "ci_left": 32,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave",
+      "theta_hat": 0.1431,
+      "rank": 53,
+      "ci_two_sided": [
+        40,
+        100
+      ],
+      "ci_left": 42,
+      "ci_uniform_left": 25
+    },
+    {
+      "name": "calme-2.2-qwen2.5-72b",
+      "theta_hat": -2.8086,
+      "rank": 84,
+      "ci_two_sided": [
+        60,
+        100
+      ],
+      "ci_left": 61,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "FluentlyLM-Prinum",
+      "theta_hat": 0.9787,
+      "rank": 44,
+      "ci_two_sided": [
+        31,
+        75
+      ],
+      "ci_left": 33,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "T3Q-qwen2.5-14b-v1.0-e3",
+      "theta_hat": 4.8959,
+      "rank": 2,
+      "ci_two_sided": [
+        1,
+        18
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "T3Q-Qwen2.5-14B-Instruct-",
+      "theta_hat": 5.2323,
+      "rank": 1,
+      "ci_two_sided": [
+        1,
+        15
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Qwen2.5-32B-Instruct-abli",
+      "theta_hat": -1.4974,
+      "rank": 66,
+      "ci_two_sided": [
+        54,
+        100
+      ],
+      "ci_left": 54,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "Gilgamesh-72B",
+      "theta_hat": 1.2199,
+      "rank": 42,
+      "ci_two_sided": [
+        29,
+        69
+      ],
+      "ci_left": 29,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "ultiima-72B",
+      "theta_hat": 2.4686,
+      "rank": 26,
+      "ci_two_sided": [
+        14,
+        48
+      ],
+      "ci_left": 15,
+      "ci_uniform_left": 6
+    },
+    {
+      "name": "zetasepic-abliteratedV2-Q",
+      "theta_hat": -1.799,
+      "rank": 70,
+      "ci_two_sided": [
+        58,
+        100
+      ],
+      "ci_left": 59,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "Awqward2.5-32B-Instruct",
+      "theta_hat": -3.5249,
+      "rank": 88,
+      "ci_two_sided": [
+        70,
+        100
+      ],
+      "ci_left": 72,
+      "ci_uniform_left": 6
+    },
+    {
+      "name": "test-2.5-72B",
+      "theta_hat": 2.2727,
+      "rank": 29,
+      "ci_two_sided": [
+        15,
+        56
+      ],
+      "ci_left": 17,
+      "ci_uniform_left": 9
+    },
+    {
+      "name": "shuttle-3",
+      "theta_hat": 1.7864,
+      "rank": 37,
+      "ci_two_sided": [
+        17,
+        67
+      ],
+      "ci_left": 17,
+      "ci_uniform_left": 15
+    },
+    {
+      "name": "Qwen2.5-32B-Instruct",
+      "theta_hat": -3.6838,
+      "rank": 92,
+      "ci_two_sided": [
+        71,
+        100
+      ],
+      "ci_left": 74,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "Mistral-Large-Instruct-24",
+      "theta_hat": 2.9162,
+      "rank": 17,
+      "ci_two_sided": [
+        4,
+        54
+      ],
+      "ci_left": 6,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "Rombos-LLM-V2.5-Qwen-72b",
+      "theta_hat": 1.5581,
+      "rank": 39,
+      "ci_two_sided": [
+        21,
+        66
+      ],
+      "ci_left": 23,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave.1",
+      "theta_hat": -3.6074,
+      "rank": 90,
+      "ci_two_sided": [
+        70,
+        100
+      ],
+      "ci_left": 73,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct-abli.1",
+      "theta_hat": 2.5908,
+      "rank": 23,
+      "ci_two_sided": [
+        12,
+        48
+      ],
+      "ci_left": 13,
+      "ci_uniform_left": 5
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave.2",
+      "theta_hat": -3.6661,
+      "rank": 91,
+      "ci_two_sided": [
+        72,
+        100
+      ],
+      "ci_left": 74,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "lambda-qwen2.5-32b-dpo-te",
+      "theta_hat": -2.5531,
+      "rank": 80,
+      "ci_two_sided": [
+        60,
+        100
+      ],
+      "ci_left": 61,
+      "ci_uniform_left": 22
+    },
+    {
+      "name": "Qwentile2.5-32B-Instruct",
+      "theta_hat": 1.8123,
+      "rank": 35,
+      "ci_two_sided": [
+        17,
+        63
+      ],
+      "ci_left": 17,
+      "ci_uniform_left": 15
+    },
+    {
+      "name": "Rombos-LLM-V2.5-Qwen-32b",
+      "theta_hat": 3.4632,
+      "rank": 15,
+      "ci_two_sided": [
+        3,
+        34
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "openbuddy-llama3.3-70b-v2",
+      "theta_hat": 4.1655,
+      "rank": 6,
+      "ci_two_sided": [
+        1,
+        22
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave.3",
+      "theta_hat": 1.4229,
+      "rank": 41,
+      "ci_two_sided": [
+        19,
+        100
+      ],
+      "ci_left": 22,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "huihui-ai-abliterated-Qwe",
+      "theta_hat": -5.1025,
+      "rank": 97,
+      "ci_two_sided": [
+        87,
+        100
+      ],
+      "ci_left": 87,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave.4",
+      "theta_hat": 0.9159,
+      "rank": 47,
+      "ci_two_sided": [
+        29,
+        100
+      ],
+      "ci_left": 32,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "ultiima-32B",
+      "theta_hat": 2.7178,
+      "rank": 22,
+      "ci_two_sided": [
+        9,
+        53
+      ],
+      "ci_left": 10,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "RYS-XLarge",
+      "theta_hat": 2.8279,
+      "rank": 19,
+      "ci_two_sided": [
+        6,
+        51
+      ],
+      "ci_left": 9,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "Qwen2.5-95B-Instruct",
+      "theta_hat": -1.8938,
+      "rank": 72,
+      "ci_two_sided": [
+        58,
+        100
+      ],
+      "ci_left": 59,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "ultiima-72B-v1.5",
+      "theta_hat": 2.4899,
+      "rank": 25,
+      "ci_two_sided": [
+        13,
+        49
+      ],
+      "ci_left": 15,
+      "ci_uniform_left": 6
+    },
+    {
+      "name": "sky-t1-coder-32b-flash",
+      "theta_hat": -1.8263,
+      "rank": 71,
+      "ci_two_sided": [
+        58,
+        100
+      ],
+      "ci_left": 59,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "Llama-3.3-70B-Instruct",
+      "theta_hat": -2.5957,
+      "rank": 82,
+      "ci_two_sided": [
+        60,
+        100
+      ],
+      "ci_left": 60,
+      "ci_uniform_left": 21
+    },
+    {
+      "name": "RomboUltima-32B",
+      "theta_hat": 2.1144,
+      "rank": 32,
+      "ci_two_sided": [
+        17,
+        66
+      ],
+      "ci_left": 17,
+      "ci_uniform_left": 12
+    },
+    {
+      "name": "calme-2.1-rys-78b",
+      "theta_hat": 1.7998,
+      "rank": 36,
+      "ci_two_sided": [
+        17,
+        60
+      ],
+      "ci_left": 19,
+      "ci_uniform_left": 15
+    },
+    {
+      "name": "calme-2.3-rys-78b",
+      "theta_hat": 1.9485,
+      "rank": 34,
+      "ci_two_sided": [
+        17,
+        66
+      ],
+      "ci_left": 17,
+      "ci_uniform_left": 13
+    },
+    {
+      "name": "calme-2.1-qwen2-72b",
+      "theta_hat": 1.737,
+      "rank": 38,
+      "ci_two_sided": [
+        17,
+        67
+      ],
+      "ci_left": 19,
+      "ci_uniform_left": 15
+    },
+    {
+      "name": "calme-2.2-rys-78b",
+      "theta_hat": 1.9745,
+      "rank": 33,
+      "ci_two_sided": [
+        17,
+        66
+      ],
+      "ci_left": 17,
+      "ci_uniform_left": 13
+    },
+    {
+      "name": "MG-FinalMix-72B",
+      "theta_hat": 2.2611,
+      "rank": 30,
+      "ci_two_sided": [
+        15,
+        56
+      ],
+      "ci_left": 17,
+      "ci_uniform_left": 9
+    },
+    {
+      "name": "EVA-Qwen2.5-72B-v0.2",
+      "theta_hat": 2.9056,
+      "rank": 18,
+      "ci_two_sided": [
+        7,
+        42
+      ],
+      "ci_left": 9,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "Qwen2-72B-Orpo-v0.1",
+      "theta_hat": 2.1909,
+      "rank": 31,
+      "ci_two_sided": [
+        17,
+        57
+      ],
+      "ci_left": 17,
+      "ci_uniform_left": 11
+    },
+    {
+      "name": "RYS-XLarge-base",
+      "theta_hat": 2.3952,
+      "rank": 28,
+      "ci_two_sided": [
+        13,
+        60
+      ],
+      "ci_left": 15,
+      "ci_uniform_left": 7
+    },
+    {
+      "name": "calme-2.2-qwen2-72b",
+      "theta_hat": -0.583,
+      "rank": 59,
+      "ci_two_sided": [
+        48,
+        100
+      ],
+      "ci_left": 49,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "Arcee-Nova",
+      "theta_hat": 0.9293,
+      "rank": 46,
+      "ci_two_sided": [
+        32,
+        77
+      ],
+      "ci_left": 33,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "L3.3-MS-Nevoria-70b",
+      "theta_hat": 3.7376,
+      "rank": 12,
+      "ci_two_sided": [
+        1,
+        33
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Set-70b",
+      "theta_hat": 3.4298,
+      "rank": 16,
+      "ci_two_sided": [
+        2,
+        38
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "QwentileSwap",
+      "theta_hat": 1.0174,
+      "rank": 43,
+      "ci_two_sided": [
+        29,
+        85
+      ],
+      "ci_left": 31,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "li-14b-v0.4",
+      "theta_hat": -1.5861,
+      "rank": 68,
+      "ci_two_sided": [
+        53,
+        100
+      ],
+      "ci_left": 53,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "tempmotacilla-cinerea-030",
+      "theta_hat": -2.2483,
+      "rank": 76,
+      "ci_two_sided": [
+        59,
+        100
+      ],
+      "ci_left": 60,
+      "ci_uniform_left": 25
+    },
+    {
+      "name": "L3.3-Nevoria-R1-70b",
+      "theta_hat": 4.2356,
+      "rank": 5,
+      "ci_two_sided": [
+        1,
+        22
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Qwen2-72B-Instruct",
+      "theta_hat": -0.26,
+      "rank": 57,
+      "ci_two_sided": [
+        43,
+        100
+      ],
+      "ci_left": 44,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "Galactic-Qwen-14B-Exp2",
+      "theta_hat": 3.6267,
+      "rank": 14,
+      "ci_two_sided": [
+        2,
+        32
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "BigQwen2.5-52B-Instruct",
+      "theta_hat": -16.5264,
+      "rank": 100,
+      "ci_two_sided": [
+        100,
+        100
+      ],
+      "ci_left": 100,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Llama-3.1-SauerkrautLM-70",
+      "theta_hat": 0.6726,
+      "rank": 49,
+      "ci_two_sided": [
+        32,
+        100
+      ],
+      "ci_left": 33,
+      "ci_uniform_left": 21
+    },
+    {
+      "name": "Llama-3.1-70B-Instruct",
+      "theta_hat": -0.2332,
+      "rank": 56,
+      "ci_two_sided": [
+        42,
+        100
+      ],
+      "ci_left": 43,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "Dracarys-72B-Instruct",
+      "theta_hat": 0.7902,
+      "rank": 48,
+      "ci_two_sided": [
+        33,
+        81
+      ],
+      "ci_left": 34,
+      "ci_uniform_left": 19
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave.5",
+      "theta_hat": -11.2432,
+      "rank": 99,
+      "ci_two_sided": [
+        99,
+        100
+      ],
+      "ci_left": 99,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Lamarckvergence-14B",
+      "theta_hat": -1.0289,
+      "rank": 61,
+      "ci_two_sided": [
+        52,
+        100
+      ],
+      "ci_left": 52,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "Lix-14B-v0.1",
+      "theta_hat": -1.7235,
+      "rank": 69,
+      "ci_two_sided": [
+        54,
+        100
+      ],
+      "ci_left": 58,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "calme-2.2-llama3.1-70b",
+      "theta_hat": -1.1364,
+      "rank": 62,
+      "ci_two_sided": [
+        52,
+        100
+      ],
+      "ci_left": 52,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "NQLSG-Qwen2.5-14B-MegaFus",
+      "theta_hat": -2.3953,
+      "rank": 79,
+      "ci_two_sided": [
+        59,
+        100
+      ],
+      "ci_left": 60,
+      "ci_uniform_left": 23
+    },
+    {
+      "name": "calme-2.3-llama3.1-70b",
+      "theta_hat": -0.3571,
+      "rank": 58,
+      "ci_two_sided": [
+        43,
+        100
+      ],
+      "ci_left": 43,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "NQLSG-Qwen2.5-14B-MegaFus.1",
+      "theta_hat": -1.9424,
+      "rank": 73,
+      "ci_two_sided": [
+        58,
+        100
+      ],
+      "ci_left": 59,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "orca_mini_v8_1_70b",
+      "theta_hat": 2.5621,
+      "rank": 24,
+      "ci_two_sided": [
+        9,
+        62
+      ],
+      "ci_left": 11,
+      "ci_uniform_left": 5
+    },
+    {
+      "name": "Apollo-70B",
+      "theta_hat": 4.7541,
+      "rank": 3,
+      "ci_two_sided": [
+        1,
+        20
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "ZYH-LLM-Qwen2.5-14B-V4",
+      "theta_hat": -2.3303,
+      "rank": 78,
+      "ci_two_sided": [
+        59,
+        100
+      ],
+      "ci_left": 60,
+      "ci_uniform_left": 24
+    },
+    {
+      "name": "NQLSG-Qwen2.5-14B-MegaFus.2",
+      "theta_hat": -2.2405,
+      "rank": 75,
+      "ci_two_sided": [
+        59,
+        100
+      ],
+      "ci_left": 60,
+      "ci_uniform_left": 25
+    },
+    {
+      "name": "Progenitor-V1.1-LLaMa-70B",
+      "theta_hat": 3.9508,
+      "rank": 9,
+      "ci_two_sided": [
+        1,
+        26
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "70B-L3.3-Cirrus-x1",
+      "theta_hat": 4.3218,
+      "rank": 4,
+      "ci_two_sided": [
+        1,
+        20
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "magnum-v1-72b",
+      "theta_hat": 0.6216,
+      "rank": 51,
+      "ci_two_sided": [
+        35,
+        100
+      ],
+      "ci_left": 36,
+      "ci_uniform_left": 22
+    },
+    {
+      "name": "magnum-72b-v1",
+      "theta_hat": 0.6651,
+      "rank": 50,
+      "ci_two_sided": [
+        34,
+        100
+      ],
+      "ci_left": 35,
+      "ci_uniform_left": 21
+    },
+    {
+      "name": "lamarckvergence-14b-tenso",
+      "theta_hat": -0.8879,
+      "rank": 60,
+      "ci_two_sided": [
+        51,
+        100
+      ],
+      "ci_left": 52,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "li-14b-v0.4-slerp0.1",
+      "theta_hat": -2.8172,
+      "rank": 85,
+      "ci_two_sided": [
+        60,
+        100
+      ],
+      "ci_left": 61,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "miscii-14b-0218",
+      "theta_hat": -0.2232,
+      "rank": 54,
+      "ci_two_sided": [
+        42,
+        100
+      ],
+      "ci_left": 43,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "Cheng-2",
+      "theta_hat": -3.7411,
+      "rank": 93,
+      "ci_two_sided": [
+        69,
+        100
+      ],
+      "ci_left": 71,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "NQLSG-Qwen2.5-14B-MegaFus.3",
+      "theta_hat": -2.5903,
+      "rank": 81,
+      "ci_two_sided": [
+        60,
+        100
+      ],
+      "ci_left": 60,
+      "ci_uniform_left": 21
+    },
+    {
+      "name": "Llama3.3-70B-CogniLink",
+      "theta_hat": 4.078,
+      "rank": 7,
+      "ci_two_sided": [
+        1,
+        24
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "tempesthenno-ppo-ckpt40",
+      "theta_hat": -1.1766,
+      "rank": 63,
+      "ci_two_sided": [
+        53,
+        100
+      ],
+      "ci_left": 53,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "RYS-Llama3.1-Large",
+      "theta_hat": -0.2291,
+      "rank": 55,
+      "ci_two_sided": [
+        43,
+        100
+      ],
+      "ci_left": 43,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "virtuoso-small-v2-tensopo",
+      "theta_hat": -1.3746,
+      "rank": 65,
+      "ci_two_sided": [
+        53,
+        100
+      ],
+      "ci_left": 53,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "Cheng-2-v1.1",
+      "theta_hat": -4.0702,
+      "rank": 96,
+      "ci_two_sided": [
+        71,
+        100
+      ],
+      "ci_left": 74,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "RombosBeagle-v2beta-MGS-3",
+      "theta_hat": 2.756,
+      "rank": 21,
+      "ci_two_sided": [
+        7,
+        53
+      ],
+      "ci_left": 9,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "TheBeagle-v2beta-32B-MGS",
+      "theta_hat": 2.818,
+      "rank": 20,
+      "ci_two_sided": [
+        7,
+        49
+      ],
+      "ci_left": 9,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "lambda-qwen2.5-14b-dpo-te",
+      "theta_hat": -2.2483,
+      "rank": 77,
+      "ci_two_sided": [
+        59,
+        100
+      ],
+      "ci_left": 60,
+      "ci_uniform_left": 25
+    },
+    {
+      "name": "tempesthenno-nuslerp-001",
+      "theta_hat": -1.3117,
+      "rank": 64,
+      "ci_two_sided": [
+        53,
+        100
+      ],
+      "ci_left": 54,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "Qwen2.5-14B-1M-YOYO-V3",
+      "theta_hat": -5.9651,
+      "rank": 98,
+      "ci_two_sided": [
+        88,
+        100
+      ],
+      "ci_left": 91,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Josiefied-Qwen2.5-14B-Ins",
+      "theta_hat": -3.447,
+      "rank": 87,
+      "ci_two_sided": [
+        66,
+        100
+      ],
+      "ci_left": 69,
+      "ci_uniform_left": 9
+    },
+    {
+      "name": "NQLSG-Qwen2.5-14B-MegaFus.4",
+      "theta_hat": -3.5345,
+      "rank": 89,
+      "ci_two_sided": [
+        70,
+        100
+      ],
+      "ci_left": 72,
+      "ci_uniform_left": 6
+    },
+    {
+      "name": "Q2.5-Veltha-14B",
+      "theta_hat": -2.7644,
+      "rank": 83,
+      "ci_two_sided": [
+        61,
+        100
+      ],
+      "ci_left": 62,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "ECE-ILAB-Q1",
+      "theta_hat": 1.4975,
+      "rank": 40,
+      "ci_two_sided": [
+        23,
+        68
+      ],
+      "ci_left": 23,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "Virtuoso-Small-v2",
+      "theta_hat": -2.8415,
+      "rank": 86,
+      "ci_two_sided": [
+        64,
+        100
+      ],
+      "ci_left": 65,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "Qwen2.5-14B-YOYO-V4-p1",
+      "theta_hat": -3.8237,
+      "rank": 94,
+      "ci_two_sided": [
+        69,
+        100
+      ],
+      "ci_left": 72,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "Chocolatine-14B-Instruct-",
+      "theta_hat": -3.9382,
+      "rank": 95,
+      "ci_two_sided": [
+        70,
+        100
+      ],
+      "ci_left": 74,
+      "ci_uniform_left": 1
+    }
+  ],
+  "metadata": {
+    "n_samples": 2,
+    "k_methods": 100,
+    "runtime_sec": 10.1667
+  }
+}

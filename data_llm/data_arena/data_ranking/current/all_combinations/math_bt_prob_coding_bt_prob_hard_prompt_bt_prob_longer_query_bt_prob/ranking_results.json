@@ -1,0 +1,587 @@
+{
+  "job_id": "all_combinations",
+  "params": {
+    "bigbetter": true,
+    "B": 2000,
+    "seed": 42
+  },
+  "methods": [
+    {
+      "name": "gemini-2.5-pro",
+      "theta_hat": 8.8547,
+      "rank": 1,
+      "ci_two_sided": [
+        1,
+        36
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gemini-2.5-pro-preview-03",
+      "theta_hat": 6.1613,
+      "rank": 2,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "grok-4-0709",
+      "theta_hat": 5.8723,
+      "rank": 3,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "o3-2025-04-16",
+      "theta_hat": 4.3288,
+      "rank": 9,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "chatgpt-4o-latest-2025032",
+      "theta_hat": 4.8936,
+      "rank": 4,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gemini-2.5-pro-preview-05",
+      "theta_hat": 3.5423,
+      "rank": 12,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "deepseek-r1-0528",
+      "theta_hat": 3.474,
+      "rank": 14,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "grok-3-preview-02-24",
+      "theta_hat": 4.601,
+      "rank": 6,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "llama-4-maverick-03-26-ex",
+      "theta_hat": 4.4563,
+      "rank": 7,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gemini-2.5-flash",
+      "theta_hat": 4.4085,
+      "rank": 8,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "qwen3-235b-a22b-no-thinki",
+      "theta_hat": 3.2266,
+      "rank": 16,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gemini-2.5-flash-preview-",
+      "theta_hat": 2.812,
+      "rank": 18,
+      "ci_two_sided": [
+        2,
+        52
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gemini-2.0-flash-thinking",
+      "theta_hat": 1.3987,
+      "rank": 27,
+      "ci_two_sided": [
+        4,
+        52
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "kimi-k2-0711-preview",
+      "theta_hat": 3.1755,
+      "rank": 17,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gpt-4.1-2025-04-14",
+      "theta_hat": 2.5333,
+      "rank": 19,
+      "ci_two_sided": [
+        2,
+        52
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "deepseek-v3-0324",
+      "theta_hat": 1.2996,
+      "rank": 28,
+      "ci_two_sided": [
+        4,
+        52
+      ],
+      "ci_left": 6,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "o4-mini-2025-04-16",
+      "theta_hat": 2.0603,
+      "rank": 23,
+      "ci_two_sided": [
+        2,
+        52
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "mistral-medium-2505",
+      "theta_hat": 1.4414,
+      "rank": 26,
+      "ci_two_sided": [
+        4,
+        52
+      ],
+      "ci_left": 5,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "gemini-2.5-flash-lite-pre",
+      "theta_hat": 2.1489,
+      "rank": 21,
+      "ci_two_sided": [
+        2,
+        52
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "qwen-max-2025-01-25",
+      "theta_hat": 1.9664,
+      "rank": 24,
+      "ci_two_sided": [
+        2,
+        52
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "hunyuan-turbos-20250416",
+      "theta_hat": 2.0853,
+      "rank": 22,
+      "ci_two_sided": [
+        2,
+        52
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "qwen3-235b-a22b",
+      "theta_hat": 3.2898,
+      "rank": 15,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "minimax-m1",
+      "theta_hat": 2.2747,
+      "rank": 20,
+      "ci_two_sided": [
+        2,
+        52
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "claude-opus-4-20250514-th",
+      "theta_hat": 3.5425,
+      "rank": 11,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "qwen3-235b-a22b-instruct-",
+      "theta_hat": 4.825,
+      "rank": 5,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gemma-3-27b-it",
+      "theta_hat": -0.5972,
+      "rank": 36,
+      "ci_two_sided": [
+        15,
+        52
+      ],
+      "ci_left": 18,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "claude-opus-4-20250514",
+      "theta_hat": 3.5273,
+      "rank": 13,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "grok-3-mini-beta",
+      "theta_hat": 1.2773,
+      "rank": 29,
+      "ci_two_sided": [
+        4,
+        52
+      ],
+      "ci_left": 6,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "grok-3-mini-high",
+      "theta_hat": 1.1206,
+      "rank": 31,
+      "ci_two_sided": [
+        4,
+        52
+      ],
+      "ci_left": 6,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "gpt-4o-2024-11-20",
+      "theta_hat": 1.1802,
+      "rank": 30,
+      "ci_two_sided": [
+        4,
+        52
+      ],
+      "ci_left": 6,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "claude-sonnet-4-20250514-",
+      "theta_hat": 3.5529,
+      "rank": 10,
+      "ci_two_sided": [
+        1,
+        52
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gemini-2.0-flash-001",
+      "theta_hat": -1.7272,
+      "rank": 41,
+      "ci_two_sided": [
+        20,
+        52
+      ],
+      "ci_left": 25,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "mistral-small-2506",
+      "theta_hat": -0.8497,
+      "rank": 38,
+      "ci_two_sided": [
+        15,
+        52
+      ],
+      "ci_left": 19,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gpt-4.1-mini-2025-04-14",
+      "theta_hat": 0.1189,
+      "rank": 35,
+      "ci_two_sided": [
+        10,
+        52
+      ],
+      "ci_left": 10,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "qwq-32b",
+      "theta_hat": 0.2908,
+      "rank": 34,
+      "ci_two_sided": [
+        7,
+        52
+      ],
+      "ci_left": 10,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "claude-sonnet-4-20250514",
+      "theta_hat": 1.6205,
+      "rank": 25,
+      "ci_two_sided": [
+        4,
+        52
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "qwen3-30b-a3b",
+      "theta_hat": 0.6295,
+      "rank": 32,
+      "ci_two_sided": [
+        4,
+        52
+      ],
+      "ci_left": 10,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "command-a-03-2025",
+      "theta_hat": -1.7899,
+      "rank": 42,
+      "ci_two_sided": [
+        20,
+        52
+      ],
+      "ci_left": 25,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "o3-mini",
+      "theta_hat": 0.4321,
+      "rank": 33,
+      "ci_two_sided": [
+        6,
+        52
+      ],
+      "ci_left": 10,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "amazon-nova-experimental-",
+      "theta_hat": -4.3577,
+      "rank": 44,
+      "ci_two_sided": [
+        36,
+        52
+      ],
+      "ci_left": 38,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gemma-3n-e4b-it",
+      "theta_hat": -8.3937,
+      "rank": 45,
+      "ci_two_sided": [
+        44,
+        52
+      ],
+      "ci_left": 45,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "claude-3-7-sonnet-2025021",
+      "theta_hat": -0.6183,
+      "rank": 37,
+      "ci_two_sided": [
+        14,
+        52
+      ],
+      "ci_left": 18,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "claude-3-5-sonnet-2024102",
+      "theta_hat": -1.379,
+      "rank": 39,
+      "ci_two_sided": [
+        18,
+        52
+      ],
+      "ci_left": 21,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "llama-4-maverick-17b-128e",
+      "theta_hat": -3.9245,
+      "rank": 43,
+      "ci_two_sided": [
+        33,
+        52
+      ],
+      "ci_left": 36,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "claude-3-7-sonnet-2025021.1",
+      "theta_hat": -1.4478,
+      "rank": 40,
+      "ci_two_sided": [
+        19,
+        52
+      ],
+      "ci_left": 23,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "llama-4-scout-17b-16e-ins",
+      "theta_hat": -9.0252,
+      "rank": 48,
+      "ci_two_sided": [
+        45,
+        52
+      ],
+      "ci_left": 45,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "llama-3.3-70b-instruct",
+      "theta_hat": -12.7806,
+      "rank": 51,
+      "ci_two_sided": [
+        46,
+        52
+      ],
+      "ci_left": 49,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "amazon.nova-pro-v1:0",
+      "theta_hat": -12.7518,
+      "rank": 50,
+      "ci_two_sided": [
+        46,
+        52
+      ],
+      "ci_left": 49,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "mistral-small-3.1-24b-ins",
+      "theta_hat": -8.6281,
+      "rank": 46,
+      "ci_two_sided": [
+        44,
+        52
+      ],
+      "ci_left": 45,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "magistral-medium-2506",
+      "theta_hat": -8.6442,
+      "rank": 47,
+      "ci_two_sided": [
+        44,
+        52
+      ],
+      "ci_left": 45,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "claude-3-5-haiku-20241022",
+      "theta_hat": -12.2693,
+      "rank": 49,
+      "ci_two_sided": [
+        45,
+        52
+      ],
+      "ci_left": 48,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "gpt-4o-mini-2024-07-18",
+      "theta_hat": -13.2384,
+      "rank": 52,
+      "ci_two_sided": [
+        48,
+        52
+      ],
+      "ci_left": 49,
+      "ci_uniform_left": 1
+    }
+  ],
+  "metadata": {
+    "n_samples": 4,
+    "k_methods": 52,
+    "runtime_sec": 3.7601
+  }
+}

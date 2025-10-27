@@ -1,0 +1,57 @@
+combination_name,combination,n_benchmarks,n_models,runtime_sec,top_model,top_score
+ifeval_bbh,"('ifeval', 'bbh')",2,100,10.5563,Qwen2.5-72B-Instruct,3.0503
+ifeval_math,"('ifeval', 'math')",2,100,10.4946,Qwen2.5-72B-Instruct,3.6269
+ifeval_gpqa,"('ifeval', 'gpqa')",2,100,10.3337,orca_mini_v8_1_70b,2.5322
+ifeval_musr,"('ifeval', 'musr')",2,100,10.6851,Llama-3.1-SauerkrautLM-70,1.8285
+ifeval_mmlu_pro,"('ifeval', 'mmlu_pro')",2,100,10.7395,test-2.5-72B,1.9711
+bbh_math,"('bbh', 'math')",2,100,10.8348,Qwen2.5-72B-Instruct,2.7054
+bbh_gpqa,"('bbh', 'gpqa')",2,100,13.3165,T3Q-Qwen2.5-14B-Instruct-,4.3465
+bbh_musr,"('bbh', 'musr')",2,100,16.0261,T3Q-Qwen2.5-14B-Instruct-,35.1733
+bbh_mmlu_pro,"('bbh', 'mmlu_pro')",2,100,10.6964,calme-3.2-instruct-78b,8.2452
+math_gpqa,"('math', 'gpqa')",2,100,10.631,Apollo-70B,2.3357
+math_musr,"('math', 'musr')",2,100,11.9945,Apollo-70B,1.8743
+math_mmlu_pro,"('math', 'mmlu_pro')",2,100,10.762,Linkbricks-Horizon-AI-Ave,2.3619
+gpqa_musr,"('gpqa', 'musr')",2,100,10.1667,T3Q-Qwen2.5-14B-Instruct-,5.2323
+gpqa_mmlu_pro,"('gpqa', 'mmlu_pro')",2,100,10.0403,Homer-v1.0-Qwen2.5-72B,3.4355
+musr_mmlu_pro,"('musr', 'mmlu_pro')",2,100,10.3327,calme-3.2-instruct-78b,7.6561
+ifeval_bbh_math,"('ifeval', 'bbh', 'math')",3,100,14.7277,Qwen2.5-72B-Instruct,2.8322
+ifeval_bbh_gpqa,"('ifeval', 'bbh', 'gpqa')",3,100,14.5604,shuttle-3,1.799
+ifeval_bbh_musr,"('ifeval', 'bbh', 'musr')",3,100,14.4352,test-2.5-72B,1.9519
+ifeval_bbh_mmlu_pro,"('ifeval', 'bbh', 'mmlu_pro')",3,100,23.926,test-2.5-72B,2.2007
+ifeval_math_gpqa,"('ifeval', 'math', 'gpqa')",3,100,16.3594,Qwen2.5-72B-Instruct-abli,1.9225
+ifeval_math_musr,"('ifeval', 'math', 'musr')",3,100,15.8343,calme-2.1-qwen2.5-72b,0.806
+ifeval_math_mmlu_pro,"('ifeval', 'math', 'mmlu_pro')",3,100,16.5589,Qwen2.5-72B-Instruct,1.792
+ifeval_gpqa_musr,"('ifeval', 'gpqa', 'musr')",3,100,21.0228,CalmeRys-78B-Orpo-v0.1,1.5387
+ifeval_gpqa_mmlu_pro,"('ifeval', 'gpqa', 'mmlu_pro')",3,100,15.6894,CalmeRys-78B-Orpo-v0.1,1.576
+ifeval_musr_mmlu_pro,"('ifeval', 'musr', 'mmlu_pro')",3,100,15.9711,CalmeRys-78B-Orpo-v0.1,2.0693
+bbh_math_gpqa,"('bbh', 'math', 'gpqa')",3,100,15.7294,Qwen2.5-72B-Instruct-abli,1.6718
+bbh_math_musr,"('bbh', 'math', 'musr')",3,100,16.1863,qwen2.5-test-32b-it,1.2827
+bbh_math_mmlu_pro,"('bbh', 'math', 'mmlu_pro')",3,100,14.8204,Rombos-LLM-V2.5-Qwen-72b,1.9272
+bbh_gpqa_musr,"('bbh', 'gpqa', 'musr')",3,100,14.9029,T3Q-Qwen2.5-14B-Instruct-,4.5979
+bbh_gpqa_mmlu_pro,"('bbh', 'gpqa', 'mmlu_pro')",3,100,15.1081,T3Q-Qwen2.5-14B-Instruct-,3.746
+bbh_musr_mmlu_pro,"('bbh', 'musr', 'mmlu_pro')",3,100,33.2948,calme-3.2-instruct-78b,5.8739
+math_gpqa_musr,"('math', 'gpqa', 'musr')",3,100,25.474,Apollo-70B,2.2461
+math_gpqa_mmlu_pro,"('math', 'gpqa', 'mmlu_pro')",3,100,16.4452,Rombos-LLM-V2.5-Qwen-72b,1.5437
+math_musr_mmlu_pro,"('math', 'musr', 'mmlu_pro')",3,100,18.5981,Rombos-LLM-V2.5-Qwen-32b,1.4504
+gpqa_musr_mmlu_pro,"('gpqa', 'musr', 'mmlu_pro')",3,100,19.0936,T3Q-Qwen2.5-14B-Instruct-,3.5325
+ifeval_bbh_math_gpqa,"('ifeval', 'bbh', 'math', 'gpqa')",4,100,33.7779,Qwen2.5-72B-Instruct-abli,1.8355
+ifeval_bbh_math_musr,"('ifeval', 'bbh', 'math', 'musr')",4,100,20.1483,calme-2.1-qwen2.5-72b,1.028
+ifeval_bbh_math_mmlu_pro,"('ifeval', 'bbh', 'math', 'mmlu_pro')",4,100,21.5857,Qwen2.5-72B-Instruct,1.8964
+ifeval_bbh_gpqa_musr,"('ifeval', 'bbh', 'gpqa', 'musr')",4,100,20.7428,CalmeRys-78B-Orpo-v0.1,1.7295
+ifeval_bbh_gpqa_mmlu_pro,"('ifeval', 'bbh', 'gpqa', 'mmlu_pro')",4,100,25.6136,CalmeRys-78B-Orpo-v0.1,1.8115
+ifeval_bbh_musr_mmlu_pro,"('ifeval', 'bbh', 'musr', 'mmlu_pro')",4,100,31.6912,calme-3.1-instruct-78b,2.3047
+ifeval_math_gpqa_musr,"('ifeval', 'math', 'gpqa', 'musr')",4,100,33.5488,Mistral-Large-Instruct-24,0.8715
+ifeval_math_gpqa_mmlu_pro,"('ifeval', 'math', 'gpqa', 'mmlu_pro')",4,100,32.1353,Qwen2.5-72B-Instruct-abli,1.3474
+ifeval_math_musr_mmlu_pro,"('ifeval', 'math', 'musr', 'mmlu_pro')",4,100,56.6321,CalmeRys-78B-Orpo-v0.1,0.9621
+ifeval_gpqa_musr_mmlu_pro,"('ifeval', 'gpqa', 'musr', 'mmlu_pro')",4,100,66.3654,CalmeRys-78B-Orpo-v0.1,1.8686
+bbh_math_gpqa_musr,"('bbh', 'math', 'gpqa', 'musr')",4,100,46.2359,T3Q-Qwen2.5-14B-Instruct-,1.1838
+bbh_math_gpqa_mmlu_pro,"('bbh', 'math', 'gpqa', 'mmlu_pro')",4,100,22.7575,Homer-v1.0-Qwen2.5-72B,1.7127
+bbh_math_musr_mmlu_pro,"('bbh', 'math', 'musr', 'mmlu_pro')",4,100,23.7736,calme-3.2-instruct-78b,1.5787
+bbh_gpqa_musr_mmlu_pro,"('bbh', 'gpqa', 'musr', 'mmlu_pro')",4,100,20.4313,T3Q-Qwen2.5-14B-Instruct-,3.9472
+math_gpqa_musr_mmlu_pro,"('math', 'gpqa', 'musr', 'mmlu_pro')",4,100,26.3605,Rombos-LLM-V2.5-Qwen-32b,1.3505
+ifeval_bbh_math_gpqa_musr,"('ifeval', 'bbh', 'math', 'gpqa', 'musr')",5,100,25.8138,CalmeRys-78B-Orpo-v0.1,0.9442
+ifeval_bbh_math_gpqa_mmlu_pro,"('ifeval', 'bbh', 'math', 'gpqa', 'mmlu_pro')",5,100,33.388,Qwen2.5-72B-Instruct-abli,1.4066
+ifeval_bbh_math_musr_mmlu_pro,"('ifeval', 'bbh', 'math', 'musr', 'mmlu_pro')",5,100,29.1783,CalmeRys-78B-Orpo-v0.1,1.1981
+ifeval_bbh_gpqa_musr_mmlu_pro,"('ifeval', 'bbh', 'gpqa', 'musr', 'mmlu_pro')",5,100,24.7205,calme-3.2-instruct-78b,2.0574
+ifeval_math_gpqa_musr_mmlu_pro,"('ifeval', 'math', 'gpqa', 'musr', 'mmlu_pro')",5,100,26.9154,CalmeRys-78B-Orpo-v0.1,1.0243
+bbh_math_gpqa_musr_mmlu_pro,"('bbh', 'math', 'gpqa', 'musr', 'mmlu_pro')",5,100,23.0753,calme-3.2-instruct-78b,1.5352

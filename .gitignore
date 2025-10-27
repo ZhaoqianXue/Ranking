@@ -60,8 +60,13 @@ venv/
 *.swp
 *.swo
 
-# Project specific data files
-data_llm/
+# Project specific data files - exclude specific data files but include ranking results
+data_llm/data_collection/
+data_llm/data_processing/
+data_llm/*/data_ranking/current/*.json
+data_llm/*/data_ranking/current/*.csv
+# Include all_combinations folders (ranking results)
+!data_llm/*/data_ranking/current/all_combinations/
 agent_uploads/
 jobs/
 temp_ranking_jobs/

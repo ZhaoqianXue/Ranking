@@ -1,0 +1,120 @@
+combination_name,combination,n_benchmarks,n_models,runtime_sec,top_model,top_score
+creative_writing_bt_prob_math_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob')",2,52,2.1383,gemini-2.5-pro,8.6593
+creative_writing_bt_prob_instruction_following_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob')",2,52,2.0978,gemini-2.5-pro-preview-03,35.0132
+creative_writing_bt_prob_coding_bt_prob,"('creative_writing_bt_prob', 'coding_bt_prob')",2,52,2.0561,gemini-2.5-pro,9.2168
+creative_writing_bt_prob_hard_prompt_bt_prob,"('creative_writing_bt_prob', 'hard_prompt_bt_prob')",2,52,2.1673,gemini-2.5-pro,34.3241
+creative_writing_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'longer_query_bt_prob')",2,52,3.2394,gemini-2.5-pro,7.8404
+creative_writing_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'multi_turn_bt_prob')",2,52,1.9647,gemini-2.5-pro,10.1861
+math_bt_prob_instruction_following_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob')",2,52,1.9756,gemini-2.5-pro,14.1161
+math_bt_prob_coding_bt_prob,"('math_bt_prob', 'coding_bt_prob')",2,52,2.0159,gemini-2.5-pro,35.3505
+math_bt_prob_hard_prompt_bt_prob,"('math_bt_prob', 'hard_prompt_bt_prob')",2,52,2.0265,gemini-2.5-pro,35.3505
+math_bt_prob_longer_query_bt_prob,"('math_bt_prob', 'longer_query_bt_prob')",2,52,2.0511,gemini-2.5-pro,8.031
+math_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'multi_turn_bt_prob')",2,52,1.9833,gemini-2.5-pro,12.1944
+instruction_following_bt_prob_coding_bt_prob,"('instruction_following_bt_prob', 'coding_bt_prob')",2,52,2.0039,gemini-2.5-pro,16.788
+instruction_following_bt_prob_hard_prompt_bt_prob,"('instruction_following_bt_prob', 'hard_prompt_bt_prob')",2,52,2.0753,gemini-2.5-pro,34.3191
+instruction_following_bt_prob_longer_query_bt_prob,"('instruction_following_bt_prob', 'longer_query_bt_prob')",2,52,5.1008,gemini-2.5-pro,12.9574
+instruction_following_bt_prob_multi_turn_bt_prob,"('instruction_following_bt_prob', 'multi_turn_bt_prob')",2,52,3.5267,gemini-2.5-pro,16.7377
+coding_bt_prob_hard_prompt_bt_prob,"('coding_bt_prob', 'hard_prompt_bt_prob')",2,52,2.7458,gemini-2.5-pro,35.3505
+coding_bt_prob_longer_query_bt_prob,"('coding_bt_prob', 'longer_query_bt_prob')",2,52,4.2263,gemini-2.5-pro,10.5149
+coding_bt_prob_multi_turn_bt_prob,"('coding_bt_prob', 'multi_turn_bt_prob')",2,52,2.4654,gemini-2.5-pro,33.2635
+hard_prompt_bt_prob_longer_query_bt_prob,"('hard_prompt_bt_prob', 'longer_query_bt_prob')",2,52,2.6461,gemini-2.5-pro,9.121
+hard_prompt_bt_prob_multi_turn_bt_prob,"('hard_prompt_bt_prob', 'multi_turn_bt_prob')",2,52,1.9359,gemini-2.5-pro,32.6449
+longer_query_bt_prob_multi_turn_bt_prob,"('longer_query_bt_prob', 'multi_turn_bt_prob')",2,52,2.0335,gemini-2.5-pro,11.9774
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob')",3,52,4.7281,gemini-2.5-pro-preview-03,9.1987
+creative_writing_bt_prob_math_bt_prob_coding_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'coding_bt_prob')",3,52,3.34,gemini-2.5-pro,9.3149
+creative_writing_bt_prob_math_bt_prob_hard_prompt_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'hard_prompt_bt_prob')",3,52,3.6206,gemini-2.5-pro,10.0262
+creative_writing_bt_prob_math_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'longer_query_bt_prob')",3,52,2.4621,gemini-2.5-pro,6.7789
+creative_writing_bt_prob_math_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'multi_turn_bt_prob')",3,52,2.7074,gemini-2.5-pro,8.042
+creative_writing_bt_prob_instruction_following_bt_prob_coding_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob')",3,52,5.9586,gemini-2.5-pro-preview-03,9.7802
+creative_writing_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob')",3,52,2.4832,gemini-2.5-pro-preview-03,34.5634
+creative_writing_bt_prob_instruction_following_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'longer_query_bt_prob')",3,52,2.4937,gemini-2.5-pro,7.8635
+creative_writing_bt_prob_instruction_following_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'multi_turn_bt_prob')",3,52,2.4443,gemini-2.5-pro-preview-03,10.1307
+creative_writing_bt_prob_coding_bt_prob_hard_prompt_bt_prob,"('creative_writing_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob')",3,52,2.5801,gemini-2.5-pro,10.6492
+creative_writing_bt_prob_coding_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob')",3,52,2.4977,gemini-2.5-pro,7.7643
+creative_writing_bt_prob_coding_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'coding_bt_prob', 'multi_turn_bt_prob')",3,52,4.837,gemini-2.5-pro,8.9071
+creative_writing_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",3,52,5.0561,gemini-2.5-pro,7.8307
+creative_writing_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",3,52,2.8888,gemini-2.5-pro,10.0829
+creative_writing_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",3,52,3.1106,gemini-2.5-pro,7.4182
+math_bt_prob_instruction_following_bt_prob_coding_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob')",3,52,2.4721,gemini-2.5-pro,12.5293
+math_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob')",3,52,2.762,gemini-2.5-pro,13.8151
+math_bt_prob_instruction_following_bt_prob_longer_query_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'longer_query_bt_prob')",3,52,2.4829,gemini-2.5-pro,8.5256
+math_bt_prob_instruction_following_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'multi_turn_bt_prob')",3,52,2.4559,gemini-2.5-pro,12.0567
+math_bt_prob_coding_bt_prob_hard_prompt_bt_prob,"('math_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob')",3,52,2.513,gemini-2.5-pro,35.3505
+math_bt_prob_coding_bt_prob_longer_query_bt_prob,"('math_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob')",3,52,2.5233,gemini-2.5-pro,8.2888
+math_bt_prob_coding_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'coding_bt_prob', 'multi_turn_bt_prob')",3,52,2.5251,gemini-2.5-pro,10.9826
+math_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('math_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",3,52,2.7313,gemini-2.5-pro,8.5594
+math_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",3,52,2.4786,gemini-2.5-pro,12.2248
+math_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",3,52,2.5816,gemini-2.5-pro,8.1535
+instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob,"('instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob')",3,52,2.4505,gemini-2.5-pro,17.7326
+instruction_following_bt_prob_coding_bt_prob_longer_query_bt_prob,"('instruction_following_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob')",3,52,2.4977,gemini-2.5-pro,10.0154
+instruction_following_bt_prob_coding_bt_prob_multi_turn_bt_prob,"('instruction_following_bt_prob', 'coding_bt_prob', 'multi_turn_bt_prob')",3,52,2.4349,gemini-2.5-pro,15.764
+instruction_following_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('instruction_following_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",3,52,3.1939,gemini-2.5-pro,9.5358
+instruction_following_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('instruction_following_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",3,52,2.8759,gemini-2.5-pro,17.2564
+instruction_following_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('instruction_following_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",3,52,6.382,gemini-2.5-pro,9.5767
+coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",3,52,4.1982,gemini-2.5-pro,9.6854
+coding_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('coding_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",3,52,2.5668,gemini-2.5-pro,32.7678
+coding_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('coding_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",3,52,5.2899,gemini-2.5-pro,8.981
+hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",3,52,3.087,gemini-2.5-pro,8.8703
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_coding_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob')",4,52,3.0397,gemini-2.5-pro,9.3469
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob')",4,52,3.8245,gemini-2.5-pro,10.0424
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'longer_query_bt_prob')",4,52,3.0113,gemini-2.5-pro,7.0981
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'multi_turn_bt_prob')",4,52,3.088,gemini-2.5-pro,8.4419
+creative_writing_bt_prob_math_bt_prob_coding_bt_prob_hard_prompt_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob')",4,52,3.6507,gemini-2.5-pro,10.251
+creative_writing_bt_prob_math_bt_prob_coding_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob')",4,52,3.576,gemini-2.5-pro,7.3443
+creative_writing_bt_prob_math_bt_prob_coding_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'coding_bt_prob', 'multi_turn_bt_prob')",4,52,4.262,gemini-2.5-pro,8.5862
+creative_writing_bt_prob_math_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",4,52,9.557,gemini-2.5-pro,7.4189
+creative_writing_bt_prob_math_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",4,52,6.7651,gemini-2.5-pro,8.8141
+creative_writing_bt_prob_math_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",4,52,3.2325,gemini-2.5-pro,6.9838
+creative_writing_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob')",4,52,3.0172,gemini-2.5-pro,10.6645
+creative_writing_bt_prob_instruction_following_bt_prob_coding_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob')",4,52,5.0356,gemini-2.5-pro,7.9545
+creative_writing_bt_prob_instruction_following_bt_prob_coding_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'multi_turn_bt_prob')",4,52,3.1616,gemini-2.5-pro,9.3062
+creative_writing_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",4,52,3.2425,gemini-2.5-pro,8.1265
+creative_writing_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",4,52,3.1293,gemini-2.5-pro,10.5087
+creative_writing_bt_prob_instruction_following_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",4,52,3.1561,gemini-2.5-pro,7.833
+creative_writing_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",4,52,3.4622,gemini-2.5-pro,8.2028
+creative_writing_bt_prob_coding_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",4,52,3.0571,gemini-2.5-pro,9.7238
+creative_writing_bt_prob_coding_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",4,52,3.9221,gemini-2.5-pro,7.7542
+creative_writing_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",4,52,4.3674,gemini-2.5-pro,7.9025
+math_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob')",4,52,3.4791,gemini-2.5-pro,12.9534
+math_bt_prob_instruction_following_bt_prob_coding_bt_prob_longer_query_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob')",4,52,4.4905,gemini-2.5-pro,8.5164
+math_bt_prob_instruction_following_bt_prob_coding_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'multi_turn_bt_prob')",4,52,3.5054,gemini-2.5-pro,10.8009
+math_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",4,52,3.0417,gemini-2.5-pro,8.8374
+math_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",4,52,3.0909,gemini-2.5-pro,11.5967
+math_bt_prob_instruction_following_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",4,52,3.5686,gemini-2.5-pro,8.5237
+math_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('math_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",4,52,3.7601,gemini-2.5-pro,8.8547
+math_bt_prob_coding_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",4,52,4.1433,gemini-2.5-pro,11.6189
+math_bt_prob_coding_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",4,52,3.7132,gemini-2.5-pro,8.3137
+math_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",4,52,3.2469,gemini-2.5-pro,8.5229
+instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",4,52,3.5262,gemini-2.5-pro,9.8885
+instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",4,52,4.5387,gemini-2.5-pro,16.57
+instruction_following_bt_prob_coding_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('instruction_following_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",4,52,7.9207,gemini-2.5-pro,9.3605
+instruction_following_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('instruction_following_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",4,52,4.1448,gemini-2.5-pro,9.3591
+coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",4,52,3.3783,gemini-2.5-pro,9.3844
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob')",5,52,5.294,gemini-2.5-pro,10.1156
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_coding_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob')",5,52,8.1502,gemini-2.5-pro,7.5377
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_coding_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'multi_turn_bt_prob')",5,52,8.2456,gemini-2.5-pro,8.8454
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",5,52,8.1144,gemini-2.5-pro,7.623
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",5,52,3.6846,gemini-2.5-pro,9.0911
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",5,52,3.4951,gemini-2.5-pro,7.2794
+creative_writing_bt_prob_math_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",5,52,5.1246,gemini-2.5-pro,7.8404
+creative_writing_bt_prob_math_bt_prob_coding_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",5,52,6.8705,gemini-2.5-pro,9.1962
+creative_writing_bt_prob_math_bt_prob_coding_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",5,52,6.8219,gemini-2.5-pro,7.4243
+creative_writing_bt_prob_math_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",5,52,4.6523,gemini-2.5-pro,7.4931
+creative_writing_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",5,52,4.0572,gemini-2.5-pro,8.3631
+creative_writing_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",5,52,3.4925,gemini-2.5-pro,9.9803
+creative_writing_bt_prob_instruction_following_bt_prob_coding_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",5,52,3.5194,gemini-2.5-pro,8.0192
+creative_writing_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",5,52,3.8223,gemini-2.5-pro,8.2049
+creative_writing_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",5,52,4.2478,gemini-2.5-pro,8.1959
+math_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",5,52,3.6939,gemini-2.5-pro,8.9678
+math_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",5,52,8.6587,gemini-2.5-pro,11.3055
+math_bt_prob_instruction_following_bt_prob_coding_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",5,52,3.6131,gemini-2.5-pro,8.5754
+math_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",5,52,3.592,gemini-2.5-pro,8.8186
+math_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",5,52,3.7407,gemini-2.5-pro,8.7829
+instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",5,52,3.5336,gemini-2.5-pro,9.6503
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob')",6,52,4.102,gemini-2.5-pro,7.9657
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'multi_turn_bt_prob')",6,52,4.1675,gemini-2.5-pro,9.372
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_coding_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",6,52,4.2746,gemini-2.5-pro,7.6318
+creative_writing_bt_prob_math_bt_prob_instruction_following_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'instruction_following_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",6,52,4.5751,gemini-2.5-pro,7.7083
+creative_writing_bt_prob_math_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'math_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",6,52,3.9312,gemini-2.5-pro,7.8397
+creative_writing_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('creative_writing_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",6,52,4.1683,gemini-2.5-pro,8.3934
+math_bt_prob_instruction_following_bt_prob_coding_bt_prob_hard_prompt_bt_prob_longer_query_bt_prob_multi_turn_bt_prob,"('math_bt_prob', 'instruction_following_bt_prob', 'coding_bt_prob', 'hard_prompt_bt_prob', 'longer_query_bt_prob', 'multi_turn_bt_prob')",6,52,4.4081,gemini-2.5-pro,8.9581
