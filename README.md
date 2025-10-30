@@ -325,12 +325,10 @@ data_llm/data_arena/data_collection/
 4. **联合分析**: 探索Leaderboard分数与Arena偏好的相关性
 
 ### 5.6. Arena数据集7个任务分类维度的判定标准
-
 基于Chatbot Arena官方定义，Arena数据集支持7个任务分类维度，用于更细粒度的模型性能分析：
-
 **参考资料**: [Chatbot Arena Categories: Definitions, Methods, and Insights](https://news.lmarena.ai/arena-category/)
 
-#### 🎨 **1. Creative Writing (创意写作)**
+#### **1. Creative Writing (创意写作)**
 - **判定字段**: `category_tag['creative_writing_v0.1']['creative_writing'] == True`
 - **定义**: 评估模型创作原创、有想象力和情感共鸣内容的能力
 - **判定标准**:
@@ -339,7 +337,7 @@ data_llm/data_arena/data_collection/
   - 请求独特视角或解释性响应
   - 超越事实报告或分析的写作
 
-#### 🔢 **2. Math (数学推理)**
+#### **2. Math (数学推理)**
 - **判定字段**: `category_tag['math_v0.1']['math'] == True`
 - **定义**: 评估模型应用数学推理和问题解决技能的能力
 - **判定标准**:
@@ -348,7 +346,7 @@ data_llm/data_arena/data_collection/
   - 包含清晰、明确的问题
   - 测试一个或多个数学能力
 
-#### 📋 **3. Instruction Following (指令跟随)**
+#### **3. Instruction Following (指令跟随)**
 - **判定字段**: `category_tag['if_v0.1']['if'] == True`
 - **定义**: 评估模型精确遵循给定指令的能力
 - **判定标准**:
@@ -356,7 +354,7 @@ data_llm/data_arena/data_collection/
   - 特定的格式或结构要求
   - 独特或具有挑战性的方面
 
-#### 💻 **4. Coding (编程)**
+#### **4. Coding (编程)**
 - **判定字段**: `is_code == True`
 - **定义**: 评估模型理解、生成和调试代码的能力
 - **判定标准**: 启发式算法检测代码相关内容
@@ -364,7 +362,8 @@ data_llm/data_arena/data_collection/
   - 编程语言关键词
   - 代码命令和相关术语
 
-#### 🚀 **5. Hard Prompt (困难提示)**
+#### **5. Hard Prompt (困难提示)**
+**Reference**: [Introducing Hard Prompts Category in Chatbot Arena](https://lmsys.org/blog/2024-05-17-category-hard/)
 - **判定逻辑**: 满足至少6个以下7个核心维度的要求
 - **定义**: 处理复杂、严格、精心设计的提示
 - **7个核心维度**:
@@ -392,25 +391,21 @@ def is_hard_prompt(category_tag):
     return hard_score >= 6
 ```
 
-**参考资料**: [Introducing Hard Prompts Category in Chatbot Arena](https://lmsys.org/blog/2024-05-17-category-hard/)
-
-#### 📏 **6. Longer Query (长查询)**
+#### **6. Longer Query (长查询)**
 - **判定逻辑**: `conv_metadata['sum_user_tokens'] > 500`
 - **定义**: 查询长度超过500 tokens（约占全部提示的10%）
 - **判定标准**: 基于用户输入的token数量阈值
 
-#### 🔄 **7. Multi-Turn (多轮对话)**
+#### **7. Multi-Turn (多轮对话)**
 - **判定逻辑**: `conv_metadata['turns'] > 1`
 - **定义**: 多轮对话交互
 - **判定标准**: 对话轮数超过1轮
 
-#### 📊 **分类部署说明**
+#### **分类部署说明**
 - **前4个维度**: 基于预定义的分类标签字段直接判断
 - **后3个维度**: 通过元数据统计和内容特征推断判断
 - **Hard Prompt**: 需要满足至少6个评估维度的组合判断
 - **数据来源**: 所有判定信息均来自`category_tag`和`conv_metadata`字段
-
-这些分类维度为Arena数据集提供了细粒度的任务分析能力，支持模型性能的深度评估和比较。
 
 
 ### 5.7. Arena 数据的 BT-MLE 建模与谱排序集成（替代 win_rate）

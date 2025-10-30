@@ -5,7 +5,7 @@
 **Dataset Name**: `lmarena-ai/arena-human-preference-140k`
 **Source**: Hugging Face Datasets
 **Purpose**: Human preference voting data comparing different LLM models in conversational scenarios
-**Total Records**: 136,634 (sampled 100 for exploration)
+**Total Records**: 136,634 (sampled 10000 for exploration)
 **Data Format**: Parquet/CSV
 
 ## Schema Structure
@@ -148,15 +148,15 @@
 
 ## Data Quality Statistics
 
-### Sample Analysis (100 records)
-- **Total Records**: 100
-- **Unique Models in A**: 38
-- **Unique Models in B**: 42
+### Sample Analysis (10000 records)
+- **Total Records**: 10000
+- **Unique Models in A**: 52
+- **Unique Models in B**: 52
 - **Winner Distribution**:
-  - `model_a`: 38 (38%)
-  - `model_b`: 33 (33%)
-  - `tie`: 19 (19%)
-  - `both_bad`: 10 (10%)
+  - `model_a`: 3621 (36.21%)
+  - `model_b`: 3642 (36.42%)
+  - `tie`: 1615 (16.15%)
+  - `both_bad`: 1122 (11.22%)
 - **Language Distribution**: Primarily English (`en`) with some Polish (`pl`) and German (`de`)
 - **Evaluation Sessions**: Multiple sessions with varying lengths
 - **No Missing Values**: All fields are complete
@@ -219,9 +219,9 @@
 ## File Structure
 
 ```
-data_llm/data_huggingface/data_collection/
-├── arena_human_preference_sample_100.csv          # Sample data (100 rows)
-├── arena_human_preference_sample_100_metadata.json # Data analysis metadata
+data_llm/data_arena/data_collection/
+├── arena_human_preference_sample_10000.csv        # Sample data (10000 rows)
+├── arena_human_preference_sample_10000_metadata.json # Data analysis metadata (10000 rows)
 └── ARENA_DATASET_SCHEMA.md                        # This schema documentation
 ```
 
@@ -235,6 +235,90 @@ data_llm/data_huggingface/data_collection/
 
 ---
 
-**Last Updated**: October 12, 2025
-**Data Version**: Sample 100 records
+**Last Updated**: October 14, 2025
+**Data Version**: Sample 10000 records
 **Source URL**: https://huggingface.co/datasets/lmarena-ai/arena-human-preference-140k
+
+
+## Arena数据集7个任务分类维度的判定标准
+基于Chatbot Arena官方定义，Arena数据集支持7个任务分类维度，用于更细粒度的模型性能分析：
+**参考资料**: [Chatbot Arena Categories: Definitions, Methods, and Insights](https://news.lmarena.ai/arena-category/)
+
+### **1. Creative Writing (创意写作)**
+- **判定字段**: `category_tag['creative_writing_v0.1']['creative_writing'] == True`
+- **定义**: 评估模型创作原创、有想象力和情感共鸣内容的能力
+- **判定标准**:
+  - 需要原创性和想象力
+  - 涉及情感或艺术表达
+  - 请求独特视角或解释性响应
+  - 超越事实报告或分析的写作
+
+### **2. Math (数学推理)**
+- **判定字段**: `category_tag['math_v0.1']['math'] == True`
+- **定义**: 评估模型应用数学推理和问题解决技能的能力
+- **判定标准**:
+  - 需要主动应用数学概念
+  - 涉及数值计算、代数运算或几何推理
+  - 包含清晰、明确的问题
+  - 测试一个或多个数学能力
+
+### **3. Instruction Following (指令跟随)**
+- **判定字段**: `category_tag['if_v0.1']['if'] == True`
+- **定义**: 评估模型精确遵循给定指令的能力
+- **判定标准**:
+  - 清晰、可操作的用户指令
+  - 特定的格式或结构要求
+  - 独特或具有挑战性的方面
+
+### **4. Coding (编程)**
+- **判定字段**: `is_code == True`
+- **定义**: 评估模型理解、生成和调试代码的能力
+- **判定标准**: 启发式算法检测代码相关内容
+  - 代码块标记
+  - 编程语言关键词
+  - 代码命令和相关术语
+
+### **5. Hard Prompt (困难提示)**
+**Reference**: [Introducing Hard Prompts Category in Chatbot Arena](https://lmsys.org/blog/2024-05-17-category-hard/)
+- **判定逻辑**: 满足至少6个以下7个核心维度的要求
+- **定义**: 处理复杂、严格、精心设计的提示
+- **7个核心维度**:
+  1. **Specificity**: 是否要求特定输出？
+  2. **Domain Knowledge**: 是否涉及一个或多个特定领域？
+  3. **Complexity**: 是否具有多个推理层次、组件或变量？
+  4. **Problem-Solving**: 是否需要主动问题解决技能？
+  5. **Creativity**: 是否需要创造性解决问题？
+  6. **Technical Accuracy**: 是否需要技术准确性？
+  7. **Real-world Application**: 是否涉及现实应用？
+
+```python
+# Hard Prompt判定代码
+def is_hard_prompt(category_tag):
+    criteria = category_tag.get('criteria_v0.1', {})
+    hard_score = sum([
+        criteria.get('specificity', False),
+        criteria.get('domain_knowledge', False),
+        criteria.get('complexity', False),
+        criteria.get('problem_solving', False),
+        criteria.get('creativity', False),
+        criteria.get('technical_accuracy', False),
+        criteria.get('real_world', False)
+    ])
+    return hard_score >= 6
+```
+
+### **6. Longer Query (长查询)**
+- **判定逻辑**: `conv_metadata['sum_user_tokens'] > 500`
+- **定义**: 查询长度超过500 tokens（约占全部提示的10%）
+- **判定标准**: 基于用户输入的token数量阈值
+
+### **7. Multi-Turn (多轮对话)**
+- **判定逻辑**: `conv_metadata['turns'] > 1`
+- **定义**: 多轮对话交互
+- **判定标准**: 对话轮数超过1轮
+
+### **分类部署说明**
+- **前4个维度**: 基于预定义的分类标签字段直接判断
+- **后3个维度**: 通过元数据统计和内容特征推断判断
+- **Hard Prompt**: 需要满足至少6个评估维度的组合判断
+- **数据来源**: 所有判定信息均来自`category_tag`和`conv_metadata`字段

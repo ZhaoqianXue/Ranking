@@ -165,7 +165,7 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .dashboard-container .nav-item {
@@ -829,6 +829,17 @@ body, html {
   min-height: 100vh;
   scroll-behavior: smooth;
   overflow-x: hidden; /* Prevent horizontal scroll */
+  /* Make scrollbar overlay content without taking up space */
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+body:hover, html:hover {
+  scrollbar-color: rgba(156, 163, 175, 0.7) rgba(243, 244, 246, 0.5);
+}
+
+body.scrolling {
+  scrollbar-color: rgba(156, 163, 175, 0.7) rgba(243, 244, 246, 0.5);
 }
 
 /* Global animations */
@@ -1057,20 +1068,21 @@ body, html {
   font-weight: 500;
   opacity: 0.92;
   text-align: center;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto 2.5rem;
   line-height: 1.7;
   position: relative;
   animation: fadeInUp 0.8s ease-out 0.4s both;
   text-shadow: none;
   color: #e5e7eb;
+  width: 100%;
 }
 
 .hero-features {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 2.5rem auto 0;
   animation: fadeInUp 0.8s ease-out 0.6s both;
   justify-content: center;
@@ -1080,12 +1092,17 @@ body, html {
   background: #fff;
   border: 1.5px solid #011f5b;
   border-radius: var(--radius-xl);
-  padding: 1.5rem 1.5rem 1.2rem 1.5rem;
+  padding: 1.2rem 1.2rem 1rem 1.2rem;
   text-align: center;
   transition: var(--transition-slow);
   box-shadow: 0 2px 8px rgba(1,31,91,0.07);
-  min-width: 220px;
-  max-width: 270px;
+  min-width: 280px;
+  max-width: 300px;
+  width: 280px;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: #011f5b;
 }
 
@@ -1097,7 +1114,7 @@ body, html {
 
 .hero-feature-icon {
   font-size: 2.5rem;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.5rem;
   display: block;
   opacity: 1;
   animation: none;
@@ -1107,8 +1124,9 @@ body, html {
 .hero-feature-title {
   font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.4rem;
   color: #011f5b;
+  white-space: nowrap;
 }
 
 .hero-feature-description {
@@ -1298,7 +1316,7 @@ body, html {
 .top-navbar {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(1, 31, 91, 0.1);
   box-shadow: var(--shadow-sm);
   position: fixed;
   top: 0;
@@ -1315,52 +1333,42 @@ body, html {
 
 .top-navbar.scrolled {
   background: rgba(255, 255, 255, 0.98);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
 }
 
 .navbar-brand {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  text-decoration: none;
-  color: var(--primary-900);
-  font-weight: 900;
-  font-size: 1.3rem;
-  transition: var(--transition-base);
-}
-
-.navbar-brand:hover {
-  transform: scale(1.05);
-  color: var(--primary-700);
+  font-weight: 700;
+  font-size: 1.25rem;
 }
 
 .navbar-brand-link {
   text-decoration: none;
-  color: var(--primary-900);
-  font-weight: 900;
-  font-size: 1.5rem;
+  color: var(--primary-900) !important;
+  font-weight: 700;
+  font-size: 1.25rem;
   transition: var(--transition-base);
   cursor: pointer;
 }
 
 .navbar-brand-link:hover {
-  transform: scale(1.05);
-  color: var(--primary-700);
+  color: var(--primary-900) !important;
+  opacity: 0.8;
+  transform: translateY(-1px);
   text-decoration: none;
 }
 
 .navbar-brand-icon {
-  font-size: 1.7rem;
-  background: var(--bg-gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 1.5rem;
+  color: var(--primary-900);
 }
 
 .navbar-nav {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1371,11 +1379,12 @@ body, html {
 }
 
 .nav-link {
-  color: var(--gray-700);
+  color: rgba(1, 31, 91, 0.8);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.95rem;
-  padding: 0.75rem 0;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
   transition: var(--transition-base);
   position: relative;
   display: flex;
@@ -1386,16 +1395,18 @@ body, html {
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: -2px;
+  left: 50%;
   width: 0;
   height: 2px;
-  background: var(--primary-600);
+  background: var(--primary-900);
   transition: var(--transition-base);
+  transform: translateX(-50%);
 }
 
 .nav-link:hover {
-  color: var(--primary-600);
+  color: var(--primary-900);
+  background: rgba(1, 31, 91, 0.1);
   transform: translateY(-1px);
 }
 
@@ -1404,11 +1415,13 @@ body, html {
 }
 
 .nav-link.active {
-  color: var(--primary-600);
+  color: var(--primary-900);
+  background: rgba(1, 31, 91, 0.15);
 }
 
 .nav-link.active::after {
   width: 100%;
+  background: var(--primary-900);
 }
 
 .navbar-actions {
@@ -1418,37 +1431,32 @@ body, html {
 }
 
 .nav-button {
-  background: transparent;
-  border: 2px solid var(--primary-600);
-  color: var(--primary-600);
-  border-radius: var(--radius-lg);
-  padding: 0.625rem 1.5rem;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: var(--transition-base);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.875rem;
   text-decoration: none;
-  display: inline-flex;
+  transition: var(--transition-base);
+  display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
 .nav-button:hover {
-  background: var(--primary-600);
-  color: white;
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
 
 .nav-button.primary {
-  background: #021f5b;
-  color: white;
-  border-color: transparent;
+  background: rgba(1, 31, 91, 0.1);
+  color: var(--primary-900);
+  border: 1px solid rgba(1, 31, 91, 0.2);
 }
 
 .nav-button.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  background: rgba(1, 31, 91, 0.2);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Mobile Navigation */
@@ -1456,10 +1464,16 @@ body, html {
   display: none;
   background: none;
   border: none;
+  color: var(--primary-900);
   font-size: 1.5rem;
-  color: var(--primary-600);
   cursor: pointer;
   padding: 0.5rem;
+  border-radius: var(--radius-md);
+  transition: var(--transition-base);
+}
+
+.mobile-toggle:hover {
+  background: rgba(1, 31, 91, 0.1);
 }
 
 .mobile-nav {
@@ -1470,9 +1484,8 @@ body, html {
   right: 0;
   background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--gray-200);
-  box-shadow: var(--shadow-lg);
-  padding: 1rem 2rem 2rem;
+  border-top: 1px solid rgba(1, 31, 91, 0.1);
+  padding: 1rem 2rem;
 }
 
 .mobile-nav .navbar-nav {
@@ -2147,20 +2160,34 @@ body {
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--gray-100);
+  background: transparent;
   border-radius: var(--radius-sm);
+  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-900);
+  background: transparent;
   border-radius: var(--radius-sm);
+  transition: background 0.3s ease;
+}
+
+/* Show scrollbar when body is hovered or scrolling */
+body:hover ::-webkit-scrollbar-thumb,
+body.scrolling ::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.7);
+}
+
+body:hover ::-webkit-scrollbar-track,
+body.scrolling ::-webkit-scrollbar-track {
+  background: rgba(243, 244, 246, 0.5);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-950);
+  background: rgba(156, 163, 175, 0.85);
 }
 
 /* Enhanced Table Styling */
@@ -2276,8 +2303,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Scroll effect for navbar
     let isScrolled = false;
+    let scrollTimeout;
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add scrolling class to show scrollbar
+        document.body.classList.add('scrolling');
+        clearTimeout(scrollTimeout);
+        
+        // Remove scrolling class after scrolling stops
+        scrollTimeout = setTimeout(function() {
+            document.body.classList.remove('scrolling');
+        }, 500);
         
         if (scrollTop > 50 && !isScrolled) {
             navbar.classList.add('scrolled');
@@ -2286,6 +2323,17 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.classList.remove('scrolled');
             isScrolled = false;
         }
+        
+        // Update active nav link based on scroll position
+        // If at the top of the page, set Home as active
+        if (scrollTop < 100) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#hero-section' || link.getAttribute('href') === '#') {
+                    link.classList.add('active');
+                }
+            });
+        }
     });
     
     // Enhanced smooth scrolling for ALL anchor links with precise positioning
@@ -2293,6 +2341,14 @@ document.addEventListener('DOMContentLoaded', function() {
         links.forEach(link => {
             link.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
+                
+                // Handle cross-page hash links (e.g., /dashboard#compare-with-your-model)
+                if (href && href.includes('#') && !href.startsWith('#')) {
+                    // This is a cross-page link with hash, let it navigate normally
+                    // The target page will handle the hash scrolling
+                    return; // Don't prevent default, let browser navigate
+                }
+                
                 if (href && href.startsWith('#')) {
                     e.preventDefault();
 
@@ -2345,6 +2401,25 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (mobileNav && mobileNav.classList.contains('show')) {
                             mobileNav.classList.remove('show');
                         }
+                        
+                        // Ensure active state is maintained after scroll completes
+                        setTimeout(function() {
+                            const currentHref = this.getAttribute('href');
+                            if (currentHref && currentHref.startsWith('#')) {
+                                const targetElement = document.querySelector(currentHref);
+                                if (targetElement) {
+                                    const rect = targetElement.getBoundingClientRect();
+                                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                                    const elementTop = rect.top + scrollTop;
+                                    
+                                    // If we're close to the target section, ensure it's active
+                                    if (scrollTop >= elementTop - 150 && scrollTop <= elementTop + rect.height + 150) {
+                                        navLinks.forEach(l => l.classList.remove('active'));
+                                        this.classList.add('active');
+                                    }
+                                }
+                            }
+                        }.bind(this), 500);
                     }
                 }
             });
@@ -2372,31 +2447,61 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Initialize active nav link on page load
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollTop < 100) {
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#hero-section' || link.getAttribute('href') === '#') {
+                link.classList.add('active');
+            }
+        });
+    }
+    
     // Intersection Observer for section highlighting with improved precision
     const sections = document.querySelectorAll('section[id], div[id]');
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '-100px 0px -70% 0px'
+        threshold: [0.1, 0.3, 0.5],
+        rootMargin: '-80px 0px -60% 0px'
     };
     
     const observer = new IntersectionObserver(function(entries) {
+        let activeSection = null;
+        let maxIntersection = 0;
+        
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                if (id) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + id) {
-                            link.classList.add('active');
-                        }
-                    });
+                const intersectionRatio = entry.intersectionRatio;
+                if (intersectionRatio > maxIntersection) {
+                    maxIntersection = intersectionRatio;
+                    activeSection = entry.target;
                 }
             }
         });
+        
+        if (activeSection) {
+            const id = activeSection.getAttribute('id');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Only update if not at the top (let scroll handler manage Home)
+            if (scrollTop >= 100) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href');
+                    if (href === '#' + id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }
     }, observerOptions);
     
     sections.forEach(section => {
-        observer.observe(section);
+        const id = section.getAttribute('id');
+        // Only observe relevant sections
+        if (id && (id === 'mode-selection' || id === 'results' || id === 'documentation' || id === 'about' || id === 'hero-section')) {
+            observer.observe(section);
+        }
     });
     
     // Add smooth reveal animations
@@ -4302,11 +4407,13 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
         # Main navigation menu (hidden on mobile)
         with ui.element('ul').classes('navbar-nav'):
             with ui.element('li').classes('nav-item'):
-                ui.html('<a href="/dashboard" class="nav-link">Dashboard</a>')
+                ui.html('<a href="#hero-section" class="nav-link active">Home</a>')
             with ui.element('li').classes('nav-item'):
-                ui.html('<a href="#mode-selection" class="nav-link active">Analysis</a>')
+                ui.html('<a href="#mode-selection" class="nav-link">Start Spectral Rank</a>')
             with ui.element('li').classes('nav-item'):
-                ui.html('<a href="#results" class="nav-link">Results</a>')
+                ui.html('<a href="/dashboard" class="nav-link">LLM Leaderboard</a>')
+            with ui.element('li').classes('nav-item'):
+                ui.html('<a href="/dashboard#compare-with-your-model" class="nav-link">Rank My LLM</a>')
             with ui.element('li').classes('nav-item'):
                 ui.html('<a href="#documentation" class="nav-link">Help</a>')
             with ui.element('li').classes('nav-item'):
@@ -4314,8 +4421,8 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
         
         # Right side actions
         with ui.element('div').classes('navbar-actions'):
-            ui.html('<a href="https://github.com/MaxineYu/Spectral_Ranking" class="nav-button primary" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="height: 1rem; width: auto; display: inline-block; margin-right: 0.5rem; vertical-align: middle; filter: brightness(0) invert(1);"/>GitHub</a>')
-            ui.html('<a href="https://doi.org/10.1287/opre.2023.0439" class="nav-button primary" target="_blank"><img src="https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg" alt="arXiv" style="height: 1rem; width: auto; display: inline-block; margin-right: 0.5rem; vertical-align: middle; filter: brightness(0) invert(1);"/>Read the Paper</a>')
+            ui.html('<a href="https://github.com/MaxineYu/Spectral_Ranking" class="nav-button primary" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="height: 1rem; width: auto; display: inline-block; margin-right: 0.5rem; vertical-align: middle;"/>GitHub</a>')
+            ui.html('<a href="https://doi.org/10.1287/opre.2023.0439" class="nav-button primary" target="_blank"><img src="https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg" alt="arXiv" style="height: 1rem; width: auto; display: inline-block; margin-right: 0.5rem; vertical-align: middle; filter: brightness(0);"/>Read the Paper</a>')
         
         # Mobile menu toggle (visible only on mobile)
         with ui.element('button').classes('mobile-toggle').on('click', toggle_mobile_nav):
@@ -4325,21 +4432,23 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
         with ui.element('div').classes('mobile-nav'):
             with ui.element('ul').classes('navbar-nav'):
                 with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="/dashboard" class="nav-link">Dashboard</a>')
+                    ui.html('<a href="#hero-section" class="nav-link active">Home</a>')
                 with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="#mode-selection" class="nav-link active">Analysis</a>')
+                    ui.html('<a href="#mode-selection" class="nav-link">Start Spectral Rank</a>')
                 with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="#results" class="nav-link">Results</a>')
+                    ui.html('<a href="/dashboard" class="nav-link">LLM Leaderboard</a>')
+                with ui.element('li').classes('nav-item'):
+                    ui.html('<a href="/dashboard#compare-with-your-model" class="nav-link">Rank My LLM</a>')
                 with ui.element('li').classes('nav-item'):
                     ui.html('<a href="#documentation" class="nav-link">Help</a>')
                 with ui.element('li').classes('nav-item'):
                     ui.html('<a href="#about" class="nav-link">About</a>')
             
             with ui.element('div').classes('navbar-actions'):
-                ui.html('<a href="https://github.com/MaxineYu/Spectral_Ranking" class="nav-button primary" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="height: 1rem; width: auto; display: inline-block; margin-right: 0.5rem; vertical-align: middle; filter: brightness(0) invert(1);"/>GitHub</a>')
-                ui.html('<a href="https://doi.org/10.1287/opre.2023.0439" class="nav-button primary" target="_blank"><img src="https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg" alt="arXiv" style="height: 1rem; width: auto; display: inline-block; margin-right: 0.5rem; vertical-align: middle; filter: brightness(0) invert(1);"/>Read the Paper</a>')
+                ui.html('<a href="https://github.com/MaxineYu/Spectral_Ranking" class="nav-button primary" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="height: 1rem; width: auto; display: inline-block; margin-right: 0.5rem; vertical-align: middle;"/>GitHub</a>')
+                ui.html('<a href="https://doi.org/10.1287/opre.2023.0439" class="nav-button primary" target="_blank"><img src="https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg" alt="arXiv" style="height: 1rem; width: auto; display: inline-block; margin-right: 0.5rem; vertical-align: middle; filter: brightness(0);"/>Read the Paper</a>')
     # Enhanced Hero Section with Modern Design - Full screen background
-    with ui.element('div').classes('hero-section').style('margin: 0 -1rem; width: calc(100% + 2rem);'):
+    with ui.element('div').classes('hero-section').style('margin: 0 -1rem; width: calc(100% + 2rem);').props('id="hero-section"'):
         # Add floating particles background
         ui.html('''
             <div class="hero-floating-particles">
@@ -4412,7 +4521,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
             # Enhanced Subtitle
             ui.html('''
                 <div class="hero-subtitle">
-                    An advanced statistical framework for robust ranking and uncertainty quantification based on pairwise or multiway comparisons.
+                    Ranking inference framework for general multiway comparisons. <span style="white-space: nowrap;">Handles heterogeneous comparison graphs without restrictive sampling assumptions.</span>
                 </div>
             ''')
             
@@ -4421,23 +4530,23 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 <div class="hero-features">
                     <div class="hero-feature">
                         <span class="material-symbols-outlined hero-feature-icon">biotech</span>
-                        <div class="hero-feature-title">Spectral Method</div>
+                        <div class="hero-feature-title">Multiway Comparisons</div>
                         <div class="hero-feature-description">
-                            Utilizes a powerful spectral method to derive robust rankings from complex, heterogeneous comparison data.
+                            Handles comparison graphs with hyper-edges of heterogeneous sizes, circumventing restrictive assumptions in traditional BTL/PL models. Works seamlessly with graphs.
                         </div>
                     </div>
                     <div class="hero-feature">
-                        <span class="material-symbols-outlined hero-feature-icon">balance</span>
-                        <div class="hero-feature-title">Uncertainty Quantification</div>
+                        <span class="material-symbols-outlined hero-feature-icon">query_stats</span>
+                        <div class="hero-feature-title">Ranking Inference</div>
                         <div class="hero-feature-description">
-                            Employs weighted bootstrap to construct confidence intervals, assessing the reliability and stability of ranks.
+                            Provides both one-sample and two-sample ranking inferences with confidence intervals. First effective two-sample rank testing method for general multiway comparisons.
                         </div>
                     </div>
                     <div class="hero-feature">
-                        <span class="material-symbols-outlined hero-feature-icon">public</span>
-                        <div class="hero-feature-title">Broad Applicability</div>
+                        <span class="material-symbols-outlined hero-feature-icon">verified</span>
+                        <div class="hero-feature-title">Theoretical Guarantees</div>
                         <div class="hero-feature-description">
-                           Applicable to diverse fields like machine learning, sports analytics, market research, and academic journal rankings.
+                            Two-step spectral method achieves asymptotic efficiency matching MLE. Comprehensive theoretical justifications with multiplier bootstrap for uncertainty quantification.
                         </div>
                     </div>
                 </div>
@@ -4447,7 +4556,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
             ui.html('''
                 <div class="hero-cta">
                     <a href="#mode-selection" class="hero-cta-button" style="background: #fff !important; color: #011f5b !important; border: 2.5px solid #011f5b; font-weight: 900; font-size: 1.1rem; transition: background 0.2s, color 0.2s, box-shadow 0.2s; box-shadow: 0 4px 16px rgba(1,31,91,0.10);">
-                        Start Analysis
+                        Start Spectral Rank
                     </a>
                 </div>
             ''')

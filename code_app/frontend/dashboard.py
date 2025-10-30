@@ -291,9 +291,12 @@ TABLE_STYLES = '''
     color: #011f5b;
 }
 .card-title {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: #1e293b;
+    line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 .card-description {
     font-size: 0.95rem;
@@ -360,6 +363,113 @@ TABLE_STYLES = '''
     font-size: 0.875rem;
     color: #64748b;
 }
+/* Unified icon and title size for all intro cards */
+.step-card.unified-header .card-header {
+    margin-bottom: 1rem !important;
+    align-items: center !important;
+    display: flex !important;
+}
+.step-card.unified-header .card-icon-container {
+    width: 50px !important;
+    height: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+}
+.step-card.unified-header .card-icon {
+    font-size: 1.9rem !important;
+    line-height: 1 !important;
+}
+.step-card.unified-header .card-title {
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+    display: inline-block !important;
+}
+/* Reduce bottom padding for intro cards */
+.step-card.intro-card {
+    padding-bottom: 1rem;
+}
+.step-card.intro-card.compact-card {
+    padding-bottom: 0.75rem;
+}
+.step-card.intro-card .card-description {
+    padding-bottom: 0;
+}
+.step-card.intro-card .card-description ul:last-child {
+    margin-bottom: 0;
+}
+.step-card.intro-card .card-description li:last-child {
+    margin-bottom: 0;
+}
+/* Compact card styles for cards with more content */
+.step-card.compact-card {
+    padding: 1.5rem;
+}
+.step-card.compact-card .card-header {
+    margin-bottom: 1rem;
+}
+.step-card.compact-card .card-icon-container {
+    width: 50px;
+    height: 50px;
+}
+.step-card.compact-card .card-icon {
+    font-size: 1.9rem;
+}
+.step-card.compact-card .card-title {
+    font-size: 1rem;
+}
+.step-card.compact-card .card-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.step-card.compact-card .card-description ul {
+    margin-top: 0.75rem;
+}
+.step-card.compact-card .card-description li {
+    margin-bottom: 0.5rem;
+}
+.step-card.compact-card .card-description .benchmark-item {
+    margin-bottom: 0.75rem;
+}
+.step-card.compact-card .advantage-list {
+    margin-top: 0.5rem;
+    padding-left: 0.25rem;
+}
+.step-card.compact-card .advantage-item {
+    margin-bottom: 0.5rem;
+}
+.step-card.compact-card .advantage-item .material-symbols-outlined {
+    font-size: 1rem;
+    margin-right: 0.4rem;
+    margin-top: 2px;
+}
+.step-card.compact-card .advantage-item p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+/* Larger font for Spectral Ranking vs Regular Ranking card */
+.step-card.compact-card.larger-font .card-description {
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+.step-card.compact-card.larger-font .card-description li {
+    font-size: 0.95rem;
+}
+.step-card.compact-card.larger-font .card-description .benchmark-item {
+    font-size: 0.95rem;
+}
+.step-card.compact-card.larger-font .advantage-item {
+    font-size: 0.95rem;
+}
+.step-card.compact-card.larger-font .advantage-item p {
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+.step-card.compact-card.larger-font .advantage-item strong {
+    font-size: 0.95rem;
+}
 /* Spectral Ranking Detail button styling */
 .spectral-detail-button {
     color: #011f5b !important;
@@ -379,6 +489,17 @@ TABLE_STYLES = '''
 @media (max-width: 992px) {
     .grid-container {
         grid-template-columns: 1fr;
+    }
+}
+/* Responsive layout for three-column intro grid */
+@media (max-width: 1400px) {
+    .intro-grid-three-columns {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+@media (max-width: 992px) {
+    .intro-grid-three-columns {
+        grid-template-columns: 1fr !important;
     }
 }
 /* Adjust tooltip position for the last two columns to prevent overflow */
@@ -2376,36 +2497,188 @@ def create_dashboard_content():
     with ui.element('section').classes('hero-section'):
         with ui.element('div').classes('hero-content'):
             ui.html('''
-                <div class="hero-badge" onclick="document.querySelector('.mode-selection-section').scrollIntoView({behavior: 'smooth'});" style="cursor: pointer; transition: opacity 0.3s ease;">
-                    <span class="material-symbols-outlined">analytics</span>
-                    LLM Performance Dashboard
+                <div class="hero-badge" onclick="
+                    const target = document.getElementById('choose-data-source');
+                    if (target) {
+                        const navbar = document.querySelector('.top-navbar');
+                        const navbarHeight = navbar ? navbar.offsetHeight : 60;
+                        const targetRect = target.getBoundingClientRect();
+                        const offsetTop = window.pageYOffset + targetRect.top - navbarHeight - 20;
+                        window.scrollTo({top: Math.max(0, offsetTop), behavior: 'smooth'});
+                    }
+                " style="cursor: pointer; transition: opacity 0.3s ease;">
+                    <span class="material-symbols-outlined">emoji_events</span>
+                    Spectral Ranking LLM Leaderboard
                 </div>
-                <h1 class="hero-title">Large Language Model Rankings</h1>
+                <h1 class="hero-title">Spectral Ranking LLM Leaderboard</h1>
                 <p class="hero-subtitle">
-                    Comprehensive performance analysis of top 100 LLM models across 6 critical benchmarks.
-                    Discover which models excel in instruction following, reasoning, mathematics, and more.
+                    Ranking top LLMs with Spectral Ranking Algorithm.<br>
+                    <span style="white-space: nowrap;">LMSYS Arena (human preferences) & Hugging Face (standardized benchmarks).</span>
                 </p>
             ''')
 
             # Feature highlights
-            with ui.element('div').classes('hero-features'):
-                with ui.element('div').classes('hero-feature'):
-                    ui.html('<span class="material-symbols-outlined hero-feature-icon">psychology</span>')
-                    ui.html('<h3 class="hero-feature-title">Instruction Following</h3>')
-                    ui.html('<p class="hero-feature-description">Models evaluated on their ability to follow complex, precise instructions across multiple steps and formats.</p>')
+            with ui.element('div').classes('hero-features').style('display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;'):
+                with ui.element('div').classes('hero-feature').style('cursor: pointer;').on('click', lambda: ui.run_javascript('''
+                    const target = document.getElementById('what-is-spectral-ranking');
+                    if (target) {
+                        const navbar = document.querySelector('.top-navbar');
+                        const navbarHeight = navbar ? navbar.offsetHeight : 60;
+                        const targetRect = target.getBoundingClientRect();
+                        const offsetTop = window.pageYOffset + targetRect.top - navbarHeight - 20;
+                        window.scrollTo({top: Math.max(0, offsetTop), behavior: 'smooth'});
+                    }
+                ''')):
+                    ui.html('<span class="material-symbols-outlined hero-feature-icon">hub</span>')
+                    ui.html('<h3 class="hero-feature-title">Dual Data Sources</h3>')
+                    ui.html('<p class="hero-feature-description">LMSYS Arena (human preferences) & Hugging Face (standardized benchmarks) for comprehensive model evaluation.</p>')
 
-                with ui.element('div').classes('hero-feature'):
-                    ui.html('<span class="material-symbols-outlined hero-feature-icon">calculate</span>')
-                    ui.html('<h3 class="hero-feature-title">Mathematical Reasoning</h3>')
-                    ui.html('<p class="hero-feature-description">Advanced mathematical problem-solving capabilities tested across algebra, geometry, and calculus.</p>')
+                with ui.element('div').classes('hero-feature').style('cursor: pointer;').on('click', lambda: ui.run_javascript('''
+                    const target = document.getElementById('what-is-spectral-ranking');
+                    if (target) {
+                        const navbar = document.querySelector('.top-navbar');
+                        const navbarHeight = navbar ? navbar.offsetHeight : 60;
+                        const targetRect = target.getBoundingClientRect();
+                        const offsetTop = window.pageYOffset + targetRect.top - navbarHeight - 20;
+                        window.scrollTo({top: Math.max(0, offsetTop), behavior: 'smooth'});
+                    }
+                ''')):
+                    ui.html('<span class="material-symbols-outlined hero-feature-icon">leaderboard</span>')
+                    ui.html('<h3 class="hero-feature-title">Spectral Ranking</h3>')
+                    ui.html('<p class="hero-feature-description">Tournament-based algorithm with statistical confidence intervals for robust rankings.</p>')
 
-                with ui.element('div').classes('hero-feature'):
-                    ui.html('<span class="material-symbols-outlined hero-feature-icon">school</span>')
-                    ui.html('<h3 class="hero-feature-title">Knowledge & Reasoning</h3>')
-                    ui.html('<p class="hero-feature-description">Comprehensive evaluation of factual knowledge and logical reasoning across multiple domains.</p>')
+                with ui.element('div').classes('hero-feature').style('cursor: pointer;').on('click', lambda: ui.run_javascript('''
+                    const target = document.getElementById('choose-data-source');
+                    if (target) {
+                        const navbar = document.querySelector('.top-navbar');
+                        const navbarHeight = navbar ? navbar.offsetHeight : 60;
+                        const targetRect = target.getBoundingClientRect();
+                        const offsetTop = window.pageYOffset + targetRect.top - navbarHeight - 20;
+                        window.scrollTo({top: Math.max(0, offsetTop), behavior: 'smooth'});
+                    }
+                ''')):
+                    ui.html('<span class="material-symbols-outlined hero-feature-icon">tune</span>')
+                    ui.html('<h3 class="hero-feature-title">Custom Benchmarks</h3>')
+                    ui.html('<p class="hero-feature-description">Select benchmarks to create rankings tailored to your specific needs.</p>')
+
+                with ui.element('div').classes('hero-feature').style('cursor: pointer;').on('click', lambda: ui.run_javascript('''
+                    const target = document.getElementById('compare-with-your-model');
+                    if (target) {
+                        const navbar = document.querySelector('.top-navbar');
+                        const navbarHeight = navbar ? navbar.offsetHeight : 60;
+                        const targetRect = target.getBoundingClientRect();
+                        const offsetTop = window.pageYOffset + targetRect.top - navbarHeight - 20;
+                        window.scrollTo({top: Math.max(0, offsetTop), behavior: 'smooth'});
+                    }
+                ''')):
+                    ui.html('<span class="material-symbols-outlined hero-feature-icon">compare_arrows</span>')
+                    ui.html('<h3 class="hero-feature-title">Compare Your Model</h3>')
+                    ui.html('<p class="hero-feature-description">Submit your LLM scores and see how it ranks against top 100 models with full statistical analysis.</p>')
+
+    # Introduction Section: What is Spectral Ranking LLM Leaderboard
+    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 4rem auto 2rem; padding: 0 2rem;').props('id="what-is-spectral-ranking"'):
+        ui.html('<h2 class="section-title">What is Spectral Ranking LLM Leaderboard?</h2>')
+        
+        with ui.element('div').classes('grid-container').classes('intro-grid-three-columns').style('grid-template-columns: repeat(3, 1fr);'):
+            # Card 1: Purpose and Function
+            with ui.element('div').classes('step-card compact-card unified-header intro-card'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">analytics</span>')
+                    ui.html('<h3 class="card-title">What This Leaderboard Does</h3>')
+                ui.html('''
+                    <div class="card-description">
+                        <p>This leaderboard provides a <strong>statistically robust ranking</strong> of Large Language Models (LLMs) using the Spectral Ranking algorithm, which goes beyond simple score averaging to create a more accurate and reliable comparison.</p>
+                        <ul>
+                            <li><span class="material-symbols-outlined">emoji_events</span><div class="benchmark-item"><strong>Comprehensive Rankings:</strong> Compare top LLM models across multiple benchmarks simultaneously, including both LMSYS Arena (human preference data) and Hugging Face (standardized benchmarks).</div></li>
+                            <li><span class="material-symbols-outlined">query_stats</span><div class="benchmark-item"><strong>Confidence Intervals:</strong> Each ranking includes statistical confidence intervals, telling you how reliable each model's position is.</div></li>
+                            <li><span class="material-symbols-outlined">tune</span><div class="benchmark-item"><strong>Customizable Analysis:</strong> Select 2-7 benchmarks to create your own focused ranking tailored to specific performance areas.</div></li>
+                            <li><span class="material-symbols-outlined">compare_arrows</span><div class="benchmark-item"><strong>Head-to-Head Comparison:</strong> See how models perform relative to each other across different benchmark categories.</div></li>
+                        </ul>
+                    </div>
+                ''')
+
+            # Card 2: Spectral Ranking vs Regular Ranking
+            with ui.element('div').classes('step-card compact-card unified-header larger-font intro-card'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">balance</span>')
+                    ui.html('<h3 class="card-title">Spectral Ranking vs Regular Ranking</h3>')
+                ui.html('''
+                    <div class="card-description">
+                        <ul>
+                            <li><span class="material-symbols-outlined">calculate</span><div class="benchmark-item"><strong>Regular Ranking Limitations:</strong>
+                                <div class="advantage-list">
+                                    <div class="advantage-item">
+                                        <span class="material-symbols-outlined">warning</span>
+                                        <div>
+                                            <strong>Ignores Context:</strong>
+                                            <p>Simple averaging treats all benchmarks equally, regardless of difficulty or importance. A model might score well on easy tasks but poorly on critical ones, yet still rank high.</p>
+                                        </div>
+                                    </div>
+                                    <div class="advantage-item">
+                                        <span class="material-symbols-outlined">warning</span>
+                                        <div>
+                                            <strong>No Confidence Information:</strong>
+                                            <p>There's no way to know if rank differences are statistically significant or just due to random variation.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div></li>
+                            <li><span class="material-symbols-outlined">military_tech</span><div class="benchmark-item"><strong>Spectral Ranking Advantages:</strong>
+                                <div class="advantage-list">
+                                    <div class="advantage-item">
+                                        <span class="material-symbols-outlined">verified</span>
+                                        <div>
+                                            <strong>Context-Aware:</strong>
+                                            <p>The algorithm creates a "tournament network" where each model's score depends on its performance relative to strong and weak competitors, not just raw numbers.</p>
+                                        </div>
+                                    </div>
+                                    <div class="advantage-item">
+                                        <span class="material-symbols-outlined">verified</span>
+                                        <div>
+                                            <strong>Statistical Confidence:</strong>
+                                            <p>Bootstrapping simulations provide confidence intervals, showing which rank differences are meaningful and which might be due to chance.</p>
+                                        </div>
+                                    </div>
+                                    <div class="advantage-item">
+                                        <span class="material-symbols-outlined">verified</span>
+                                        <div>
+                                            <strong>More Robust:</strong>
+                                            <p>Less sensitive to outliers and benchmark selection, providing a more stable and reliable ranking.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div></li>
+                        </ul>
+                    </div>
+                ''')
+
+            # Card 3: Key Features
+            with ui.element('div').classes('step-card compact-card unified-header intro-card'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">star</span>')
+                    ui.html('<h3 class="card-title">Key Features</h3>')
+                ui.html('''
+                    <div class="card-description">
+                        <ul>
+                            <li><span class="material-symbols-outlined">dataset</span><div class="benchmark-item"><strong>Dual Data Sources:</strong> Access rankings based on both human preference data (LMSYS Arena) and standardized benchmarks (Hugging Face), giving you multiple perspectives on model performance.</div></li>
+                            <li><span class="material-symbols-outlined">tune</span><div class="benchmark-item"><strong>Benchmark Selection:</strong> Choose which benchmarks matter most to you. Select 2-7 benchmarks to create a customized ranking focused on your specific use case or evaluation criteria.</div></li>
+                            <li><span class="material-symbols-outlined">hub</span><div class="benchmark-item"><strong>Tournament-Based Ranking:</strong> Uses a sophisticated algorithm that models all model comparisons as a tournament network, where a model's rank depends on the strength of competitors it outperforms.</div></li>
+                            <li><span class="material-symbols-outlined">query_stats</span><div class="benchmark-item"><strong>Statistical Rigor:</strong> Every ranking includes 95% confidence intervals, letting you know how much uncertainty exists in each model's position.</div></li>
+                            <li><span class="material-symbols-outlined">compare</span><div class="benchmark-item"><strong>Side-by-Side Comparison:</strong> Compare Spectral Rank (algorithm-based) with Average Score Rank (simple averaging) to see how the two methods differ.</div></li>
+                            <li><span class="material-symbols-outlined">add_circle</span><div class="benchmark-item"><strong>Rank Your Own Model:</strong> Add your custom LLM with benchmark scores and see how it ranks against the top 100 models in real-time.</div></li>
+                        </ul>
+                    </div>
+                ''')
+
+    # Leaderboard Selection Section Title
+    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 1rem auto 0.5rem; padding: 0 2rem;').props('id="choose-data-source"'):
+        ui.html('<h2 class="section-title">Choose a Data Source</h2>')
 
     # Mode Selection Cards
-    with ui.element('section').classes('mode-selection-section').style('width: 100%; max-width: 1400px; margin: 4rem auto 1rem; padding: 0 2rem;'):
+    with ui.element('section').classes('mode-selection-section').style('width: 100%; max-width: 1400px; margin: 0 auto 1rem; padding: 0 2rem;'):
         with ui.element('div').style('display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;'):
 
             # LMSYS Arena Mode Card
@@ -2517,7 +2790,7 @@ def create_huggingface_content(data):
         create_ranking_table(data)
 
     # Custom model ranking section
-    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 2rem auto; padding: 0 2rem;'):
+    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 2rem auto; padding: 0 2rem;').props('id="compare-with-your-model"'):
         ui.html('<h2 class="section-title">Compare With Your Model</h2>')
         
         with ui.card().classes('compare-card w-full'):
@@ -3074,6 +3347,89 @@ def create_dashboard():
                     rows.forEach(row => tbody.appendChild(row));
                 }
             </script>
+            
+            <script>
+                // Handle hash navigation for dashboard page
+                function scrollToHash() {
+                    const hash = window.location.hash;
+                    if (hash === '#compare-with-your-model') {
+                        // Switch to HuggingFace mode first if needed
+                        const huggingfaceContent = document.getElementById('huggingface-content');
+                        const arenaContent = document.getElementById('arena-content');
+                        
+                        if (huggingfaceContent && huggingfaceContent.style.display === 'none') {
+                            // Switch to HuggingFace mode
+                            huggingfaceContent.style.display = 'block';
+                            if (arenaContent) {
+                                arenaContent.style.display = 'none';
+                            }
+                            
+                            // Update card styles
+                            const hfCard = document.getElementById('huggingface-mode-card');
+                            const arenaCard = document.getElementById('arena-mode-card');
+                            if (hfCard) {
+                                hfCard.classList.add('active');
+                                hfCard.classList.remove('inactive');
+                            }
+                            if (arenaCard) {
+                                arenaCard.classList.add('inactive');
+                                arenaCard.classList.remove('active');
+                            }
+                        }
+                    }
+                    
+                    if (hash) {
+                        const targetId = hash.substring(1); // Remove #
+                        
+                        // Try multiple times with increasing delays to handle dynamic content
+                        let attempts = 0;
+                        const maxAttempts = 20; // Increased for mode switching
+                        
+                        function attemptScroll() {
+                            const targetElement = document.getElementById(targetId);
+                            if (targetElement) {
+                                const navbar = document.querySelector('.top-navbar');
+                                const navbarHeight = navbar ? navbar.offsetHeight : 60;
+                                const targetRect = targetElement.getBoundingClientRect();
+                                const offsetTop = window.pageYOffset + targetRect.top - navbarHeight - 20;
+                                
+                                window.scrollTo({
+                                    top: Math.max(0, offsetTop),
+                                    behavior: 'smooth'
+                                });
+                                return true;
+                            }
+                            return false;
+                        }
+                        
+                        // Immediate attempt
+                        if (!attemptScroll()) {
+                            // Retry with delays for dynamic content (especially after mode switch)
+                            const interval = setInterval(function() {
+                                attempts++;
+                                if (attemptScroll() || attempts >= maxAttempts) {
+                                    clearInterval(interval);
+                                }
+                            }, 150);
+                        }
+                    }
+                }
+                
+                // Handle hash on page load
+                document.addEventListener('DOMContentLoaded', function() {
+                    setTimeout(scrollToHash, 300); // Increased delay for initial load
+                });
+                
+                // Handle hash changes (when clicking links)
+                window.addEventListener('hashchange', function() {
+                    scrollToHash();
+                });
+                
+                // Also handle hash if page is already loaded
+                if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                    setTimeout(scrollToHash, 300);
+                }
+            </script>
         ''')
 
         # Top Navigation Bar - same as main page
@@ -3086,11 +3442,13 @@ def create_dashboard():
             # Main navigation menu (hidden on mobile)
             with ui.element('ul').classes('navbar-nav'):
                 with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="/dashboard" class="nav-link active">Dashboard</a>')
+                    ui.html('<a href="/" onclick="window.location.href=\'/#hero-section\'" class="nav-link">Home</a>')
                 with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="#mode-selection" onclick="window.location.href=\'/#mode-selection\'" class="nav-link">Analysis</a>')
+                    ui.html('<a href="#mode-selection" onclick="window.location.href=\'/#mode-selection\'" class="nav-link">Start Spectral Rank</a>')
                 with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="#results" onclick="window.location.href=\'/#results\'" class="nav-link">Results</a>')
+                    ui.html('<a href="/dashboard" class="nav-link active">LLM Leaderboard</a>')
+                with ui.element('li').classes('nav-item'):
+                    ui.html('<a href="#compare-with-your-model" class="nav-link">Rank My LLM</a>')
                 with ui.element('li').classes('nav-item'):
                     ui.html('<a href="#documentation" onclick="window.location.href=\'/#documentation\'" class="nav-link">Help</a>')
                 with ui.element('li').classes('nav-item'):
@@ -3109,11 +3467,13 @@ def create_dashboard():
             with ui.element('div').classes('mobile-nav'):
                 with ui.element('ul').classes('navbar-nav'):
                     with ui.element('li').classes('nav-item'):
-                        ui.html('<a href="/dashboard" class="nav-link active">Dashboard</a>')
+                        ui.html('<a href="/" onclick="window.location.href=\'/#hero-section\'" class="nav-link">Home</a>')
                     with ui.element('li').classes('nav-item'):
-                        ui.html('<a href="#mode-selection" onclick="window.location.href=\'/#mode-selection\'" class="nav-link">Analysis</a>')
+                        ui.html('<a href="#mode-selection" onclick="window.location.href=\'/#mode-selection\'" class="nav-link">Start Spectral Rank</a>')
                     with ui.element('li').classes('nav-item'):
-                        ui.html('<a href="#results" onclick="window.location.href=\'/#results\'" class="nav-link">Results</a>')
+                        ui.html('<a href="/dashboard" class="nav-link active">LLM Leaderboard</a>')
+                    with ui.element('li').classes('nav-item'):
+                        ui.html('<a href="#compare-with-your-model" class="nav-link">Rank My LLM</a>')
                     with ui.element('li').classes('nav-item'):
                         ui.html('<a href="#documentation" onclick="window.location.href=\'/#documentation\'" class="nav-link">Help</a>')
                     with ui.element('li').classes('nav-item'):
