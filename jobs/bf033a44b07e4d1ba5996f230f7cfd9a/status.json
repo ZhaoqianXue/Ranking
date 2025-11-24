@@ -1,0 +1,13 @@
+{
+  "job_id": "bf033a44b07e4d1ba5996f230f7cfd9a",
+  "status": "succeeded",
+  "message": "Ranking completed",
+  "updated_at": "2025-10-02T18:04:29.965794Z",
+  "artifacts": [
+    "ranking_results.json",
+    "ranking_results.csv"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}

@@ -1,0 +1,39 @@
+---
+title: "Demo for ML model arena ranking"
+output: html_document
+date: "2025-10-28"
+---
+
+```{r}
+library(readr)
+library(dplyr)
+```
+
+```{r}
+### generate raw data to table ###
+
+data <- read_csv(file.path(getwd(), "arena_human_preference_sample_10000.csv"), show_col_types = FALSE)
+Idx <- unique(c(data$model_a, data$model_b))
+n <- nrow(data)
+data_table <- as.data.frame(matrix(NA_real_, nrow = n, ncol = length(Idx)))
+colnames(data_table) <- Idx
+  
+winner_name <- ifelse(data$winner == "model_a", data$model_a, data$model_b)
+loser_name  <- ifelse(data$winner == "model_a", data$model_b, data$model_a)
+
+winner_idx <- match(winner_name, Idx)   
+loser_idx  <- match(loser_name, Idx)
+
+row_idx <- seq_len(n)
+
+data_table[cbind(row_idx, winner_idx)] <- 1
+data_table[cbind(row_idx, loser_idx)]  <- 0
+
+data_table <- cbind(model = data$evaluation_session_id, data_table)
+
+head(data_table)
+```
+
+```{r}
+write.csv(data_table, file.path(getwd(), "arena_test_data.csv"), row.names = FALSE)
+```

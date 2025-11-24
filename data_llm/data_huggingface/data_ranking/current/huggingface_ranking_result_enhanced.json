@@ -1,0 +1,3717 @@
+{
+  "job_id": "data_ranking",
+  "params": {
+    "bigbetter": true,
+    "B": 2000,
+    "seed": 42
+  },
+  "methods": [
+    {
+      "name": "calme-3.2-instruct-78b",
+      "theta_hat": 1.2099,
+      "rank": 2,
+      "ci_two_sided": [
+        1,
+        10
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "MaziyarPanahi/calme-3.2-instruct-78b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-3.2-instruct-78b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-3.2-instruct-78b-details",
+      "benchmark_scores": {
+        "ifeval": 80.62607215521483,
+        "bbh": 62.6094432829016,
+        "math": 40.33232628398791,
+        "gpqa": 20.3579418344519,
+        "musr": 38.52890624999999,
+        "mmlu_pro": 70.03361406619385,
+        "average_score": 52.08138397879168
+      }
+    },
+    {
+      "name": "calme-3.1-instruct-78b",
+      "theta_hat": 1.1017,
+      "rank": 4,
+      "ci_two_sided": [
+        1,
+        16
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "MaziyarPanahi/calme-3.1-instruct-78b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-3.1-instruct-78b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-3.1-instruct-78b-details",
+      "benchmark_scores": {
+        "ifeval": 81.35547015252862,
+        "bbh": 62.40968270370106,
+        "math": 39.27492447129909,
+        "gpqa": 19.463087248322143,
+        "musr": 36.49947916666666,
+        "mmlu_pro": 68.72229609929079,
+        "average_score": 51.28748997363473
+      }
+    },
+    {
+      "name": "CalmeRys-78B-Orpo-v0.1",
+      "theta_hat": 1.2126,
+      "rank": 1,
+      "ci_two_sided": [
+        1,
+        9
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "dfurman/CalmeRys-78B-Orpo-v0.1",
+      "model_url": "https://huggingface.co/dfurman/CalmeRys-78B-Orpo-v0.1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/dfurman__CalmeRys-78B-Orpo-v0.1-details",
+      "benchmark_scores": {
+        "ifeval": 81.6327344778521,
+        "bbh": 61.92476379259157,
+        "math": 40.6344410876133,
+        "gpqa": 20.02237136465324,
+        "musr": 36.37213541666666,
+        "mmlu_pro": 66.80149231678487,
+        "average_score": 51.23132307602696
+      }
+    },
+    {
+      "name": "calme-2.4-rys-78b",
+      "theta_hat": 1.1216,
+      "rank": 3,
+      "ci_two_sided": [
+        1,
+        15
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "MaziyarPanahi/calme-2.4-rys-78b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-2.4-rys-78b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.4-rys-78b-details",
+      "benchmark_scores": {
+        "ifeval": 80.10899967641413,
+        "bbh": 62.15654929467119,
+        "math": 40.70996978851964,
+        "gpqa": 20.3579418344519,
+        "musr": 34.56614583333333,
+        "mmlu_pro": 66.690676713948,
+        "average_score": 50.76504719022304
+      }
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct-abli...6",
+      "theta_hat": 0.7974,
+      "rank": 9,
+      "ci_two_sided": [
+        1,
+        27
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "huihui-ai/Qwen2.5-72B-Instruct-abliterated",
+      "model_url": "https://huggingface.co/huihui-ai/Qwen2.5-72B-Instruct-abliterated",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/huihui-ai__Qwen2.5-72B-Instruct-abliterated-details",
+      "benchmark_scores": {
+        "ifeval": 85.92667455684251,
+        "bbh": 60.48786941269388,
+        "math": 60.12084592145015,
+        "gpqa": 19.35123042505593,
+        "musr": 12.342187500000003,
+        "mmlu_pro": 50.410017730496456,
+        "average_score": 48.10647092442315
+      }
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct",
+      "theta_hat": 0.6931,
+      "rank": 15,
+      "ci_two_sided": [
+        3,
+        33
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "Qwen/Qwen2.5-72B-Instruct",
+      "model_url": "https://huggingface.co/Qwen/Qwen2.5-72B-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Qwen__Qwen2.5-72B-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 86.3837949972739,
+        "bbh": 61.87325566878789,
+        "math": 59.818731117824775,
+        "gpqa": 16.666666666666664,
+        "musr": 11.742187500000004,
+        "mmlu_pro": 51.39812352245864,
+        "average_score": 47.98045991216864
+      }
+    },
+    {
+      "name": "calme-2.1-qwen2.5-72b",
+      "theta_hat": 0.6161,
+      "rank": 19,
+      "ci_two_sided": [
+        5,
+        35
+      ],
+      "ci_left": 5,
+      "ci_uniform_left": 3,
+      "leaderboard_name": "MaziyarPanahi/calme-2.1-qwen2.5-72b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-2.1-qwen2.5-72b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.1-qwen2.5-72b-details",
+      "benchmark_scores": {
+        "ifeval": 86.62360315075111,
+        "bbh": 61.65570318314716,
+        "math": 59.13897280966768,
+        "gpqa": 15.100671140939594,
+        "musr": 13.297135416666665,
+        "mmlu_pro": 51.3242464539007,
+        "average_score": 47.85672202584548
+      }
+    },
+    {
+      "name": "Homer-v1.0-Qwen2.5-72B",
+      "theta_hat": 0.8827,
+      "rank": 6,
+      "ci_two_sided": [
+        1,
+        23
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "newsbang/Homer-v1.0-Qwen2.5-72B",
+      "model_url": "https://huggingface.co/newsbang/Homer-v1.0-Qwen2.5-72B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/newsbang__Homer-v1.0-Qwen2.5-72B-details",
+      "benchmark_scores": {
+        "ifeval": 76.27716680629618,
+        "bbh": 62.27406507872839,
+        "math": 49.01812688821752,
+        "gpqa": 22.14765100671141,
+        "musr": 17.89947916666667,
+        "mmlu_pro": 57.16976950354611,
+        "average_score": 47.464376408361055
+      }
+    },
+    {
+      "name": "qwen2.5-test-32b-it",
+      "theta_hat": 0.5752,
+      "rank": 20,
+      "ci_two_sided": [
+        5,
+        39
+      ],
+      "ci_left": 6,
+      "ci_uniform_left": 3,
+      "leaderboard_name": "ehristoforu/qwen2.5-test-32b-it",
+      "model_url": "https://huggingface.co/ehristoforu/qwen2.5-test-32b-it",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/ehristoforu__qwen2.5-test-32b-it-details",
+      "benchmark_scores": {
+        "ifeval": 78.89499860370483,
+        "bbh": 58.28330738049858,
+        "math": 59.74320241691843,
+        "gpqa": 15.212527964205815,
+        "musr": 19.1265625,
+        "mmlu_pro": 52.94954196217494,
+        "average_score": 47.36835680458376
+      }
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave...11",
+      "theta_hat": 0.5159,
+      "rank": 21,
+      "ci_two_sided": [
+        6,
+        42
+      ],
+      "ci_left": 6,
+      "ci_uniform_left": 5,
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_url": "https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    {
+      "name": "calme-2.2-qwen2.5-72b",
+      "theta_hat": 0.4136,
+      "rank": 25,
+      "ci_two_sided": [
+        8,
+        49
+      ],
+      "ci_left": 8,
+      "ci_uniform_left": 6,
+      "leaderboard_name": "MaziyarPanahi/calme-2.2-qwen2.5-72b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-2.2-qwen2.5-72b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.2-qwen2.5-72b-details",
+      "benchmark_scores": {
+        "ifeval": 84.76763875406145,
+        "bbh": 61.80360419146786,
+        "math": 58.91238670694864,
+        "gpqa": 14.5413870246085,
+        "musr": 12.016666666666673,
+        "mmlu_pro": 51.305777186761226,
+        "average_score": 47.22457675508573
+      }
+    },
+    {
+      "name": "FluentlyLM-Prinum",
+      "theta_hat": 0.7494,
+      "rank": 10,
+      "ci_two_sided": [
+        3,
+        29
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "fluently-lm/FluentlyLM-Prinum",
+      "model_url": "https://huggingface.co/fluently-lm/FluentlyLM-Prinum",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/fluently-lm__FluentlyLM-Prinum-details",
+      "benchmark_scores": {
+        "ifeval": 80.9033364805383,
+        "bbh": 59.48220341842799,
+        "math": 54.003021148036254,
+        "gpqa": 18.232662192393736,
+        "musr": 17.259895833333335,
+        "mmlu_pro": 53.42050827423167,
+        "average_score": 47.21693789116021
+      }
+    },
+    {
+      "name": "T3Q-qwen2.5-14b-v1.0-e3",
+      "theta_hat": 0.7459,
+      "rank": 11,
+      "ci_two_sided": [
+        3,
+        29
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "JungZoona/T3Q-qwen2.5-14b-v1.0-e3",
+      "model_url": "https://huggingface.co/JungZoona/T3Q-qwen2.5-14b-v1.0-e3",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/JungZoona__T3Q-qwen2.5-14b-v1.0-e3-details",
+      "benchmark_scores": {
+        "ifeval": 73.2396707403024,
+        "bbh": 65.46659667305961,
+        "math": 28.625377643504528,
+        "gpqa": 22.259507829977636,
+        "musr": 38.688020833333326,
+        "mmlu_pro": 54.27009456264776,
+        "average_score": 47.09154471380421
+      }
+    },
+    {
+      "name": "T3Q-Qwen2.5-14B-Instruct-",
+      "theta_hat": 0.8039,
+      "rank": 8,
+      "ci_two_sided": [
+        1,
+        27
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "JungZoona/T3Q-Qwen2.5-14B-Instruct-1M-e3",
+      "model_url": "https://huggingface.co/JungZoona/T3Q-Qwen2.5-14B-Instruct-1M-e3",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/JungZoona__T3Q-Qwen2.5-14B-Instruct-1M-e3-details",
+      "benchmark_scores": {
+        "ifeval": 73.2396707403024,
+        "bbh": 65.46659667305961,
+        "math": 28.625377643504528,
+        "gpqa": 22.259507829977636,
+        "musr": 38.688020833333326,
+        "mmlu_pro": 54.27009456264776,
+        "average_score": 47.09154471380421
+      }
+    },
+    {
+      "name": "Qwen2.5-32B-Instruct-abli",
+      "theta_hat": 0.3022,
+      "rank": 30,
+      "ci_two_sided": [
+        13,
+        56
+      ],
+      "ci_left": 15,
+      "ci_uniform_left": 7,
+      "leaderboard_name": "zetasepic/Qwen2.5-32B-Instruct-abliterated-v2",
+      "model_url": "https://huggingface.co/zetasepic/Qwen2.5-32B-Instruct-abliterated-v2",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/zetasepic__Qwen2.5-32B-Instruct-abliterated-v2-details",
+      "benchmark_scores": {
+        "ifeval": 83.34131216283905,
+        "bbh": 56.53381848053764,
+        "math": 59.5166163141994,
+        "gpqa": 15.659955257270694,
+        "musr": 14.928385416666664,
+        "mmlu_pro": 51.35195035460993,
+        "average_score": 46.88867299768722
+      }
+    },
+    {
+      "name": "Gilgamesh-72B",
+      "theta_hat": 0.8679,
+      "rank": 7,
+      "ci_two_sided": [
+        1,
+        23
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "rubenroy/Gilgamesh-72B",
+      "model_url": "https://huggingface.co/rubenroy/Gilgamesh-72B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/rubenroy__Gilgamesh-72B-details",
+      "benchmark_scores": {
+        "ifeval": 84.86006019583593,
+        "bbh": 61.83602130504769,
+        "math": 43.80664652567976,
+        "gpqa": 19.239373601789712,
+        "musr": 17.664062499999996,
+        "mmlu_pro": 53.3558658392435,
+        "average_score": 46.793671661266096
+      }
+    },
+    {
+      "name": "ultiima-72B",
+      "theta_hat": 0.7386,
+      "rank": 12,
+      "ci_two_sided": [
+        3,
+        29
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "Sakalti/ultiima-72B",
+      "model_url": "https://huggingface.co/Sakalti/ultiima-72B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Sakalti__ultiima-72B-details",
+      "benchmark_scores": {
+        "ifeval": 71.4012154416947,
+        "bbh": 61.10313258693403,
+        "math": 53.54984894259819,
+        "gpqa": 21.923937360178968,
+        "musr": 18.115104166666665,
+        "mmlu_pro": 54.510195035461,
+        "average_score": 46.76723892225559
+      }
+    },
+    {
+      "name": "zetasepic-abliteratedV2-Q",
+      "theta_hat": 0.3323,
+      "rank": 29,
+      "ci_two_sided": [
+        10,
+        55
+      ],
+      "ci_left": 14,
+      "ci_uniform_left": 6,
+      "leaderboard_name": "CombinHorizon/zetasepic-abliteratedV2-Qwen2.5-32B-Inst-BaseMerge-TIES",
+      "model_url": "https://huggingface.co/CombinHorizon/zetasepic-abliteratedV2-Qwen2.5-32B-Inst-BaseMerge-TIES",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/CombinHorizon__zetasepic-abliteratedV2-Qwen2.5-32B-Inst-BaseMerge-TIES-details",
+      "benchmark_scores": {
+        "ifeval": 83.28136012446973,
+        "bbh": 56.82740697772572,
+        "math": 58.53474320241692,
+        "gpqa": 15.659955257270694,
+        "musr": 14.224479166666663,
+        "mmlu_pro": 52.05378250591017,
+        "average_score": 46.76362120574333
+      }
+    },
+    {
+      "name": "Awqward2.5-32B-Instruct",
+      "theta_hat": 0.2779,
+      "rank": 33,
+      "ci_two_sided": [
+        15,
+        56
+      ],
+      "ci_left": 16,
+      "ci_uniform_left": 8,
+      "leaderboard_name": "maldv/Awqward2.5-32B-Instruct",
+      "model_url": "https://huggingface.co/maldv/Awqward2.5-32B-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/maldv__Awqward2.5-32B-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 82.54697535871487,
+        "bbh": 57.20733868173476,
+        "math": 62.31117824773413,
+        "gpqa": 12.080536912751676,
+        "musr": 13.86953125,
+        "mmlu_pro": 52.4785756501182,
+        "average_score": 46.74902268350894
+      }
+    },
+    {
+      "name": "test-2.5-72B",
+      "theta_hat": 1.0061,
+      "rank": 5,
+      "ci_two_sided": [
+        1,
+        19
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "raphgg/test-2.5-72B",
+      "model_url": "https://huggingface.co/raphgg/test-2.5-72B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/raphgg__test-2.5-72B-details",
+      "benchmark_scores": {
+        "ifeval": 84.37047035199936,
+        "bbh": 62.1541268705062,
+        "math": 41.08761329305136,
+        "gpqa": 18.568232662192397,
+        "musr": 20.515104166666664,
+        "mmlu_pro": 53.74372044917257,
+        "average_score": 46.73987796559809
+      }
+    },
+    {
+      "name": "shuttle-3",
+      "theta_hat": 0.7035,
+      "rank": 14,
+      "ci_two_sided": [
+        3,
+        33
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "shuttleai/shuttle-3",
+      "model_url": "https://huggingface.co/shuttleai/shuttle-3",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/shuttleai__shuttle-3-details",
+      "benchmark_scores": {
+        "ifeval": 81.5403130360776,
+        "bbh": 64.05301565117443,
+        "math": 45.99697885196375,
+        "gpqa": 21.588366890380318,
+        "musr": 14.64427083333333,
+        "mmlu_pro": 52.40469858156028,
+        "average_score": 46.70460730741495
+      }
+    },
+    {
+      "name": "Qwen2.5-32B-Instruct",
+      "theta_hat": 0.1248,
+      "rank": 41,
+      "ci_two_sided": [
+        21,
+        67
+      ],
+      "ci_left": 22,
+      "ci_uniform_left": 16,
+      "leaderboard_name": "Qwen/Qwen2.5-32B-Instruct",
+      "model_url": "https://huggingface.co/Qwen/Qwen2.5-32B-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Qwen__Qwen2.5-32B-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 83.46121623957765,
+        "bbh": 56.48934826159387,
+        "math": 62.53776435045317,
+        "gpqa": 11.74496644295302,
+        "musr": 13.498958333333327,
+        "mmlu_pro": 51.85062056737589,
+        "average_score": 46.59714569921449
+      }
+    },
+    {
+      "name": "Mistral-Large-Instruct-24",
+      "theta_hat": 0.4575,
+      "rank": 22,
+      "ci_two_sided": [
+        6,
+        48
+      ],
+      "ci_left": 8,
+      "ci_uniform_left": 5,
+      "leaderboard_name": "mistralai/Mistral-Large-Instruct-2411",
+      "model_url": "https://huggingface.co/mistralai/Mistral-Large-Instruct-2411",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/mistralai__Mistral-Large-Instruct-2411-details",
+      "benchmark_scores": {
+        "ifeval": 84.00577135334247,
+        "bbh": 52.7448919952634,
+        "math": 49.546827794561935,
+        "gpqa": 24.94407158836689,
+        "musr": 17.216666666666665,
+        "mmlu_pro": 50.687056737588655,
+        "average_score": 46.524214355965
+      }
+    },
+    {
+      "name": "Rombos-LLM-V2.5-Qwen-72b",
+      "theta_hat": 0.7315,
+      "rank": 13,
+      "ci_two_sided": [
+        3,
+        29
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "rombodawg/Rombos-LLM-V2.5-Qwen-72b",
+      "model_url": "https://huggingface.co/rombodawg/Rombos-LLM-V2.5-Qwen-72b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/rombodawg__Rombos-LLM-V2.5-Qwen-72b-details",
+      "benchmark_scores": {
+        "ifeval": 71.5535889218385,
+        "bbh": 61.26714504573664,
+        "math": 54.229607250755286,
+        "gpqa": 19.798657718120808,
+        "musr": 17.322916666666668,
+        "mmlu_pro": 54.83340721040189,
+        "average_score": 46.50088713558663
+      }
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave...26",
+      "theta_hat": 0.0748,
+      "rank": 46,
+      "ci_two_sided": [
+        22,
+        71
+      ],
+      "ci_left": 22,
+      "ci_uniform_left": 19,
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_url": "https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct-abli...27",
+      "theta_hat": 0.6538,
+      "rank": 17,
+      "ci_two_sided": [
+        4,
+        34
+      ],
+      "ci_left": 5,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "huihui-ai/Qwen2.5-72B-Instruct-abliterated",
+      "model_url": "https://huggingface.co/huihui-ai/Qwen2.5-72B-Instruct-abliterated",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/huihui-ai__Qwen2.5-72B-Instruct-abliterated-details",
+      "benchmark_scores": {
+        "ifeval": 85.92667455684251,
+        "bbh": 60.48786941269388,
+        "math": 60.12084592145015,
+        "gpqa": 19.35123042505593,
+        "musr": 12.342187500000003,
+        "mmlu_pro": 50.410017730496456,
+        "average_score": 48.10647092442315
+      }
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave...28",
+      "theta_hat": 0.0378,
+      "rank": 48,
+      "ci_two_sided": [
+        22,
+        73
+      ],
+      "ci_left": 25,
+      "ci_uniform_left": 20,
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_url": "https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    {
+      "name": "lambda-qwen2.5-32b-dpo-te",
+      "theta_hat": -0.0557,
+      "rank": 54,
+      "ci_two_sided": [
+        28,
+        75
+      ],
+      "ci_left": 30,
+      "ci_uniform_left": 22,
+      "leaderboard_name": "tanliboy/lambda-qwen2.5-32b-dpo-test",
+      "model_url": "https://huggingface.co/tanliboy/lambda-qwen2.5-32b-dpo-test",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/tanliboy__lambda-qwen2.5-32b-dpo-test-details",
+      "benchmark_scores": {
+        "ifeval": 80.83839767372794,
+        "bbh": 54.40796058706255,
+        "math": 61.027190332326285,
+        "gpqa": 14.205816554809845,
+        "musr": 13.328385416666665,
+        "mmlu_pro": 51.739804964539005,
+        "average_score": 45.92459258818872
+      }
+    },
+    {
+      "name": "Qwentile2.5-32B-Instruct",
+      "theta_hat": 0.3581,
+      "rank": 28,
+      "ci_two_sided": [
+        10,
+        54
+      ],
+      "ci_left": 10,
+      "ci_uniform_left": 6,
+      "leaderboard_name": "maldv/Qwentile2.5-32B-Instruct",
+      "model_url": "https://huggingface.co/maldv/Qwentile2.5-32B-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/maldv__Qwentile2.5-32B-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 73.93161256576994,
+        "bbh": 57.20587763688364,
+        "math": 52.19033232628399,
+        "gpqa": 17.897091722595075,
+        "musr": 19.96197916666667,
+        "mmlu_pro": 54.21468676122932,
+        "average_score": 45.9002633632381
+      }
+    },
+    {
+      "name": "Rombos-LLM-V2.5-Qwen-32b",
+      "theta_hat": 0.6455,
+      "rank": 18,
+      "ci_two_sided": [
+        5,
+        35
+      ],
+      "ci_left": 5,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "rombodawg/Rombos-LLM-V2.5-Qwen-32b",
+      "model_url": "https://huggingface.co/rombodawg/Rombos-LLM-V2.5-Qwen-32b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/rombodawg__Rombos-LLM-V2.5-Qwen-32b-details",
+      "benchmark_scores": {
+        "ifeval": 68.26631116548536,
+        "bbh": 58.26189408678741,
+        "math": 49.546827794561935,
+        "gpqa": 19.57494407158837,
+        "musr": 24.727083333333336,
+        "mmlu_pro": 54.62101063829788,
+        "average_score": 45.83301184834238
+      }
+    },
+    {
+      "name": "openbuddy-llama3.3-70b-v2",
+      "theta_hat": 0.2941,
+      "rank": 31,
+      "ci_two_sided": [
+        14,
+        56
+      ],
+      "ci_left": 16,
+      "ci_uniform_left": 8,
+      "leaderboard_name": "OpenBuddy/openbuddy-llama3.3-70b-v24.1-131k",
+      "model_url": "https://huggingface.co/OpenBuddy/openbuddy-llama3.3-70b-v24.1-131k",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/OpenBuddy__openbuddy-llama3.3-70b-v24.1-131k-details",
+      "benchmark_scores": {
+        "ifeval": 81.2080834408259,
+        "bbh": 54.14664796972127,
+        "math": 44.10876132930513,
+        "gpqa": 24.608501118568235,
+        "musr": 22.265885416666663,
+        "mmlu_pro": 48.082890070921984,
+        "average_score": 45.73679489100153
+      }
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave...33",
+      "theta_hat": 0.1686,
+      "rank": 38,
+      "ci_two_sided": [
+        20,
+        64
+      ],
+      "ci_left": 21,
+      "ci_uniform_left": 14,
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_url": "https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    {
+      "name": "huihui-ai-abliterated-Qwe",
+      "theta_hat": -0.0739,
+      "rank": 55,
+      "ci_two_sided": [
+        29,
+        75
+      ],
+      "ci_left": 30,
+      "ci_uniform_left": 22,
+      "leaderboard_name": "CombinHorizon/huihui-ai-abliterated-Qwen2.5-32B-Inst-BaseMerge-TIES",
+      "model_url": "https://huggingface.co/CombinHorizon/huihui-ai-abliterated-Qwen2.5-32B-Inst-BaseMerge-TIES",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/CombinHorizon__huihui-ai-abliterated-Qwen2.5-32B-Inst-BaseMerge-TIES-details",
+      "benchmark_scores": {
+        "ifeval": 82.06237228331938,
+        "bbh": 56.04478184089901,
+        "math": 59.44108761329305,
+        "gpqa": 11.85682326621924,
+        "musr": 12.091145833333336,
+        "mmlu_pro": 52.45087174940899,
+        "average_score": 45.6578470977455
+      }
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave...35",
+      "theta_hat": 0.0841,
+      "rank": 44,
+      "ci_two_sided": [
+        22,
+        69
+      ],
+      "ci_left": 22,
+      "ci_uniform_left": 19,
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_url": "https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    {
+      "name": "ultiima-32B",
+      "theta_hat": 0.4485,
+      "rank": 23,
+      "ci_two_sided": [
+        7,
+        48
+      ],
+      "ci_left": 8,
+      "ci_uniform_left": 5,
+      "leaderboard_name": "Sakalti/ultiima-32B",
+      "model_url": "https://huggingface.co/Sakalti/ultiima-32B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Sakalti__ultiima-32B-details",
+      "benchmark_scores": {
+        "ifeval": 68.54357549080883,
+        "bbh": 58.112446786765965,
+        "math": 49.62235649546828,
+        "gpqa": 17.4496644295302,
+        "musr": 24.13489583333333,
+        "mmlu_pro": 54.55636820330969,
+        "average_score": 45.40321787320272
+      }
+    },
+    {
+      "name": "RYS-XLarge",
+      "theta_hat": 0.2874,
+      "rank": 32,
+      "ci_two_sided": [
+        14,
+        56
+      ],
+      "ci_left": 16,
+      "ci_uniform_left": 8,
+      "leaderboard_name": "dnhkng/RYS-XLarge",
+      "model_url": "https://huggingface.co/dnhkng/RYS-XLarge",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/dnhkng__RYS-XLarge-details",
+      "benchmark_scores": {
+        "ifeval": 79.95662619627035,
+        "bbh": 58.77356748233938,
+        "math": 42.522658610271904,
+        "gpqa": 17.897091722595075,
+        "musr": 23.72109375,
+        "mmlu_pro": 49.20028073286053,
+        "average_score": 45.345219749056206
+      }
+    },
+    {
+      "name": "Qwen2.5-95B-Instruct",
+      "theta_hat": -0.0317,
+      "rank": 51,
+      "ci_two_sided": [
+        27,
+        75
+      ],
+      "ci_left": 28,
+      "ci_uniform_left": 21,
+      "leaderboard_name": "ssmits/Qwen2.5-95B-Instruct",
+      "model_url": "https://huggingface.co/ssmits/Qwen2.5-95B-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/ssmits__Qwen2.5-95B-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 84.31051831363006,
+        "bbh": 58.530351322851054,
+        "math": 53.02114803625378,
+        "gpqa": 15.212527964205815,
+        "musr": 13.61484375,
+        "mmlu_pro": 46.85468380614657,
+        "average_score": 45.257345532181205
+      }
+    },
+    {
+      "name": "ultiima-72B-v1.5",
+      "theta_hat": 0.6619,
+      "rank": 16,
+      "ci_two_sided": [
+        4,
+        34
+      ],
+      "ci_left": 5,
+      "ci_uniform_left": 1,
+      "leaderboard_name": "Sakalti/ultiima-72B-v1.5",
+      "model_url": "https://huggingface.co/Sakalti/ultiima-72B-v1.5",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Sakalti__ultiima-72B-v1.5-details",
+      "benchmark_scores": {
+        "ifeval": 65.49610588793291,
+        "bbh": 63.438206058920265,
+        "math": 43.957703927492446,
+        "gpqa": 21.81208053691276,
+        "musr": 18.536718749999995,
+        "mmlu_pro": 56.153959810874696,
+        "average_score": 44.89912916202218
+      }
+    },
+    {
+      "name": "sky-t1-coder-32b-flash",
+      "theta_hat": -0.1885,
+      "rank": 60,
+      "ci_two_sided": [
+        34,
+        82
+      ],
+      "ci_left": 36,
+      "ci_uniform_left": 28,
+      "leaderboard_name": "tomasmcm/sky-t1-coder-32b-flash",
+      "model_url": "https://huggingface.co/tomasmcm/sky-t1-coder-32b-flash",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/tomasmcm__sky-t1-coder-32b-flash-details",
+      "benchmark_scores": {
+        "ifeval": 77.80090160773415,
+        "bbh": 55.46594372212499,
+        "math": 54.229607250755286,
+        "gpqa": 15.771812080536916,
+        "musr": 12.808854166666665,
+        "mmlu_pro": 53.13423463356975,
+        "average_score": 44.868558910231286
+      }
+    },
+    {
+      "name": "Llama-3.3-70B-Instruct",
+      "theta_hat": -0.2468,
+      "rank": 64,
+      "ci_two_sided": [
+        36,
+        87
+      ],
+      "ci_left": 40,
+      "ci_uniform_left": 30,
+      "leaderboard_name": "meta-llama/Llama-3.3-70B-Instruct",
+      "model_url": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/meta-llama__Llama-3.3-70B-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 89.97581971391463,
+        "bbh": 56.561410788022194,
+        "math": 48.338368580060425,
+        "gpqa": 10.514541387024613,
+        "musr": 15.565625,
+        "mmlu_pro": 48.12906323877069,
+        "average_score": 44.84747145129876
+      }
+    },
+    {
+      "name": "RomboUltima-32B",
+      "theta_hat": 0.1622,
+      "rank": 39,
+      "ci_two_sided": [
+        20,
+        64
+      ],
+      "ci_left": 21,
+      "ci_uniform_left": 14,
+      "leaderboard_name": "FINGU-AI/RomboUltima-32B",
+      "model_url": "https://huggingface.co/FINGU-AI/RomboUltima-32B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/FINGU-AI__RomboUltima-32B-details",
+      "benchmark_scores": {
+        "ifeval": 66.71509372908326,
+        "bbh": 56.67376969863417,
+        "math": 53.85196374622356,
+        "gpqa": 16.21923937360179,
+        "musr": 21.72109375,
+        "mmlu_pro": 53.20811170212767,
+        "average_score": 44.731545333278405
+      }
+    },
+    {
+      "name": "calme-2.1-rys-78b",
+      "theta_hat": 0.2315,
+      "rank": 34,
+      "ci_two_sided": [
+        18,
+        59
+      ],
+      "ci_left": 19,
+      "ci_uniform_left": 10,
+      "leaderboard_name": "MaziyarPanahi/calme-2.1-rys-78b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-2.1-rys-78b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.1-rys-78b-details",
+      "benchmark_scores": {
+        "ifeval": 81.35547015252862,
+        "bbh": 59.4700307859535,
+        "math": 39.42598187311178,
+        "gpqa": 19.239373601789712,
+        "musr": 18.99739583333333,
+        "mmlu_pro": 49.37573877068559,
+        "average_score": 44.64399850290042
+      }
+    },
+    {
+      "name": "calme-2.3-rys-78b",
+      "theta_hat": 0.223,
+      "rank": 35,
+      "ci_two_sided": [
+        18,
+        60
+      ],
+      "ci_left": 20,
+      "ci_uniform_left": 10,
+      "leaderboard_name": "MaziyarPanahi/calme-2.3-rys-78b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-2.3-rys-78b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.3-rys-78b-details",
+      "benchmark_scores": {
+        "ifeval": 80.65854155862002,
+        "bbh": 59.57454695904105,
+        "math": 39.80362537764351,
+        "gpqa": 20.581655480984335,
+        "musr": 16.999218749999997,
+        "mmlu_pro": 49.7266548463357,
+        "average_score": 44.55737382877077
+      }
+    },
+    {
+      "name": "calme-2.1-qwen2-72b",
+      "theta_hat": 0.1152,
+      "rank": 42,
+      "ci_two_sided": [
+        21,
+        68
+      ],
+      "ci_left": 22,
+      "ci_uniform_left": 16,
+      "leaderboard_name": "MaziyarPanahi/calme-2.1-qwen2-72b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-2.1-qwen2-72b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.1-qwen2-72b-details",
+      "benchmark_scores": {
+        "ifeval": 81.62774770941103,
+        "bbh": 57.3258823447103,
+        "math": 40.78549848942598,
+        "gpqa": 17.4496644295302,
+        "musr": 20.15234375,
+        "mmlu_pro": 49.05252659574468,
+        "average_score": 44.39894388647036
+      }
+    },
+    {
+      "name": "calme-2.2-rys-78b",
+      "theta_hat": 0.0908,
+      "rank": 43,
+      "ci_two_sided": [
+        22,
+        69
+      ],
+      "ci_left": 22,
+      "ci_uniform_left": 18,
+      "leaderboard_name": "MaziyarPanahi/calme-2.2-rys-78b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-2.2-rys-78b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.2-rys-78b-details",
+      "benchmark_scores": {
+        "ifeval": 79.86420475449586,
+        "bbh": 59.268645675184494,
+        "math": 40.70996978851964,
+        "gpqa": 20.917225950783,
+        "musr": 16.82864583333333,
+        "mmlu_pro": 48.72931442080378,
+        "average_score": 44.38633440385336
+      }
+    },
+    {
+      "name": "MG-FinalMix-72B",
+      "theta_hat": 0.0524,
+      "rank": 47,
+      "ci_two_sided": [
+        22,
+        73
+      ],
+      "ci_left": 24,
+      "ci_uniform_left": 20,
+      "leaderboard_name": "Undi95/MG-FinalMix-72B",
+      "model_url": "https://huggingface.co/Undi95/MG-FinalMix-72B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Undi95__MG-FinalMix-72B-details",
+      "benchmark_scores": {
+        "ifeval": 80.13648231137824,
+        "bbh": 57.502411706281976,
+        "math": 39.72809667673716,
+        "gpqa": 18.008948545861294,
+        "musr": 21.2171875,
+        "mmlu_pro": 49.19104609929077,
+        "average_score": 44.29736213992491
+      }
+    },
+    {
+      "name": "EVA-Qwen2.5-72B-v0.2",
+      "theta_hat": 0.4231,
+      "rank": 24,
+      "ci_two_sided": [
+        8,
+        48
+      ],
+      "ci_left": 8,
+      "ci_uniform_left": 6,
+      "leaderboard_name": "EVA-UNIT-01/EVA-Qwen2.5-72B-v0.2",
+      "model_url": "https://huggingface.co/EVA-UNIT-01/EVA-Qwen2.5-72B-v0.2",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/EVA-UNIT-01__EVA-Qwen2.5-72B-v0.2-details",
+      "benchmark_scores": {
+        "ifeval": 68.78837041272712,
+        "bbh": 59.0667326828602,
+        "math": 43.126888217522655,
+        "gpqa": 21.14093959731544,
+        "musr": 19.730729166666663,
+        "mmlu_pro": 53.47591607565011,
+        "average_score": 44.22159602545703
+      }
+    },
+    {
+      "name": "Qwen2-72B-Orpo-v0.1",
+      "theta_hat": -0.0026,
+      "rank": 49,
+      "ci_two_sided": [
+        26,
+        74
+      ],
+      "ci_left": 28,
+      "ci_uniform_left": 21,
+      "leaderboard_name": "dfurman/Qwen2-72B-Orpo-v0.1",
+      "model_url": "https://huggingface.co/dfurman/Qwen2-72B-Orpo-v0.1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/dfurman__Qwen2-72B-Orpo-v0.1-details",
+      "benchmark_scores": {
+        "ifeval": 78.79759039348927,
+        "bbh": 57.41436351018751,
+        "math": 40.55891238670695,
+        "gpqa": 17.897091722595075,
+        "musr": 20.87005208333333,
+        "mmlu_pro": 49.49578900709219,
+        "average_score": 44.17229985056738
+      }
+    },
+    {
+      "name": "RYS-XLarge-base",
+      "theta_hat": -0.0206,
+      "rank": 50,
+      "ci_two_sided": [
+        27,
+        74
+      ],
+      "ci_left": 28,
+      "ci_uniform_left": 21,
+      "leaderboard_name": "dnhkng/RYS-XLarge-base",
+      "model_url": "https://huggingface.co/dnhkng/RYS-XLarge-base",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/dnhkng__RYS-XLarge-base-details",
+      "benchmark_scores": {
+        "ifeval": 79.10233735377686,
+        "bbh": 58.69214607657639,
+        "math": 37.91540785498489,
+        "gpqa": 17.225950782997764,
+        "musr": 22.4171875,
+        "mmlu_pro": 49.22798463356975,
+        "average_score": 44.096835700317605
+      }
+    },
+    {
+      "name": "calme-2.2-qwen2-72b",
+      "theta_hat": -0.2257,
+      "rank": 62,
+      "ci_two_sided": [
+        36,
+        82
+      ],
+      "ci_left": 40,
+      "ci_uniform_left": 30,
+      "leaderboard_name": "MaziyarPanahi/calme-2.2-qwen2-72b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-2.2-qwen2-72b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.2-qwen2-72b-details",
+      "benchmark_scores": {
+        "ifeval": 80.08151704145003,
+        "bbh": 56.79594225047665,
+        "math": 45.31722054380665,
+        "gpqa": 16.554809843400445,
+        "musr": 16.516927083333332,
+        "mmlu_pro": 49.27415780141844,
+        "average_score": 44.09009576064759
+      }
+    },
+    {
+      "name": "Arcee-Nova",
+      "theta_hat": -0.1532,
+      "rank": 58,
+      "ci_two_sided": [
+        34,
+        79
+      ],
+      "ci_left": 34,
+      "ci_uniform_left": 26,
+      "leaderboard_name": "arcee-ai/Arcee-Nova",
+      "model_url": "https://huggingface.co/arcee-ai/Arcee-Nova",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/arcee-ai__Arcee-Nova-details",
+      "benchmark_scores": {
+        "ifeval": 79.07485471881274,
+        "bbh": 56.74098753952074,
+        "math": 43.80664652567976,
+        "gpqa": 18.008948545861294,
+        "musr": 17.220833333333328,
+        "mmlu_pro": 49.46808510638298,
+        "average_score": 44.05339262826514
+      }
+    },
+    {
+      "name": "L3.3-MS-Nevoria-70b",
+      "theta_hat": -0.0498,
+      "rank": 53,
+      "ci_two_sided": [
+        28,
+        75
+      ],
+      "ci_left": 30,
+      "ci_uniform_left": 22,
+      "leaderboard_name": "Steelskull/L3.3-MS-Nevoria-70b",
+      "model_url": "https://huggingface.co/Steelskull/L3.3-MS-Nevoria-70b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Steelskull__L3.3-MS-Nevoria-70b-details",
+      "benchmark_scores": {
+        "ifeval": 69.63268571833845,
+        "bbh": 56.60264873723427,
+        "math": 39.57703927492447,
+        "gpqa": 29.418344519015665,
+        "musr": 18.628645833333337,
+        "mmlu_pro": 50.39154846335697,
+        "average_score": 44.041818757700526
+      }
+    },
+    {
+      "name": "Set-70b",
+      "theta_hat": -0.043,
+      "rank": 52,
+      "ci_two_sided": [
+        28,
+        75
+      ],
+      "ci_left": 29,
+      "ci_uniform_left": 22,
+      "leaderboard_name": "Triangle104/Set-70b",
+      "model_url": "https://huggingface.co/Triangle104/Set-70b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Triangle104__Set-70b-details",
+      "benchmark_scores": {
+        "ifeval": 76.42954028643999,
+        "bbh": 56.88003115055037,
+        "math": 36.40483383685801,
+        "gpqa": 26.174496644295303,
+        "musr": 18.961979166666666,
+        "mmlu_pro": 49.3572695035461,
+        "average_score": 44.03469176472607
+      }
+    },
+    {
+      "name": "QwentileSwap",
+      "theta_hat": 0.174,
+      "rank": 37,
+      "ci_two_sided": [
+        20,
+        64
+      ],
+      "ci_left": 21,
+      "ci_uniform_left": 13,
+      "leaderboard_name": "Aryanne/QwentileSwap",
+      "model_url": "https://huggingface.co/Aryanne/QwentileSwap",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Aryanne__QwentileSwap-details",
+      "benchmark_scores": {
+        "ifeval": 73.78422585406722,
+        "bbh": 57.67565555333628,
+        "math": 42.220543806646525,
+        "gpqa": 15.659955257270694,
+        "musr": 19.20520833333333,
+        "mmlu_pro": 54.95345744680851,
+        "average_score": 43.91650770857709
+      }
+    },
+    {
+      "name": "li-14b-v0.4",
+      "theta_hat": -0.538,
+      "rank": 77,
+      "ci_two_sided": [
+        56,
+        100
+      ],
+      "ci_left": 57,
+      "ci_uniform_left": 49,
+      "leaderboard_name": "wanlige/li-14b-v0.4",
+      "model_url": "https://huggingface.co/wanlige/li-14b-v0.4",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/wanlige__li-14b-v0.4-details",
+      "benchmark_scores": {
+        "ifeval": 81.32798751756451,
+        "bbh": 50.384177102490106,
+        "math": 55.740181268882175,
+        "gpqa": 11.85682326621924,
+        "musr": 16.349999999999998,
+        "mmlu_pro": 46.30060579196218,
+        "average_score": 43.65996249118637
+      }
+    },
+    {
+      "name": "tempmotacilla-cinerea-030",
+      "theta_hat": -0.5498,
+      "rank": 78,
+      "ci_two_sided": [
+        57,
+        100
+      ],
+      "ci_left": 57,
+      "ci_uniform_left": 49,
+      "leaderboard_name": "Cran-May/tempmotacilla-cinerea-0308",
+      "model_url": "https://huggingface.co/Cran-May/tempmotacilla-cinerea-0308",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Cran-May__tempmotacilla-cinerea-0308-details",
+      "benchmark_scores": {
+        "ifeval": 80.84837121061007,
+        "bbh": 50.59894860885105,
+        "math": 55.51359516616314,
+        "gpqa": 14.988814317673372,
+        "musr": 12.66953125,
+        "mmlu_pro": 47.224069148936174,
+        "average_score": 43.6405549503723
+      }
+    },
+    {
+      "name": "L3.3-Nevoria-R1-70b",
+      "theta_hat": 0.0764,
+      "rank": 45,
+      "ci_two_sided": [
+        22,
+        71
+      ],
+      "ci_left": 23,
+      "ci_uniform_left": 19,
+      "leaderboard_name": "Steelskull/L3.3-Nevoria-R1-70b",
+      "model_url": "https://huggingface.co/Steelskull/L3.3-Nevoria-R1-70b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Steelskull__L3.3-Nevoria-R1-70b-details",
+      "benchmark_scores": {
+        "ifeval": 60.23794642659256,
+        "bbh": 56.16728833047952,
+        "math": 46.299093655589125,
+        "gpqa": 29.194630872483216,
+        "musr": 20.19140625,
+        "mmlu_pro": 49.5881353427896,
+        "average_score": 43.61308347965567
+      }
+    },
+    {
+      "name": "Qwen2-72B-Instruct",
+      "theta_hat": -0.2631,
+      "rank": 65,
+      "ci_two_sided": [
+        40,
+        87
+      ],
+      "ci_left": 42,
+      "ci_uniform_left": 31,
+      "leaderboard_name": "Qwen/Qwen2-72B-Instruct",
+      "model_url": "https://huggingface.co/Qwen/Qwen2-72B-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Qwen__Qwen2-72B-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 79.89168738945996,
+        "bbh": 57.48300911876294,
+        "math": 41.76737160120846,
+        "gpqa": 16.33109619686801,
+        "musr": 17.167968749999996,
+        "mmlu_pro": 48.92324172576833,
+        "average_score": 43.59406246367795
+      }
+    },
+    {
+      "name": "Galactic-Qwen-14B-Exp2",
+      "theta_hat": 0.1798,
+      "rank": 36,
+      "ci_two_sided": [
+        20,
+        63
+      ],
+      "ci_left": 21,
+      "ci_uniform_left": 12,
+      "leaderboard_name": "prithivMLmods/Galactic-Qwen-14B-Exp2",
+      "model_url": "https://huggingface.co/prithivMLmods/Galactic-Qwen-14B-Exp2",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/prithivMLmods__Galactic-Qwen-14B-Exp2-details",
+      "benchmark_scores": {
+        "ifeval": 66.20300801872366,
+        "bbh": 59.91731650130399,
+        "math": 34.74320241691843,
+        "gpqa": 19.910514541387023,
+        "musr": 28.489843749999995,
+        "mmlu_pro": 52.11842494089834,
+        "average_score": 43.56371836153858
+      }
+    },
+    {
+      "name": "BigQwen2.5-52B-Instruct",
+      "theta_hat": -0.2805,
+      "rank": 67,
+      "ci_two_sided": [
+        41,
+        90
+      ],
+      "ci_left": 43,
+      "ci_uniform_left": 34,
+      "leaderboard_name": "mlabonne/BigQwen2.5-52B-Instruct",
+      "model_url": "https://huggingface.co/mlabonne/BigQwen2.5-52B-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/mlabonne__BigQwen2.5-52B-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 79.13480675718205,
+        "bbh": 59.80960695923371,
+        "math": 54.7583081570997,
+        "gpqa": 6.935123042505594,
+        "musr": 10.44609375,
+        "mmlu_pro": 50.21609042553191,
+        "average_score": 43.55000484859215
+      }
+    },
+    {
+      "name": "Llama-3.1-SauerkrautLM-70",
+      "theta_hat": -0.1665,
+      "rank": 59,
+      "ci_two_sided": [
+        34,
+        80
+      ],
+      "ci_left": 36,
+      "ci_uniform_left": 27,
+      "leaderboard_name": "VAGOsolutions/Llama-3.1-SauerkrautLM-70b-Instruct",
+      "model_url": "https://huggingface.co/VAGOsolutions/Llama-3.1-SauerkrautLM-70b-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/VAGOsolutions__Llama-3.1-SauerkrautLM-70b-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 86.56365111238182,
+        "bbh": 57.24162100868165,
+        "math": 36.933534743202415,
+        "gpqa": 12.192393736017896,
+        "musr": 19.38541666666666,
+        "mmlu_pro": 48.16600177304965,
+        "average_score": 43.413769840000015
+      }
+    },
+    {
+      "name": "Llama-3.1-70B-Instruct",
+      "theta_hat": -0.341,
+      "rank": 70,
+      "ci_two_sided": [
+        47,
+        93
+      ],
+      "ci_left": 48,
+      "ci_uniform_left": 36,
+      "leaderboard_name": "meta-llama/Llama-3.1-70B-Instruct",
+      "model_url": "https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/meta-llama__Llama-3.1-70B-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 86.6885419575615,
+        "bbh": 55.92799173898473,
+        "math": 38.06646525679759,
+        "gpqa": 14.205816554809845,
+        "musr": 17.691145833333334,
+        "mmlu_pro": 47.87972813238771,
+        "average_score": 43.409948245645786
+      }
+    },
+    {
+      "name": "Dracarys-72B-Instruct",
+      "theta_hat": -0.3466,
+      "rank": 71,
+      "ci_two_sided": [
+        47,
+        93
+      ],
+      "ci_left": 49,
+      "ci_uniform_left": 36,
+      "leaderboard_name": "abacusai/Dracarys-72B-Instruct",
+      "model_url": "https://huggingface.co/abacusai/Dracarys-72B-Instruct",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/abacusai__Dracarys-72B-Instruct-details",
+      "benchmark_scores": {
+        "ifeval": 78.55778224001206,
+        "bbh": 56.93552010003367,
+        "math": 39.65256797583081,
+        "gpqa": 18.791946308724835,
+        "musr": 16.81119791666666,
+        "mmlu_pro": 49.51425827423168,
+        "average_score": 43.377212135916615
+      }
+    },
+    {
+      "name": "Linkbricks-Horizon-AI-Ave...65",
+      "theta_hat": -0.2048,
+      "rank": 61,
+      "ci_two_sided": [
+        36,
+        82
+      ],
+      "ci_left": 37,
+      "ci_uniform_left": 29,
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_url": "https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    {
+      "name": "Lamarckvergence-14B",
+      "theta_hat": -0.6153,
+      "rank": 82,
+      "ci_two_sided": [
+        60,
+        100
+      ],
+      "ci_left": 62,
+      "ci_uniform_left": 53,
+      "leaderboard_name": "suayptalha/Lamarckvergence-14B",
+      "model_url": "https://huggingface.co/suayptalha/Lamarckvergence-14B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/suayptalha__Lamarckvergence-14B-details",
+      "benchmark_scores": {
+        "ifeval": 76.55941790006072,
+        "bbh": 50.32923622182769,
+        "math": 54.003021148036254,
+        "gpqa": 15.100671140939594,
+        "musr": 16.336197916666666,
+        "mmlu_pro": 47.593454491725765,
+        "average_score": 43.32033313654279
+      }
+    },
+    {
+      "name": "Lix-14B-v0.1",
+      "theta_hat": -0.6788,
+      "rank": 86,
+      "ci_two_sided": [
+        64,
+        100
+      ],
+      "ci_left": 67,
+      "ci_uniform_left": 56,
+      "leaderboard_name": "suayptalha/Lix-14B-v0.1",
+      "model_url": "https://huggingface.co/suayptalha/Lix-14B-v0.1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/suayptalha__Lix-14B-v0.1-details",
+      "benchmark_scores": {
+        "ifeval": 78.13313120298585,
+        "bbh": 51.473725053502925,
+        "math": 52.94561933534743,
+        "gpqa": 15.99552572706935,
+        "musr": 13.422656250000005,
+        "mmlu_pro": 47.93513593380615,
+        "average_score": 43.31763225045196
+      }
+    },
+    {
+      "name": "calme-2.2-llama3.1-70b",
+      "theta_hat": -0.3617,
+      "rank": 72,
+      "ci_two_sided": [
+        47,
+        94
+      ],
+      "ci_left": 49,
+      "ci_uniform_left": 36,
+      "leaderboard_name": "MaziyarPanahi/calme-2.2-llama3.1-70b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-2.2-llama3.1-70b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.2-llama3.1-70b-details",
+      "benchmark_scores": {
+        "ifeval": 85.92667455684251,
+        "bbh": 54.20646208605566,
+        "math": 43.65558912386707,
+        "gpqa": 9.955257270693512,
+        "musr": 17.06953125,
+        "mmlu_pro": 49.05252659574468,
+        "average_score": 43.31100681386724
+      }
+    },
+    {
+      "name": "NQLSG-Qwen2.5-14B-MegaFus...69",
+      "theta_hat": -0.5949,
+      "rank": 80,
+      "ci_two_sided": [
+        59,
+        100
+      ],
+      "ci_left": 61,
+      "ci_uniform_left": 51,
+      "leaderboard_name": "Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "model_url": "https://huggingface.co/Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Lunzima__NQLSG-Qwen2.5-14B-MegaFusion-v9.1-details",
+      "benchmark_scores": {
+        "ifeval": 80.02655177152178,
+        "bbh": 50.73787805937095,
+        "math": 54.68277945619335,
+        "gpqa": 12.416107382550338,
+        "musr": 14.757812499999998,
+        "mmlu_pro": 47.23330378250591,
+        "average_score": 43.309072158690384
+      }
+    },
+    {
+      "name": "calme-2.3-llama3.1-70b",
+      "theta_hat": -0.3723,
+      "rank": 73,
+      "ci_two_sided": [
+        47,
+        94
+      ],
+      "ci_left": 49,
+      "ci_uniform_left": 36,
+      "leaderboard_name": "MaziyarPanahi/calme-2.3-llama3.1-70b",
+      "model_url": "https://huggingface.co/MaziyarPanahi/calme-2.3-llama3.1-70b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.3-llama3.1-70b-details",
+      "benchmark_scores": {
+        "ifeval": 86.04657863358113,
+        "bbh": 55.58549511699308,
+        "math": 39.27492447129909,
+        "gpqa": 12.527964205816552,
+        "musr": 17.736197916666658,
+        "mmlu_pro": 48.4799793144208,
+        "average_score": 43.275189943129554
+      }
+    },
+    {
+      "name": "NQLSG-Qwen2.5-14B-MegaFus...71",
+      "theta_hat": -0.7695,
+      "rank": 93,
+      "ci_two_sided": [
+        70,
+        100
+      ],
+      "ci_left": 72,
+      "ci_uniform_left": 60,
+      "leaderboard_name": "Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "model_url": "https://huggingface.co/Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Lunzima__NQLSG-Qwen2.5-14B-MegaFusion-v9.1-details",
+      "benchmark_scores": {
+        "ifeval": 80.02655177152178,
+        "bbh": 50.73787805937095,
+        "math": 54.68277945619335,
+        "gpqa": 12.416107382550338,
+        "musr": 14.757812499999998,
+        "mmlu_pro": 47.23330378250591,
+        "average_score": 43.309072158690384
+      }
+    },
+    {
+      "name": "orca_mini_v8_1_70b",
+      "theta_hat": -0.2371,
+      "rank": 63,
+      "ci_two_sided": [
+        36,
+        87
+      ],
+      "ci_left": 40,
+      "ci_uniform_left": 30,
+      "leaderboard_name": "pankajmathur/orca_mini_v8_1_70b",
+      "model_url": "https://huggingface.co/pankajmathur/orca_mini_v8_1_70b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/pankajmathur__orca_mini_v8_1_70b-details",
+      "benchmark_scores": {
+        "ifeval": 85.7143490383294,
+        "bbh": 53.51972670972081,
+        "math": 35.27190332326284,
+        "gpqa": 24.384787472035796,
+        "musr": 15.996874999999998,
+        "mmlu_pro": 44.25975177304965,
+        "average_score": 43.191232219399744
+      }
+    },
+    {
+      "name": "Apollo-70B",
+      "theta_hat": 0.1469,
+      "rank": 40,
+      "ci_two_sided": [
+        21,
+        67
+      ],
+      "ci_left": 21,
+      "ci_uniform_left": 14,
+      "leaderboard_name": "rootxhacker/Apollo-70B",
+      "model_url": "https://huggingface.co/rootxhacker/Apollo-70B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/rootxhacker__Apollo-70B-details",
+      "benchmark_scores": {
+        "ifeval": 50.9856070781083,
+        "bbh": 53.528405173016914,
+        "math": 56.11782477341389,
+        "gpqa": 27.628635346756152,
+        "musr": 23.146354166666654,
+        "mmlu_pro": 47.54728132387708,
+        "average_score": 43.15901797697317
+      }
+    },
+    {
+      "name": "ZYH-LLM-Qwen2.5-14B-V4",
+      "theta_hat": -0.5367,
+      "rank": 76,
+      "ci_two_sided": [
+        56,
+        100
+      ],
+      "ci_left": 57,
+      "ci_uniform_left": 49,
+      "leaderboard_name": "YOYO-AI/ZYH-LLM-Qwen2.5-14B-V4",
+      "model_url": "https://huggingface.co/YOYO-AI/ZYH-LLM-Qwen2.5-14B-V4",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/YOYO-AI__ZYH-LLM-Qwen2.5-14B-V4-details",
+      "benchmark_scores": {
+        "ifeval": 83.64605912312663,
+        "bbh": 50.26935344231426,
+        "math": 53.92749244712991,
+        "gpqa": 8.612975391498878,
+        "musr": 15.661718749999997,
+        "mmlu_pro": 46.706929669030735,
+        "average_score": 43.137421470516735
+      }
+    },
+    {
+      "name": "NQLSG-Qwen2.5-14B-MegaFus...75",
+      "theta_hat": -0.7896,
+      "rank": 94,
+      "ci_two_sided": [
+        71,
+        100
+      ],
+      "ci_left": 74,
+      "ci_uniform_left": 62,
+      "leaderboard_name": "Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "model_url": "https://huggingface.co/Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Lunzima__NQLSG-Qwen2.5-14B-MegaFusion-v9.1-details",
+      "benchmark_scores": {
+        "ifeval": 80.02655177152178,
+        "bbh": 50.73787805937095,
+        "math": 54.68277945619335,
+        "gpqa": 12.416107382550338,
+        "musr": 14.757812499999998,
+        "mmlu_pro": 47.23330378250591,
+        "average_score": 43.309072158690384
+      }
+    },
+    {
+      "name": "Progenitor-V1.1-LLaMa-70B",
+      "theta_hat": -0.1532,
+      "rank": 57,
+      "ci_two_sided": [
+        34,
+        79
+      ],
+      "ci_left": 34,
+      "ci_uniform_left": 26,
+      "leaderboard_name": "Tarek07/Progenitor-V1.1-LLaMa-70B",
+      "model_url": "https://huggingface.co/Tarek07/Progenitor-V1.1-LLaMa-70B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Tarek07__Progenitor-V1.1-LLaMa-70B-details",
+      "benchmark_scores": {
+        "ifeval": 69.06064796960952,
+        "bbh": 56.24697023586278,
+        "math": 35.725075528700906,
+        "gpqa": 27.740492170022367,
+        "musr": 19.62864583333333,
+        "mmlu_pro": 49.61583924349882,
+        "average_score": 43.00294516350462
+      }
+    },
+    {
+      "name": "70B-L3.3-Cirrus-x1",
+      "theta_hat": -0.108,
+      "rank": 56,
+      "ci_two_sided": [
+        30,
+        77
+      ],
+      "ci_left": 34,
+      "ci_uniform_left": 24,
+      "leaderboard_name": "Sao10K/70B-L3.3-Cirrus-x1",
+      "model_url": "https://huggingface.co/Sao10K/70B-L3.3-Cirrus-x1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Sao10K__70B-L3.3-Cirrus-x1-details",
+      "benchmark_scores": {
+        "ifeval": 66.80751517085777,
+        "bbh": 57.13231216638128,
+        "math": 37.38670694864049,
+        "gpqa": 26.62192393736018,
+        "musr": 21.42083333333333,
+        "mmlu_pro": 48.64620271867612,
+        "average_score": 43.0025823792082
+      }
+    },
+    {
+      "name": "magnum-v1-72b",
+      "theta_hat": -0.3172,
+      "rank": 69,
+      "ci_two_sided": [
+        43,
+        90
+      ],
+      "ci_left": 47,
+      "ci_uniform_left": 34,
+      "leaderboard_name": "anthracite-org/magnum-v1-72b",
+      "model_url": "https://huggingface.co/anthracite-org/magnum-v1-72b",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/anthracite-org__magnum-v1-72b-details",
+      "benchmark_scores": {
+        "ifeval": 76.06484128778308,
+        "bbh": 57.65318485514271,
+        "math": 39.80362537764351,
+        "gpqa": 18.791946308724835,
+        "musr": 15.617187499999998,
+        "mmlu_pro": 49.84670508274232,
+        "average_score": 42.96291506867274
+      }
+    },
+    {
+      "name": "magnum-72b-v1",
+      "theta_hat": -0.3011,
+      "rank": 68,
+      "ci_two_sided": [
+        43,
+        90
+      ],
+      "ci_left": 45,
+      "ci_uniform_left": 34,
+      "leaderboard_name": "alpindale/magnum-72b-v1",
+      "model_url": "https://huggingface.co/alpindale/magnum-72b-v1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/alpindale__magnum-72b-v1-details",
+      "benchmark_scores": {
+        "ifeval": 76.06484128778308,
+        "bbh": 57.65318485514271,
+        "math": 39.80362537764351,
+        "gpqa": 18.791946308724835,
+        "musr": 15.617187499999998,
+        "mmlu_pro": 49.64354314420804,
+        "average_score": 42.9290547455837
+      }
+    },
+    {
+      "name": "lamarckvergence-14b-tenso",
+      "theta_hat": -0.7621,
+      "rank": 91,
+      "ci_two_sided": [
+        70,
+        100
+      ],
+      "ci_left": 72,
+      "ci_uniform_left": 60,
+      "leaderboard_name": "tensopolis/lamarckvergence-14b-tensopolis-v1",
+      "model_url": "https://huggingface.co/tensopolis/lamarckvergence-14b-tensopolis-v1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/tensopolis__lamarckvergence-14b-tensopolis-v1-details",
+      "benchmark_scores": {
+        "ifeval": 76.03735865281897,
+        "bbh": 50.983494714854295,
+        "math": 51.66163141993958,
+        "gpqa": 14.76510067114094,
+        "musr": 16.832291666666666,
+        "mmlu_pro": 47.224069148936174,
+        "average_score": 42.91732437905944
+      }
+    },
+    {
+      "name": "li-14b-v0.4-slerp0.1",
+      "theta_hat": -0.8546,
+      "rank": 99,
+      "ci_two_sided": [
+        74,
+        100
+      ],
+      "ci_left": 75,
+      "ci_uniform_left": 66,
+      "leaderboard_name": "wanlige/li-14b-v0.4-slerp0.1",
+      "model_url": "https://huggingface.co/wanlige/li-14b-v0.4-slerp0.1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/wanlige__li-14b-v0.4-slerp0.1-details",
+      "benchmark_scores": {
+        "ifeval": 79.22722819895654,
+        "bbh": 50.88127296750732,
+        "math": 53.32326283987915,
+        "gpqa": 14.5413870246085,
+        "musr": 11.750000000000002,
+        "mmlu_pro": 47.71350472813239,
+        "average_score": 42.906109293180656
+      }
+    },
+    {
+      "name": "miscii-14b-0218",
+      "theta_hat": -0.6975,
+      "rank": 88,
+      "ci_two_sided": [
+        65,
+        100
+      ],
+      "ci_left": 68,
+      "ci_uniform_left": 57,
+      "leaderboard_name": "sthenno-com/miscii-14b-0218",
+      "model_url": "https://huggingface.co/sthenno-com/miscii-14b-0218",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/sthenno-com__miscii-14b-0218-details",
+      "benchmark_scores": {
+        "ifeval": 76.55941790006072,
+        "bbh": 50.6445656375432,
+        "math": 51.43504531722054,
+        "gpqa": 17.785234899328863,
+        "musr": 13.208854166666663,
+        "mmlu_pro": 47.75044326241135,
+        "average_score": 42.89726019720522
+      }
+    },
+    {
+      "name": "Cheng-2",
+      "theta_hat": -0.6648,
+      "rank": 83,
+      "ci_two_sided": [
+        62,
+        100
+      ],
+      "ci_left": 65,
+      "ci_uniform_left": 56,
+      "leaderboard_name": "marcuscedricridia/Cheng-2",
+      "model_url": "https://huggingface.co/marcuscedricridia/Cheng-2",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/marcuscedricridia__Cheng-2-details",
+      "benchmark_scores": {
+        "ifeval": 83.37378156624423,
+        "bbh": 49.97518634878575,
+        "math": 54.38066465256798,
+        "gpqa": 12.751677852348994,
+        "musr": 12.016666666666664,
+        "mmlu_pro": 44.59219858156028,
+        "average_score": 42.84836261136232
+      }
+    },
+    {
+      "name": "NQLSG-Qwen2.5-14B-MegaFus...84",
+      "theta_hat": -0.8374,
+      "rank": 96,
+      "ci_two_sided": [
+        74,
+        100
+      ],
+      "ci_left": 75,
+      "ci_uniform_left": 65,
+      "leaderboard_name": "Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "model_url": "https://huggingface.co/Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Lunzima__NQLSG-Qwen2.5-14B-MegaFusion-v9.1-details",
+      "benchmark_scores": {
+        "ifeval": 80.02655177152178,
+        "bbh": 50.73787805937095,
+        "math": 54.68277945619335,
+        "gpqa": 12.416107382550338,
+        "musr": 14.757812499999998,
+        "mmlu_pro": 47.23330378250591,
+        "average_score": 43.309072158690384
+      }
+    },
+    {
+      "name": "Llama3.3-70B-CogniLink",
+      "theta_hat": -0.2677,
+      "rank": 66,
+      "ci_two_sided": [
+        39,
+        90
+      ],
+      "ci_left": 41,
+      "ci_uniform_left": 32,
+      "leaderboard_name": "Daemontatox/Llama3.3-70B-CogniLink",
+      "model_url": "https://huggingface.co/Daemontatox/Llama3.3-70B-CogniLink",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Daemontatox__Llama3.3-70B-CogniLink-details",
+      "benchmark_scores": {
+        "ifeval": 69.31042965996889,
+        "bbh": 52.12466257626164,
+        "math": 41.389728096676734,
+        "gpqa": 26.062639821029084,
+        "musr": 21.395572916666666,
+        "mmlu_pro": 46.36524822695035,
+        "average_score": 42.77471354959223
+      }
+    },
+    {
+      "name": "tempesthenno-ppo-ckpt40",
+      "theta_hat": -0.6763,
+      "rank": 85,
+      "ci_two_sided": [
+        64,
+        100
+      ],
+      "ci_left": 68,
+      "ci_uniform_left": 56,
+      "leaderboard_name": "sthenno/tempesthenno-ppo-ckpt40",
+      "model_url": "https://huggingface.co/sthenno/tempesthenno-ppo-ckpt40",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/sthenno__tempesthenno-ppo-ckpt40-details",
+      "benchmark_scores": {
+        "ifeval": 79.23221496739761,
+        "bbh": 50.57317166167434,
+        "math": 47.35649546827795,
+        "gpqa": 17.00223713646532,
+        "musr": 14.56380208333333,
+        "mmlu_pro": 47.685800827423165,
+        "average_score": 42.73562035742862
+      }
+    },
+    {
+      "name": "RYS-Llama3.1-Large",
+      "theta_hat": -0.4509,
+      "rank": 75,
+      "ci_two_sided": [
+        51,
+        99
+      ],
+      "ci_left": 55,
+      "ci_uniform_left": 43,
+      "leaderboard_name": "dnhkng/RYS-Llama3.1-Large",
+      "model_url": "https://huggingface.co/dnhkng/RYS-Llama3.1-Large",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/dnhkng__RYS-Llama3.1-Large-details",
+      "benchmark_scores": {
+        "ifeval": 84.92001223420525,
+        "bbh": 55.41486404819653,
+        "math": 35.04531722054381,
+        "gpqa": 16.554809843400445,
+        "musr": 17.091145833333332,
+        "mmlu_pro": 47.20559988179669,
+        "average_score": 42.70529151024601
+      }
+    },
+    {
+      "name": "virtuoso-small-v2-tensopo",
+      "theta_hat": -0.5504,
+      "rank": 79,
+      "ci_two_sided": [
+        57,
+        100
+      ],
+      "ci_left": 57,
+      "ci_uniform_left": 49,
+      "leaderboard_name": "tensopolis/virtuoso-small-v2-tensopolis-v1",
+      "model_url": "https://huggingface.co/tensopolis/virtuoso-small-v2-tensopolis-v1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/tensopolis__virtuoso-small-v2-tensopolis-v1-details",
+      "benchmark_scores": {
+        "ifeval": 84.19061423689145,
+        "bbh": 50.96603012167689,
+        "math": 45.2416918429003,
+        "gpqa": 12.863534675615217,
+        "musr": 16.532552083333332,
+        "mmlu_pro": 46.39295212765958,
+        "average_score": 42.6978958480128
+      }
+    },
+    {
+      "name": "Cheng-2-v1.1",
+      "theta_hat": -0.7678,
+      "rank": 92,
+      "ci_two_sided": [
+        69,
+        100
+      ],
+      "ci_left": 70,
+      "ci_uniform_left": 60,
+      "leaderboard_name": "marcuscedricridia/Cheng-2-v1.1",
+      "model_url": "https://huggingface.co/marcuscedricridia/Cheng-2-v1.1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/marcuscedricridia__Cheng-2-v1.1-details",
+      "benchmark_scores": {
+        "ifeval": 82.69934883885867,
+        "bbh": 50.248143037694966,
+        "math": 53.92749244712991,
+        "gpqa": 12.416107382550338,
+        "musr": 11.491145833333336,
+        "mmlu_pro": 45.29403073286053,
+        "average_score": 42.67937804540463
+      }
+    },
+    {
+      "name": "RombosBeagle-v2beta-MGS-3",
+      "theta_hat": 0.4009,
+      "rank": 26,
+      "ci_two_sided": [
+        8,
+        50
+      ],
+      "ci_left": 10,
+      "ci_uniform_left": 6,
+      "leaderboard_name": "hotmailuser/RombosBeagle-v2beta-MGS-32B",
+      "model_url": "https://huggingface.co/hotmailuser/RombosBeagle-v2beta-MGS-32B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/hotmailuser__RombosBeagle-v2beta-MGS-32B-details",
+      "benchmark_scores": {
+        "ifeval": 51.567618363719376,
+        "bbh": 58.117898971791085,
+        "math": 49.92447129909365,
+        "gpqa": 17.337807606263986,
+        "musr": 24.460416666666664,
+        "mmlu_pro": 54.52866430260048,
+        "average_score": 42.65614620168921
+      }
+    },
+    {
+      "name": "TheBeagle-v2beta-32B-MGS",
+      "theta_hat": 0.3839,
+      "rank": 27,
+      "ci_two_sided": [
+        8,
+        50
+      ],
+      "ci_left": 10,
+      "ci_uniform_left": 6,
+      "leaderboard_name": "fblgit/TheBeagle-v2beta-32B-MGS",
+      "model_url": "https://huggingface.co/fblgit/TheBeagle-v2beta-32B-MGS",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/fblgit__TheBeagle-v2beta-32B-MGS-details",
+      "benchmark_scores": {
+        "ifeval": 51.8074265171966,
+        "bbh": 58.0279762011676,
+        "math": 49.47129909365559,
+        "gpqa": 17.67337807606264,
+        "musr": 24.260416666666668,
+        "mmlu_pro": 54.61177600472813,
+        "average_score": 42.642045426579536
+      }
+    },
+    {
+      "name": "lambda-qwen2.5-14b-dpo-te",
+      "theta_hat": -0.6092,
+      "rank": 81,
+      "ci_two_sided": [
+        59,
+        100
+      ],
+      "ci_left": 61,
+      "ci_uniform_left": 52,
+      "leaderboard_name": "tanliboy/lambda-qwen2.5-14b-dpo-test",
+      "model_url": "https://huggingface.co/tanliboy/lambda-qwen2.5-14b-dpo-test",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/tanliboy__lambda-qwen2.5-14b-dpo-test-details",
+      "benchmark_scores": {
+        "ifeval": 82.31215397367873,
+        "bbh": 48.45443982860533,
+        "math": 54.607250755287005,
+        "gpqa": 14.988814317673372,
+        "musr": 12.587239583333336,
+        "mmlu_pro": 42.75450650118203,
+        "average_score": 42.61740082662664
+      }
+    },
+    {
+      "name": "tempesthenno-nuslerp-001",
+      "theta_hat": -0.7034,
+      "rank": 89,
+      "ci_two_sided": [
+        66,
+        100
+      ],
+      "ci_left": 69,
+      "ci_uniform_left": 57,
+      "leaderboard_name": "sthenno/tempesthenno-nuslerp-001",
+      "model_url": "https://huggingface.co/sthenno/tempesthenno-nuslerp-001",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/sthenno__tempesthenno-nuslerp-001-details",
+      "benchmark_scores": {
+        "ifeval": 79.2646843708028,
+        "bbh": 51.04491084341287,
+        "math": 47.583081570996974,
+        "gpqa": 16.442953020134222,
+        "musr": 13.883333333333333,
+        "mmlu_pro": 47.29794621749409,
+        "average_score": 42.58615155936238
+      }
+    },
+    {
+      "name": "Qwen2.5-14B-1M-YOYO-V3",
+      "theta_hat": -0.8212,
+      "rank": 95,
+      "ci_two_sided": [
+        73,
+        100
+      ],
+      "ci_left": 74,
+      "ci_uniform_left": 63,
+      "leaderboard_name": "YOYO-AI/Qwen2.5-14B-1M-YOYO-V3",
+      "model_url": "https://huggingface.co/YOYO-AI/Qwen2.5-14B-1M-YOYO-V3",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/YOYO-AI__Qwen2.5-14B-1M-YOYO-V3-details",
+      "benchmark_scores": {
+        "ifeval": 83.98327548681942,
+        "bbh": 49.46606980733037,
+        "math": 53.54984894259819,
+        "gpqa": 10.514541387024613,
+        "musr": 11.098958333333336,
+        "mmlu_pro": 46.74386820330969,
+        "average_score": 42.55942702673594
+      }
+    },
+    {
+      "name": "Josiefied-Qwen2.5-14B-Ins",
+      "theta_hat": -0.6852,
+      "rank": 87,
+      "ci_two_sided": [
+        64,
+        100
+      ],
+      "ci_left": 67,
+      "ci_uniform_left": 57,
+      "leaderboard_name": "Goekdeniz-Guelmez/Josiefied-Qwen2.5-14B-Instruct-abliterated-v4",
+      "model_url": "https://huggingface.co/Goekdeniz-Guelmez/Josiefied-Qwen2.5-14B-Instruct-abliterated-v4",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Goekdeniz-Guelmez__Josiefied-Qwen2.5-14B-Instruct-abliterated-v4-details",
+      "benchmark_scores": {
+        "ifeval": 82.91666112581285,
+        "bbh": 48.05226992969286,
+        "math": 54.229607250755286,
+        "gpqa": 12.304250559284116,
+        "musr": 13.15,
+        "mmlu_pro": 44.64760638297872,
+        "average_score": 42.550065874753976
+      }
+    },
+    {
+      "name": "NQLSG-Qwen2.5-14B-MegaFus...96",
+      "theta_hat": -0.9067,
+      "rank": 100,
+      "ci_two_sided": [
+        75,
+        100
+      ],
+      "ci_left": 76,
+      "ci_uniform_left": 69,
+      "leaderboard_name": "Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "model_url": "https://huggingface.co/Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/Lunzima__NQLSG-Qwen2.5-14B-MegaFusion-v9.1-details",
+      "benchmark_scores": {
+        "ifeval": 80.02655177152178,
+        "bbh": 50.73787805937095,
+        "math": 54.68277945619335,
+        "gpqa": 12.416107382550338,
+        "musr": 14.757812499999998,
+        "mmlu_pro": 47.23330378250591,
+        "average_score": 43.309072158690384
+      }
+    },
+    {
+      "name": "Q2.5-Veltha-14B",
+      "theta_hat": -0.7146,
+      "rank": 90,
+      "ci_two_sided": [
+        67,
+        100
+      ],
+      "ci_left": 69,
+      "ci_uniform_left": 57,
+      "leaderboard_name": "djuna/Q2.5-Veltha-14B",
+      "model_url": "https://huggingface.co/djuna/Q2.5-Veltha-14B",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/djuna__Q2.5-Veltha-14B-details",
+      "benchmark_scores": {
+        "ifeval": 82.91666112581285,
+        "bbh": 49.75243239928858,
+        "math": 47.88519637462236,
+        "gpqa": 14.5413870246085,
+        "musr": 12.261718749999998,
+        "mmlu_pro": 47.759677895981085,
+        "average_score": 42.519512261718894
+      }
+    },
+    {
+      "name": "ECE-ILAB-Q1",
+      "theta_hat": -0.4104,
+      "rank": 74,
+      "ci_two_sided": [
+        49,
+        98
+      ],
+      "ci_left": 52,
+      "ci_uniform_left": 40,
+      "leaderboard_name": "paulml/ECE-ILAB-Q1",
+      "model_url": "https://huggingface.co/paulml/ECE-ILAB-Q1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/paulml__ECE-ILAB-Q1-details",
+      "benchmark_scores": {
+        "ifeval": 78.64521691334548,
+        "bbh": 53.70222770817057,
+        "math": 35.57401812688822,
+        "gpqa": 18.232662192393736,
+        "musr": 18.805208333333333,
+        "mmlu_pro": 50.05910165484633,
+        "average_score": 42.50307248816295
+      }
+    },
+    {
+      "name": "Virtuoso-Small-v2",
+      "theta_hat": -0.6728,
+      "rank": 84,
+      "ci_two_sided": [
+        63,
+        100
+      ],
+      "ci_left": 65,
+      "ci_uniform_left": 56,
+      "leaderboard_name": "arcee-ai/Virtuoso-Small-v2",
+      "model_url": "https://huggingface.co/arcee-ai/Virtuoso-Small-v2",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/arcee-ai__Virtuoso-Small-v2-details",
+      "benchmark_scores": {
+        "ifeval": 82.73181824226387,
+        "bbh": 50.94799062781783,
+        "math": 46.6012084592145,
+        "gpqa": 13.758389261744966,
+        "musr": 14.283333333333331,
+        "mmlu_pro": 46.53147163120567,
+        "average_score": 42.475701925930025
+      }
+    },
+    {
+      "name": "Qwen2.5-14B-YOYO-V4-p1",
+      "theta_hat": -0.8484,
+      "rank": 98,
+      "ci_two_sided": [
+        74,
+        100
+      ],
+      "ci_left": 75,
+      "ci_uniform_left": 65,
+      "leaderboard_name": "YOYO-AI/Qwen2.5-14B-YOYO-V4-p1",
+      "model_url": "https://huggingface.co/YOYO-AI/Qwen2.5-14B-YOYO-V4-p1",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/YOYO-AI__Qwen2.5-14B-YOYO-V4-p1-details",
+      "benchmark_scores": {
+        "ifeval": 82.03488964835526,
+        "bbh": 50.24542053284919,
+        "math": 53.32326283987915,
+        "gpqa": 12.751677852348994,
+        "musr": 11.728385416666669,
+        "mmlu_pro": 44.6660756501182,
+        "average_score": 42.45828532336958
+      }
+    },
+    {
+      "name": "Chocolatine-14B-Instruct-",
+      "theta_hat": -0.8376,
+      "rank": 97,
+      "ci_two_sided": [
+        74,
+        100
+      ],
+      "ci_left": 75,
+      "ci_uniform_left": 65,
+      "leaderboard_name": "jpacifico/Chocolatine-14B-Instruct-DPO-v1.3",
+      "model_url": "https://huggingface.co/jpacifico/Chocolatine-14B-Instruct-DPO-v1.3",
+      "details_url": "https://huggingface.co/datasets/open-llm-leaderboard/jpacifico__Chocolatine-14B-Instruct-DPO-v1.3-details",
+      "benchmark_scores": {
+        "ifeval": 70.39953988749849,
+        "bbh": 54.84648579293099,
+        "math": 56.19335347432024,
+        "gpqa": 12.192393736017896,
+        "musr": 12.291145833333331,
+        "mmlu_pro": 48.60002955082743,
+        "average_score": 42.42049137915473
+      }
+    }
+  ],
+  "metadata": {
+    "n_samples": 6,
+    "k_methods": 100,
+    "runtime_sec": 32.6226
+  },
+  "leaderboard_mapping": {
+    "calme-3.2-instruct-78b": {
+      "original_name": "calme-3.2-instruct-78b",
+      "leaderboard_name": "MaziyarPanahi/calme-3.2-instruct-78b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-3.2-instruct-78b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-3.2-instruct-78b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-3.2-instruct-78b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.62607215521483,
+        "bbh": 62.6094432829016,
+        "math": 40.33232628398791,
+        "gpqa": 20.3579418344519,
+        "musr": 38.52890624999999,
+        "mmlu_pro": 70.03361406619385,
+        "average_score": 52.08138397879168
+      }
+    },
+    "calme-3.1-instruct-78b": {
+      "original_name": "calme-3.1-instruct-78b",
+      "leaderboard_name": "MaziyarPanahi/calme-3.1-instruct-78b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-3.1-instruct-78b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-3.1-instruct-78b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-3.1-instruct-78b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 81.35547015252862,
+        "bbh": 62.40968270370106,
+        "math": 39.27492447129909,
+        "gpqa": 19.463087248322143,
+        "musr": 36.49947916666666,
+        "mmlu_pro": 68.72229609929079,
+        "average_score": 51.28748997363473
+      }
+    },
+    "CalmeRys-78B-Orpo-v0.1": {
+      "original_name": "CalmeRys-78B-Orpo-v0.1",
+      "leaderboard_name": "dfurman/CalmeRys-78B-Orpo-v0.1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/dfurman/CalmeRys-78B-Orpo-v0.1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">dfurman/CalmeRys-78B-Orpo-v0.1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/dfurman__CalmeRys-78B-Orpo-v0.1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 81.6327344778521,
+        "bbh": 61.92476379259157,
+        "math": 40.6344410876133,
+        "gpqa": 20.02237136465324,
+        "musr": 36.37213541666666,
+        "mmlu_pro": 66.80149231678487,
+        "average_score": 51.23132307602696
+      }
+    },
+    "calme-2.4-rys-78b": {
+      "original_name": "calme-2.4-rys-78b",
+      "leaderboard_name": "MaziyarPanahi/calme-2.4-rys-78b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-2.4-rys-78b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-2.4-rys-78b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.4-rys-78b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.10899967641413,
+        "bbh": 62.15654929467119,
+        "math": 40.70996978851964,
+        "gpqa": 20.3579418344519,
+        "musr": 34.56614583333333,
+        "mmlu_pro": 66.690676713948,
+        "average_score": 50.76504719022304
+      }
+    },
+    "Qwen2.5-72B-Instruct-abli...6": {
+      "original_name": "Qwen2.5-72B-Instruct-abli",
+      "leaderboard_name": "huihui-ai/Qwen2.5-72B-Instruct-abliterated",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/huihui-ai/Qwen2.5-72B-Instruct-abliterated\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">huihui-ai/Qwen2.5-72B-Instruct-abliterated</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/huihui-ai__Qwen2.5-72B-Instruct-abliterated-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 85.92667455684251,
+        "bbh": 60.48786941269388,
+        "math": 60.12084592145015,
+        "gpqa": 19.35123042505593,
+        "musr": 12.342187500000003,
+        "mmlu_pro": 50.410017730496456,
+        "average_score": 48.10647092442315
+      }
+    },
+    "Qwen2.5-72B-Instruct": {
+      "original_name": "Qwen2.5-72B-Instruct",
+      "leaderboard_name": "Qwen/Qwen2.5-72B-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Qwen/Qwen2.5-72B-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Qwen/Qwen2.5-72B-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Qwen__Qwen2.5-72B-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 86.3837949972739,
+        "bbh": 61.87325566878789,
+        "math": 59.818731117824775,
+        "gpqa": 16.666666666666664,
+        "musr": 11.742187500000004,
+        "mmlu_pro": 51.39812352245864,
+        "average_score": 47.98045991216864
+      }
+    },
+    "calme-2.1-qwen2.5-72b": {
+      "original_name": "calme-2.1-qwen2.5-72b",
+      "leaderboard_name": "MaziyarPanahi/calme-2.1-qwen2.5-72b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-2.1-qwen2.5-72b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-2.1-qwen2.5-72b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.1-qwen2.5-72b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 86.62360315075111,
+        "bbh": 61.65570318314716,
+        "math": 59.13897280966768,
+        "gpqa": 15.100671140939594,
+        "musr": 13.297135416666665,
+        "mmlu_pro": 51.3242464539007,
+        "average_score": 47.85672202584548
+      }
+    },
+    "Homer-v1.0-Qwen2.5-72B": {
+      "original_name": "Homer-v1.0-Qwen2.5-72B",
+      "leaderboard_name": "newsbang/Homer-v1.0-Qwen2.5-72B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/newsbang/Homer-v1.0-Qwen2.5-72B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">newsbang/Homer-v1.0-Qwen2.5-72B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/newsbang__Homer-v1.0-Qwen2.5-72B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 76.27716680629618,
+        "bbh": 62.27406507872839,
+        "math": 49.01812688821752,
+        "gpqa": 22.14765100671141,
+        "musr": 17.89947916666667,
+        "mmlu_pro": 57.16976950354611,
+        "average_score": 47.464376408361055
+      }
+    },
+    "qwen2.5-test-32b-it": {
+      "original_name": "qwen2.5-test-32b-it",
+      "leaderboard_name": "ehristoforu/qwen2.5-test-32b-it",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/ehristoforu/qwen2.5-test-32b-it\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">ehristoforu/qwen2.5-test-32b-it</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/ehristoforu__qwen2.5-test-32b-it-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 78.89499860370483,
+        "bbh": 58.28330738049858,
+        "math": 59.74320241691843,
+        "gpqa": 15.212527964205815,
+        "musr": 19.1265625,
+        "mmlu_pro": 52.94954196217494,
+        "average_score": 47.36835680458376
+      }
+    },
+    "Linkbricks-Horizon-AI-Ave...11": {
+      "original_name": "Linkbricks-Horizon-AI-Ave",
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    "calme-2.2-qwen2.5-72b": {
+      "original_name": "calme-2.2-qwen2.5-72b",
+      "leaderboard_name": "MaziyarPanahi/calme-2.2-qwen2.5-72b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-2.2-qwen2.5-72b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-2.2-qwen2.5-72b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.2-qwen2.5-72b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 84.76763875406145,
+        "bbh": 61.80360419146786,
+        "math": 58.91238670694864,
+        "gpqa": 14.5413870246085,
+        "musr": 12.016666666666673,
+        "mmlu_pro": 51.305777186761226,
+        "average_score": 47.22457675508573
+      }
+    },
+    "FluentlyLM-Prinum": {
+      "original_name": "FluentlyLM-Prinum",
+      "leaderboard_name": "fluently-lm/FluentlyLM-Prinum",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/fluently-lm/FluentlyLM-Prinum\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">fluently-lm/FluentlyLM-Prinum</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/fluently-lm__FluentlyLM-Prinum-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.9033364805383,
+        "bbh": 59.48220341842799,
+        "math": 54.003021148036254,
+        "gpqa": 18.232662192393736,
+        "musr": 17.259895833333335,
+        "mmlu_pro": 53.42050827423167,
+        "average_score": 47.21693789116021
+      }
+    },
+    "T3Q-qwen2.5-14b-v1.0-e3": {
+      "original_name": "T3Q-qwen2.5-14b-v1.0-e3",
+      "leaderboard_name": "JungZoona/T3Q-qwen2.5-14b-v1.0-e3",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/JungZoona/T3Q-qwen2.5-14b-v1.0-e3\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">JungZoona/T3Q-qwen2.5-14b-v1.0-e3</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/JungZoona__T3Q-qwen2.5-14b-v1.0-e3-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 73.2396707403024,
+        "bbh": 65.46659667305961,
+        "math": 28.625377643504528,
+        "gpqa": 22.259507829977636,
+        "musr": 38.688020833333326,
+        "mmlu_pro": 54.27009456264776,
+        "average_score": 47.09154471380421
+      }
+    },
+    "T3Q-Qwen2.5-14B-Instruct-": {
+      "original_name": "T3Q-Qwen2.5-14B-Instruct-",
+      "leaderboard_name": "JungZoona/T3Q-Qwen2.5-14B-Instruct-1M-e3",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/JungZoona/T3Q-Qwen2.5-14B-Instruct-1M-e3\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">JungZoona/T3Q-Qwen2.5-14B-Instruct-1M-e3</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/JungZoona__T3Q-Qwen2.5-14B-Instruct-1M-e3-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 73.2396707403024,
+        "bbh": 65.46659667305961,
+        "math": 28.625377643504528,
+        "gpqa": 22.259507829977636,
+        "musr": 38.688020833333326,
+        "mmlu_pro": 54.27009456264776,
+        "average_score": 47.09154471380421
+      }
+    },
+    "Qwen2.5-32B-Instruct-abli": {
+      "original_name": "Qwen2.5-32B-Instruct-abli",
+      "leaderboard_name": "zetasepic/Qwen2.5-32B-Instruct-abliterated-v2",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/zetasepic/Qwen2.5-32B-Instruct-abliterated-v2\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">zetasepic/Qwen2.5-32B-Instruct-abliterated-v2</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/zetasepic__Qwen2.5-32B-Instruct-abliterated-v2-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 83.34131216283905,
+        "bbh": 56.53381848053764,
+        "math": 59.5166163141994,
+        "gpqa": 15.659955257270694,
+        "musr": 14.928385416666664,
+        "mmlu_pro": 51.35195035460993,
+        "average_score": 46.88867299768722
+      }
+    },
+    "Gilgamesh-72B": {
+      "original_name": "Gilgamesh-72B",
+      "leaderboard_name": "rubenroy/Gilgamesh-72B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/rubenroy/Gilgamesh-72B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">rubenroy/Gilgamesh-72B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/rubenroy__Gilgamesh-72B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 84.86006019583593,
+        "bbh": 61.83602130504769,
+        "math": 43.80664652567976,
+        "gpqa": 19.239373601789712,
+        "musr": 17.664062499999996,
+        "mmlu_pro": 53.3558658392435,
+        "average_score": 46.793671661266096
+      }
+    },
+    "ultiima-72B": {
+      "original_name": "ultiima-72B",
+      "leaderboard_name": "Sakalti/ultiima-72B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Sakalti/ultiima-72B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Sakalti/ultiima-72B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Sakalti__ultiima-72B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 71.4012154416947,
+        "bbh": 61.10313258693403,
+        "math": 53.54984894259819,
+        "gpqa": 21.923937360178968,
+        "musr": 18.115104166666665,
+        "mmlu_pro": 54.510195035461,
+        "average_score": 46.76723892225559
+      }
+    },
+    "zetasepic-abliteratedV2-Q": {
+      "original_name": "zetasepic-abliteratedV2-Q",
+      "leaderboard_name": "CombinHorizon/zetasepic-abliteratedV2-Qwen2.5-32B-Inst-BaseMerge-TIES",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/CombinHorizon/zetasepic-abliteratedV2-Qwen2.5-32B-Inst-BaseMerge-TIES\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">CombinHorizon/zetasepic-abliteratedV2-Qwen2.5-32B-Inst-BaseMerge-TIES</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/CombinHorizon__zetasepic-abliteratedV2-Qwen2.5-32B-Inst-BaseMerge-TIES-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 83.28136012446973,
+        "bbh": 56.82740697772572,
+        "math": 58.53474320241692,
+        "gpqa": 15.659955257270694,
+        "musr": 14.224479166666663,
+        "mmlu_pro": 52.05378250591017,
+        "average_score": 46.76362120574333
+      }
+    },
+    "Awqward2.5-32B-Instruct": {
+      "original_name": "Awqward2.5-32B-Instruct",
+      "leaderboard_name": "maldv/Awqward2.5-32B-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/maldv/Awqward2.5-32B-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">maldv/Awqward2.5-32B-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/maldv__Awqward2.5-32B-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 82.54697535871487,
+        "bbh": 57.20733868173476,
+        "math": 62.31117824773413,
+        "gpqa": 12.080536912751676,
+        "musr": 13.86953125,
+        "mmlu_pro": 52.4785756501182,
+        "average_score": 46.74902268350894
+      }
+    },
+    "test-2.5-72B": {
+      "original_name": "test-2.5-72B",
+      "leaderboard_name": "raphgg/test-2.5-72B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/raphgg/test-2.5-72B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">raphgg/test-2.5-72B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/raphgg__test-2.5-72B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 84.37047035199936,
+        "bbh": 62.1541268705062,
+        "math": 41.08761329305136,
+        "gpqa": 18.568232662192397,
+        "musr": 20.515104166666664,
+        "mmlu_pro": 53.74372044917257,
+        "average_score": 46.73987796559809
+      }
+    },
+    "shuttle-3": {
+      "original_name": "shuttle-3",
+      "leaderboard_name": "shuttleai/shuttle-3",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/shuttleai/shuttle-3\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">shuttleai/shuttle-3</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/shuttleai__shuttle-3-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 81.5403130360776,
+        "bbh": 64.05301565117443,
+        "math": 45.99697885196375,
+        "gpqa": 21.588366890380318,
+        "musr": 14.64427083333333,
+        "mmlu_pro": 52.40469858156028,
+        "average_score": 46.70460730741495
+      }
+    },
+    "Qwen2.5-32B-Instruct": {
+      "original_name": "Qwen2.5-32B-Instruct",
+      "leaderboard_name": "Qwen/Qwen2.5-32B-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Qwen/Qwen2.5-32B-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Qwen/Qwen2.5-32B-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Qwen__Qwen2.5-32B-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 83.46121623957765,
+        "bbh": 56.48934826159387,
+        "math": 62.53776435045317,
+        "gpqa": 11.74496644295302,
+        "musr": 13.498958333333327,
+        "mmlu_pro": 51.85062056737589,
+        "average_score": 46.59714569921449
+      }
+    },
+    "Mistral-Large-Instruct-24": {
+      "original_name": "Mistral-Large-Instruct-24",
+      "leaderboard_name": "mistralai/Mistral-Large-Instruct-2411",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/mistralai/Mistral-Large-Instruct-2411\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">mistralai/Mistral-Large-Instruct-2411</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/mistralai__Mistral-Large-Instruct-2411-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 84.00577135334247,
+        "bbh": 52.7448919952634,
+        "math": 49.546827794561935,
+        "gpqa": 24.94407158836689,
+        "musr": 17.216666666666665,
+        "mmlu_pro": 50.687056737588655,
+        "average_score": 46.524214355965
+      }
+    },
+    "Rombos-LLM-V2.5-Qwen-72b": {
+      "original_name": "Rombos-LLM-V2.5-Qwen-72b",
+      "leaderboard_name": "rombodawg/Rombos-LLM-V2.5-Qwen-72b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/rombodawg/Rombos-LLM-V2.5-Qwen-72b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">rombodawg/Rombos-LLM-V2.5-Qwen-72b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/rombodawg__Rombos-LLM-V2.5-Qwen-72b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 71.5535889218385,
+        "bbh": 61.26714504573664,
+        "math": 54.229607250755286,
+        "gpqa": 19.798657718120808,
+        "musr": 17.322916666666668,
+        "mmlu_pro": 54.83340721040189,
+        "average_score": 46.50088713558663
+      }
+    },
+    "Linkbricks-Horizon-AI-Ave...26": {
+      "original_name": "Linkbricks-Horizon-AI-Ave",
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    "Qwen2.5-72B-Instruct-abli...27": {
+      "original_name": "Qwen2.5-72B-Instruct-abli",
+      "leaderboard_name": "huihui-ai/Qwen2.5-72B-Instruct-abliterated",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/huihui-ai/Qwen2.5-72B-Instruct-abliterated\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">huihui-ai/Qwen2.5-72B-Instruct-abliterated</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/huihui-ai__Qwen2.5-72B-Instruct-abliterated-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 85.92667455684251,
+        "bbh": 60.48786941269388,
+        "math": 60.12084592145015,
+        "gpqa": 19.35123042505593,
+        "musr": 12.342187500000003,
+        "mmlu_pro": 50.410017730496456,
+        "average_score": 48.10647092442315
+      }
+    },
+    "Linkbricks-Horizon-AI-Ave...28": {
+      "original_name": "Linkbricks-Horizon-AI-Ave",
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    "lambda-qwen2.5-32b-dpo-te": {
+      "original_name": "lambda-qwen2.5-32b-dpo-te",
+      "leaderboard_name": "tanliboy/lambda-qwen2.5-32b-dpo-test",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/tanliboy/lambda-qwen2.5-32b-dpo-test\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">tanliboy/lambda-qwen2.5-32b-dpo-test</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/tanliboy__lambda-qwen2.5-32b-dpo-test-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.83839767372794,
+        "bbh": 54.40796058706255,
+        "math": 61.027190332326285,
+        "gpqa": 14.205816554809845,
+        "musr": 13.328385416666665,
+        "mmlu_pro": 51.739804964539005,
+        "average_score": 45.92459258818872
+      }
+    },
+    "Qwentile2.5-32B-Instruct": {
+      "original_name": "Qwentile2.5-32B-Instruct",
+      "leaderboard_name": "maldv/Qwentile2.5-32B-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/maldv/Qwentile2.5-32B-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">maldv/Qwentile2.5-32B-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/maldv__Qwentile2.5-32B-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 73.93161256576994,
+        "bbh": 57.20587763688364,
+        "math": 52.19033232628399,
+        "gpqa": 17.897091722595075,
+        "musr": 19.96197916666667,
+        "mmlu_pro": 54.21468676122932,
+        "average_score": 45.9002633632381
+      }
+    },
+    "Rombos-LLM-V2.5-Qwen-32b": {
+      "original_name": "Rombos-LLM-V2.5-Qwen-32b",
+      "leaderboard_name": "rombodawg/Rombos-LLM-V2.5-Qwen-32b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/rombodawg/Rombos-LLM-V2.5-Qwen-32b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">rombodawg/Rombos-LLM-V2.5-Qwen-32b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/rombodawg__Rombos-LLM-V2.5-Qwen-32b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 68.26631116548536,
+        "bbh": 58.26189408678741,
+        "math": 49.546827794561935,
+        "gpqa": 19.57494407158837,
+        "musr": 24.727083333333336,
+        "mmlu_pro": 54.62101063829788,
+        "average_score": 45.83301184834238
+      }
+    },
+    "openbuddy-llama3.3-70b-v2": {
+      "original_name": "openbuddy-llama3.3-70b-v2",
+      "leaderboard_name": "OpenBuddy/openbuddy-llama3.3-70b-v24.1-131k",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/OpenBuddy/openbuddy-llama3.3-70b-v24.1-131k\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">OpenBuddy/openbuddy-llama3.3-70b-v24.1-131k</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/OpenBuddy__openbuddy-llama3.3-70b-v24.1-131k-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 81.2080834408259,
+        "bbh": 54.14664796972127,
+        "math": 44.10876132930513,
+        "gpqa": 24.608501118568235,
+        "musr": 22.265885416666663,
+        "mmlu_pro": 48.082890070921984,
+        "average_score": 45.73679489100153
+      }
+    },
+    "Linkbricks-Horizon-AI-Ave...33": {
+      "original_name": "Linkbricks-Horizon-AI-Ave",
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    "huihui-ai-abliterated-Qwe": {
+      "original_name": "huihui-ai-abliterated-Qwe",
+      "leaderboard_name": "CombinHorizon/huihui-ai-abliterated-Qwen2.5-32B-Inst-BaseMerge-TIES",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/CombinHorizon/huihui-ai-abliterated-Qwen2.5-32B-Inst-BaseMerge-TIES\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">CombinHorizon/huihui-ai-abliterated-Qwen2.5-32B-Inst-BaseMerge-TIES</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/CombinHorizon__huihui-ai-abliterated-Qwen2.5-32B-Inst-BaseMerge-TIES-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 82.06237228331938,
+        "bbh": 56.04478184089901,
+        "math": 59.44108761329305,
+        "gpqa": 11.85682326621924,
+        "musr": 12.091145833333336,
+        "mmlu_pro": 52.45087174940899,
+        "average_score": 45.6578470977455
+      }
+    },
+    "Linkbricks-Horizon-AI-Ave...35": {
+      "original_name": "Linkbricks-Horizon-AI-Ave",
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    "ultiima-32B": {
+      "original_name": "ultiima-32B",
+      "leaderboard_name": "Sakalti/ultiima-32B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Sakalti/ultiima-32B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Sakalti/ultiima-32B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Sakalti__ultiima-32B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 68.54357549080883,
+        "bbh": 58.112446786765965,
+        "math": 49.62235649546828,
+        "gpqa": 17.4496644295302,
+        "musr": 24.13489583333333,
+        "mmlu_pro": 54.55636820330969,
+        "average_score": 45.40321787320272
+      }
+    },
+    "RYS-XLarge": {
+      "original_name": "RYS-XLarge",
+      "leaderboard_name": "dnhkng/RYS-XLarge",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/dnhkng/RYS-XLarge\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">dnhkng/RYS-XLarge</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/dnhkng__RYS-XLarge-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.95662619627035,
+        "bbh": 58.77356748233938,
+        "math": 42.522658610271904,
+        "gpqa": 17.897091722595075,
+        "musr": 23.72109375,
+        "mmlu_pro": 49.20028073286053,
+        "average_score": 45.345219749056206
+      }
+    },
+    "Qwen2.5-95B-Instruct": {
+      "original_name": "Qwen2.5-95B-Instruct",
+      "leaderboard_name": "ssmits/Qwen2.5-95B-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/ssmits/Qwen2.5-95B-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">ssmits/Qwen2.5-95B-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/ssmits__Qwen2.5-95B-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 84.31051831363006,
+        "bbh": 58.530351322851054,
+        "math": 53.02114803625378,
+        "gpqa": 15.212527964205815,
+        "musr": 13.61484375,
+        "mmlu_pro": 46.85468380614657,
+        "average_score": 45.257345532181205
+      }
+    },
+    "ultiima-72B-v1.5": {
+      "original_name": "ultiima-72B-v1.5",
+      "leaderboard_name": "Sakalti/ultiima-72B-v1.5",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Sakalti/ultiima-72B-v1.5\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Sakalti/ultiima-72B-v1.5</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Sakalti__ultiima-72B-v1.5-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 65.49610588793291,
+        "bbh": 63.438206058920265,
+        "math": 43.957703927492446,
+        "gpqa": 21.81208053691276,
+        "musr": 18.536718749999995,
+        "mmlu_pro": 56.153959810874696,
+        "average_score": 44.89912916202218
+      }
+    },
+    "sky-t1-coder-32b-flash": {
+      "original_name": "sky-t1-coder-32b-flash",
+      "leaderboard_name": "tomasmcm/sky-t1-coder-32b-flash",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/tomasmcm/sky-t1-coder-32b-flash\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">tomasmcm/sky-t1-coder-32b-flash</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/tomasmcm__sky-t1-coder-32b-flash-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 77.80090160773415,
+        "bbh": 55.46594372212499,
+        "math": 54.229607250755286,
+        "gpqa": 15.771812080536916,
+        "musr": 12.808854166666665,
+        "mmlu_pro": 53.13423463356975,
+        "average_score": 44.868558910231286
+      }
+    },
+    "Llama-3.3-70B-Instruct": {
+      "original_name": "Llama-3.3-70B-Instruct",
+      "leaderboard_name": "meta-llama/Llama-3.3-70B-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">meta-llama/Llama-3.3-70B-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/meta-llama__Llama-3.3-70B-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 89.97581971391463,
+        "bbh": 56.561410788022194,
+        "math": 48.338368580060425,
+        "gpqa": 10.514541387024613,
+        "musr": 15.565625,
+        "mmlu_pro": 48.12906323877069,
+        "average_score": 44.84747145129876
+      }
+    },
+    "RomboUltima-32B": {
+      "original_name": "RomboUltima-32B",
+      "leaderboard_name": "FINGU-AI/RomboUltima-32B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/FINGU-AI/RomboUltima-32B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">FINGU-AI/RomboUltima-32B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/FINGU-AI__RomboUltima-32B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 66.71509372908326,
+        "bbh": 56.67376969863417,
+        "math": 53.85196374622356,
+        "gpqa": 16.21923937360179,
+        "musr": 21.72109375,
+        "mmlu_pro": 53.20811170212767,
+        "average_score": 44.731545333278405
+      }
+    },
+    "calme-2.1-rys-78b": {
+      "original_name": "calme-2.1-rys-78b",
+      "leaderboard_name": "MaziyarPanahi/calme-2.1-rys-78b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-2.1-rys-78b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-2.1-rys-78b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.1-rys-78b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 81.35547015252862,
+        "bbh": 59.4700307859535,
+        "math": 39.42598187311178,
+        "gpqa": 19.239373601789712,
+        "musr": 18.99739583333333,
+        "mmlu_pro": 49.37573877068559,
+        "average_score": 44.64399850290042
+      }
+    },
+    "calme-2.3-rys-78b": {
+      "original_name": "calme-2.3-rys-78b",
+      "leaderboard_name": "MaziyarPanahi/calme-2.3-rys-78b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-2.3-rys-78b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-2.3-rys-78b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.3-rys-78b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.65854155862002,
+        "bbh": 59.57454695904105,
+        "math": 39.80362537764351,
+        "gpqa": 20.581655480984335,
+        "musr": 16.999218749999997,
+        "mmlu_pro": 49.7266548463357,
+        "average_score": 44.55737382877077
+      }
+    },
+    "calme-2.1-qwen2-72b": {
+      "original_name": "calme-2.1-qwen2-72b",
+      "leaderboard_name": "MaziyarPanahi/calme-2.1-qwen2-72b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-2.1-qwen2-72b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-2.1-qwen2-72b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.1-qwen2-72b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 81.62774770941103,
+        "bbh": 57.3258823447103,
+        "math": 40.78549848942598,
+        "gpqa": 17.4496644295302,
+        "musr": 20.15234375,
+        "mmlu_pro": 49.05252659574468,
+        "average_score": 44.39894388647036
+      }
+    },
+    "calme-2.2-rys-78b": {
+      "original_name": "calme-2.2-rys-78b",
+      "leaderboard_name": "MaziyarPanahi/calme-2.2-rys-78b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-2.2-rys-78b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-2.2-rys-78b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.2-rys-78b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.86420475449586,
+        "bbh": 59.268645675184494,
+        "math": 40.70996978851964,
+        "gpqa": 20.917225950783,
+        "musr": 16.82864583333333,
+        "mmlu_pro": 48.72931442080378,
+        "average_score": 44.38633440385336
+      }
+    },
+    "MG-FinalMix-72B": {
+      "original_name": "MG-FinalMix-72B",
+      "leaderboard_name": "Undi95/MG-FinalMix-72B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Undi95/MG-FinalMix-72B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Undi95/MG-FinalMix-72B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Undi95__MG-FinalMix-72B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.13648231137824,
+        "bbh": 57.502411706281976,
+        "math": 39.72809667673716,
+        "gpqa": 18.008948545861294,
+        "musr": 21.2171875,
+        "mmlu_pro": 49.19104609929077,
+        "average_score": 44.29736213992491
+      }
+    },
+    "EVA-Qwen2.5-72B-v0.2": {
+      "original_name": "EVA-Qwen2.5-72B-v0.2",
+      "leaderboard_name": "EVA-UNIT-01/EVA-Qwen2.5-72B-v0.2",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/EVA-UNIT-01/EVA-Qwen2.5-72B-v0.2\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">EVA-UNIT-01/EVA-Qwen2.5-72B-v0.2</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/EVA-UNIT-01__EVA-Qwen2.5-72B-v0.2-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 68.78837041272712,
+        "bbh": 59.0667326828602,
+        "math": 43.126888217522655,
+        "gpqa": 21.14093959731544,
+        "musr": 19.730729166666663,
+        "mmlu_pro": 53.47591607565011,
+        "average_score": 44.22159602545703
+      }
+    },
+    "Qwen2-72B-Orpo-v0.1": {
+      "original_name": "Qwen2-72B-Orpo-v0.1",
+      "leaderboard_name": "dfurman/Qwen2-72B-Orpo-v0.1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/dfurman/Qwen2-72B-Orpo-v0.1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">dfurman/Qwen2-72B-Orpo-v0.1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/dfurman__Qwen2-72B-Orpo-v0.1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 78.79759039348927,
+        "bbh": 57.41436351018751,
+        "math": 40.55891238670695,
+        "gpqa": 17.897091722595075,
+        "musr": 20.87005208333333,
+        "mmlu_pro": 49.49578900709219,
+        "average_score": 44.17229985056738
+      }
+    },
+    "RYS-XLarge-base": {
+      "original_name": "RYS-XLarge-base",
+      "leaderboard_name": "dnhkng/RYS-XLarge-base",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/dnhkng/RYS-XLarge-base\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">dnhkng/RYS-XLarge-base</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/dnhkng__RYS-XLarge-base-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.10233735377686,
+        "bbh": 58.69214607657639,
+        "math": 37.91540785498489,
+        "gpqa": 17.225950782997764,
+        "musr": 22.4171875,
+        "mmlu_pro": 49.22798463356975,
+        "average_score": 44.096835700317605
+      }
+    },
+    "calme-2.2-qwen2-72b": {
+      "original_name": "calme-2.2-qwen2-72b",
+      "leaderboard_name": "MaziyarPanahi/calme-2.2-qwen2-72b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-2.2-qwen2-72b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-2.2-qwen2-72b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.2-qwen2-72b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.08151704145003,
+        "bbh": 56.79594225047665,
+        "math": 45.31722054380665,
+        "gpqa": 16.554809843400445,
+        "musr": 16.516927083333332,
+        "mmlu_pro": 49.27415780141844,
+        "average_score": 44.09009576064759
+      }
+    },
+    "Arcee-Nova": {
+      "original_name": "Arcee-Nova",
+      "leaderboard_name": "arcee-ai/Arcee-Nova",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/arcee-ai/Arcee-Nova\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">arcee-ai/Arcee-Nova</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/arcee-ai__Arcee-Nova-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.07485471881274,
+        "bbh": 56.74098753952074,
+        "math": 43.80664652567976,
+        "gpqa": 18.008948545861294,
+        "musr": 17.220833333333328,
+        "mmlu_pro": 49.46808510638298,
+        "average_score": 44.05339262826514
+      }
+    },
+    "L3.3-MS-Nevoria-70b": {
+      "original_name": "L3.3-MS-Nevoria-70b",
+      "leaderboard_name": "Steelskull/L3.3-MS-Nevoria-70b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Steelskull/L3.3-MS-Nevoria-70b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Steelskull/L3.3-MS-Nevoria-70b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Steelskull__L3.3-MS-Nevoria-70b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 69.63268571833845,
+        "bbh": 56.60264873723427,
+        "math": 39.57703927492447,
+        "gpqa": 29.418344519015665,
+        "musr": 18.628645833333337,
+        "mmlu_pro": 50.39154846335697,
+        "average_score": 44.041818757700526
+      }
+    },
+    "Set-70b": {
+      "original_name": "Set-70b",
+      "leaderboard_name": "Triangle104/Set-70b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Triangle104/Set-70b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Triangle104/Set-70b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Triangle104__Set-70b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 76.42954028643999,
+        "bbh": 56.88003115055037,
+        "math": 36.40483383685801,
+        "gpqa": 26.174496644295303,
+        "musr": 18.961979166666666,
+        "mmlu_pro": 49.3572695035461,
+        "average_score": 44.03469176472607
+      }
+    },
+    "QwentileSwap": {
+      "original_name": "QwentileSwap",
+      "leaderboard_name": "Aryanne/QwentileSwap",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Aryanne/QwentileSwap\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Aryanne/QwentileSwap</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Aryanne__QwentileSwap-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 73.78422585406722,
+        "bbh": 57.67565555333628,
+        "math": 42.220543806646525,
+        "gpqa": 15.659955257270694,
+        "musr": 19.20520833333333,
+        "mmlu_pro": 54.95345744680851,
+        "average_score": 43.91650770857709
+      }
+    },
+    "li-14b-v0.4": {
+      "original_name": "li-14b-v0.4",
+      "leaderboard_name": "wanlige/li-14b-v0.4",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/wanlige/li-14b-v0.4\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">wanlige/li-14b-v0.4</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/wanlige__li-14b-v0.4-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 81.32798751756451,
+        "bbh": 50.384177102490106,
+        "math": 55.740181268882175,
+        "gpqa": 11.85682326621924,
+        "musr": 16.349999999999998,
+        "mmlu_pro": 46.30060579196218,
+        "average_score": 43.65996249118637
+      }
+    },
+    "tempmotacilla-cinerea-030": {
+      "original_name": "tempmotacilla-cinerea-030",
+      "leaderboard_name": "Cran-May/tempmotacilla-cinerea-0308",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Cran-May/tempmotacilla-cinerea-0308\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Cran-May/tempmotacilla-cinerea-0308</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Cran-May__tempmotacilla-cinerea-0308-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.84837121061007,
+        "bbh": 50.59894860885105,
+        "math": 55.51359516616314,
+        "gpqa": 14.988814317673372,
+        "musr": 12.66953125,
+        "mmlu_pro": 47.224069148936174,
+        "average_score": 43.6405549503723
+      }
+    },
+    "L3.3-Nevoria-R1-70b": {
+      "original_name": "L3.3-Nevoria-R1-70b",
+      "leaderboard_name": "Steelskull/L3.3-Nevoria-R1-70b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Steelskull/L3.3-Nevoria-R1-70b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Steelskull/L3.3-Nevoria-R1-70b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Steelskull__L3.3-Nevoria-R1-70b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 60.23794642659256,
+        "bbh": 56.16728833047952,
+        "math": 46.299093655589125,
+        "gpqa": 29.194630872483216,
+        "musr": 20.19140625,
+        "mmlu_pro": 49.5881353427896,
+        "average_score": 43.61308347965567
+      }
+    },
+    "Qwen2-72B-Instruct": {
+      "original_name": "Qwen2-72B-Instruct",
+      "leaderboard_name": "Qwen/Qwen2-72B-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Qwen/Qwen2-72B-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Qwen/Qwen2-72B-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Qwen__Qwen2-72B-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.89168738945996,
+        "bbh": 57.48300911876294,
+        "math": 41.76737160120846,
+        "gpqa": 16.33109619686801,
+        "musr": 17.167968749999996,
+        "mmlu_pro": 48.92324172576833,
+        "average_score": 43.59406246367795
+      }
+    },
+    "Galactic-Qwen-14B-Exp2": {
+      "original_name": "Galactic-Qwen-14B-Exp2",
+      "leaderboard_name": "prithivMLmods/Galactic-Qwen-14B-Exp2",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/prithivMLmods/Galactic-Qwen-14B-Exp2\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">prithivMLmods/Galactic-Qwen-14B-Exp2</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/prithivMLmods__Galactic-Qwen-14B-Exp2-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 66.20300801872366,
+        "bbh": 59.91731650130399,
+        "math": 34.74320241691843,
+        "gpqa": 19.910514541387023,
+        "musr": 28.489843749999995,
+        "mmlu_pro": 52.11842494089834,
+        "average_score": 43.56371836153858
+      }
+    },
+    "BigQwen2.5-52B-Instruct": {
+      "original_name": "BigQwen2.5-52B-Instruct",
+      "leaderboard_name": "mlabonne/BigQwen2.5-52B-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/mlabonne/BigQwen2.5-52B-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">mlabonne/BigQwen2.5-52B-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/mlabonne__BigQwen2.5-52B-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.13480675718205,
+        "bbh": 59.80960695923371,
+        "math": 54.7583081570997,
+        "gpqa": 6.935123042505594,
+        "musr": 10.44609375,
+        "mmlu_pro": 50.21609042553191,
+        "average_score": 43.55000484859215
+      }
+    },
+    "Llama-3.1-SauerkrautLM-70": {
+      "original_name": "Llama-3.1-SauerkrautLM-70",
+      "leaderboard_name": "VAGOsolutions/Llama-3.1-SauerkrautLM-70b-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/VAGOsolutions/Llama-3.1-SauerkrautLM-70b-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">VAGOsolutions/Llama-3.1-SauerkrautLM-70b-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/VAGOsolutions__Llama-3.1-SauerkrautLM-70b-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 86.56365111238182,
+        "bbh": 57.24162100868165,
+        "math": 36.933534743202415,
+        "gpqa": 12.192393736017896,
+        "musr": 19.38541666666666,
+        "mmlu_pro": 48.16600177304965,
+        "average_score": 43.413769840000015
+      }
+    },
+    "Llama-3.1-70B-Instruct": {
+      "original_name": "Llama-3.1-70B-Instruct",
+      "leaderboard_name": "meta-llama/Llama-3.1-70B-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">meta-llama/Llama-3.1-70B-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/meta-llama__Llama-3.1-70B-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 86.6885419575615,
+        "bbh": 55.92799173898473,
+        "math": 38.06646525679759,
+        "gpqa": 14.205816554809845,
+        "musr": 17.691145833333334,
+        "mmlu_pro": 47.87972813238771,
+        "average_score": 43.409948245645786
+      }
+    },
+    "Dracarys-72B-Instruct": {
+      "original_name": "Dracarys-72B-Instruct",
+      "leaderboard_name": "abacusai/Dracarys-72B-Instruct",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/abacusai/Dracarys-72B-Instruct\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">abacusai/Dracarys-72B-Instruct</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/abacusai__Dracarys-72B-Instruct-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 78.55778224001206,
+        "bbh": 56.93552010003367,
+        "math": 39.65256797583081,
+        "gpqa": 18.791946308724835,
+        "musr": 16.81119791666666,
+        "mmlu_pro": 49.51425827423168,
+        "average_score": 43.377212135916615
+      }
+    },
+    "Linkbricks-Horizon-AI-Ave...65": {
+      "original_name": "Linkbricks-Horizon-AI-Ave",
+      "leaderboard_name": "Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Saxo/Linkbricks-Horizon-AI-Avengers-V1-32B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.71681804279312,
+        "bbh": 57.63392862080288,
+        "math": 60.27190332326284,
+        "gpqa": 14.988814317673372,
+        "musr": 18.155989583333334,
+        "mmlu_pro": 53.25428486997635,
+        "average_score": 47.33695645964031
+      }
+    },
+    "Lamarckvergence-14B": {
+      "original_name": "Lamarckvergence-14B",
+      "leaderboard_name": "suayptalha/Lamarckvergence-14B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/suayptalha/Lamarckvergence-14B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">suayptalha/Lamarckvergence-14B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/suayptalha__Lamarckvergence-14B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 76.55941790006072,
+        "bbh": 50.32923622182769,
+        "math": 54.003021148036254,
+        "gpqa": 15.100671140939594,
+        "musr": 16.336197916666666,
+        "mmlu_pro": 47.593454491725765,
+        "average_score": 43.32033313654279
+      }
+    },
+    "Lix-14B-v0.1": {
+      "original_name": "Lix-14B-v0.1",
+      "leaderboard_name": "suayptalha/Lix-14B-v0.1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/suayptalha/Lix-14B-v0.1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">suayptalha/Lix-14B-v0.1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/suayptalha__Lix-14B-v0.1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 78.13313120298585,
+        "bbh": 51.473725053502925,
+        "math": 52.94561933534743,
+        "gpqa": 15.99552572706935,
+        "musr": 13.422656250000005,
+        "mmlu_pro": 47.93513593380615,
+        "average_score": 43.31763225045196
+      }
+    },
+    "calme-2.2-llama3.1-70b": {
+      "original_name": "calme-2.2-llama3.1-70b",
+      "leaderboard_name": "MaziyarPanahi/calme-2.2-llama3.1-70b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-2.2-llama3.1-70b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-2.2-llama3.1-70b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.2-llama3.1-70b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 85.92667455684251,
+        "bbh": 54.20646208605566,
+        "math": 43.65558912386707,
+        "gpqa": 9.955257270693512,
+        "musr": 17.06953125,
+        "mmlu_pro": 49.05252659574468,
+        "average_score": 43.31100681386724
+      }
+    },
+    "NQLSG-Qwen2.5-14B-MegaFus...69": {
+      "original_name": "NQLSG-Qwen2.5-14B-MegaFus",
+      "leaderboard_name": "Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Lunzima__NQLSG-Qwen2.5-14B-MegaFusion-v9.1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.02655177152178,
+        "bbh": 50.73787805937095,
+        "math": 54.68277945619335,
+        "gpqa": 12.416107382550338,
+        "musr": 14.757812499999998,
+        "mmlu_pro": 47.23330378250591,
+        "average_score": 43.309072158690384
+      }
+    },
+    "calme-2.3-llama3.1-70b": {
+      "original_name": "calme-2.3-llama3.1-70b",
+      "leaderboard_name": "MaziyarPanahi/calme-2.3-llama3.1-70b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/MaziyarPanahi/calme-2.3-llama3.1-70b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">MaziyarPanahi/calme-2.3-llama3.1-70b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/MaziyarPanahi__calme-2.3-llama3.1-70b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 86.04657863358113,
+        "bbh": 55.58549511699308,
+        "math": 39.27492447129909,
+        "gpqa": 12.527964205816552,
+        "musr": 17.736197916666658,
+        "mmlu_pro": 48.4799793144208,
+        "average_score": 43.275189943129554
+      }
+    },
+    "NQLSG-Qwen2.5-14B-MegaFus...71": {
+      "original_name": "NQLSG-Qwen2.5-14B-MegaFus",
+      "leaderboard_name": "Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Lunzima__NQLSG-Qwen2.5-14B-MegaFusion-v9.1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.02655177152178,
+        "bbh": 50.73787805937095,
+        "math": 54.68277945619335,
+        "gpqa": 12.416107382550338,
+        "musr": 14.757812499999998,
+        "mmlu_pro": 47.23330378250591,
+        "average_score": 43.309072158690384
+      }
+    },
+    "orca_mini_v8_1_70b": {
+      "original_name": "orca_mini_v8_1_70b",
+      "leaderboard_name": "pankajmathur/orca_mini_v8_1_70b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/pankajmathur/orca_mini_v8_1_70b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">pankajmathur/orca_mini_v8_1_70b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/pankajmathur__orca_mini_v8_1_70b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 85.7143490383294,
+        "bbh": 53.51972670972081,
+        "math": 35.27190332326284,
+        "gpqa": 24.384787472035796,
+        "musr": 15.996874999999998,
+        "mmlu_pro": 44.25975177304965,
+        "average_score": 43.191232219399744
+      }
+    },
+    "Apollo-70B": {
+      "original_name": "Apollo-70B",
+      "leaderboard_name": "rootxhacker/Apollo-70B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/rootxhacker/Apollo-70B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">rootxhacker/Apollo-70B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/rootxhacker__Apollo-70B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 50.9856070781083,
+        "bbh": 53.528405173016914,
+        "math": 56.11782477341389,
+        "gpqa": 27.628635346756152,
+        "musr": 23.146354166666654,
+        "mmlu_pro": 47.54728132387708,
+        "average_score": 43.15901797697317
+      }
+    },
+    "ZYH-LLM-Qwen2.5-14B-V4": {
+      "original_name": "ZYH-LLM-Qwen2.5-14B-V4",
+      "leaderboard_name": "YOYO-AI/ZYH-LLM-Qwen2.5-14B-V4",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/YOYO-AI/ZYH-LLM-Qwen2.5-14B-V4\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">YOYO-AI/ZYH-LLM-Qwen2.5-14B-V4</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/YOYO-AI__ZYH-LLM-Qwen2.5-14B-V4-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 83.64605912312663,
+        "bbh": 50.26935344231426,
+        "math": 53.92749244712991,
+        "gpqa": 8.612975391498878,
+        "musr": 15.661718749999997,
+        "mmlu_pro": 46.706929669030735,
+        "average_score": 43.137421470516735
+      }
+    },
+    "NQLSG-Qwen2.5-14B-MegaFus...75": {
+      "original_name": "NQLSG-Qwen2.5-14B-MegaFus",
+      "leaderboard_name": "Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Lunzima__NQLSG-Qwen2.5-14B-MegaFusion-v9.1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.02655177152178,
+        "bbh": 50.73787805937095,
+        "math": 54.68277945619335,
+        "gpqa": 12.416107382550338,
+        "musr": 14.757812499999998,
+        "mmlu_pro": 47.23330378250591,
+        "average_score": 43.309072158690384
+      }
+    },
+    "Progenitor-V1.1-LLaMa-70B": {
+      "original_name": "Progenitor-V1.1-LLaMa-70B",
+      "leaderboard_name": "Tarek07/Progenitor-V1.1-LLaMa-70B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Tarek07/Progenitor-V1.1-LLaMa-70B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Tarek07/Progenitor-V1.1-LLaMa-70B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Tarek07__Progenitor-V1.1-LLaMa-70B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 69.06064796960952,
+        "bbh": 56.24697023586278,
+        "math": 35.725075528700906,
+        "gpqa": 27.740492170022367,
+        "musr": 19.62864583333333,
+        "mmlu_pro": 49.61583924349882,
+        "average_score": 43.00294516350462
+      }
+    },
+    "70B-L3.3-Cirrus-x1": {
+      "original_name": "70B-L3.3-Cirrus-x1",
+      "leaderboard_name": "Sao10K/70B-L3.3-Cirrus-x1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Sao10K/70B-L3.3-Cirrus-x1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Sao10K/70B-L3.3-Cirrus-x1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Sao10K__70B-L3.3-Cirrus-x1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 66.80751517085777,
+        "bbh": 57.13231216638128,
+        "math": 37.38670694864049,
+        "gpqa": 26.62192393736018,
+        "musr": 21.42083333333333,
+        "mmlu_pro": 48.64620271867612,
+        "average_score": 43.0025823792082
+      }
+    },
+    "magnum-v1-72b": {
+      "original_name": "magnum-v1-72b",
+      "leaderboard_name": "anthracite-org/magnum-v1-72b",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/anthracite-org/magnum-v1-72b\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">anthracite-org/magnum-v1-72b</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/anthracite-org__magnum-v1-72b-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 76.06484128778308,
+        "bbh": 57.65318485514271,
+        "math": 39.80362537764351,
+        "gpqa": 18.791946308724835,
+        "musr": 15.617187499999998,
+        "mmlu_pro": 49.84670508274232,
+        "average_score": 42.96291506867274
+      }
+    },
+    "magnum-72b-v1": {
+      "original_name": "magnum-72b-v1",
+      "leaderboard_name": "alpindale/magnum-72b-v1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/alpindale/magnum-72b-v1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">alpindale/magnum-72b-v1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/alpindale__magnum-72b-v1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 76.06484128778308,
+        "bbh": 57.65318485514271,
+        "math": 39.80362537764351,
+        "gpqa": 18.791946308724835,
+        "musr": 15.617187499999998,
+        "mmlu_pro": 49.64354314420804,
+        "average_score": 42.9290547455837
+      }
+    },
+    "lamarckvergence-14b-tenso": {
+      "original_name": "lamarckvergence-14b-tenso",
+      "leaderboard_name": "tensopolis/lamarckvergence-14b-tensopolis-v1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/tensopolis/lamarckvergence-14b-tensopolis-v1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">tensopolis/lamarckvergence-14b-tensopolis-v1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/tensopolis__lamarckvergence-14b-tensopolis-v1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 76.03735865281897,
+        "bbh": 50.983494714854295,
+        "math": 51.66163141993958,
+        "gpqa": 14.76510067114094,
+        "musr": 16.832291666666666,
+        "mmlu_pro": 47.224069148936174,
+        "average_score": 42.91732437905944
+      }
+    },
+    "li-14b-v0.4-slerp0.1": {
+      "original_name": "li-14b-v0.4-slerp0.1",
+      "leaderboard_name": "wanlige/li-14b-v0.4-slerp0.1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/wanlige/li-14b-v0.4-slerp0.1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">wanlige/li-14b-v0.4-slerp0.1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/wanlige__li-14b-v0.4-slerp0.1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.22722819895654,
+        "bbh": 50.88127296750732,
+        "math": 53.32326283987915,
+        "gpqa": 14.5413870246085,
+        "musr": 11.750000000000002,
+        "mmlu_pro": 47.71350472813239,
+        "average_score": 42.906109293180656
+      }
+    },
+    "miscii-14b-0218": {
+      "original_name": "miscii-14b-0218",
+      "leaderboard_name": "sthenno-com/miscii-14b-0218",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/sthenno-com/miscii-14b-0218\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">sthenno-com/miscii-14b-0218</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/sthenno-com__miscii-14b-0218-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 76.55941790006072,
+        "bbh": 50.6445656375432,
+        "math": 51.43504531722054,
+        "gpqa": 17.785234899328863,
+        "musr": 13.208854166666663,
+        "mmlu_pro": 47.75044326241135,
+        "average_score": 42.89726019720522
+      }
+    },
+    "Cheng-2": {
+      "original_name": "Cheng-2",
+      "leaderboard_name": "marcuscedricridia/Cheng-2",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/marcuscedricridia/Cheng-2\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">marcuscedricridia/Cheng-2</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/marcuscedricridia__Cheng-2-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 83.37378156624423,
+        "bbh": 49.97518634878575,
+        "math": 54.38066465256798,
+        "gpqa": 12.751677852348994,
+        "musr": 12.016666666666664,
+        "mmlu_pro": 44.59219858156028,
+        "average_score": 42.84836261136232
+      }
+    },
+    "NQLSG-Qwen2.5-14B-MegaFus...84": {
+      "original_name": "NQLSG-Qwen2.5-14B-MegaFus",
+      "leaderboard_name": "Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Lunzima__NQLSG-Qwen2.5-14B-MegaFusion-v9.1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.02655177152178,
+        "bbh": 50.73787805937095,
+        "math": 54.68277945619335,
+        "gpqa": 12.416107382550338,
+        "musr": 14.757812499999998,
+        "mmlu_pro": 47.23330378250591,
+        "average_score": 43.309072158690384
+      }
+    },
+    "Llama3.3-70B-CogniLink": {
+      "original_name": "Llama3.3-70B-CogniLink",
+      "leaderboard_name": "Daemontatox/Llama3.3-70B-CogniLink",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Daemontatox/Llama3.3-70B-CogniLink\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Daemontatox/Llama3.3-70B-CogniLink</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Daemontatox__Llama3.3-70B-CogniLink-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 69.31042965996889,
+        "bbh": 52.12466257626164,
+        "math": 41.389728096676734,
+        "gpqa": 26.062639821029084,
+        "musr": 21.395572916666666,
+        "mmlu_pro": 46.36524822695035,
+        "average_score": 42.77471354959223
+      }
+    },
+    "tempesthenno-ppo-ckpt40": {
+      "original_name": "tempesthenno-ppo-ckpt40",
+      "leaderboard_name": "sthenno/tempesthenno-ppo-ckpt40",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/sthenno/tempesthenno-ppo-ckpt40\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">sthenno/tempesthenno-ppo-ckpt40</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/sthenno__tempesthenno-ppo-ckpt40-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.23221496739761,
+        "bbh": 50.57317166167434,
+        "math": 47.35649546827795,
+        "gpqa": 17.00223713646532,
+        "musr": 14.56380208333333,
+        "mmlu_pro": 47.685800827423165,
+        "average_score": 42.73562035742862
+      }
+    },
+    "RYS-Llama3.1-Large": {
+      "original_name": "RYS-Llama3.1-Large",
+      "leaderboard_name": "dnhkng/RYS-Llama3.1-Large",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/dnhkng/RYS-Llama3.1-Large\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">dnhkng/RYS-Llama3.1-Large</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/dnhkng__RYS-Llama3.1-Large-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 84.92001223420525,
+        "bbh": 55.41486404819653,
+        "math": 35.04531722054381,
+        "gpqa": 16.554809843400445,
+        "musr": 17.091145833333332,
+        "mmlu_pro": 47.20559988179669,
+        "average_score": 42.70529151024601
+      }
+    },
+    "virtuoso-small-v2-tensopo": {
+      "original_name": "virtuoso-small-v2-tensopo",
+      "leaderboard_name": "tensopolis/virtuoso-small-v2-tensopolis-v1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/tensopolis/virtuoso-small-v2-tensopolis-v1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">tensopolis/virtuoso-small-v2-tensopolis-v1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/tensopolis__virtuoso-small-v2-tensopolis-v1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 84.19061423689145,
+        "bbh": 50.96603012167689,
+        "math": 45.2416918429003,
+        "gpqa": 12.863534675615217,
+        "musr": 16.532552083333332,
+        "mmlu_pro": 46.39295212765958,
+        "average_score": 42.6978958480128
+      }
+    },
+    "Cheng-2-v1.1": {
+      "original_name": "Cheng-2-v1.1",
+      "leaderboard_name": "marcuscedricridia/Cheng-2-v1.1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/marcuscedricridia/Cheng-2-v1.1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">marcuscedricridia/Cheng-2-v1.1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/marcuscedricridia__Cheng-2-v1.1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 82.69934883885867,
+        "bbh": 50.248143037694966,
+        "math": 53.92749244712991,
+        "gpqa": 12.416107382550338,
+        "musr": 11.491145833333336,
+        "mmlu_pro": 45.29403073286053,
+        "average_score": 42.67937804540463
+      }
+    },
+    "RombosBeagle-v2beta-MGS-3": {
+      "original_name": "RombosBeagle-v2beta-MGS-3",
+      "leaderboard_name": "hotmailuser/RombosBeagle-v2beta-MGS-32B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/hotmailuser/RombosBeagle-v2beta-MGS-32B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">hotmailuser/RombosBeagle-v2beta-MGS-32B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/hotmailuser__RombosBeagle-v2beta-MGS-32B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 51.567618363719376,
+        "bbh": 58.117898971791085,
+        "math": 49.92447129909365,
+        "gpqa": 17.337807606263986,
+        "musr": 24.460416666666664,
+        "mmlu_pro": 54.52866430260048,
+        "average_score": 42.65614620168921
+      }
+    },
+    "TheBeagle-v2beta-32B-MGS": {
+      "original_name": "TheBeagle-v2beta-32B-MGS",
+      "leaderboard_name": "fblgit/TheBeagle-v2beta-32B-MGS",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/fblgit/TheBeagle-v2beta-32B-MGS\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">fblgit/TheBeagle-v2beta-32B-MGS</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/fblgit__TheBeagle-v2beta-32B-MGS-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 51.8074265171966,
+        "bbh": 58.0279762011676,
+        "math": 49.47129909365559,
+        "gpqa": 17.67337807606264,
+        "musr": 24.260416666666668,
+        "mmlu_pro": 54.61177600472813,
+        "average_score": 42.642045426579536
+      }
+    },
+    "lambda-qwen2.5-14b-dpo-te": {
+      "original_name": "lambda-qwen2.5-14b-dpo-te",
+      "leaderboard_name": "tanliboy/lambda-qwen2.5-14b-dpo-test",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/tanliboy/lambda-qwen2.5-14b-dpo-test\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">tanliboy/lambda-qwen2.5-14b-dpo-test</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/tanliboy__lambda-qwen2.5-14b-dpo-test-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 82.31215397367873,
+        "bbh": 48.45443982860533,
+        "math": 54.607250755287005,
+        "gpqa": 14.988814317673372,
+        "musr": 12.587239583333336,
+        "mmlu_pro": 42.75450650118203,
+        "average_score": 42.61740082662664
+      }
+    },
+    "tempesthenno-nuslerp-001": {
+      "original_name": "tempesthenno-nuslerp-001",
+      "leaderboard_name": "sthenno/tempesthenno-nuslerp-001",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/sthenno/tempesthenno-nuslerp-001\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">sthenno/tempesthenno-nuslerp-001</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/sthenno__tempesthenno-nuslerp-001-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 79.2646843708028,
+        "bbh": 51.04491084341287,
+        "math": 47.583081570996974,
+        "gpqa": 16.442953020134222,
+        "musr": 13.883333333333333,
+        "mmlu_pro": 47.29794621749409,
+        "average_score": 42.58615155936238
+      }
+    },
+    "Qwen2.5-14B-1M-YOYO-V3": {
+      "original_name": "Qwen2.5-14B-1M-YOYO-V3",
+      "leaderboard_name": "YOYO-AI/Qwen2.5-14B-1M-YOYO-V3",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/YOYO-AI/Qwen2.5-14B-1M-YOYO-V3\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">YOYO-AI/Qwen2.5-14B-1M-YOYO-V3</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/YOYO-AI__Qwen2.5-14B-1M-YOYO-V3-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 83.98327548681942,
+        "bbh": 49.46606980733037,
+        "math": 53.54984894259819,
+        "gpqa": 10.514541387024613,
+        "musr": 11.098958333333336,
+        "mmlu_pro": 46.74386820330969,
+        "average_score": 42.55942702673594
+      }
+    },
+    "Josiefied-Qwen2.5-14B-Ins": {
+      "original_name": "Josiefied-Qwen2.5-14B-Ins",
+      "leaderboard_name": "Goekdeniz-Guelmez/Josiefied-Qwen2.5-14B-Instruct-abliterated-v4",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Goekdeniz-Guelmez/Josiefied-Qwen2.5-14B-Instruct-abliterated-v4\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Goekdeniz-Guelmez/Josiefied-Qwen2.5-14B-Instruct-abliterated-v4</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Goekdeniz-Guelmez__Josiefied-Qwen2.5-14B-Instruct-abliterated-v4-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 82.91666112581285,
+        "bbh": 48.05226992969286,
+        "math": 54.229607250755286,
+        "gpqa": 12.304250559284116,
+        "musr": 13.15,
+        "mmlu_pro": 44.64760638297872,
+        "average_score": 42.550065874753976
+      }
+    },
+    "NQLSG-Qwen2.5-14B-MegaFus...96": {
+      "original_name": "NQLSG-Qwen2.5-14B-MegaFus",
+      "leaderboard_name": "Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">Lunzima/NQLSG-Qwen2.5-14B-MegaFusion-v9.1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/Lunzima__NQLSG-Qwen2.5-14B-MegaFusion-v9.1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 80.02655177152178,
+        "bbh": 50.73787805937095,
+        "math": 54.68277945619335,
+        "gpqa": 12.416107382550338,
+        "musr": 14.757812499999998,
+        "mmlu_pro": 47.23330378250591,
+        "average_score": 43.309072158690384
+      }
+    },
+    "Q2.5-Veltha-14B": {
+      "original_name": "Q2.5-Veltha-14B",
+      "leaderboard_name": "djuna/Q2.5-Veltha-14B",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/djuna/Q2.5-Veltha-14B\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">djuna/Q2.5-Veltha-14B</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/djuna__Q2.5-Veltha-14B-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 82.91666112581285,
+        "bbh": 49.75243239928858,
+        "math": 47.88519637462236,
+        "gpqa": 14.5413870246085,
+        "musr": 12.261718749999998,
+        "mmlu_pro": 47.759677895981085,
+        "average_score": 42.519512261718894
+      }
+    },
+    "ECE-ILAB-Q1": {
+      "original_name": "ECE-ILAB-Q1",
+      "leaderboard_name": "paulml/ECE-ILAB-Q1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/paulml/ECE-ILAB-Q1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">paulml/ECE-ILAB-Q1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/paulml__ECE-ILAB-Q1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 78.64521691334548,
+        "bbh": 53.70222770817057,
+        "math": 35.57401812688822,
+        "gpqa": 18.232662192393736,
+        "musr": 18.805208333333333,
+        "mmlu_pro": 50.05910165484633,
+        "average_score": 42.50307248816295
+      }
+    },
+    "Virtuoso-Small-v2": {
+      "original_name": "Virtuoso-Small-v2",
+      "leaderboard_name": "arcee-ai/Virtuoso-Small-v2",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/arcee-ai/Virtuoso-Small-v2\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">arcee-ai/Virtuoso-Small-v2</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/arcee-ai__Virtuoso-Small-v2-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 82.73181824226387,
+        "bbh": 50.94799062781783,
+        "math": 46.6012084592145,
+        "gpqa": 13.758389261744966,
+        "musr": 14.283333333333331,
+        "mmlu_pro": 46.53147163120567,
+        "average_score": 42.475701925930025
+      }
+    },
+    "Qwen2.5-14B-YOYO-V4-p1": {
+      "original_name": "Qwen2.5-14B-YOYO-V4-p1",
+      "leaderboard_name": "YOYO-AI/Qwen2.5-14B-YOYO-V4-p1",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/YOYO-AI/Qwen2.5-14B-YOYO-V4-p1\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">YOYO-AI/Qwen2.5-14B-YOYO-V4-p1</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/YOYO-AI__Qwen2.5-14B-YOYO-V4-p1-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 82.03488964835526,
+        "bbh": 50.24542053284919,
+        "math": 53.32326283987915,
+        "gpqa": 12.751677852348994,
+        "musr": 11.728385416666669,
+        "mmlu_pro": 44.6660756501182,
+        "average_score": 42.45828532336958
+      }
+    },
+    "Chocolatine-14B-Instruct-": {
+      "original_name": "Chocolatine-14B-Instruct-",
+      "leaderboard_name": "jpacifico/Chocolatine-14B-Instruct-DPO-v1.3",
+      "model_link": "<a target=\"_blank\" href=\"https://huggingface.co/jpacifico/Chocolatine-14B-Instruct-DPO-v1.3\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">jpacifico/Chocolatine-14B-Instruct-DPO-v1.3</a>  <a target=\"_blank\" href=\"https://huggingface.co/datasets/open-llm-leaderboard/jpacifico__Chocolatine-14B-Instruct-DPO-v1.3-details\" style=\"color: var(--link-text-color); text-decoration: underline;text-decoration-style: dotted;\">\ud83d\udcd1</a>",
+      "benchmark_scores": {
+        "ifeval": 70.39953988749849,
+        "bbh": 54.84648579293099,
+        "math": 56.19335347432024,
+        "gpqa": 12.192393736017896,
+        "musr": 12.291145833333331,
+        "mmlu_pro": 48.60002955082743,
+        "average_score": 42.42049137915473
+      }
+    }
+  }
+}

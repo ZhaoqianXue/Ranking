@@ -1,0 +1,6 @@
+model,case_num,autogluon,tabpfn,glm,superlearner,unsemble,single,description
+model_001,1,0.85,0.82,0.88,0.86,0.84,0.83,UKBB sample 1
+model_002,2,0.87,0.85,0.86,0.88,0.87,0.85,UKBB sample 2
+model_003,3,0.83,0.86,0.84,0.85,0.86,0.87,UKBB sample 3
+model_004,4,0.89,0.88,0.87,0.89,0.88,0.86,UKBB sample 4
+model_005,5,0.86,0.84,0.89,0.87,0.85,0.88,UKBB sample 5

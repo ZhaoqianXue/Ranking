@@ -1,0 +1,6 @@
+case_num,model_1,model_2,model_3,model_4,description
+1,0.85,,0.88,0.82,Case 1
+2,0.92,0.89,,0.87,Case 2
+3,,0.85,0.91,0.83,Case 3
+4,0.88,0.92,0.86,,Case 4
+5,0.79,,0.84,0.88,Case 5

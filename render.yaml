@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: spectral-ranking-backend
+    env: docker
+    dockerfilePath: Dockerfile.backend
+    plan: starter
+    region: oregon
+    healthCheckPath: /api/health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-5-nano
+    disks:
+      - name: data
+        mountPath: /opt/render/project/src/data
+        sizeGB: 1
+
+  - type: web
+    name: spectral-ranking-frontend
+    env: python
+    plan: starter
+    region: oregon
+    buildCommand: pip install -r requirements.frontend.txt
+    startCommand: python code_app/frontend/main.py
+    healthCheckPath: /dashboard
+    envVars:
+      - key: API_BASE_URL
+        sync: false
+
+

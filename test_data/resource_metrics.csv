@@ -1,0 +1,6 @@
+algorithm,time_seconds,memory_mb,f1_macro,precision_micro,description
+alg_a,1250.5,8500.0,0.87,0.89,Algorithm A
+alg_b,980.2,6200.0,0.91,0.92,Algorithm B
+alg_c,1580.8,12400.0,0.83,0.85,Algorithm C
+alg_d,750.3,4800.0,0.94,0.95,Algorithm D
+alg_e,1120.7,7200.0,0.89,0.88,Algorithm E

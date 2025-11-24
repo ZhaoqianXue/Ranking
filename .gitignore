@@ -1,0 +1,156 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.hypothesis/
+.pytest_cache/
+
+# Environments
+.env
+.venv
+env/
+venv/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project specific data files - exclude specific data files but include ranking results
+data_llm/*/data_collection/
+data_llm/*/data_processing/
+# Include all_combinations folders AND their contents (ranking results) - must come BEFORE exclusions
+!data_llm/*/data_ranking/current/all_combinations/
+!data_llm/*/data_ranking/current/all_combinations/**/*.json
+!data_llm/*/data_ranking/current/all_combinations/**/*.csv
+# Exclude other ranking files (these rules must come AFTER the all_combinations inclusions)
+data_llm/*/data_ranking/current/*.json
+data_llm/*/data_ranking/current/*.csv
+agent_uploads/
+jobs/
+temp_ranking_jobs/
+*.backup
+demo_r/output_*/
+
+# Azure deployment files
+.azure/
+
+# Render deployment files
+render.yaml.bak
+render-*.log
+
+# macOS
+.DS_Store
+
+# Exclude large data files not essential for the repo
+demo_r/simulated_data.csv
+demo_r/top2000childrencode_report_aou.csv
+demo_r/top2000childrencode_report_ukbb.csv
+
+# Large files (>100MB) - Git doesn't support size-based ignoring natively
+# To automatically ignore files larger than 100MB, we have implemented:
+# 1. Pre-commit hook (.git/hooks/pre-commit) that prevents committing files >100MB
+# 2. Common large file patterns in this .gitignore file
+# 3. For files that should be tracked despite size, consider Git LFS
+
+# Common large file patterns that should be ignored
+*.zip
+*.tar.gz
+*.tar.bz2
+*.7z
+*.rar
+*.iso
+*.dmg
+*.pkg
+*.deb
+*.rpm
+*.exe
+*.msi
+*.bin
+*.img
+*.vmdk
+*.qcow2
+*.ova
+
+# Large data files
+*.hdf5
+*.h5
+*.pkl
+*.pickle
+*.npy
+*.npz
+*.mat
+*.sav
+*.sas7bdat
+*.dta
+*.parquet
+*.feather
+*.orc
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.mdb
+*.accdb
+
+# Log files that might grow large
+*.log
+logs/
+*.out
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.bak
+*~
+
+# Cache directories
+.cache/
+__pycache__/
+*.cache

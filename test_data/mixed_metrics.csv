@@ -1,0 +1,6 @@
+method,accuracy,loss,f1_score,precision,recall,mse,description
+svm,0.85,0.45,0.83,0.88,0.79,0.35,Support Vector Machine
+rf,0.92,0.32,0.91,0.89,0.93,0.28,Random Forest
+nn,0.88,0.38,0.87,0.91,0.84,0.31,Neural Network
+lr,0.79,0.52,0.78,0.82,0.75,0.42,Logistic Regression
+xgb,0.95,0.28,0.94,0.96,0.93,0.24,XGBoost

@@ -1,0 +1,81 @@
+{
+  "job_id": "e36b720d401e4741bf918bc43fe98f2d",
+  "params": {
+    "bigbetter": false,
+    "B": 2000,
+    "seed": 1
+  },
+  "methods": [
+    {
+      "name": "autogluon",
+      "theta_hat": 0.6247,
+      "rank": 1,
+      "ci_two_sided": [
+        1,
+        2
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "tabpfn",
+      "theta_hat": 0.4798,
+      "rank": 2,
+      "ci_two_sided": [
+        1,
+        2
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "glm",
+      "theta_hat": -0.267,
+      "rank": 4,
+      "ci_two_sided": [
+        4,
+        6
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "superlearner",
+      "theta_hat": -0.4454,
+      "rank": 5,
+      "ci_two_sided": [
+        4,
+        6
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "unsemble",
+      "theta_hat": 0.0566,
+      "rank": 3,
+      "ci_two_sided": [
+        3,
+        3
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 3
+    },
+    {
+      "name": "single",
+      "theta_hat": -0.4488,
+      "rank": 6,
+      "ci_two_sided": [
+        4,
+        6
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 4
+    }
+  ],
+  "metadata": {
+    "n_samples": 164,
+    "k_methods": 6,
+    "runtime_sec": 1.0118
+  }
+}

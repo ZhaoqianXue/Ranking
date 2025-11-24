@@ -1,0 +1,7 @@
+"method","theta_hat","rank","ci_two_left","ci_two_right","ci_left","ci_uniform_left"
+"autogluon",-0.277888689074016,3,3,4,3,3
+"tabpfn",1.20021620022616,2,2,2,2,2
+"glm",-1.35683530047364,5,5,6,5,5
+"superlearner",-1.63415027742637,6,5,6,5,5
+"unsemble",2.43161824374418,1,1,1,1,1
+"single",-0.362960176996322,4,3,4,3,3

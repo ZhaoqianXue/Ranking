@@ -1,0 +1,6 @@
+"method","theta_hat","rank","ci_two_left","ci_two_right","ci_left","ci_uniform_left"
+"Method1",-4.11812751264704,5,5,5,5,5
+"Method2",-1.71134248426313,4,4,4,4,4
+"Method3",0.271891340493301,3,3,3,3,3
+"Method4",1.94788605351885,2,2,2,2,2
+"Method5",3.60969260289802,1,1,1,1,1

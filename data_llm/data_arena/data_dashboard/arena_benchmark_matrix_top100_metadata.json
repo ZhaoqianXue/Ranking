@@ -1,0 +1,16 @@
+{
+  "dataset_name": "top100",
+  "n_benchmarks": 7,
+  "n_models": 52,
+  "benchmarks": [
+    "instruction_following",
+    "coding",
+    "multi_turn",
+    "hard_prompt",
+    "creative_writing",
+    "math",
+    "longer_query"
+  ],
+  "created_at": "2025-10-30 06:07:02.108242",
+  "description": "Arena benchmark matrix derived from spectral comparison data"
+}

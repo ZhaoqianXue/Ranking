@@ -1,0 +1,6 @@
+model,autogluon,tabpfn,glm,superlearner,unsemble,single,description
+model_a,0.85,0.82,0.88,0.86,0.84,0.83,First model description
+model_b,0.87,0.85,0.86,0.88,0.87,0.85,Second model description
+model_c,0.83,0.86,0.84,0.85,0.86,0.87,Third model description
+model_d,0.89,0.88,0.87,0.89,0.88,0.86,Fourth model description
+model_e,0.86,0.84,0.89,0.87,0.85,0.88,Fifth model description

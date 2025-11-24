@@ -1,0 +1,61 @@
+{
+  "conversion_summary": {
+    "datasets_converted": [
+      "top100"
+    ],
+    "created_at": "2025-10-30 06:07:02.111332",
+    "note": "Converted from spectral comparison format to dashboard benchmark matrix format"
+  },
+  "datasets": {
+    "top100": {
+      "benchmark_matrix_csv": "/Users/zhaoqianxue/Desktop/UPenn/Ranking/data_llm/data_arena/data_dashboard/arena_benchmark_matrix_top100.csv",
+      "benchmark_matrix_metadata": "/Users/zhaoqianxue/Desktop/UPenn/Ranking/data_llm/data_arena/data_dashboard/arena_benchmark_matrix_top100_metadata.json",
+      "category_stats": {
+        "total_comparisons": 10000,
+        "category_distribution": {
+          "general": 3669,
+          "coding": 1975,
+          "instruction_following": 1398,
+          "hard_prompt": 867,
+          "creative_writing": 855,
+          "math": 805,
+          "multi_turn": 369,
+          "longer_query": 62
+        },
+        "categories": [
+          "general",
+          "coding",
+          "instruction_following",
+          "hard_prompt",
+          "creative_writing",
+          "math",
+          "multi_turn",
+          "longer_query"
+        ],
+        "category_percentages": {
+          "general": 36.69,
+          "coding": 19.75,
+          "instruction_following": 13.98,
+          "hard_prompt": 8.67,
+          "creative_writing": 8.55,
+          "math": 8.05,
+          "multi_turn": 3.69,
+          "longer_query": 0.62
+        }
+      },
+      "matrix_shape": [
+        7,
+        53
+      ],
+      "benchmarks": [
+        "instruction_following",
+        "coding",
+        "multi_turn",
+        "hard_prompt",
+        "creative_writing",
+        "math",
+        "longer_query"
+      ]
+    }
+  }
+}

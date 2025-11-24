@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-10-12T00:18:45.638225",
+  "total_models": 4576,
+  "benchmarks": [
+    "ifeval",
+    "bbh",
+    "math",
+    "gpqa",
+    "musr",
+    "mmlu_pro"
+  ],
+  "source": "https://huggingface.co/datasets/open-llm-leaderboard/contents"
+}

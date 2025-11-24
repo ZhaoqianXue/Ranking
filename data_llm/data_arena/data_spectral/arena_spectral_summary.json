@@ -1,0 +1,38 @@
+{
+  "processing_summary": {
+    "total_comparisons": 10000,
+    "total_models": 52,
+    "datasets_created": [
+      "full",
+      "top50",
+      "top100"
+    ],
+    "created_at": "2025-10-30 07:00:57.805404"
+  },
+  "datasets": {
+    "full": {
+      "csv": "/Users/zhaoqianxue/Desktop/UPenn/Ranking/data_llm/data_arena/data_spectral/arena_spectral_full.csv",
+      "metadata": "/Users/zhaoqianxue/Desktop/UPenn/Ranking/data_llm/data_arena/data_spectral/arena_spectral_full_metadata.json",
+      "shape": [
+        10000,
+        53
+      ]
+    },
+    "top50": {
+      "csv": "/Users/zhaoqianxue/Desktop/UPenn/Ranking/data_llm/data_arena/data_spectral/arena_spectral_top50.csv",
+      "metadata": "/Users/zhaoqianxue/Desktop/UPenn/Ranking/data_llm/data_arena/data_spectral/arena_spectral_top50_metadata.json",
+      "shape": [
+        9941,
+        51
+      ]
+    },
+    "top100": {
+      "csv": "/Users/zhaoqianxue/Desktop/UPenn/Ranking/data_llm/data_arena/data_spectral/arena_spectral_top100.csv",
+      "metadata": "/Users/zhaoqianxue/Desktop/UPenn/Ranking/data_llm/data_arena/data_spectral/arena_spectral_top100_metadata.json",
+      "shape": [
+        10000,
+        53
+      ]
+    }
+  }
+}

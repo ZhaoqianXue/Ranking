@@ -1,0 +1,565 @@
+{
+  "job_id": ".",
+  "params": {
+    "bigbetter": true,
+    "B": 2000,
+    "seed": 42
+  },
+  "methods": [
+    {
+      "name": "CombinHorizon__huihui-ai-abliterated-Qwen2.5-32B-Inst-BaseMerge-TIES",
+      "theta_hat": -0.2328,
+      "rank": 34,
+      "ci_two_sided": [
+        26,
+        46
+      ],
+      "ci_left": 28,
+      "ci_uniform_left": 23
+    },
+    {
+      "name": "CombinHorizon__zetasepic-abliteratedV2-Qwen2.5-32B-Inst-BaseMerge-TIES",
+      "theta_hat": -0.2752,
+      "rank": 36,
+      "ci_two_sided": [
+        30,
+        46
+      ],
+      "ci_left": 31,
+      "ci_uniform_left": 25
+    },
+    {
+      "name": "EVA-UNIT-01__EVA-Qwen2.5-72B-v0.2",
+      "theta_hat": -0.2147,
+      "rank": 33,
+      "ci_two_sided": [
+        25,
+        45
+      ],
+      "ci_left": 26,
+      "ci_uniform_left": 22
+    },
+    {
+      "name": "FINGU-AI__RomboUltima-32B",
+      "theta_hat": -0.2706,
+      "rank": 35,
+      "ci_two_sided": [
+        30,
+        46
+      ],
+      "ci_left": 31,
+      "ci_uniform_left": 25
+    },
+    {
+      "name": "JungZoona__T3Q-Qwen2.5-14B-Instruct-1M-e3",
+      "theta_hat": 0.3958,
+      "rank": 10,
+      "ci_two_sided": [
+        3,
+        16
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "JungZoona__T3Q-qwen2.5-14b-v1.0-e3",
+      "theta_hat": 0.4964,
+      "rank": 5,
+      "ci_two_sided": [
+        1,
+        11
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "MaziyarPanahi__calme-2.1-qwen2-72b",
+      "theta_hat": -0.6409,
+      "rank": 49,
+      "ci_two_sided": [
+        46,
+        50
+      ],
+      "ci_left": 47,
+      "ci_uniform_left": 43
+    },
+    {
+      "name": "MaziyarPanahi__calme-2.1-qwen2.5-72b",
+      "theta_hat": 0.3711,
+      "rank": 11,
+      "ci_two_sided": [
+        4,
+        17
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "MaziyarPanahi__calme-2.1-rys-78b",
+      "theta_hat": -0.3194,
+      "rank": 41,
+      "ci_two_sided": [
+        31,
+        48
+      ],
+      "ci_left": 31,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "MaziyarPanahi__calme-2.2-qwen2-72b",
+      "theta_hat": -0.6451,
+      "rank": 50,
+      "ci_two_sided": [
+        46,
+        50
+      ],
+      "ci_left": 47,
+      "ci_uniform_left": 44
+    },
+    {
+      "name": "MaziyarPanahi__calme-2.2-qwen2.5-72b",
+      "theta_hat": 0.4075,
+      "rank": 8,
+      "ci_two_sided": [
+        3,
+        16
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "MaziyarPanahi__calme-2.2-rys-78b",
+      "theta_hat": -0.3644,
+      "rank": 43,
+      "ci_two_sided": [
+        32,
+        48
+      ],
+      "ci_left": 33,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "MaziyarPanahi__calme-2.3-rys-78b",
+      "theta_hat": -0.3112,
+      "rank": 39,
+      "ci_two_sided": [
+        31,
+        48
+      ],
+      "ci_left": 31,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "MaziyarPanahi__calme-2.4-rys-78b",
+      "theta_hat": 0.0288,
+      "rank": 24,
+      "ci_two_sided": [
+        15,
+        32
+      ],
+      "ci_left": 16,
+      "ci_uniform_left": 12
+    },
+    {
+      "name": "MaziyarPanahi__calme-3.1-instruct-78b",
+      "theta_hat": 0.0495,
+      "rank": 22,
+      "ci_two_sided": [
+        15,
+        31
+      ],
+      "ci_left": 15,
+      "ci_uniform_left": 12
+    },
+    {
+      "name": "MaziyarPanahi__calme-3.2-instruct-78b",
+      "theta_hat": 0.1453,
+      "rank": 18,
+      "ci_two_sided": [
+        12,
+        29
+      ],
+      "ci_left": 12,
+      "ci_uniform_left": 8
+    },
+    {
+      "name": "OpenBuddy__openbuddy-llama3.3-70b-v24.1-131k",
+      "theta_hat": -0.2877,
+      "rank": 38,
+      "ci_two_sided": [
+        30,
+        46
+      ],
+      "ci_left": 31,
+      "ci_uniform_left": 26
+    },
+    {
+      "name": "Qwen__Qwen2.5-32B-Instruct",
+      "theta_hat": 0.061,
+      "rank": 21,
+      "ci_two_sided": [
+        12,
+        31
+      ],
+      "ci_left": 15,
+      "ci_uniform_left": 12
+    },
+    {
+      "name": "Qwen__Qwen2.5-72B-Instruct",
+      "theta_hat": 0.5541,
+      "rank": 4,
+      "ci_two_sided": [
+        1,
+        11
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Sakalti__ultiima-32B",
+      "theta_hat": -0.0371,
+      "rank": 28,
+      "ci_two_sided": [
+        18,
+        34
+      ],
+      "ci_left": 18,
+      "ci_uniform_left": 16
+    },
+    {
+      "name": "Sakalti__ultiima-72B",
+      "theta_hat": 0.4241,
+      "rank": 7,
+      "ci_two_sided": [
+        1,
+        15
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Sakalti__ultiima-72B-v1.5",
+      "theta_hat": 0.6322,
+      "rank": 1,
+      "ci_two_sided": [
+        1,
+        7
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Saxo__Linkbricks-Horizon-AI-Avengers-V1-32B",
+      "theta_hat": -0.0359,
+      "rank": 27,
+      "ci_two_sided": [
+        17,
+        34
+      ],
+      "ci_left": 18,
+      "ci_uniform_left": 15
+    },
+    {
+      "name": "Saxo__Linkbricks-Horizon-AI-Avengers-V3-32B",
+      "theta_hat": 0.0356,
+      "rank": 23,
+      "ci_two_sided": [
+        15,
+        32
+      ],
+      "ci_left": 16,
+      "ci_uniform_left": 12
+    },
+    {
+      "name": "Saxo__Linkbricks-Horizon-AI-Avengers-V4-32B",
+      "theta_hat": -0.3785,
+      "rank": 44,
+      "ci_two_sided": [
+        33,
+        48
+      ],
+      "ci_left": 33,
+      "ci_uniform_left": 31
+    },
+    {
+      "name": "Saxo__Linkbricks-Horizon-AI-Avengers-V5-32B",
+      "theta_hat": -0.3417,
+      "rank": 42,
+      "ci_two_sided": [
+        31,
+        48
+      ],
+      "ci_left": 32,
+      "ci_uniform_left": 30
+    },
+    {
+      "name": "Saxo__Linkbricks-Horizon-AI-Avengers-V6-32B",
+      "theta_hat": -0.0129,
+      "rank": 25,
+      "ci_two_sided": [
+        17,
+        33
+      ],
+      "ci_left": 17,
+      "ci_uniform_left": 15
+    },
+    {
+      "name": "Undi95__MG-FinalMix-72B",
+      "theta_hat": -0.5211,
+      "rank": 48,
+      "ci_two_sided": [
+        39,
+        50
+      ],
+      "ci_left": 42,
+      "ci_uniform_left": 35
+    },
+    {
+      "name": "dfurman__CalmeRys-78B-Orpo-v0.1",
+      "theta_hat": 0.0724,
+      "rank": 20,
+      "ci_two_sided": [
+        12,
+        30
+      ],
+      "ci_left": 15,
+      "ci_uniform_left": 12
+    },
+    {
+      "name": "dfurman__Qwen2-72B-Orpo-v0.1",
+      "theta_hat": -0.5142,
+      "rank": 47,
+      "ci_two_sided": [
+        39,
+        50
+      ],
+      "ci_left": 42,
+      "ci_uniform_left": 35
+    },
+    {
+      "name": "dnhkng__RYS-XLarge",
+      "theta_hat": -0.2776,
+      "rank": 37,
+      "ci_two_sided": [
+        30,
+        46
+      ],
+      "ci_left": 31,
+      "ci_uniform_left": 25
+    },
+    {
+      "name": "dnhkng__RYS-XLarge-base",
+      "theta_hat": -0.436,
+      "rank": 46,
+      "ci_two_sided": [
+        34,
+        50
+      ],
+      "ci_left": 35,
+      "ci_uniform_left": 33
+    },
+    {
+      "name": "ehristoforu__qwen2.5-test-32b-it",
+      "theta_hat": 0.2092,
+      "rank": 16,
+      "ci_two_sided": [
+        8,
+        24
+      ],
+      "ci_left": 9,
+      "ci_uniform_left": 6
+    },
+    {
+      "name": "fluently-lm__FluentlyLM-Prinum",
+      "theta_hat": 0.2309,
+      "rank": 15,
+      "ci_two_sided": [
+        7,
+        24
+      ],
+      "ci_left": 8,
+      "ci_uniform_left": 5
+    },
+    {
+      "name": "huihui-ai__Qwen2.5-72B-Instruct-abliterated",
+      "theta_hat": 0.3991,
+      "rank": 9,
+      "ci_two_sided": [
+        3,
+        16
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "maldv__Awqward2.5-32B-Instruct",
+      "theta_hat": 0.1693,
+      "rank": 17,
+      "ci_two_sided": [
+        11,
+        28
+      ],
+      "ci_left": 12,
+      "ci_uniform_left": 7
+    },
+    {
+      "name": "maldv__Qwentile2.5-32B-Instruct",
+      "theta_hat": -0.1558,
+      "rank": 32,
+      "ci_two_sided": [
+        22,
+        43
+      ],
+      "ci_left": 23,
+      "ci_uniform_left": 20
+    },
+    {
+      "name": "meta-llama__Llama-3.3-70B-Instruct",
+      "theta_hat": -0.3159,
+      "rank": 40,
+      "ci_two_sided": [
+        31,
+        48
+      ],
+      "ci_left": 31,
+      "ci_uniform_left": 29
+    },
+    {
+      "name": "mistralai__Mistral-Large-Instruct-2411",
+      "theta_hat": -0.0252,
+      "rank": 26,
+      "ci_two_sided": [
+        17,
+        34
+      ],
+      "ci_left": 18,
+      "ci_uniform_left": 15
+    },
+    {
+      "name": "newsbang__Homer-v1.0-Qwen2.5-72B",
+      "theta_hat": 0.5978,
+      "rank": 3,
+      "ci_two_sided": [
+        1,
+        10
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "raphgg__test-2.5-72B",
+      "theta_hat": 0.2685,
+      "rank": 13,
+      "ci_two_sided": [
+        6,
+        21
+      ],
+      "ci_left": 7,
+      "ci_uniform_left": 5
+    },
+    {
+      "name": "rombodawg__Rombos-LLM-V2.5-Qwen-32b",
+      "theta_hat": 0.1173,
+      "rank": 19,
+      "ci_two_sided": [
+        12,
+        30
+      ],
+      "ci_left": 12,
+      "ci_uniform_left": 11
+    },
+    {
+      "name": "rombodawg__Rombos-LLM-V2.5-Qwen-72b",
+      "theta_hat": 0.4707,
+      "rank": 6,
+      "ci_two_sided": [
+        1,
+        14
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "rubenroy__Gilgamesh-72B",
+      "theta_hat": 0.2668,
+      "rank": 14,
+      "ci_two_sided": [
+        6,
+        21
+      ],
+      "ci_left": 7,
+      "ci_uniform_left": 5
+    },
+    {
+      "name": "shuttleai__shuttle-3",
+      "theta_hat": 0.6268,
+      "rank": 2,
+      "ci_two_sided": [
+        1,
+        7
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "ssmits__Qwen2.5-95B-Instruct",
+      "theta_hat": -0.0792,
+      "rank": 30,
+      "ci_two_sided": [
+        19,
+        38
+      ],
+      "ci_left": 20,
+      "ci_uniform_left": 17
+    },
+    {
+      "name": "tanliboy__lambda-qwen2.5-32b-dpo-test",
+      "theta_hat": -0.0525,
+      "rank": 29,
+      "ci_two_sided": [
+        18,
+        34
+      ],
+      "ci_left": 19,
+      "ci_uniform_left": 16
+    },
+    {
+      "name": "tomasmcm__sky-t1-coder-32b-flash",
+      "theta_hat": -0.4163,
+      "rank": 45,
+      "ci_two_sided": [
+        33,
+        48
+      ],
+      "ci_left": 34,
+      "ci_uniform_left": 32
+    },
+    {
+      "name": "zetasepic__Qwen2.5-32B-Instruct-abliterated-v2",
+      "theta_hat": -0.1377,
+      "rank": 31,
+      "ci_two_sided": [
+        21,
+        42
+      ],
+      "ci_left": 22,
+      "ci_uniform_left": 19
+    },
+    {
+      "name": "zetasepic__Qwen2.5-72B-Instruct-abliterated",
+      "theta_hat": 0.2694,
+      "rank": 12,
+      "ci_two_sided": [
+        6,
+        21
+      ],
+      "ci_left": 7,
+      "ci_uniform_left": 5
+    }
+  ],
+  "metadata": {
+    "n_samples": 40,
+    "k_methods": 50,
+    "runtime_sec": 25.3779
+  }
+}

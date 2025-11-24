@@ -1,0 +1,6 @@
+classifier,true_positives,false_positives,true_negatives,false_negatives,accuracy,precision,recall,f1,description
+nb,850,150,850,150,0.85,0.85,0.85,0.85,Naive Bayes
+dt,880,120,880,120,0.88,0.88,0.88,0.88,Decision Tree
+rf,920,80,920,80,0.92,0.92,0.92,0.92,Random Forest
+svm,890,110,890,110,0.89,0.89,0.89,0.89,SVM
+knn,870,130,870,130,0.87,0.87,0.87,0.87,KNN

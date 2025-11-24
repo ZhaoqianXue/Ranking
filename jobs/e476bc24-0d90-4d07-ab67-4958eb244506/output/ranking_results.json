@@ -1,0 +1,70 @@
+{
+  "job_id": "e476bc24-0d90-4d07-ab67-4958eb244506",
+  "params": {
+    "bigbetter": true,
+    "B": 100,
+    "seed": 42
+  },
+  "methods": [
+    {
+      "name": "Method1",
+      "theta_hat": -4.1181,
+      "rank": 5,
+      "ci_two_sided": [
+        5,
+        5
+      ],
+      "ci_left": 5,
+      "ci_uniform_left": 5
+    },
+    {
+      "name": "Method2",
+      "theta_hat": -1.7113,
+      "rank": 4,
+      "ci_two_sided": [
+        4,
+        4
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 4
+    },
+    {
+      "name": "Method3",
+      "theta_hat": 0.2719,
+      "rank": 3,
+      "ci_two_sided": [
+        3,
+        3
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 3
+    },
+    {
+      "name": "Method4",
+      "theta_hat": 1.9479,
+      "rank": 2,
+      "ci_two_sided": [
+        2,
+        2
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "Method5",
+      "theta_hat": 3.6097,
+      "rank": 1,
+      "ci_two_sided": [
+        1,
+        1
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    }
+  ],
+  "metadata": {
+    "n_samples": 1000,
+    "k_methods": 5,
+    "runtime_sec": 1.2107
+  }
+}

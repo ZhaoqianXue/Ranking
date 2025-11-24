@@ -1,0 +1,6 @@
+timestamp,experiment_id,model_name,accuracy,loss,f1,description
+2024-01-01T10:00:00,exp_001,gpt4,0.92,0.31,0.91,GPT-4 test
+2024-01-01T11:00:00,exp_002,claude,0.89,0.35,0.88,Claude test
+2024-01-01T12:00:00,exp_003,gemini,0.87,0.38,0.86,Gemini test
+2024-01-01T13:00:00,exp_004,llama,0.85,0.42,0.84,Llama test
+2024-01-01T14:00:00,exp_005,mistral,0.88,0.36,0.87,Mistral test

@@ -1,0 +1,6 @@
+sample_id,case_num,method_1,method_2,method_3,description
+1001,1,0.85,0.82,0.88,Sample 1
+1002,2,0.92,0.89,0.91,Sample 2
+1003,3,0.78,0.85,0.83,Sample 3
+1004,4,0.88,0.92,0.86,Sample 4
+1005,5,0.79,0.88,0.84,Sample 5

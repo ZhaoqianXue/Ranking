@@ -1,0 +1,1206 @@
+{
+  "processing_timestamp": "2025-11-03T01:50:41.230069",
+  "total_combinations": 120,
+  "combinations": [
+    {
+      "combination_name": "longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9344
+    },
+    {
+      "combination_name": "creative_writing_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0015
+    },
+    {
+      "combination_name": "creative_writing_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.1117
+    },
+    {
+      "combination_name": "longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8199
+    },
+    {
+      "combination_name": "math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 1.0028
+    },
+    {
+      "combination_name": "creative_writing_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0061
+    },
+    {
+      "combination_name": "creative_writing_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9456
+    },
+    {
+      "combination_name": "instruction_following_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_instruction_following_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0818
+    },
+    {
+      "combination_name": "instruction_following_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_instruction_following_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.1382
+    },
+    {
+      "combination_name": "creative_writing_instruction_following",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_instruction_following.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.2081
+    },
+    {
+      "combination_name": "longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9173
+    },
+    {
+      "combination_name": "creative_writing_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.8956
+    },
+    {
+      "combination_name": "creative_writing_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 1.0053
+    },
+    {
+      "combination_name": "instruction_following_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_instruction_following_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0612
+    },
+    {
+      "combination_name": "instruction_following_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_instruction_following_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0447
+    },
+    {
+      "combination_name": "creative_writing_instruction_following_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_instruction_following_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.1197
+    },
+    {
+      "combination_name": "creative_writing_instruction_following_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_instruction_following_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.1586
+    },
+    {
+      "combination_name": "coding_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8274
+    },
+    {
+      "combination_name": "creative_writing_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9395
+    },
+    {
+      "combination_name": "coding_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9329
+    },
+    {
+      "combination_name": "coding_creative_writing",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8982
+    },
+    {
+      "combination_name": "instruction_following_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_instruction_following_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9903
+    },
+    {
+      "combination_name": "instruction_following_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_instruction_following_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0376
+    },
+    {
+      "combination_name": "creative_writing_instruction_following_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_instruction_following_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0954
+    },
+    {
+      "combination_name": "creative_writing_instruction_following_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_instruction_following_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0792
+    },
+    {
+      "combination_name": "coding_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8891
+    },
+    {
+      "combination_name": "coding_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.878
+    },
+    {
+      "combination_name": "coding_creative_writing_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8609
+    },
+    {
+      "combination_name": "hard_prompt_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9587
+    },
+    {
+      "combination_name": "coding_creative_writing_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9469
+    },
+    {
+      "combination_name": "hard_prompt_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0095
+    },
+    {
+      "combination_name": "instruction_following_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_instruction_following_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/instruction_following_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9941
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0442
+    },
+    {
+      "combination_name": "creative_writing_instruction_following_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_instruction_following_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0316
+    },
+    {
+      "combination_name": "coding_instruction_following",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_instruction_following.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8661
+    },
+    {
+      "combination_name": "creative_writing_instruction_following_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_instruction_following_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0674
+    },
+    {
+      "combination_name": "coding_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8472
+    },
+    {
+      "combination_name": "coding_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9234
+    },
+    {
+      "combination_name": "coding_creative_writing_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9085
+    },
+    {
+      "combination_name": "hard_prompt_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9724
+    },
+    {
+      "combination_name": "coding_creative_writing_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8984
+    },
+    {
+      "combination_name": "hard_prompt_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9494
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0045
+    },
+    {
+      "combination_name": "coding_instruction_following_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_instruction_following_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8398
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0427
+    },
+    {
+      "combination_name": "creative_writing_instruction_following_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_instruction_following_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_instruction_following_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0284
+    },
+    {
+      "combination_name": "coding_instruction_following_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_instruction_following_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9092
+    },
+    {
+      "combination_name": "coding_creative_writing_instruction_following",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_instruction_following.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9032
+    },
+    {
+      "combination_name": "hard_prompt_instruction_following",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_instruction_following.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0709
+    },
+    {
+      "combination_name": "coding_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8913
+    },
+    {
+      "combination_name": "coding_creative_writing_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8699
+    },
+    {
+      "combination_name": "hard_prompt_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9216
+    },
+    {
+      "combination_name": "coding_creative_writing_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9353
+    },
+    {
+      "combination_name": "hard_prompt_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.979
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0085
+    },
+    {
+      "combination_name": "coding_instruction_following_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_instruction_following_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8814
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9882
+    },
+    {
+      "combination_name": "coding_instruction_following_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_instruction_following_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8733
+    },
+    {
+      "combination_name": "coding_creative_writing_instruction_following_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_instruction_following_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.8839
+    },
+    {
+      "combination_name": "hard_prompt_instruction_following_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_instruction_following_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0353
+    },
+    {
+      "combination_name": "coding_creative_writing_instruction_following_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_instruction_following_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9221
+    },
+    {
+      "combination_name": "hard_prompt_instruction_following_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_instruction_following_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0652
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_instruction_following",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_instruction_following.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0915
+    },
+    {
+      "combination_name": "coding_creative_writing_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9062
+    },
+    {
+      "combination_name": "hard_prompt_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9463
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9619
+    },
+    {
+      "combination_name": "coding_hard_prompt",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9241
+    },
+    {
+      "combination_name": "coding_instruction_following_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_instruction_following_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8516
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9949
+    },
+    {
+      "combination_name": "coding_instruction_following_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_instruction_following_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.907
+    },
+    {
+      "combination_name": "coding_creative_writing_instruction_following_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_instruction_following_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9001
+    },
+    {
+      "combination_name": "hard_prompt_instruction_following_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_instruction_following_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0342
+    },
+    {
+      "combination_name": "coding_creative_writing_instruction_following_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_instruction_following_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8889
+    },
+    {
+      "combination_name": "hard_prompt_instruction_following_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_instruction_following_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.022
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_instruction_following_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_instruction_following_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0589
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_instruction_following_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_instruction_following_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0835
+    },
+    {
+      "combination_name": "coding_hard_prompt_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8997
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9709
+    },
+    {
+      "combination_name": "coding_hard_prompt_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9501
+    },
+    {
+      "combination_name": "coding_instruction_following_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_instruction_following_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_instruction_following_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8844
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9324
+    },
+    {
+      "combination_name": "coding_creative_writing_instruction_following_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_instruction_following_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.8693
+    },
+    {
+      "combination_name": "hard_prompt_instruction_following_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_instruction_following_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9964
+    },
+    {
+      "combination_name": "coding_creative_writing_instruction_following_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_instruction_following_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9178
+    },
+    {
+      "combination_name": "hard_prompt_instruction_following_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_instruction_following_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0229
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_instruction_following_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_instruction_following_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0549
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_instruction_following_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_instruction_following_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0436
+    },
+    {
+      "combination_name": "coding_hard_prompt_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9258
+    },
+    {
+      "combination_name": "coding_hard_prompt_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9198
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.91
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9554
+    },
+    {
+      "combination_name": "coding_creative_writing_instruction_following_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_instruction_following_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_instruction_following_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8966
+    },
+    {
+      "combination_name": "hard_prompt_instruction_following_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_hard_prompt_instruction_following_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/hard_prompt_instruction_following_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9997
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_instruction_following_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_instruction_following_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0195
+    },
+    {
+      "combination_name": "coding_hard_prompt_instruction_following",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_instruction_following.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9127
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_instruction_following_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_instruction_following_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.042
+    },
+    {
+      "combination_name": "coding_hard_prompt_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8996
+    },
+    {
+      "combination_name": "coding_hard_prompt_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9421
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9331
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9273
+    },
+    {
+      "combination_name": "coding_hard_prompt_instruction_following_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_instruction_following_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.8987
+    },
+    {
+      "combination_name": "creative_writing_hard_prompt_instruction_following_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_creative_writing_hard_prompt_instruction_following_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/creative_writing_hard_prompt_instruction_following_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 1.0201
+    },
+    {
+      "combination_name": "coding_hard_prompt_instruction_following_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_instruction_following_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9329
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_instruction_following",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_instruction_following.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9404
+    },
+    {
+      "combination_name": "coding_hard_prompt_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9219
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9084
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9474
+    },
+    {
+      "combination_name": "coding_hard_prompt_instruction_following_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_instruction_following_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9144
+    },
+    {
+      "combination_name": "coding_hard_prompt_instruction_following_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_instruction_following_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9093
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_instruction_following_longer_query",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_instruction_following_longer_query.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_longer_query",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_longer_query/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9262
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_instruction_following_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_instruction_following_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9481
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9285
+    },
+    {
+      "combination_name": "coding_hard_prompt_instruction_following_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_instruction_following_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.8933
+    },
+    {
+      "combination_name": "coding_hard_prompt_instruction_following_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_instruction_following_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9285
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_instruction_following_longer_query_math",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_instruction_following_longer_query_math.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_longer_query_math",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_longer_query_math/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9345
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_instruction_following_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_instruction_following_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9236
+    },
+    {
+      "combination_name": "coding_hard_prompt_instruction_following_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_hard_prompt_instruction_following_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_hard_prompt_instruction_following_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9124
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_instruction_following_longer_query_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_instruction_following_longer_query_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_longer_query_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_longer_query_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9119
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_instruction_following_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_instruction_following_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro",
+      "top_score": 0.9339
+    },
+    {
+      "combination_name": "coding_creative_writing_hard_prompt_instruction_following_longer_query_math_multi_turn",
+      "success": true,
+      "input_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_processing/all_combinations/arena_spectral_coding_creative_writing_hard_prompt_instruction_following_longer_query_math_multi_turn.csv",
+      "output_dir": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_longer_query_math_multi_turn",
+      "results_file": "/root/autodl-tmp/Ranking/data_llm/data_arena/data_ranking/current/all_combinations/coding_creative_writing_hard_prompt_instruction_following_longer_query_math_multi_turn/ranking_results.json",
+      "num_models": 52,
+      "top_model": "gemini-2.5-pro-preview-03-25",
+      "top_score": 0.9205
+    }
+  ]
+}

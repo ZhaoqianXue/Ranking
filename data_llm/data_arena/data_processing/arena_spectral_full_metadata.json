@@ -1,0 +1,25 @@
+{
+  "dataset_type": "full",
+  "n_comparisons": 135634,
+  "n_models": 53,
+  "matrix_shape": [
+    117947,
+    54
+  ],
+  "created_at": "2025-11-02 00:39:02.467305",
+  "winner_distribution": {
+    "total_comparisons": 135634
+  },
+  "model_counts": {
+    "claude-opus-4-20250514": 10092,
+    "gemini-2.5-flash": 9668,
+    "gemini-2.5-pro": 9219,
+    "mistral-medium-2505": 9135,
+    "qwen3-235b-a22b-no-thinking": 9076,
+    "o3-2025-04-16": 8529,
+    "claude-sonnet-4-20250514": 8295,
+    "chatgpt-4o-latest-20250326": 7650,
+    "gemma-3-27b-it": 7326,
+    "claude-3-7-sonnet-20250219-thinking-32k": 7149
+  }
+}

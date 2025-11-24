@@ -1,0 +1,7 @@
+{
+  "timestamp": "2025-10-13T00:38:17.790466",
+  "source_dataset": "lmarena-ai/arena-human-preference-140k",
+  "total_rows": 1000,
+  "description": "Arena Human Preference Dataset - First 1000 rows for exploration",
+  "collection_method": "API batch download"
+}

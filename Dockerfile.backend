@@ -1,0 +1,30 @@
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# Install system dependencies and R
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    r-base r-base-dev build-essential gfortran \
+    libcurl4-openssl-dev libssl-dev libxml2-dev \
+    libblas-dev liblapack-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install required R packages
+RUN R -e "install.packages(c('readr','dplyr','jsonlite'), repos='https://cloud.r-project.org')"
+
+WORKDIR /opt/render/project/src
+
+# Install Python dependencies
+COPY requirements.backend.txt ./requirements.backend.txt
+RUN pip install --no-cache-dir -r requirements.backend.txt
+
+# Copy project files
+COPY . .
+
+EXPOSE 8001
+
+# Default command (Render will override port with $PORT in startCommand)
+CMD ["uvicorn", "code_app.backend.main:app", "--host", "0.0.0.0", "--port", "8001"]
+
+
