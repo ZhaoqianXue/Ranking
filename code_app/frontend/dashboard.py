@@ -738,6 +738,83 @@ TABLE_STYLES = '''
     box-shadow: 0 2px 4px rgba(13, 43, 100, 0.15) !important;
 }
 
+.example-arena-card {
+    background: var(--gray-50, #f8fafc);
+    border: 1px solid var(--gray-200, #e2e8f0);
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 0.85rem;
+    color: #0f172a;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.example-arena-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+    gap: 0.75rem;
+}
+.example-arena-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #011f5b;
+    font-weight: 700;
+}
+.example-arena-meta {
+    color: #475569;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.82rem;
+    flex-wrap: wrap;
+}
+.example-arena-meta .meta-count {
+    font-weight: 600;
+}
+.example-arena-meta .meta-pill {
+    background: #f2f2f7;
+    color: #3c3c43;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    border: 1px solid #d1d1d6;
+}
+.example-arena-meta.meta-count-only {
+    margin-left: auto;
+}
+.example-arena-table {
+    border-collapse: collapse;
+    width: max-content;
+    min-width: 100%;
+    font-size: 0.8rem;
+}
+.example-arena-table th,
+.example-arena-table td {
+    padding: 0.45rem 0.4rem;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+.example-arena-table thead th {
+    background: #011f5b;
+    color: #ffffff;
+    position: sticky;
+    top: 0;
+}
+.example-arena-table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+.example-arena-scroll {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 300px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    -webkit-overflow-scrolling: touch;
+}
+
 /* Compare card styles */
 .compare-card {
     border-radius: 12px;
@@ -1151,6 +1228,8 @@ ALL_COMBINATIONS_DIR = os.path.join(
 HF_ALL_COMBINATIONS_DIR = os.path.join(
     PROJECT_ROOT, 'data_llm', 'data_huggingface', 'data_ranking', 'current', 'all_combinations'
 )
+
+EXAMPLE_ARENA_CSV = os.path.join(PROJECT_ROOT, 'demo_r', 'example_arena_style.csv')
 
 def _load_arena_benchmark_matrix():
     """Load arena_elo_full.csv and return (benchmarks_virtual:list, model_names:list, scores_matrix: np.ndarray models x benchmarks)."""
@@ -3340,52 +3419,38 @@ def create_arena_content(data):
                     with ui.element('div').classes('card-icon-container'):
                         ui.html('<span class="material-symbols-outlined card-icon">upload_file</span>')
                     ui.html('<h3 class="card-title">Upload Your LLMs Arena Results</h3>')
-                # Build example table HTML (no script tag)
-                example_models = ['Your Model', 'ChatGPT', 'Claude', 'Gemini', 'Llama', 'Qwen']
-                example_benchmarks = ['code', 'math']
-                example_rows = []
-                for i in range(100):
-                    benchmark = 'code' if i < 50 else 'math'
-                    winner = example_models[i % len(example_models)]
-                    loser = example_models[(i + 1) % len(example_models)]
-                    row = {'benchmark': benchmark}
-                    for m in example_models:
-                        row[m] = 'NaN'
-                    row[winner] = '1.0'
-                    row[loser] = '0.0'
-                    example_rows.append(row)
-
-                table_parts = []
-                table_parts.append('<div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:0.9rem; font-size:0.85rem; color:#0f172a;">')
-                table_parts.append('<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">')
-                table_parts.append('<div style="display:flex; align-items:center; gap:0.75rem; color:#011f5b; font-weight:700;">'
-                                    '<span class="material-symbols-outlined" style="font-size:1rem;">analytics</span>'
-                                    '<span>Example Arena-style CSV</span>'
-                                    '<span style="background:#e2e8f0; color:#0f172a; padding:0.2rem 0.6rem; border-radius:999px; font-size:0.75rem; font-weight:600;">Tasks: code, math</span>'
-                                    '</div>')
-                table_parts.append('<div style="color:#475569; display:flex; gap:0.75rem; align-items:center;"><span>100 rows × 7 cols</span></div>')
-                table_parts.append('</div>')
-                table_parts.append('<div style="overflow-x:auto; overflow-y:auto; max-height:300px; border-radius:8px; border:1px solid #e2e8f0; -webkit-overflow-scrolling: touch;">')
-                table_parts.append('<table style="border-collapse:collapse; font-size:0.8rem; width:max-content; min-width:100%;">')
-                table_parts.append('<thead><tr style="background:#011f5b; color:white;">')
-                table_parts.append('<th style="padding:0.45rem 0.4rem; text-align:left; border:1px solid #e2e8f0; min-width:120px;">Task</th>')
-                for m in example_models:
-                    table_parts.append(f'<th style="padding:0.45rem 0.4rem; text-align:left; border:1px solid #e2e8f0; min-width:110px;">{m}</th>')
-                table_parts.append('</tr></thead><tbody>')
-                for idx, r in enumerate(example_rows):
-                    bg = 'white' if idx % 2 == 0 else '#f8fafc'
-                    table_parts.append(f'<tr style="background:{bg};">')
-                    table_parts.append(f'<td style="padding:0.45rem 0.4rem; border:1px solid #e2e8f0;"><strong>{r["benchmark"]}</strong></td>')
-                    for m in example_models:
-                        val = r[m]
-                        if val == 'NaN':
-                            cell_content = '&mdash;'
-                        else:
-                            cell_content = f'<strong>{val}</strong>'
-                        table_parts.append(f'<td style="padding:0.45rem 0.4rem; border:1px solid #e2e8f0;">{cell_content}</td>')
-                    table_parts.append('</tr>')
-                table_parts.append('</tbody></table></div></div>')
-                example_table_html = ''.join(table_parts)
+                example_table_html = ''
+                example_meta_tasks = ''
+                example_meta_count = '<div class="example-arena-meta"><span class="meta-count">Example file not available</span></div>'
+                try:
+                    example_df = pd.read_csv(EXAMPLE_ARENA_CSV)
+                    row_count, col_count = example_df.shape
+                    tasks = []
+                    if 'Task' in example_df.columns:
+                        tasks = sorted(example_df['Task'].dropna().astype(str).unique().tolist())
+                    task_label = ', '.join(tasks)
+                    example_meta_count = f'<div class="example-arena-meta meta-count-only"><span class="meta-count">{row_count} rows × {col_count} cols</span></div>'
+                    example_meta_tasks = f'<div class="example-arena-meta meta-tasks"><span class="meta-pill">Tasks: {task_label}</span></div>' if task_label else ''
+                    headers = example_df.columns.tolist()
+                    rows = example_df.replace({np.nan: '--'}).astype(str).values.tolist()
+                    table_parts = []
+                    table_parts.append('<div class="data-preview-table-scroll" style="overflow-x: auto; overflow-y: visible; width: 100%; border-radius: 8px; -webkit-overflow-scrolling: touch; position: relative;">')
+                    table_parts.append('<table style="border-collapse: collapse; font-size: 0.75rem; line-height: 1.2; width: max-content; min-width: 100%; table-layout: auto;">')
+                    table_parts.append('<thead><tr style="background: #011f5b;">')
+                    for header in headers:
+                        table_parts.append(f'<th style="padding: 0.4rem 0.3rem; text-align: left; border: 1px solid var(--gray-200); font-weight: 600; color: white; min-width: 80px;">{header}</th>')
+                    table_parts.append('</tr></thead><tbody>')
+                    for row in rows:
+                        table_parts.append('<tr style="background: white;">')
+                        for cell in row:
+                            cell_val = cell if cell not in (None, '') else '--'
+                            table_parts.append(f'<td style="padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px; text-align: left;">{cell_val}</td>')
+                        table_parts.append('</tr>')
+                    table_parts.append('</tbody></table></div>')
+                    example_table_html = ''.join(table_parts)
+                except Exception as e:
+                    logger.warning(f"Failed to load example Arena CSV: {e}")
+                    example_table_html = f'<div style="color:#b91c1c; padding:0.5rem 0;">Failed to load example CSV: {e}</div>'
 
                 ui.html(f'''
                     <div class="card-description">
@@ -3394,9 +3459,21 @@ def create_arena_content(data):
                             <li><span class="material-symbols-outlined">table</span><div class="benchmark-item"><strong>File format:</strong> Arena-style CSV of pairwise battles. Include a task tag column (e.g., <code>Task</code>) to label each row; model columns (and order) must stay consistent in every row.</div></li>
                             <li><span class="material-symbols-outlined">adjust</span><div class="benchmark-item"><strong>Row data:</strong> One battle per row. Winner = <code>1.0</code>, loser = <code>0.0</code>, all other models = <code>NaN</code>.</div></li>
                             <li><span class="material-symbols-outlined">query_stats</span><div class="benchmark-item"><strong>Result:</strong> Spectral scores, ranks, and confidence intervals computed only for models in your file (no merge with the site leaderboard).</div></li>
-                            <li><span class="material-symbols-outlined">folder_open</span><div class="benchmark-item"><strong>Example data:</strong></div></li>
+                            <li><span class="material-symbols-outlined">insights</span><div class="benchmark-item"><strong>Quick example:</strong> If you upload the Example Arena-style CSV above, the job will run on exactly two tasks (<code>code</code> and <code>math</code>) and will output spectral ranks plus confidence intervals for the models listed in that file (ChatGPT, Claude, Gemini, Llama, Qwen, and Your Model) restricted to those two tasks.</div></li>
                         </ul>
-                        {example_table_html}
+                        <div class="example-arena-card">
+                            <div class="example-arena-header">
+                                <div class="example-arena-title">
+                                    <span class="material-symbols-outlined" style="font-size:1rem;">analytics</span>
+                                    <span>Example Arena-style CSV</span>
+                                    {example_meta_tasks}
+                                </div>
+                                {example_meta_count}
+                            </div>
+                            <div class="example-arena-scroll">
+                                {example_table_html}
+                            </div>
+                        </div>
                     </div>
                 ''')
                 with ui.element('div').classes('card-footer').style('margin-top: 1rem;'):

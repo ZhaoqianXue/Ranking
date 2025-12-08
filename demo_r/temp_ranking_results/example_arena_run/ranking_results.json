@@ -1,0 +1,81 @@
+{
+  "job_id": "temp_ranking_results",
+  "params": {
+    "bigbetter": true,
+    "B": 2000,
+    "seed": 42
+  },
+  "methods": [
+    {
+      "name": "Your Model",
+      "theta_hat": -11.7224,
+      "rank": 5,
+      "ci_two_sided": [
+        4,
+        6
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "ChatGPT",
+      "theta_hat": 24.3163,
+      "rank": 1,
+      "ci_two_sided": [
+        1,
+        5
+      ],
+      "ci_left": 1,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Claude",
+      "theta_hat": -11.1628,
+      "rank": 3,
+      "ci_two_sided": [
+        3,
+        3
+      ],
+      "ci_left": 3,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Gemini",
+      "theta_hat": 22.0137,
+      "rank": 2,
+      "ci_two_sided": [
+        2,
+        6
+      ],
+      "ci_left": 2,
+      "ci_uniform_left": 2
+    },
+    {
+      "name": "Llama",
+      "theta_hat": -11.7224,
+      "rank": 5,
+      "ci_two_sided": [
+        4,
+        6
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    },
+    {
+      "name": "Qwen",
+      "theta_hat": -11.7224,
+      "rank": 5,
+      "ci_two_sided": [
+        4,
+        6
+      ],
+      "ci_left": 4,
+      "ci_uniform_left": 1
+    }
+  ],
+  "metadata": {
+    "n_samples": 10000,
+    "k_methods": 6,
+    "runtime_sec": 5.1942
+  }
+}
