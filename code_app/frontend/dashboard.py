@@ -64,24 +64,24 @@ TABLE_STYLES = '''
 }
 /* Bold separator between core columns and benchmark columns */
 .spectral-table-html thead th.core-column + th.benchmark-column {
-    border-left: 2px solid #e2e8f0 !important;
+    border-left: 2px solid #7f9bc6 !important;
 }
 .spectral-table-html thead th.benchmark-column:first-of-type {
-    border-left: 2px solid #e2e8f0 !important;
+    border-left: 2px solid #7f9bc6 !important;
 }
 /* Also add right border to the last core column before benchmark columns */
 .spectral-table-html thead th.core-column:has(+ th.benchmark-column) {
-    border-right: 2px solid #e2e8f0 !important;
+    border-right: 2px solid #7f9bc6 !important;
 }
 .spectral-table-html tbody td.core-column + td.benchmark-column {
-    border-left: 2px solid #e2e8f0 !important;
+    border-left: 2px solid #7f9bc6 !important;
 }
 .spectral-table-html tbody td.benchmark-column:first-of-type {
-    border-left: 2px solid #e2e8f0 !important;
+    border-left: 2px solid #7f9bc6 !important;
 }
 /* Also add right border to the last core column before benchmark columns */
 .spectral-table-html tbody td.core-column:has(+ td.benchmark-column) {
-    border-right: 2px solid #e2e8f0 !important;
+    border-right: 2px solid #7f9bc6 !important;
 }
 .spectral-table-html tbody tr:nth-child(even) {
     background-color: #f8fafc; /* Zebra-striping */
@@ -1857,7 +1857,6 @@ def create_spectral_ranking_table(data, spectral_results, highlight_model: str =
             {'name': 'rank', 'label': 'Spectral Rank', 'field': 'rank', 'align': 'left', 'sortable': True, 'tooltip': spectral_rank_tooltip, 'class': 'core-column rank-header'},
             {'name': 'theta_hat', 'label': 'θ-hat Score', 'field': 'theta_hat', 'align': 'left', 'style': 'width: 90px; min-width: 90px; max-width: 90px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The estimated performance score from the Spectral Ranking algorithm. Higher is better.', 'class': 'core-column theta-hat-col'},
             {'name': 'ci_95', 'label': '95% CI', 'field': 'ci_95', 'align': 'left', 'style': 'width: 80px; min-width: 80px; max-width: 80px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% two-sided confidence interval for the rank. For example, an interval of [1, 3] means we are 95% confident the model\'s true rank is between 1 and 3.', 'class': 'core-column'},
-            {'name': 'ci_left', 'label': 'Left CI', 'field': 'ci_left', 'align': 'left', 'style': 'width: 70px; min-width: 70px; max-width: 70px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% one-sided confidence interval (lower bound) for the rank. A value of 2 means we are 95% confident the true rank is no better than 2nd place.', 'class': 'core-column'},
             {'name': 'ci_uniform', 'label': 'Uniform CI', 'field': 'ci_uniform', 'align': 'left', 'style': 'width: 80px; min-width: 80px; max-width: 80px;', 'sortable': False, 'toggleable': True, 'tooltip': 'A more conservative, uniform one-sided confidence interval for the rank that holds simultaneously for all models with 95% confidence.', 'class': 'core-column uniform-ci-col'},
             {'name': 'avg_rank', 'label': 'Average Score Rank', 'field': 'avg_rank', 'align': 'left', 'sortable': True, 'toggleable': True, 'tooltip': score_rank_tooltip, 'class': 'core-column avg-rank-col'},
         ]
@@ -1890,7 +1889,6 @@ def create_spectral_ranking_table(data, spectral_results, highlight_model: str =
             {'name': 'rank', 'label': 'Spectral Rank', 'field': 'rank', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'tooltip': spectral_rank_tooltip, 'class': 'core-column rank-header'},
             {'name': 'theta_hat', 'label': 'θ-hat Score', 'field': 'theta_hat', 'align': 'left', 'style': 'width: 80px;', 'sortable': True, 'toggleable': True, 'tooltip': 'The estimated performance score from the Spectral Ranking algorithm. Higher is better.', 'class': 'core-column theta-hat-col'},
             {'name': 'ci_95', 'label': '95% CI', 'field': 'ci_95', 'align': 'left', 'style': 'width: 85px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% two-sided confidence interval for the rank. For example, an interval of [1, 3] means we are 95% confident the model\'s true rank is between 1 and 3.', 'class': 'core-column'},
-            {'name': 'ci_left', 'label': 'Left CI', 'field': 'ci_left', 'align': 'left', 'style': 'width: 60px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% one-sided confidence interval (lower bound) for the rank. A value of 2 means we are 95% confident the true rank is no better than 2nd place.', 'class': 'core-column'},
             {'name': 'ci_uniform', 'label': 'Uniform CI', 'field': 'ci_uniform', 'align': 'left', 'style': 'width: 75px;', 'sortable': False, 'toggleable': True, 'tooltip': 'A more conservative, uniform one-sided confidence interval for the rank that holds simultaneously for all models with 95% confidence.', 'class': 'core-column uniform-ci-col'},
             {'name': 'avg_rank', 'label': 'Average Score Rank', 'field': 'avg_rank', 'align': 'left', 'style': 'width: 70px;', 'sortable': True, 'toggleable': True, 'tooltip': score_rank_tooltip, 'class': 'core-column avg-rank-col'},
         ]
@@ -2159,7 +2157,6 @@ def create_arena_ranking_table(spectral_results, is_arena_specific=False):
         {'name': 'rank', 'label': 'Spectral Rank', 'field': 'rank', 'align': 'left', 'style': 'width: 60px;', 'sortable': True, 'tooltip': 'The model\'s rank as determined by the Spectral Ranking algorithm, which provides a more robust result by considering pairwise comparisons from user preferences in head-to-head battles.'},
         {'name': 'theta_hat', 'label': 'θ-hat Score', 'field': 'theta_hat', 'align': 'left', 'style': 'width: 100px;', 'sortable': True, 'toggleable': True, 'tooltip': 'The estimated performance score from the Spectral Ranking algorithm. Higher is better.'},
         {'name': 'ci_95', 'label': '95% CI', 'field': 'ci_95', 'align': 'left', 'style': 'width: 120px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% two-sided confidence interval for the rank. For example, an interval of [1, 3] means we are 95% confident the model\'s true rank is between 1 and 3.'},
-        {'name': 'ci_left', 'label': 'Left CI', 'field': 'ci_left', 'align': 'left', 'style': 'width: 80px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% one-sided confidence interval (lower bound) for the rank. A value of 2 means we are 95% confident the true rank is no better than 2nd place.'},
         {'name': 'ci_uniform', 'label': 'Uniform CI', 'field': 'ci_uniform', 'align': 'left', 'style': 'width: 90px;', 'sortable': False, 'toggleable': True, 'tooltip': 'A more conservative, uniform one-sided confidence interval for the rank that holds simultaneously for all models with 95% confidence.'},
     ]
 
@@ -3333,6 +3330,80 @@ def create_arena_content(data):
 
         ui.html('<h2 class="section-title">LMSYS Arena LLM Rankings</h2>')
         create_ranking_table(data, is_arena_mode=True)
+
+    # Upload guidance for Arena custom data (styled like calculation cards)
+    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 1.5rem auto 0; padding: 0 2rem;'):
+        ui.html('<h2 class="section-title">Upload Your LLMs Arena Results for Ranking</h2>')
+        with ui.element('div').classes('grid-container').style('grid-template-columns: 1fr;'):
+            with ui.element('div').classes('step-card compact-card unified-header'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">upload_file</span>')
+                    ui.html('<h3 class="card-title">Upload Your LLMs Arena Results</h3>')
+                # Build example table HTML (no script tag)
+                example_models = ['Your Model', 'ChatGPT', 'Claude', 'Gemini', 'Llama', 'Qwen']
+                example_benchmarks = ['code', 'math']
+                example_rows = []
+                for i in range(100):
+                    benchmark = 'code' if i < 50 else 'math'
+                    winner = example_models[i % len(example_models)]
+                    loser = example_models[(i + 1) % len(example_models)]
+                    row = {'benchmark': benchmark}
+                    for m in example_models:
+                        row[m] = 'NaN'
+                    row[winner] = '1.0'
+                    row[loser] = '0.0'
+                    example_rows.append(row)
+
+                table_parts = []
+                table_parts.append('<div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:0.9rem; font-size:0.85rem; color:#0f172a;">')
+                table_parts.append('<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">')
+                table_parts.append('<div style="display:flex; align-items:center; gap:0.75rem; color:#011f5b; font-weight:700;">'
+                                    '<span class="material-symbols-outlined" style="font-size:1rem;">analytics</span>'
+                                    '<span>Example Arena-style CSV</span>'
+                                    '<span style="background:#e2e8f0; color:#0f172a; padding:0.2rem 0.6rem; border-radius:999px; font-size:0.75rem; font-weight:600;">Tasks: code, math</span>'
+                                    '</div>')
+                table_parts.append('<div style="color:#475569; display:flex; gap:0.75rem; align-items:center;"><span>100 rows × 7 cols</span></div>')
+                table_parts.append('</div>')
+                table_parts.append('<div style="overflow-x:auto; overflow-y:auto; max-height:300px; border-radius:8px; border:1px solid #e2e8f0; -webkit-overflow-scrolling: touch;">')
+                table_parts.append('<table style="border-collapse:collapse; font-size:0.8rem; width:max-content; min-width:100%;">')
+                table_parts.append('<thead><tr style="background:#011f5b; color:white;">')
+                table_parts.append('<th style="padding:0.45rem 0.4rem; text-align:left; border:1px solid #e2e8f0; min-width:120px;">Task</th>')
+                for m in example_models:
+                    table_parts.append(f'<th style="padding:0.45rem 0.4rem; text-align:left; border:1px solid #e2e8f0; min-width:110px;">{m}</th>')
+                table_parts.append('</tr></thead><tbody>')
+                for idx, r in enumerate(example_rows):
+                    bg = 'white' if idx % 2 == 0 else '#f8fafc'
+                    table_parts.append(f'<tr style="background:{bg};">')
+                    table_parts.append(f'<td style="padding:0.45rem 0.4rem; border:1px solid #e2e8f0;"><strong>{r["benchmark"]}</strong></td>')
+                    for m in example_models:
+                        val = r[m]
+                        if val == 'NaN':
+                            cell_content = '&mdash;'
+                        else:
+                            cell_content = f'<strong>{val}</strong>'
+                        table_parts.append(f'<td style="padding:0.45rem 0.4rem; border:1px solid #e2e8f0;">{cell_content}</td>')
+                    table_parts.append('</tr>')
+                table_parts.append('</tbody></table></div></div>')
+                example_table_html = ''.join(table_parts)
+
+                ui.html(f'''
+                    <div class="card-description">
+                        <p>Run a standalone spectral leaderboard on your collected Arena-style battles. Results stay separate from the built-in LMSYS leaderboard.</p>
+                        <ul>
+                            <li><span class="material-symbols-outlined">table</span><div class="benchmark-item"><strong>File format:</strong> Arena-style CSV of pairwise battles. Include a task tag column (e.g., <code>Task</code>) to label each row; model columns (and order) must stay consistent in every row.</div></li>
+                            <li><span class="material-symbols-outlined">adjust</span><div class="benchmark-item"><strong>Row data:</strong> One battle per row. Winner = <code>1.0</code>, loser = <code>0.0</code>, all other models = <code>NaN</code>.</div></li>
+                            <li><span class="material-symbols-outlined">query_stats</span><div class="benchmark-item"><strong>Result:</strong> Spectral scores, ranks, and confidence intervals computed only for models in your file (no merge with the site leaderboard).</div></li>
+                            <li><span class="material-symbols-outlined">folder_open</span><div class="benchmark-item"><strong>Example data:</strong></div></li>
+                        </ul>
+                        {example_table_html}
+                    </div>
+                ''')
+                with ui.element('div').classes('card-footer').style('margin-top: 1rem;'):
+                    ui.button(
+                        'Upload & Run Ranking',
+                        on_click=lambda: ui.run_javascript('window.location.href="/#mode-selection"')
+                    ).classes('primary-btn').style('text-transform: none;')
 
     # Arena-specific information - Data Processing Steps
     with ui.element('section').style('width: 100%; max-width: 1400px; margin: 2rem auto; padding: 0 2rem;'):
