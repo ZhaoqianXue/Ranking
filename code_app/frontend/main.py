@@ -1376,6 +1376,10 @@ body.scrolling {
   border-color: rgba(16,185,129,0.6);
 }
 
+.example-data-card-arena:hover {
+  border-color: rgba(245,158,11,0.6);
+}
+
 .hero-feature-icon {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
@@ -1972,6 +1976,20 @@ body {
   color: #475569;
   line-height: 1.6;
   flex-grow: 1;
+}
+
+/* Grid Container Styles (matching dashboard.py) */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 992px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Step Card Styles (matching dashboard.py) */
@@ -3036,7 +3054,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (agentCardDisplay === 'flex') {
             // Agent mode: use existing agent example data loading
-        const buttonId = dataset === 'aou' ? 'example-aou-btn' : 'example-ukbb-btn';
+        const buttonId = dataset === 'aou' ? 'example-aou-btn' : dataset === 'ukbb' ? 'example-ukbb-btn' : 'example-arena-btn';
         const button = document.getElementById(buttonId);
         if (button) {
             button.click();
@@ -3051,7 +3069,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (manualCardDisplay === 'flex') {
             // Manual mode: load example data directly without triggering agent chat
             // Click the corresponding hidden button for manual mode
-            const buttonId = dataset === 'aou' ? 'example-manual-aou-btn' : 'example-manual-ukbb-btn';
+            const buttonId = dataset === 'aou' ? 'example-manual-aou-btn' : dataset === 'ukbb' ? 'example-manual-ukbb-btn' : 'example-manual-arena-btn';
             const button = document.getElementById(buttonId);
             if (button) {
                 button.click();
@@ -3076,7 +3094,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to load example data for manual mode
     window.loadManualExampleData = function(dataset) {
         // Click the corresponding hidden button for manual mode
-        const buttonId = dataset === 'aou' ? 'example-manual-aou-btn' : 'example-manual-ukbb-btn';
+        const buttonId = dataset === 'aou' ? 'example-manual-aou-btn' : dataset === 'ukbb' ? 'example-manual-ukbb-btn' : 'example-manual-arena-btn';
         const button = document.getElementById(buttonId);
         if (button) {
             button.click();
@@ -3132,31 +3150,69 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
                         <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">Or try with example data:</div>
-                        <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr; gap: 1rem; max-width: 400px; margin: 0 auto;">
+                        <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 800px; margin: 0 auto;">
                             <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
                                 <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,197,253,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
 
                                 <!-- Card Header Structure -->
                                 <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                     <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">analytics</span>
-                                    <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Example Data</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data</div>
                                 </div>
 
                                 <!-- Card Description -->
                                 <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
-                                    <strong>AUC Performance Dataset:</strong> 164 samples × 6 models with sample identifiers and descriptions
+                                    <p><strong>AUC Performance Dataset:</strong> 164 samples × 6 models with sample identifiers and descriptions. Dense format with complete performance scores across all models.</p>
                                     <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
                                         <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                            <div><strong>sample_id:</strong> Unique sample identifier (e.g., sample_001, sample_002)</div>
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
+                                            <div><strong>Data Structure:</strong> Traditional matrix format where each row contains complete performance data for all models.</div>
                                         </li>
                                         <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
                                             <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                            <div><strong>model_1 to model_6:</strong> AUC performance scores for 6 different models (0.0-1.0 range)</div>
+                                            <div><strong>sample_id:</strong> Unique sample identifier (e.g., sample_001, sample_002).</div>
+                                        </li>
+                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">analytics</span>
+                                            <div><strong>model_1 to model_6:</strong> AUC performance scores for 6 different models (0.0-1.0 range).</div>
                                         </li>
                                         <li style="display: flex; align-items: flex-start;">
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">description</span>
+                                            <div><strong>description:</strong> Human-readable description for each sample (e.g., "description of sample_001").</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Arena Style Example Data Card -->
+                            <div class="example-data-card example-data-card-arena" onclick="loadExampleData('arena')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(5,150,105,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
+
+                                <!-- Card Header Structure -->
+                                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
+                                    <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">leaderboard</span>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data</div>
+                                </div>
+
+                                <!-- Card Description -->
+                                <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
+                                    <p><strong>Arena Comparison Dataset:</strong> 999 samples × 6 models with pairwise comparison results. Sparse format representing head-to-head battles, ideal for spectral ranking.</p>
+                                    <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
+                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
+                                            <div><strong>Data Structure:</strong> Each row represents one comparison. Only one model gets 1.0 (winner), others get 0.0 or NaN.</div>
+                                        </li>
+                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
                                             <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                            <div><strong>description:</strong> Human-readable description for each sample (e.g., "description of sample_001")</div>
+                                            <div><strong>Task:</strong> Task category (e.g., "code", "math").</div>
+                                        </li>
+                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">adjust</span>
+                                            <div><strong>Model Columns:</strong> Your Model, ChatGPT, Claude, Gemini, Llama, Qwen (1.0 = winner, 0.0 = loser, NaN = not compared).</div>
+                                        </li>
+                                        <li style="display: flex; align-items: flex-start;">
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">insights</span>
+                                            <div><strong>Perfect for Spectral Ranking:</strong> Captures tournament-style comparisons ideal for spectral algorithms.</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -3289,31 +3345,69 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
                         <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">Or try with example data:</div>
-                        <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr; gap: 1rem; max-width: 400px; margin: 0 auto;">
+                        <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 800px; margin: 0 auto;">
                             <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
                                 <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,197,253,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
 
                                 <!-- Card Header Structure -->
                                 <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                     <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">analytics</span>
-                                    <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Example Data</div>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data</div>
                                 </div>
 
                                 <!-- Card Description -->
                                 <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
-                                    <strong>AUC Performance Dataset:</strong> 164 samples × 6 models with sample identifiers and descriptions
+                                    <p><strong>AUC Performance Dataset:</strong> 164 samples × 6 models with sample identifiers and descriptions. Dense format with complete performance scores across all models.</p>
                                     <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
                                         <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                            <div><strong>sample_id:</strong> Unique sample identifier (e.g., sample_001, sample_002)</div>
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
+                                            <div><strong>Data Structure:</strong> Traditional matrix format where each row contains complete performance data for all models.</div>
                                         </li>
                                         <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
                                             <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                            <div><strong>model_1 to model_6:</strong> AUC performance scores for 6 different models (0.0-1.0 range)</div>
+                                            <div><strong>sample_id:</strong> Unique sample identifier (e.g., sample_001, sample_002).</div>
+                                        </li>
+                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">analytics</span>
+                                            <div><strong>model_1 to model_6:</strong> AUC performance scores for 6 different models (0.0-1.0 range).</div>
                                         </li>
                                         <li style="display: flex; align-items: flex-start;">
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">description</span>
+                                            <div><strong>description:</strong> Human-readable description for each sample (e.g., "description of sample_001").</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Arena Style Example Data Card -->
+                            <div class="example-data-card example-data-card-arena" onclick="loadExampleData('arena')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(5,150,105,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
+
+                                <!-- Card Header Structure -->
+                                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
+                                    <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">leaderboard</span>
+                                    <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data</div>
+                                </div>
+
+                                <!-- Card Description -->
+                                <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
+                                    <p><strong>Arena Comparison Dataset:</strong> 999 samples × 6 models with pairwise comparison results. Sparse format representing head-to-head battles, ideal for spectral ranking.</p>
+                                    <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
+                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
+                                            <div><strong>Data Structure:</strong> Each row represents one comparison. Only one model gets 1.0 (winner), others get 0.0 or NaN.</div>
+                                        </li>
+                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
                                             <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                            <div><strong>description:</strong> Human-readable description for each sample (e.g., "description of sample_001")</div>
+                                            <div><strong>Task:</strong> Task category (e.g., "code", "math").</div>
+                                        </li>
+                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">adjust</span>
+                                            <div><strong>Model Columns:</strong> Your Model, ChatGPT, Claude, Gemini, Llama, Qwen (1.0 = winner, 0.0 = loser, NaN = not compared).</div>
+                                        </li>
+                                        <li style="display: flex; align-items: flex-start;">
+                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">insights</span>
+                                            <div><strong>Perfect for Spectral Ranking:</strong> Captures tournament-style comparisons ideal for spectral algorithms.</div>
                                         </li>
                                     </ul>
                                 </div>
@@ -3323,7 +3417,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
         }
-        
+
         // If agent mode, reset chat messages and clear conversation
         if (isAgentMode && chatMessages) {
             chatMessages.innerHTML = `
@@ -3774,6 +3868,8 @@ async def handle_manual_example_data_load(dataset: str):
             file_path = 'demo_r/example_data.csv'
         elif dataset == 'ukbb':
             file_path = 'demo_r/top2000childrencode_report_ukbb.csv'
+        elif dataset == 'arena':
+            file_path = 'demo_r/example_arena_style.csv'
         else:
             ui.notify('⚠️ Unknown dataset requested.', type='warning', timeout=3000)
             return
@@ -3991,6 +4087,9 @@ async def handle_example_data_load(dataset, messages_container, input_field, api
         elif dataset == 'ukbb':
             file_path = 'demo_r/top2000childrencode_report_ukbb.csv'
             filename = 'top2000childrencode_report_ukbb.csv'
+        elif dataset == 'arena':
+            file_path = 'demo_r/example_arena_style.csv'
+            filename = 'example_arena_style.csv'
         else:
             file_path = 'demo_r/example_data.csv'
             filename = 'example_data.csv'
@@ -6900,10 +6999,12 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                             # Agent mode example data buttons
                             example_aou_btn = ui.button('Load AOU', on_click=lambda: handle_example_data_load('aou', messages_container, input_field, api_key_input)).props('id="example-aou-btn"').style('display: none;')
                             example_ukbb_btn = ui.button('Load UKBB', on_click=lambda: handle_example_data_load('ukbb', messages_container, input_field, api_key_input)).props('id="example-ukbb-btn"').style('display: none;')
+                            example_arena_btn = ui.button('Load Arena', on_click=lambda: handle_example_data_load('arena', messages_container, input_field, api_key_input)).props('id="example-arena-btn"').style('display: none;')
 
                             # Manual mode example data buttons
                             example_manual_aou_btn = ui.button('Load Manual AOU', on_click=lambda: handle_manual_example_data_load('aou')).props('id="example-manual-aou-btn"').style('display: none;')
                             example_manual_ukbb_btn = ui.button('Load Manual UKBB', on_click=lambda: handle_manual_example_data_load('ukbb')).props('id="example-manual-ukbb-btn"').style('display: none;')
+                            example_manual_arena_btn = ui.button('Load Manual Arena', on_click=lambda: handle_manual_example_data_load('arena')).props('id="example-manual-arena-btn"').style('display: none;')
                             
                             # Hidden buttons to trigger Python reset functions
                             reset_agent_upload_btn = ui.button('Reset Agent Upload', on_click=reset_agent_upload_state).props('id="reset-agent-upload-btn"').style('display: none;')
@@ -6919,31 +7020,69 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
 
                                         <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
                                             <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">Or try with example data:</div>
-                                            <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr; gap: 1rem; max-width: 400px; margin: 0 auto;">
+                                            <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 800px; margin: 0 auto;">
                                                 <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
                                                     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,197,253,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
 
                                                     <!-- Card Header Structure -->
                                                     <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                                         <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">analytics</span>
-                                                        <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Example Data</div>
+                                                        <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data</div>
                                                     </div>
 
                                                     <!-- Card Description -->
                                                     <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
-                                                        <strong>AUC Performance Dataset:</strong> 164 samples × 6 models with sample identifiers and descriptions
+                                                        <p><strong>AUC Performance Dataset:</strong> 164 samples × 6 models with sample identifiers and descriptions. Dense format with complete performance scores across all models.</p>
                                                         <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
                                                             <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                                                <div><strong>sample_id:</strong> Unique sample identifier (e.g., sample_001, sample_002)</div>
+                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
+                                                                <div><strong>Data Structure:</strong> Traditional matrix format where each row contains complete performance data for all models.</div>
                                                             </li>
                                                             <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
                                                                 <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                                                <div><strong>model_1 to model_6:</strong> AUC performance scores for 6 different models (0.0-1.0 range)</div>
+                                                                <div><strong>sample_id:</strong> Unique sample identifier (e.g., sample_001, sample_002).</div>
+                                                            </li>
+                                                            <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">analytics</span>
+                                                                <div><strong>model_1 to model_6:</strong> AUC performance scores for 6 different models (0.0-1.0 range).</div>
                                                             </li>
                                                             <li style="display: flex; align-items: flex-start;">
+                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">description</span>
+                                                                <div><strong>description:</strong> Human-readable description for each sample (e.g., "description of sample_001").</div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Arena Style Example Data Card -->
+                                                <div class="example-data-card example-data-card-arena" onclick="loadExampleData('arena')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
+                                                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(5,150,105,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
+
+                                                    <!-- Card Header Structure -->
+                                                    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
+                                                        <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">leaderboard</span>
+                                                        <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data</div>
+                                                    </div>
+
+                                                    <!-- Card Description -->
+                                                    <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
+                                                        <p><strong>Arena Comparison Dataset:</strong> 999 samples × 6 models with pairwise comparison results. Sparse format representing head-to-head battles, ideal for spectral ranking.</p>
+                                                        <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
+                                                            <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
+                                                                <div><strong>Data Structure:</strong> Each row represents one comparison. Only one model gets 1.0 (winner), others get 0.0 or NaN.</div>
+                                                            </li>
+                                                            <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
                                                                 <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                                                <div><strong>description:</strong> Human-readable description for each sample (e.g., "description of sample_001")</div>
+                                                                <div><strong>Task:</strong> Task category (e.g., "code", "math").</div>
+                                                            </li>
+                                                            <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
+                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">adjust</span>
+                                                                <div><strong>Model Columns:</strong> Your Model, ChatGPT, Claude, Gemini, Llama, Qwen (1.0 = winner, 0.0 = loser, NaN = not compared).</div>
+                                                            </li>
+                                                            <li style="display: flex; align-items: flex-start;">
+                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">insights</span>
+                                                                <div><strong>Perfect for Spectral Ranking:</strong> Captures tournament-style comparisons ideal for spectral algorithms.</div>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -7447,87 +7586,56 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
             pass
 
     # Documentation & Help section moved here, margin removed for tight spacing
-    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 1rem auto; padding: 0;').props('id="documentation"'):
-        with ui.element('div').classes('info-card').style('text-align: center; margin-bottom: 0.5rem; border: 3px solid #011f5b;'):
-            ui.html('''
-                <div style="margin-bottom: 0rem;">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
-                        <span class="material-symbols-outlined" style="font-size: 2rem;">menu_book</span>
-                        <h2 style="color: var(--primary-900); font-weight: 800; margin: 0; font-size: 1.5rem;">How to Use This Tool</h2>
-                    </div>
-                    <p style="color: var(--gray-600); font-size: 0.9rem; max-width: 600px; margin: 0 auto;">
-                        Follow these simple steps to generate your robust ranking report.
-                    </p>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1.5rem;">
-                    <div class="highlight-box" style="text-align: left; background: #011f5b; color: #fff;">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff; text-align: center;">
-                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">counter_1</span>
-                            <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem; display: inline-block;"><b>Upload Data</b></h4>
-                        </div>
-                        <p style="color: #fff;">Upload a CSV file where rows represent samples and columns represent the methods to be ranked.</p>
-                    </div>
-                    <div class="highlight-box" style="text-align: left; background: #011f5b; color: #fff;">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff; text-align: center;">
-                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">counter_2</span>
-                            <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem; display: inline-block;"><b>Set Parameters</b></h4>
-                        </div>
-                        <p style="color: #fff;">Specify whether higher or lower values indicate better performance. Adjust advanced settings if needed.</p>
-                    </div>
-                    <div class="highlight-box" style="text-align: left; background: #011f5b; color: #fff;">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff; text-align: center;">
-                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">counter_3</span>
-                            <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem; display: inline-block;"><b>Generate Report</b></h4>
-                        </div>
-                        <p style="color: #fff;">Click the "Generate Report" button to receive your ranking analysis with confidence intervals.</p>
-                    </div>
-                </div>
-            ''')
+    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 1rem auto; padding: 0 2rem;').props('id="documentation"'):
+        ui.html('<h2 class="section-title"><span class="material-symbols-outlined" style="font-size: 1.75rem;">menu_book</span>How to Use This Tool</h2>')
+        with ui.element('div').classes('grid-container').style('grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));'):
+            with ui.element('div').classes('step-card'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">counter_1</span>')
+                    ui.html('<h3 class="card-title">Upload Data</h3>')
+                ui.html('<p class="card-description">Upload a CSV file where rows represent samples and columns represent the methods to be ranked.</p>')
+            with ui.element('div').classes('step-card'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">counter_2</span>')
+                    ui.html('<h3 class="card-title">Set Parameters</h3>')
+                ui.html('<p class="card-description">Specify whether higher or lower values indicate better performance. Adjust advanced settings if needed.</p>')
+            with ui.element('div').classes('step-card'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">counter_3</span>')
+                    ui.html('<h3 class="card-title">Generate Report</h3>')
+                ui.html('<p class="card-description">Click the "Generate Report" button to receive your ranking analysis with confidence intervals.</p>')
 
     # About PRSAgent section moved here, margin removed for tight spacing
-    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 1rem auto 4rem auto; padding: 0;').props('id="about"'):
-        with ui.element('div').classes('info-card').style('text-align: center; margin-bottom: 0.5rem; border: 3px solid #011f5b;'):
-            ui.html('''
-                <div style="margin-bottom: 0rem;">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
-                        <span class="material-symbols-outlined" style="font-size: 2rem;">lightbulb</span>
-                        <h2 style="color: var(--primary-900); font-weight: 800; margin: 0; font-size: 1.5rem;">About This Framework</h2>
-                    </div>
-                    <p style="color: var(--gray-600); font-size: 0.9rem; max-width: 800px; margin: 0 auto; line-height: 1.6;">
-                        This tool implements a statistical framework for robustly ranking entities based on varied comparisons. It excels in handling heterogeneous data where items are compared in groups of different sizes, a common scenario in real-world applications.<br>The core of our approach is the <strong>Spectral Method</strong>, which estimates underlying preference scores, combined with a <strong>Weighted Bootstrap</strong> to quantify the uncertainty of the resulting ranks.
-                    </p>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1.5rem;">
-                    <div class="highlight-box" style="text-align: center; background: #011f5b; color: #fff;">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff;">
-                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">target</span>
-                            <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>General Fixed Graph</b></h4>
-                        </div>
-                        <p style="color: #fff;">Circumvents restrictive assumptions, allowing for flexible, real-world comparison structures.</p>
-                    </div>
-                    <div class="highlight-box" style="text-align: center; background: #011f5b; color: #fff;">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff;">
-                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">science</span>
-                            <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>Asymptotic Efficiency</b></h4>
-                        </div>
-                        <p style="color: #fff;">Our two-step spectral method can achieve the same asymptotic efficiency as the MLE.</p>
-                    </div>
-                    <div class="highlight-box" style="text-align: center; background: #011f5b; color: #fff;">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff;">
-                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">analytics</span>
-                            <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>Ranking Inferences</b></h4>
-                        </div>
-                        <p style="color: #fff;">Provides a comprehensive framework for both one-sample and two-sample ranking inferences.</p>
-                    </div>
-                    <div class="highlight-box" style="text-align: center; background: #011f5b; color: #fff;">
-                        <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; color: #fff;">
-                            <span class="material-symbols-outlined" style="font-size: 1.5rem;">verified</span>
-                            <h4 style="color: #fff; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>Proven Methodology</b></h4>
-                        </div>
-                        <p style="color: #fff;">Validated through comprehensive simulations and applied to real-world datasets.</p>
-                    </div>
-                </div>
-            ''')
+    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 1rem auto 4rem auto; padding: 0 2rem;').props('id="about"'):
+        ui.html('<h2 class="section-title"><span class="material-symbols-outlined" style="font-size: 1.75rem;">lightbulb</span>About This Framework</h2>')
+        with ui.element('div').classes('grid-container').style('grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));'):
+            with ui.element('div').classes('step-card'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">target</span>')
+                    ui.html('<h3 class="card-title">General Fixed Graph</h3>')
+                ui.html('<p class="card-description">Circumvents restrictive assumptions, allowing for flexible, real-world comparison structures.</p>')
+            with ui.element('div').classes('step-card'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">science</span>')
+                    ui.html('<h3 class="card-title">Asymptotic Efficiency</h3>')
+                ui.html('<p class="card-description">Our two-step spectral method can achieve the same asymptotic efficiency as the MLE.</p>')
+            with ui.element('div').classes('step-card'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">analytics</span>')
+                    ui.html('<h3 class="card-title">Ranking Inferences</h3>')
+                ui.html('<p class="card-description">Provides a comprehensive framework for both one-sample and two-sample ranking inferences.</p>')
+            with ui.element('div').classes('step-card'):
+                with ui.element('div').classes('card-header'):
+                    with ui.element('div').classes('card-icon-container'):
+                        ui.html('<span class="material-symbols-outlined card-icon">verified</span>')
+                    ui.html('<h3 class="card-title">Proven Methodology</h3>')
+                ui.html('<p class="card-description">Validated through comprehensive simulations and applied to real-world datasets.</p>')
 
     # Footer
     with ui.element('footer').classes('footer-section').style('margin: 0 -1rem; width: calc(100% + 2rem); background: linear-gradient(135deg, #1e3a8a 0%, #011f5b 40%, #000d26 80%, #00071a 100%); color: white; padding: 3rem 2rem 2rem; position: relative; overflow: hidden;'):

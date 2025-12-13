@@ -64,24 +64,24 @@ TABLE_STYLES = '''
 }
 /* Bold separator between core columns and benchmark columns */
 .spectral-table-html thead th.core-column + th.benchmark-column {
-    border-left: 2px solid #7f9bc6 !important;
+    border-left: 4px solid #9fb8d6 !important;
 }
 .spectral-table-html thead th.benchmark-column:first-of-type {
-    border-left: 2px solid #7f9bc6 !important;
+    border-left: 4px solid #9fb8d6 !important;
 }
 /* Also add right border to the last core column before benchmark columns */
 .spectral-table-html thead th.core-column:has(+ th.benchmark-column) {
-    border-right: 2px solid #7f9bc6 !important;
+    border-right: 4px solid #9fb8d6 !important;
 }
 .spectral-table-html tbody td.core-column + td.benchmark-column {
-    border-left: 2px solid #7f9bc6 !important;
+    border-left: 4px solid #9fb8d6 !important;
 }
 .spectral-table-html tbody td.benchmark-column:first-of-type {
-    border-left: 2px solid #7f9bc6 !important;
+    border-left: 4px solid #9fb8d6 !important;
 }
 /* Also add right border to the last core column before benchmark columns */
 .spectral-table-html tbody td.core-column:has(+ td.benchmark-column) {
-    border-right: 2px solid #7f9bc6 !important;
+    border-right: 4px solid #9fb8d6 !important;
 }
 .spectral-table-html tbody tr:nth-child(even) {
     background-color: #f8fafc; /* Zebra-striping */
@@ -104,10 +104,13 @@ TABLE_STYLES = '''
     font-weight: bold;
     color: #1e293b;
 }
-.spectral-table-html .rank-cell,
-.spectral-table-html .rank-header {
+.spectral-table-html .rank-cell {
     font-weight: 600;
     color: #0284c7;
+}
+.spectral-table-html .rank-header {
+    font-weight: 600;
+    color: #1e293b;
 }
 /* Top 3 ranking styles for cells - Clean and modern design */
 .spectral-table-html .first-place-cell {
@@ -203,6 +206,13 @@ TABLE_STYLES = '''
 .spectral-table-html table.show-details .uniform-ci-col,
 .spectral-table-html table.show-details .avg-rank-col {
     display: none !important;
+}
+/* Default show 95% CI column but hide other toggleable columns */
+.spectral-table-html table .toggleable-col:not(.ci-95-col) {
+    display: none !important;
+}
+.spectral-table-html table .ci-95-col {
+    display: table-cell !important;
 }
 .sortable-header {
     cursor: pointer;
@@ -1656,14 +1666,6 @@ def create_ranking_table(data, highlight_model: str = None, is_arena_mode: bool 
                         # Build selected virtual keys in CSV order
                         selected_virtual = [ARENA_DISPLAY_TO_VIRTUAL[lbl] for lbl in selected_labels]
 
-                        # Save current show-details state before clearing - execute synchronously
-                        ui.run_javascript('''
-                            (function() {
-                                const tables = document.querySelectorAll('.spectral-table-html table');
-                                const hasDetails = tables.length > 0 && tables[0].classList.contains('show-details');
-                                sessionStorage.setItem('spectralTableShowDetails', hasDetails ? 'true' : 'false');
-                            })();
-                        ''')
 
                         ranking_content_container.clear()
                         with ranking_content_container:
@@ -1721,14 +1723,6 @@ def create_ranking_table(data, highlight_model: str = None, is_arena_mode: bool 
                             }
                             selected_keys = [hf_display_to_key[lbl] for lbl in selected_labels]
 
-                            # Save current show-details state before clearing - execute synchronously
-                            ui.run_javascript('''
-                                (function() {
-                                    const tables = document.querySelectorAll('.spectral-table-html table');
-                                    const hasDetails = tables.length > 0 && tables[0].classList.contains('show-details');
-                                    sessionStorage.setItem('spectralTableShowDetails', hasDetails ? 'true' : 'false');
-                                })();
-                            ''')
 
                             ranking_content_container.clear()
                             with ranking_content_container:
@@ -1777,23 +1771,7 @@ def create_ranking_table(data, highlight_model: str = None, is_arena_mode: bool 
                     ui.html('<div class="legend-color third"></div>')
                     ui.html('<span>Third Place</span>')
 
-            # Right side: Detail Button
-            spectral_results = data.get('spectral_results')
-            if spectral_results and 'methods' in spectral_results:
-                ui.button('Spectral Ranking Detail', on_click=lambda: ui.run_javascript(
-                    '''
-                    const tables = document.querySelectorAll('.spectral-table-html table');
-                    let hasDetails = false;
-                    tables.forEach(table => {
-                        table.classList.toggle('show-details');
-                        if (table.classList.contains('show-details')) {
-                            hasDetails = true;
-                        }
-                    });
-                    // Save state to sessionStorage
-                    sessionStorage.setItem('spectralTableShowDetails', hasDetails ? 'true' : 'false');
-                    '''
-                )).props('color=primary outline').classes('spectral-detail-button').style('text-transform: none;')
+            # Right side: Empty (Detail Button removed)
 
         ranking_content_container = ui.element('div').classes('ranking-content')
         with ranking_content_container:
@@ -1905,7 +1883,7 @@ def create_html_table(columns, rows, table_id, highlight_model: str = None):
 
     # Combine into full table
     table_html = f'''
-    <table id="{table_id}" class="modern-table spectral-table {table_class}" style="width: 100%; font-size: 0.85em; border-collapse: separate; border-spacing: 0;">
+    <table id="{table_id}" class="modern-table spectral-table {table_class} show-details" style="width: 100%; font-size: 0.85em; border-collapse: separate; border-spacing: 0;">
         {header_html}
         {body_html}
     </table>
@@ -1935,7 +1913,7 @@ def create_spectral_ranking_table(data, spectral_results, highlight_model: str =
             {'name': 'model', 'label': 'Model', 'field': 'model', 'align': 'left', 'style': 'width: 250px; max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;', 'sortable': True, 'class': 'core-column'},
             {'name': 'rank', 'label': 'Spectral Rank', 'field': 'rank', 'align': 'left', 'sortable': True, 'tooltip': spectral_rank_tooltip, 'class': 'core-column rank-header'},
             {'name': 'theta_hat', 'label': 'θ-hat Score', 'field': 'theta_hat', 'align': 'left', 'style': 'width: 90px; min-width: 90px; max-width: 90px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The estimated performance score from the Spectral Ranking algorithm. Higher is better.', 'class': 'core-column theta-hat-col'},
-            {'name': 'ci_95', 'label': '95% CI', 'field': 'ci_95', 'align': 'left', 'style': 'width: 80px; min-width: 80px; max-width: 80px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% two-sided confidence interval for the rank. For example, an interval of [1, 3] means we are 95% confident the model\'s true rank is between 1 and 3.', 'class': 'core-column'},
+            {'name': 'ci_95', 'label': '95% CI', 'field': 'ci_95', 'align': 'left', 'style': 'width: 80px; min-width: 80px; max-width: 80px;', 'sortable': False, 'toggleable': True, 'tooltip': 'The 95% two-sided confidence interval for the rank. For example, an interval of [1, 3] means we are 95% confident the model\'s true rank is between 1 and 3.', 'class': 'core-column ci-95-col'},
             {'name': 'ci_uniform', 'label': 'Uniform CI', 'field': 'ci_uniform', 'align': 'left', 'style': 'width: 80px; min-width: 80px; max-width: 80px;', 'sortable': False, 'toggleable': True, 'tooltip': 'A more conservative, uniform one-sided confidence interval for the rank that holds simultaneously for all models with 95% confidence.', 'class': 'core-column uniform-ci-col'},
             {'name': 'avg_rank', 'label': 'Average Score Rank', 'field': 'avg_rank', 'align': 'left', 'sortable': True, 'toggleable': True, 'tooltip': score_rank_tooltip, 'class': 'core-column avg-rank-col'},
         ]
@@ -2192,38 +2170,6 @@ def create_spectral_ranking_table(data, spectral_results, highlight_model: str =
         table_html = create_html_table(columns, table_data, table_id='huggingface-table' if not is_arena else 'arena-table', highlight_model=highlight_model)
         ui.html(table_html).classes('spectral-table-html')
 
-        # Add script to restore show-details state separately using ui.add_body_html()
-        restore_script = '''
-        (function() {
-            function restoreShowDetails() {
-                const showDetails = sessionStorage.getItem('spectralTableShowDetails');
-                if (showDetails === 'true') {
-                    const tables = document.querySelectorAll('.spectral-table-html table');
-                    if (tables.length > 0) {
-                        tables.forEach(table => {
-                            table.classList.add('show-details');
-                        });
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            // Try immediately
-            if (!restoreShowDetails()) {
-                // Retry with delays
-                let attempts = 0;
-                const maxAttempts = 10;
-                const interval = setInterval(function() {
-                    attempts++;
-                    if (restoreShowDetails() || attempts >= maxAttempts) {
-                        clearInterval(interval);
-                    }
-                }, 50);
-            }
-        })();
-        '''
-        ui.add_body_html(f'<script>{restore_script}</script>')
 
     # Add shared table styles
     ui.add_head_html(f'<style>{TABLE_STYLES}</style>')
