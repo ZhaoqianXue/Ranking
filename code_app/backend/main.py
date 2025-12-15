@@ -30,6 +30,21 @@ except ImportError as e:
     logger.error(f"Failed to import custom ranking function: {e}")
     CUSTOM_RANKING_AVAILABLE = False
 
+# Import Phase 2 agent functions
+try:
+    from code_app.backend.phase2_agent import (
+        prepare_phase2_messages,
+        manage_phase2_context,
+        is_phase2_request,
+        extract_ranking_results_from_messages,
+        PHASE2_SYSTEM_PROMPT_ADDON,
+        PHASE2_QUESTION_TYPES
+    )
+    PHASE2_AVAILABLE = True
+except ImportError as e:
+    logger.warning(f"Failed to import Phase 2 agent functions: {e}")
+    PHASE2_AVAILABLE = False
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -65,6 +80,7 @@ def _get_agent_file_path(file_id: str) -> str:
 class ChatRequest(BaseModel):
     messages: List[Dict[str, Any]]
     api_key: Optional[str] = None
+    ranking_results: Optional[Dict[str, Any]] = None  # Optional ranking results for Phase 2
 
 class ChatResponse(BaseModel):
     messages: List[Dict[str, Any]]
@@ -1556,7 +1572,7 @@ async def _dispatch_tool_call_with_retry_phase1(
     return {"error": f"Tool execution failed after {max_retries + 1} attempts: {last_error}"}
 
 
-async def _call_openai(messages: List[Dict[str, Any]], tools: List[Dict[str, Any]], api_key: Optional[str] = None) -> Dict[str, Any]:
+async def _call_openai(messages: List[Dict[str, Any]], tools: List[Dict[str, Any]] = None, api_key: Optional[str] = None) -> Dict[str, Any]:
     # Use provided API key or fall back to environment variable
     effective_api_key = api_key or OPENAI_API_KEY
 
@@ -1566,9 +1582,11 @@ async def _call_openai(messages: List[Dict[str, Any]], tools: List[Dict[str, Any
     payload = {
         "model": OPENAI_MODEL,
         "messages": messages,
-        "tools": tools,
-        "tool_choice": "auto"
     }
+    # Only add tools and tool_choice if tools are provided (Phase 1)
+    if tools is not None and len(tools) > 0:
+        payload["tools"] = tools
+        payload["tool_choice"] = "auto"
     headers = {
         "Authorization": f"Bearer {effective_api_key}",
         "Content-Type": "application/json"
@@ -1714,7 +1732,129 @@ async def agent_chat(payload: ChatRequest):
         logger.info(f"Received agent chat request with {len(payload.messages)} messages")
         for i, msg in enumerate(payload.messages):
             logger.info(f"Message {i}: {msg.get('role')} - {msg.get('content')[:100]}...")
-        # Build conversation
+        
+        # Check if this is a Phase 2 request (ranking results analysis)
+        ranking_results = payload.ranking_results
+        print(f"DEBUG BACKEND: ranking_results from payload: {ranking_results is not None}, type: {type(ranking_results)}")
+        logger.info(f"DEBUG: ranking_results from payload: {ranking_results is not None}, type: {type(ranking_results)}")
+        if ranking_results:
+            print(f"DEBUG BACKEND: ranking_results keys: {list(ranking_results.keys()) if isinstance(ranking_results, dict) else 'NOT A DICT'}")
+            print(f"DEBUG BACKEND: ranking_results has methods: {bool(ranking_results.get('methods'))}, methods count: {len(ranking_results.get('methods', []))}")
+            if ranking_results.get('methods'):
+                print(f"DEBUG BACKEND: First method sample: {ranking_results['methods'][0] if len(ranking_results['methods']) > 0 else 'EMPTY'}")
+            logger.info(f"DEBUG: ranking_results has methods: {bool(ranking_results.get('methods'))}, methods count: {len(ranking_results.get('methods', []))}")
+        else:
+            print(f"DEBUG BACKEND: ERROR - ranking_results is None or empty!")
+            print(f"DEBUG BACKEND: payload keys: {list(payload.dict().keys()) if hasattr(payload, 'dict') else 'NO DICT METHOD'}")
+        
+        if not ranking_results and PHASE2_AVAILABLE:
+            # Try to extract from messages
+            ranking_results = extract_ranking_results_from_messages(payload.messages)
+            logger.info(f"DEBUG: Extracted ranking_results from messages: {ranking_results is not None}")
+        
+        # CRITICAL: If ranking_results exists and has methods, FORCE Phase 2 mode
+        # This ensures we always use Phase 2 when results are available
+        is_phase2 = False
+        if PHASE2_AVAILABLE and ranking_results:
+            # Check if ranking_results has methods (strong indicator of Phase 2)
+            if isinstance(ranking_results, dict) and ranking_results.get('methods') and len(ranking_results.get('methods', [])) > 0:
+                # Force Phase 2 if ranking results are available
+                is_phase2 = True
+                print(f"DEBUG BACKEND: FORCING Phase 2 - ranking_results has {len(ranking_results.get('methods', []))} methods")
+                logger.info(f"DEBUG: FORCING Phase 2 - ranking_results has methods")
+            else:
+                # Fallback to keyword-based detection
+                is_phase2 = is_phase2_request(payload.messages, ranking_results)
+                print(f"DEBUG BACKEND: is_phase2_request returned: {is_phase2}")
+                logger.info(f"DEBUG: is_phase2_request returned: {is_phase2}")
+        else:
+            print(f"DEBUG BACKEND: Phase 2 check skipped - PHASE2_AVAILABLE: {PHASE2_AVAILABLE}, ranking_results exists: {ranking_results is not None}")
+        
+        # Handle Phase 2 requests differently (no tool calls, pure conversation)
+        if is_phase2 and PHASE2_AVAILABLE:
+            logger.info("Phase 2 request detected - using Phase 2 message preparation")
+            
+            # Validate ranking_results before proceeding
+            if not ranking_results or not isinstance(ranking_results, dict):
+                logger.error("Phase 2 request but ranking_results is missing or invalid")
+                return ChatResponse(
+                    messages=payload.messages, 
+                    error="Ranking results are required for Phase 2 analysis. Please ensure the ranking analysis has completed successfully."
+                )
+            
+            if not ranking_results.get('methods') or len(ranking_results.get('methods', [])) == 0:
+                logger.error("Phase 2 request but ranking_results has no methods")
+                return ChatResponse(
+                    messages=payload.messages, 
+                    error="Ranking results are incomplete. The results do not contain method rankings. Please regenerate the ranking analysis."
+                )
+            
+            # Get the last user message and strip HTML tags
+            import re
+            user_message = ""
+            for msg in reversed(payload.messages):
+                if msg.get('role') == 'user':
+                    raw_content = msg.get('content', '')
+                    # Strip HTML tags to get clean text
+                    user_message = re.sub(r'<[^>]+>', '', raw_content).strip()
+                    break
+            
+            if not user_message:
+                return ChatResponse(messages=payload.messages, error="No user message found")
+            
+            print(f"DEBUG BACKEND: Extracted user message (after HTML strip): {user_message[:100]}...")
+            
+            # Prepare Phase 2 messages with ranking results context
+            conversation_history = [msg for msg in payload.messages if msg.get('role') != 'system']
+            
+            # Debug: Verify ranking_results before passing
+            print(f"DEBUG BACKEND: Before prepare_phase2_messages - ranking_results is None: {ranking_results is None}")
+            if ranking_results:
+                print(f"DEBUG BACKEND: ranking_results type: {type(ranking_results)}, has methods: {'methods' in ranking_results}")
+                if 'methods' in ranking_results:
+                    print(f"DEBUG BACKEND: methods count: {len(ranking_results.get('methods', []))}")
+            
+            # CRITICAL: Do NOT pass base_system_prompt - we want Phase 2 specific prompt only
+            # The Phase 2 prompt already contains all necessary instructions
+            phase2_messages = prepare_phase2_messages(
+                user_message=user_message,
+                ranking_results=ranking_results,
+                conversation_history=conversation_history,
+                base_system_prompt=""  # Empty - use Phase 2 prompt only
+            )
+            
+            # Debug: Check what was prepared
+            print(f"DEBUG BACKEND: Prepared {len(phase2_messages)} messages for Phase 2")
+            if phase2_messages:
+                system_msg = next((msg for msg in phase2_messages if msg.get('role') == 'system'), None)
+                if system_msg:
+                    print(f"DEBUG BACKEND: System message length: {len(system_msg.get('content', ''))}")
+                    print(f"DEBUG BACKEND: System message preview: {system_msg.get('content', '')[:200]}...")
+            
+            # Call OpenAI API without tools (pure conversation)
+            logger.info(f"DEBUG: Calling OpenAI API for Phase 2 with {len(phase2_messages)} messages")
+            completion = await _call_openai(phase2_messages, tools=[], api_key=payload.api_key)
+            
+            if completion.get("error"):
+                logger.error(f"DEBUG: OpenAI API error: {completion.get('error')}")
+                return ChatResponse(messages=payload.messages, error=str(completion.get("error")))
+            if "error" in completion:
+                logger.error(f"DEBUG: OpenAI API error in completion: {completion.get('error')}")
+                return ChatResponse(messages=payload.messages, error=str(completion["error"]))
+            
+            choice = (completion.get("choices") or [{}])[0]
+            assistant_msg = choice.get("message") or {}
+            content = assistant_msg.get("content", "")
+            logger.info(f"DEBUG: Phase 2 response received, content length: {len(content)}, preview: {content[:100]}...")
+            
+            # Return response with updated messages
+            updated_messages = payload.messages + [
+                {"role": "assistant", **assistant_msg}
+            ]
+            
+            return ChatResponse(messages=updated_messages, assistant_message=assistant_msg)
+        
+        # Phase 1: Build conversation with tool-calling capability
         messages: List[Dict[str, Any]] = [{"role": "system", "content": SYSTEM_PROMPT}] + payload.messages
 
         # Debug: Log the final messages and tools

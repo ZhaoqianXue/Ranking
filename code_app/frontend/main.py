@@ -7,6 +7,8 @@ import aiohttp
 import logging
 import sys
 import os
+import markdown
+import re
 
 # Add the current directory to the path to import dashboard
 sys.path.append(os.path.dirname(__file__))
@@ -43,6 +45,7 @@ def get_client_state():
                 'current_stage': 'awaiting_upload',
                 'user_preferences': {},
                 'data_insights': {},
+                'ranking_results': None,  # Phase 2: Store ranking results for Q&A
                 'last_activity': None
             },
             'manual_uploaded_file': None,
@@ -975,6 +978,14 @@ report_container_ref = None
 status_container_ref = None
 mobile_nav_ref = None
 agent_data_preview_ref = None
+
+# Floating report modal related globals
+floating_report_modal_ref = None
+floating_loading_modal_ref = None
+report_displayed = False
+loading_displayed = False
+start_ranking_button_ref = None
+current_report_result = None
 
 # Enhanced CSS styling with #011f5b theme
 ui.add_head_html('''
@@ -2270,6 +2281,179 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+/* Enhanced Loading Animation Styles */
+.enhanced-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  height: 100%;
+}
+.enhanced-loading-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 20px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.enhanced-loading-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(1, 31, 91, 0.03), transparent);
+  animation: shimmer 2s infinite;
+}
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+.enhanced-loading-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+.enhanced-loading-icon {
+  font-size: 3.5rem !important;
+  color: #011f5b !important;
+  animation: pulse-icon 2s infinite;
+  filter: drop-shadow(0 4px 8px rgba(1, 31, 91, 0.2));
+}
+@keyframes pulse-icon {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+.enhanced-loading-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+.enhanced-loading-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #011f5b, #3b82f6);
+  animation: bounce-dots 1.4s infinite ease-in-out both;
+}
+.enhanced-loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+.enhanced-loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+.enhanced-loading-dots span:nth-child(3) { animation-delay: 0s; }
+@keyframes bounce-dots {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.enhanced-loading-text-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.enhanced-loading-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #011f5b;
+  margin: 0;
+  animation: fadeInUp-loading 0.6s ease-out;
+}
+.enhanced-loading-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #475569;
+  margin: 0;
+  animation: fadeInUp-loading 0.6s ease-out 0.2s both;
+}
+.enhanced-loading-note {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #64748b;
+  margin: 0;
+  animation: fadeInUp-loading 0.6s ease-out 0.4s both;
+}
+@keyframes fadeInUp-loading {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.enhanced-loading-progress {
+  width: 100%;
+  height: 4px;
+  background-color: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.enhanced-loading-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #011f5b 0%, #3b82f6 50%, #60a5fa 100%);
+  border-radius: 2px;
+  animation: progress-loading 2s ease-in-out infinite;
+  position: relative;
+}
+.enhanced-loading-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer-bar-loading 1.5s infinite;
+}
+@keyframes progress-loading {
+  0% { width: 0%; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+@keyframes shimmer-bar-loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+/* Responsive adjustments for loading animation */
+@media (max-width: 640px) {
+  .enhanced-loading-card {
+    padding: 2rem 1.5rem;
+    margin: 0 1rem;
+  }
+  .enhanced-loading-icon {
+    font-size: 3rem !important;
+  }
+  .enhanced-loading-title {
+    font-size: 1.25rem;
+  }
+  .enhanced-loading-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
 /* Badges */
 .badge {
   display: inline-flex;
@@ -2644,6 +2828,34 @@ body.scrolling ::-webkit-scrollbar-track {
   padding: 1rem 1.5rem;
   font-size: 0.9rem;
   color: var(--gray-800);
+}
+
+/* Report table styles - matching data preview table */
+.report-table {
+  font-size: 0.75rem !important;
+  line-height: 1.2 !important;
+}
+
+.report-table .q-table__container {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.report-table thead th {
+  padding: 0.4rem 0.3rem !important;
+  font-size: 0.75rem !important;
+  line-height: 1.2 !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  min-width: 80px;
+}
+
+.report-table tbody td {
+  padding: 0.4rem 0.3rem !important;
+  font-size: 0.75rem !important;
+  line-height: 1.2 !important;
+  min-width: 80px;
 }
 
 /* Remove Quasar textarea bottom blue line and animations - ALL STATES */
@@ -3447,6 +3659,16 @@ document.addEventListener('DOMContentLoaded', function() {
             attachmentBtn.disabled = false;
         }
         
+        // Reset button text to "Start Ranking" immediately
+        const buttons = document.querySelectorAll('button');
+        for (let btn of buttons) {
+            const text = btn.textContent || btn.innerText || '';
+            if (text.includes('Show Report') || text.includes('Hide Report') || text.includes('Start Ranking')) {
+                btn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">play_arrow</span> Start Ranking';
+                break;
+            }
+        }
+        
         // Trigger Python-side reset by clicking hidden reset button
         if (isAgentMode) {
             const resetBtn = document.getElementById('reset-agent-upload-btn');
@@ -3521,14 +3743,12 @@ async def fetch_results_async(job_id: str):
         return None, f'Connection error: {str(e)}'
 
 def show_results(result):
-    with ui.element('div').classes('report-card').style('max-width: 1400px; margin: 0 auto; width: 100%;'):
-        with ui.element('div').classes('report-header'):
+    with ui.element('div').classes('report-card').style('max-width: 1400px; margin: 0 auto; width: 100%; padding: 1rem;'):
+        # Simplified header for floating modal (title is already in modal header)
+        with ui.element('div').classes('report-header').style('margin-bottom: 1rem;'):
             ui.html(f'''
-                <div style="position: relative; z-index: 10;">
-                    <div class="hero-title" style="font-size: 2.5rem; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                        <span class="material-symbols-outlined" style="font-size: 2.5rem; margin-right: 0.5rem; vertical-align: middle;">analytics</span> Robust Ranking Report
-                    </div>
-                    <div style="font-size: 1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; line-height: 1.5;">
+                <div style="text-align: center; padding: 0.5rem 0;">
+                    <div style="font-size: 0.9rem; opacity: 0.8; color: #666;">
                         Vanilla Spectral Method ranking with bootstrap confidence intervals
                     </div>
                 </div>
@@ -3543,7 +3763,7 @@ def show_results(result):
         # Add Analysis Results summary card (shared across modes)
         with ui.element('div').classes('info-card').style('padding: 1.25rem 1.5rem; margin: 1.5rem 1rem;'):
             ui.html('<div class="section-title"><span class="material-symbols-outlined" style="font-size: 1.2rem; margin-right: 0.5rem; vertical-align: middle;">description</span> Analysis Results</div>')
-            header = ['Method', 'θ̂', 'Rank', 'CI (Two-Sided)', 'CI Left']
+            header = ['Rank', 'Name', '95% CI', 'Uniform CI', 'Left CI', 'θ-hat Score']
             rows_html = []
             for m in methods[:6]:
                 name = m.get('name', '')
@@ -3551,15 +3771,16 @@ def show_results(result):
                 rank = m.get('rank', '')
                 ci_two = m.get('ci_two_sided') or [None, None]
                 ci_left = m.get('ci_left', '')
+                ci_uniform_left = m.get('ci_uniform_left', '')
                 ci_disp = f"[{ci_two[0]}, {ci_two[1]}]" if ci_two and len(ci_two) == 2 else 'N/A'
-                rows_html.append(f"<tr><td><b>{name}</b></td><td>{theta}</td><td>{rank}</td><td>{ci_disp}</td><td>{ci_left}</td></tr>")
+                rows_html.append(f"<tr style='background: white;'><td style='padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px;'>{rank}</td><td style='padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px;'><b>{name}</b></td><td style='padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px;'>{ci_disp}</td><td style='padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px;'>{ci_uniform_left}</td><td style='padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px;'>{ci_left}</td><td style='padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px;'>{theta}</td></tr>")
             table_html = (
-                '<table style="width:100%; border-collapse: collapse; font-size: 0.9rem;">'
-                + '<thead><tr>'
-                + ''.join([f'<th style="text-align:left; padding: 8px; border-bottom: 1px solid #e5e7eb;">{h}</th>' for h in header])
+                '<div class="data-preview-table-scroll" style="margin-top: 0.75rem;"><table style="width:100%; border-collapse: collapse; font-size: 0.75rem; line-height: 1.2;">'
+                + '<thead><tr style="background: #011f5b;">'
+                + ''.join([f'<th style="text-align:left; padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); font-weight: 600; color: white; min-width: 80px;">{h}</th>' for h in header])
                 + '</tr></thead><tbody>'
                 + ''.join(rows_html)
-                + '</tbody></table>'
+                + '</tbody></table></div>'
             )
             ui.html(table_html)
 
@@ -3679,14 +3900,15 @@ def show_results(result):
                 ui.html('<p class="card-description">Comprehensive ranking results with confidence intervals and statistical metrics</p>')
                 columns = [
                     {'name': 'Method', 'label': 'Method', 'field': 'Method', 'sortable': True},
-                    {'name': 'theta_hat', 'label': 'theta.hat', 'field': 'theta_hat', 'sortable': True},
+                    {'name': 'theta_hat', 'label': 'θ-hat Score', 'field': 'theta_hat', 'sortable': True},
                     {'name': 'rank', 'label': 'Rank', 'field': 'rank', 'sortable': True},
                     {'name': 'ci_two_left', 'label': 'CI Left', 'field': 'ci_two_left', 'sortable': True},
                     {'name': 'ci_two_right', 'label': 'CI Right', 'field': 'ci_two_right', 'sortable': True},
-                    {'name': 'ci_left', 'label': 'Left-sided CI', 'field': 'ci_left', 'sortable': True},
-                    {'name': 'ci_uniform_left', 'label': 'Uniform Left CI', 'field': 'ci_uniform_left', 'sortable': True},
+                    {'name': 'ci_left', 'label': 'Left CI', 'field': 'ci_left', 'sortable': True},
+                    {'name': 'ci_uniform_left', 'label': 'Uniform CI', 'field': 'ci_uniform_left', 'sortable': True},
                 ]
-                results_table = ui.table(columns=columns, rows=rows, row_key='Method', pagination=10).classes('w-full modern-table')
+                with ui.element('div').classes('data-preview-table-scroll').style('margin-top: 0.75rem;'):
+                    results_table = ui.table(columns=columns, rows=rows, row_key='Method', pagination=10).classes('w-full modern-table report-table')
         
         # --- Interactivity ---
         def handle_hover(e):
@@ -4515,6 +4737,8 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
     state = get_client_state()
     current_agent_file_id = state['current_agent_file_id']
     agent_context = state['agent_context']
+    
+    # Check if panel needs to be recreated (None or potentially invalid after DOM reset)
     if ranking_preview_panel is None:
         with messages_container:
             with ui.element('div').classes('message assistant').style('''
@@ -4535,9 +4759,41 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
                         text-align: left;
                     ''')
+    
+    # If panel is still None after creation attempt, return early
     if ranking_preview_panel is None:
         return ranking_preview_panel
-    ranking_preview_panel.clear()
+    
+    # Clear and rebuild panel content
+    try:
+        ranking_preview_panel.clear()
+    except Exception as e:
+        # If clear fails (e.g., element was removed from DOM), recreate the panel
+        print(f"Warning: Failed to clear ranking_preview_panel, recreating: {e}")
+        ranking_preview_panel = None
+        # Recreate the panel
+        with messages_container:
+            with ui.element('div').classes('message assistant').style('''
+                display: flex;
+                gap: 0.75rem;
+                margin-bottom: 1rem;
+                align-items: flex-end;
+            '''):
+                # Assistant avatar
+                ui.html('<div class="message-avatar" style="background: white; color: #011f5b; width: 32px; height: 32px; border-radius: 50%; border: 2px solid #011f5b; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);"><span class="material-symbols-outlined" style="font-size: 1.2rem; color: #011f5b;">robot_2</span></div>')
+                # Workflow panel content
+                with ui.element('div').classes('message-content').style('flex: 1;'):
+                    ranking_preview_panel = ui.element('div').style('''
+                        background: white;
+                        padding: 1rem;
+                        border-radius: 8px;
+                        border: 1px solid #e5e7eb;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+                        text-align: left;
+                    ''')
+        # If still None after recreation, return early
+        if ranking_preview_panel is None:
+            return None
     with ranking_preview_panel:
                     # Header with title and expand icon
                     with ui.element('div').style('''
@@ -4673,6 +4929,18 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                     with ui.element('div').style('margin-top: 1rem; width: 100%;'):
                         async def start_ranking():
                             """Start ranking analysis by calling direct_agent_analysis"""
+                            global current_report_result, report_displayed
+                            
+                            # Check if button has been converted to "Show Report" button
+                            # If current_report_result exists, this button should only toggle report visibility
+                            if current_report_result is not None:
+                                # Button should be "Show Report" - toggle report visibility instead
+                                if report_displayed:
+                                    hide_floating_report()
+                                else:
+                                    show_floating_report(current_report_result)
+                                return
+                            
                             if not current_agent_file_id:
                                 add_message_to_chat(messages_container, 'assistant', '❌ No file uploaded. Please upload a file first.')
                                 return
@@ -4709,6 +4977,9 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                             text-transform: none;
                         ''')
                         start_ranking_button.on('click', start_ranking)
+                        # Save reference for later modification
+                        global start_ranking_button_ref
+                        start_ranking_button_ref = start_ranking_button
                         # Add icon and text content to button
                         with start_ranking_button:
                             ui.html('<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">play_arrow</span> Start Ranking')
@@ -4735,6 +5006,253 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
 
     return ranking_preview_panel
 
+def add_suggested_questions(messages_container, api_key_input=None, api_key_str=None):
+    """Add suggested questions as clickable buttons for Phase 2
+    
+    Args:
+        messages_container: The messages container element
+        api_key_input: API key input element (preferred)
+        api_key_str: API key string (fallback if api_key_input not available)
+    """
+    suggested_questions = [
+        "Explain what these ranking results mean",
+        "Compare the top 3 methods",
+        "What are the key insights from this ranking?"
+    ]
+    
+    # Create a wrapper for api_key if we have a string
+    if api_key_str and not api_key_input:
+        class ApiKeyWrapper:
+            def __init__(self, key_str):
+                self._key = key_str
+            @property
+            def value(self):
+                return self._key
+        api_key_input = ApiKeyWrapper(api_key_str)
+    elif not api_key_input:
+        # Fallback to global
+        api_key_input = global_api_key_input
+    
+    # Add to conversation history
+    state = get_client_state()
+    agent_conversation_history = state['agent_conversation_history']
+    agent_conversation_history.append({
+        'role': 'assistant',
+        'content': 'You can now ask me questions about your analysis results! Try one of these suggested questions.'
+    })
+    
+    with messages_container:
+        with ui.element('div').classes('message assistant').style('''
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            align-items: flex-end;
+        '''):
+            ui.html('<div class="message-avatar" style="background: white; color: #011f5b; width: 32px; height: 32px; border-radius: 50%; border: 2px solid #011f5b; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);"><span class="material-symbols-outlined" style="font-size: 1.2rem; color: #011f5b;">robot_2</span></div>')
+            with ui.element('div').classes('message-content').style('flex: 1;'):
+                # Single message bubble containing both text and buttons
+                with ui.element('div').classes('message-text').style('''
+                    background: white;
+                    padding: 0.75rem;
+                    border-radius: var(--radius-lg);
+                    border: 1px solid var(--gray-200);
+                    font-size: 0.8rem;
+                    line-height: 1.5;
+                    text-align: left;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+                '''):
+                    # Prompt text
+                    ui.html('<div style="margin-bottom: 0.75rem; color: #374151;"><span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem; color: #011f5b;">chat</span>You can now ask me questions about your analysis results! Try one of these:</div>')
+                    
+                    # Create buttons for each suggested question
+                    for i, question in enumerate(suggested_questions):
+                        # Handle click - send the question automatically
+                        def make_question_handler(q, key_input=api_key_input):
+                            async def handler():
+                                # Set the message input value
+                                ui.run_javascript(f'''
+                                    var messageInput = document.getElementById("message-input");
+                                    if (messageInput) {{
+                                        messageInput.value = {json.dumps(q)};
+                                    }}
+                                ''')
+                                
+                                # Don't add user message here - send_agent_message will add it
+                                # This prevents duplicate messages
+                                
+                                # Scroll to bottom
+                                ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
+                                
+                                # Create a mock hidden input object
+                                class MockHiddenInput:
+                                    def __init__(self, val):
+                                        self.value = val
+                                
+                                mock_hidden_input = MockHiddenInput(q)
+                                
+                                # Call send_agent_message directly (it will add the user message)
+                                await send_agent_message(mock_hidden_input, messages_container, None, key_input)
+                            
+                            return handler
+                        
+                        # Create button with same styling as Start Ranking button (no hover effect)
+                        question_button = ui.button(question).style('''
+                            color: #011f5b !important;
+                            background-color: rgba(1, 31, 91, 0.05) !important;
+                            border: 1px solid #011f5b !important;
+                            border-radius: 6px !important;
+                            padding: 6px 16px !important;
+                            font-weight: 500 !important;
+                            font-size: 0.875rem !important;
+                            min-height: 32px !important;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+                            gap: 0.5rem;
+                            cursor: pointer;
+                            text-transform: none;
+                            margin-bottom: 0.5rem;
+                        ''')
+                        
+                        question_button.on('click', make_question_handler(question))
+    
+    # Scroll to bottom
+    ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
+
+
+def render_markdown(content):
+    """Convert Markdown to HTML with proper styling"""
+    # Check if content already contains HTML tags (from previous rendering or icons)
+    # If it does, extract the text parts and convert only those
+    has_html = bool(re.search(r'<[^>]+>', content))
+    
+    if has_html:
+        # Content already has HTML (e.g., icons), preserve it and convert markdown parts
+        # Use a more sophisticated approach: extract HTML tags, convert text between them
+        # Split by HTML tags while preserving them
+        parts = re.split(r'(<[^>]+>)', content)
+        result_parts = []
+        for part in parts:
+            if part.startswith('<'):
+                # HTML tag, keep as is
+                result_parts.append(part)
+            else:
+                # Text part, convert markdown
+                if part.strip():
+                    # Convert markdown, but be careful with nested HTML
+                    html_part = markdown.markdown(part, extensions=['fenced_code', 'tables', 'nl2br'])
+                    result_parts.append(html_part)
+                else:
+                    result_parts.append(part)
+        html_content = ''.join(result_parts)
+    else:
+        # Pure text/markdown, convert directly
+        html_content = markdown.markdown(content, extensions=['fenced_code', 'tables', 'nl2br'])
+    
+    # Add CSS styles for markdown elements
+    styled_html = f'''
+    <div class="markdown-content" style="
+        font-size: 0.8rem;
+        line-height: 1.6;
+        color: #374151;
+        text-align: left;
+    ">
+        <style>
+            .markdown-content {{
+                text-align: left !important;
+            }}
+            .markdown-content h1, .markdown-content h2, .markdown-content h3, 
+            .markdown-content h4, .markdown-content h5, .markdown-content h6 {{
+                margin-top: 1rem;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+                color: #111827;
+                text-align: left !important;
+            }}
+            .markdown-content h1 {{ font-size: 1.25rem; }}
+            .markdown-content h2 {{ font-size: 1.125rem; }}
+            .markdown-content h3 {{ font-size: 1rem; }}
+            .markdown-content p {{
+                margin: 0.5rem 0;
+                text-align: left !important;
+            }}
+            .markdown-content ul, .markdown-content ol {{
+                margin: 0.5rem 0;
+                padding-left: 1.5rem;
+                text-align: left !important;
+            }}
+            .markdown-content li {{
+                margin: 0.25rem 0;
+                text-align: left !important;
+            }}
+            .markdown-content code {{
+                background: #f3f4f6;
+                padding: 0.125rem 0.25rem;
+                border-radius: 0.25rem;
+                font-family: 'Courier New', monospace;
+                font-size: 0.875em;
+                color: #dc2626;
+            }}
+            .markdown-content pre {{
+                background: #f9fafb;
+                border: 1px solid #e5e7eb;
+                border-radius: 0.375rem;
+                padding: 0.75rem;
+                overflow-x: auto;
+                margin: 0.75rem 0;
+            }}
+            .markdown-content pre code {{
+                background: transparent;
+                padding: 0;
+                color: inherit;
+            }}
+            .markdown-content strong {{
+                font-weight: 600;
+                color: #111827;
+            }}
+            .markdown-content em {{
+                font-style: italic;
+            }}
+            .markdown-content blockquote {{
+                border-left: 3px solid #d1d5db;
+                padding-left: 1rem;
+                margin: 0.75rem 0;
+                color: #6b7280;
+                text-align: left !important;
+            }}
+            .markdown-content table {{
+                border-collapse: collapse;
+                width: 100%;
+                margin: 0.75rem 0;
+                text-align: left !important;
+            }}
+            .markdown-content table th,
+            .markdown-content table td {{
+                border: 1px solid #e5e7eb;
+                padding: 0.5rem;
+                text-align: left;
+            }}
+            .markdown-content table th {{
+                background: #f9fafb;
+                font-weight: 600;
+            }}
+            .markdown-content a {{
+                color: #2563eb;
+                text-decoration: underline;
+            }}
+            .markdown-content hr {{
+                border: none;
+                border-top: 1px solid #e5e7eb;
+                margin: 1rem 0;
+            }}
+        </style>
+        {html_content}
+    </div>
+    '''
+    return styled_html
+
+
 def add_message_to_chat(messages_container, role, content):
     """Add a message to the chat container and conversation history"""
     state = get_client_state()
@@ -4750,6 +5268,13 @@ def add_message_to_chat(messages_container, role, content):
     if len(agent_conversation_history) > 50:
         agent_conversation_history = agent_conversation_history[-50:]
 
+    # Convert markdown to HTML for assistant messages
+    if role == 'assistant':
+        rendered_content = render_markdown(content)
+    else:
+        # User messages: keep as plain text (or simple HTML if needed)
+        rendered_content = content
+
     with messages_container:
         with ui.element('div').classes(f'message {role}').style('''
             display: flex;
@@ -4761,11 +5286,11 @@ def add_message_to_chat(messages_container, role, content):
                 # Assistant: avatar left, content right
                 ui.html('<div class="message-avatar" style="background: white; color: #011f5b; width: 32px; height: 32px; border-radius: 50%; border: 2px solid #011f5b; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);"><span class="material-symbols-outlined" style="font-size: 1.2rem; color: #011f5b;">robot_2</span></div>')
                 with ui.element('div').classes('message-content').style('flex: 1;'):
-                    ui.html(f'<div class="message-text" style="background: white; padding: 0.75rem; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap; text-align: left; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);">{content}</div>')
+                    ui.html(f'<div class="message-text" style="background: white; padding: 0.75rem; border-radius: var(--radius-lg); border: 1px solid var(--gray-200); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05); text-align: left;">{rendered_content}</div>')
             else:
                 # User: content left, avatar right
                 with ui.element('div').classes('message-content').style('flex: 1;'):
-                    ui.html(f'<div class="message-text" style="background: white; padding: 0.75rem; border-radius: 1.25rem; border: 1px solid var(--gray-200); font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap; text-align: left; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);">{content}</div>')
+                    ui.html(f'<div class="message-text" style="background: white; padding: 0.75rem; border-radius: 1.25rem; border: 1px solid var(--gray-200); font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap; text-align: left; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);">{rendered_content}</div>')
                 ui.html('<div class="message-avatar" style="background: white; color: #011f5b; width: 32px; height: 32px; border-radius: 50%; border: 2px solid #011f5b; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);"><span class="material-symbols-outlined" style="font-size: 1.2rem; color: #011f5b;">person</span></div>')
 
 async def send_agent_message(hidden_input, messages_container, status_area, api_key_input):
@@ -4793,13 +5318,34 @@ async def send_agent_message(hidden_input, messages_container, status_area, api_
         add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">key</span> Please enter your OpenAI API key first.')
         return
 
-    # Validate input based on current workflow stage
-    current_stage = get_current_workflow_stage()
-    validation = validate_user_input(message, current_stage)
+    # Check if this is Phase 2 (ranking results Q&A) before validation
+    state = get_client_state()
+    agent_context = state['agent_context']
+    ranking_results = agent_context.get('ranking_results')
+    has_ranking_results = ranking_results is not None and isinstance(ranking_results, dict)
+    
+    # Debug: Print ranking_results status
+    print(f"DEBUG FRONTEND: ranking_results exists: {has_ranking_results}")
+    if has_ranking_results:
+        print(f"DEBUG FRONTEND: ranking_results type: {type(ranking_results)}, has methods: {bool(ranking_results.get('methods'))}, methods count: {len(ranking_results.get('methods', []))}")
+    
+    # Phase 2 keywords that indicate questions about results
+    phase2_keywords = ['ranking', 'results', 'method', 'compare', 'top', 'rank', 
+                      'which method', 'what is the', 'tell me about', 'explain',
+                      'interpretation', 'analysis', 'theta', 'confidence']
+    message_lower = message.lower()
+    has_phase2_keywords = any(keyword in message_lower for keyword in phase2_keywords)
+    is_phase2_request = has_ranking_results and has_phase2_keywords
+    print(f"DEBUG FRONTEND: has_phase2_keywords: {has_phase2_keywords}, is_phase2_request: {is_phase2_request}")
 
-    if not validation["valid"]:
-        add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> {validation["reason"]}')
-        return
+    # Validate input based on current workflow stage (skip validation for Phase 2)
+    if not is_phase2_request:
+        current_stage = get_current_workflow_stage()
+        validation = validate_user_input(message, current_stage)
+
+        if not validation["valid"]:
+            add_message_to_chat(messages_container, 'assistant', f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">cancel</span> {validation["reason"]}')
+            return
 
     # Update context with user activity
     update_agent_context()
@@ -4833,50 +5379,125 @@ async def send_agent_message(hidden_input, messages_container, status_area, api_
     ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
 
     try:
+        # Phase 2: Reuse the detection from earlier (already checked before validation)
+        # ranking_results and is_phase2_request are already available from above
+        # IMPORTANT: Get fresh state to ensure we have latest ranking_results
+        state = get_client_state()
+        agent_context = state['agent_context']
+        ranking_results = agent_context.get('ranking_results')
+        
+        # Debug: Print ranking_results status
+        print(f"DEBUG FRONTEND send_agent_message: ranking_results exists: {ranking_results is not None}")
+        if ranking_results:
+            print(f"DEBUG FRONTEND send_agent_message: ranking_results type: {type(ranking_results)}, keys: {list(ranking_results.keys()) if isinstance(ranking_results, dict) else 'NOT DICT'}")
+            if isinstance(ranking_results, dict) and 'methods' in ranking_results:
+                methods = ranking_results.get('methods', [])
+                print(f"DEBUG FRONTEND send_agent_message: methods count: {len(methods)}")
+                if methods:
+                    print(f"DEBUG FRONTEND send_agent_message: First method: {methods[0]}")
+            else:
+                print(f"DEBUG FRONTEND send_agent_message: WARNING - ranking_results missing 'methods' key!")
+        else:
+            print(f"DEBUG FRONTEND send_agent_message: ERROR - ranking_results is None!")
+            print(f"DEBUG FRONTEND send_agent_message: agent_context keys: {list(agent_context.keys())}")
+        
+        # More robust Phase 2 detection: check if ranking_results exists and has valid structure
+        has_ranking_results = ranking_results is not None and isinstance(ranking_results, dict)
+        has_methods = has_ranking_results and ranking_results.get('methods') and len(ranking_results.get('methods', [])) > 0
+        
+        # Determine if this is Phase 2: either we have ranking results with methods, 
+        # or user is asking Phase 2 questions and we have any ranking_results
+        is_phase2 = has_methods or is_phase2_request
+        
+        # Debug logging (can be removed in production)
+        if has_ranking_results:
+            logger.info(f"Phase 2 detection: has_ranking_results={has_ranking_results}, has_methods={has_methods}, is_phase2_request={is_phase2_request}, is_phase2={is_phase2}")
+
         # Prepare messages for API with enhanced context
         messages = []
         agent_conversation_history = state['agent_conversation_history']
-        agent_context = state['agent_context']
 
-        # Add recent conversation history for context (last 10 messages)
-        recent_history = agent_conversation_history[-10:] if agent_conversation_history else []
-        for msg in recent_history:
-            if msg['role'] != 'system':  # Skip system messages in history
+        if is_phase2:
+            # Phase 2: Use simplified message preparation (backend will handle Phase 2 context)
+            # Add recent conversation history for context (last 10 messages)
+            recent_history = agent_conversation_history[-10:] if agent_conversation_history else []
+            for msg in recent_history:
+                if msg['role'] != 'system':  # Skip system messages in history
+                    messages.append({
+                        'role': msg['role'],
+                        'content': msg['content']
+                    })
+
+            # Add the current user message
+            messages.append({
+                'role': 'user',
+                'content': message
+            })
+        else:
+            # Phase 1: Use existing message preparation logic
+            # Add recent conversation history for context (last 10 messages)
+            recent_history = agent_conversation_history[-10:] if agent_conversation_history else []
+            for msg in recent_history:
+                if msg['role'] != 'system':  # Skip system messages in history
+                    messages.append({
+                        'role': msg['role'],
+                        'content': msg['content']
+                    })
+
+            # Add context about uploaded file if available
+            if current_agent_file_id:
                 messages.append({
-                    'role': msg['role'],
-                    'content': msg['content']
+                    'role': 'system',
+                    'content': f'User has uploaded a file with ID: {current_agent_file_id}. Continue ranking analysis workflow.'
                 })
 
-        # Add context about uploaded file if available
-        if current_agent_file_id:
+            # Add enhanced workflow stage context
+            workflow_stage = get_current_workflow_stage()
+            guidance = get_workflow_guidance(workflow_stage)
+
+            context_message = f'''Current workflow stage: {workflow_stage}.
+            User context: {agent_context['data_insights'] if agent_context['data_insights'] else 'No data insights yet'}.
+            Guide user through: {', '.join(guidance['next_steps'])}.
+            Tips: {guidance['tips']}'''
+
             messages.append({
                 'role': 'system',
-                'content': f'User has uploaded a file with ID: {current_agent_file_id}. Continue ranking analysis workflow.'
+                'content': context_message
             })
 
-        # Add enhanced workflow stage context
-        workflow_stage = get_current_workflow_stage()
-        guidance = get_workflow_guidance(workflow_stage)
-
-        context_message = f'''Current workflow stage: {workflow_stage}.
-        User context: {agent_context['data_insights'] if agent_context['data_insights'] else 'No data insights yet'}.
-        Guide user through: {', '.join(guidance['next_steps'])}.
-        Tips: {guidance['tips']}'''
-
-        messages.append({
-            'role': 'system',
-            'content': context_message
-        })
-
-        # Add the current user message
-        messages.append({
-            'role': 'user',
-            'content': message
-        })
+            # Add the current user message
+            messages.append({
+                'role': 'user',
+                'content': message
+            })
 
         # Call agent chat API with timeout
         async with aiohttp.ClientSession() as session:
-            payload = {'messages': messages, 'api_key': api_key}
+            # Phase 2: Pass ranking_results to backend if available (let backend decide if Phase 2)
+            # Always pass ranking_results if it exists, so backend can make the final decision
+            payload = {
+                'messages': messages, 
+                'api_key': api_key,
+                'ranking_results': ranking_results if has_ranking_results else None
+            }
+            
+            # Debug logging
+            print(f"DEBUG FRONTEND: Sending request with ranking_results: {has_ranking_results}, is_phase2: {is_phase2}, message: {message[:50]}...")
+            logger.info(f"DEBUG FRONTEND: Sending request with ranking_results: {has_ranking_results}, is_phase2: {is_phase2}, message: {message[:50]}...")
+            if has_ranking_results:
+                print(f"DEBUG FRONTEND: ranking_results has methods: {bool(ranking_results.get('methods'))}, count: {len(ranking_results.get('methods', []))}")
+                logger.info(f"DEBUG FRONTEND: ranking_results has methods: {bool(ranking_results.get('methods'))}, count: {len(ranking_results.get('methods', []))}")
+                # Print actual payload to verify
+                import json
+                payload_preview = {
+                    'messages_count': len(messages),
+                    'has_ranking_results': has_ranking_results,
+                    'ranking_results_keys': list(ranking_results.keys()) if isinstance(ranking_results, dict) else None,
+                    'ranking_results_methods_count': len(ranking_results.get('methods', [])) if isinstance(ranking_results, dict) else 0
+                }
+                print(f"DEBUG FRONTEND: Payload preview: {json.dumps(payload_preview, indent=2)}")
+            else:
+                print(f"DEBUG FRONTEND: ERROR - has_ranking_results is False, ranking_results: {ranking_results}")
             async with session.post(f'{API_BASE_URL}/api/agent/chat', json=payload, timeout=30) as resp:
                 if resp.status == 200:
                     result = await resp.json()
@@ -4954,9 +5575,12 @@ async def send_agent_message(hidden_input, messages_container, status_area, api_
                             pass
 
                         if content:
+                            # Phase 2: Always display content for Phase 2 responses (ranking results Q&A)
+                            if is_phase2:
+                                add_message_to_chat(messages_container, 'assistant', content)
                             # Check if this is a workflow summary message that should show the workflow modal
                             # Skip displaying these messages as they are replaced by the workflow modal
-                            if any(phrase in content.lower() for phrase in [
+                            elif any(phrase in content.lower() for phrase in [
                                 'ultra-concise summary',
                                 'ultra-concise status',
                                 'please choose ranking direction',
@@ -5083,7 +5707,15 @@ def update_agent_context(stage=None, data=None, preferences=None):
         agent_context['current_stage'] = stage
 
     if data:
-        agent_context['data_insights'].update(data)
+        # Handle ranking_results separately (Phase 2)
+        if 'ranking_results' in data:
+            agent_context['ranking_results'] = data['ranking_results']
+            # Remove from data dict to avoid updating data_insights with it
+            data = {k: v for k, v in data.items() if k != 'ranking_results'}
+        
+        # Update data_insights with remaining data
+        if data:
+            agent_context['data_insights'].update(data)
 
     if preferences:
         agent_context['user_preferences'].update(preferences)
@@ -5420,54 +6052,16 @@ async def direct_agent_analysis(file_id: str, messages_container, api_key: str):
             add_message_to_chat(messages_container, 'assistant', '❌ Report system not ready. Please refresh the page.')
             return
 
-        report_container_ref.clear()
-        status_container_ref.clear()
-        # Make containers visible
-        status_container_ref.style('display: block;')
-        report_container_ref.style('display: none;')
-
-        # Enhanced loading animation
-        with status_container_ref:
-            with ui.element('div').classes('status-card').style('''
-                background: linear-gradient(135deg, rgba(1, 31, 91, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
-                border: 1px solid rgba(1, 31, 91, 0.1);
-                backdrop-filter: blur(15px);
-            '''):
-                ui.html('''
-                    <div style="display: flex; align-items: center; gap: 1.5rem; justify-content: center;">
-                        <div class="loading-spinner"></div>
-                        <div style="color: var(--primary-900); font-weight: 700; font-size: 1.1rem;">
-                            🔍 Performing robust ranking analysis...
-                        </div>
-                    </div>
-                    <div style="margin-top: 1rem; text-align: center; color: var(--gray-600); font-size: 0.9rem;">
-                        Please wait while we process your report
-                    </div>
-                ''')
+        # Hide report and show loading animation in floating modal
+        hide_floating_report()
+        show_floating_loading()
 
         # Get file content from agent backend
         async with aiohttp.ClientSession() as session:
             async with session.get(f'{API_BASE_URL}/api/agent/files/{file_id}', timeout=30) as resp:
                 if resp.status != 200:
-                    status_container_ref.clear()
-                    with status_container_ref:
-                        with ui.element('div').classes('status-card info-card error').style('''
-                            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
-                            border-left: 5px solid var(--error-500);
-                        '''):
-                            ui.html('''
-                                <div style="display: flex; align-items: center; gap: 1rem;">
-                                    <div style="font-size: 1.5rem;">❌</div>
-                                    <div>
-                                        <div style="color: var(--error-600); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">
-                                            File Access Failed
-                                        </div>
-                                        <div style="color: var(--gray-700); font-size: 0.95rem;">
-                                            Could not access uploaded file. Please try uploading again.
-                                        </div>
-                                    </div>
-                                </div>
-                            ''')
+                    hide_floating_loading()
+                    show_floating_error('File Access Failed', 'Could not access uploaded file. Please try uploading again.')
                     return
 
                 file_bytes = await resp.read()
@@ -5482,30 +6076,14 @@ async def direct_agent_analysis(file_id: str, messages_container, api_key: str):
         job_id, err = await create_job_async(file_name, file_bytes, bigbetter, B, seed)
         if err or not job_id:
             logger.error(f"Create job failed: {err}")
-            status_container_ref.clear()
-            with status_container_ref:
-                with ui.element('div').classes('status-card info-card error').style('''
-                    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
-                    border-left: 5px solid var(--error-500);
-                '''):
-                    ui.html(f'''
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 1.5rem;">❌</div>
-                            <div>
-                                <div style="color: var(--error-600); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">
-                                    Analysis Failed
-                                </div>
-                                <div style="color: var(--gray-700); font-size: 0.95rem;">
-                                    {err or 'Job creation failed'}
-                                </div>
-                            </div>
-                        </div>
-                    ''')
+            hide_floating_loading()
+            show_floating_error('Analysis Failed', err or 'Job creation failed')
             return
 
         # Poll status
         status = await poll_status_async(job_id)
         if status.get('status') != 'succeeded':
+            hide_floating_loading()
             status_container_ref.clear()
             with status_container_ref:
                 with ui.element('div').classes('status-card info-card error').style('''
@@ -5530,67 +6108,33 @@ async def direct_agent_analysis(file_id: str, messages_container, api_key: str):
         # Fetch results
         result, err = await fetch_results_async(job_id)
         if err or not result:
-            status_container_ref.clear()
-            with status_container_ref:
-                with ui.element('div').classes('status-card info-card error').style('''
-                    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
-                    border-left: 5px solid var(--error-500);
-                '''):
-                    ui.html(f'''
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="font-size: 1.5rem;">❌</div>
-                            <div>
-                                <div style="color: var(--error-600); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">
-                                    Results Fetch Failed
-                                </div>
-                                <div style="color: var(--gray-700); font-size: 0.95rem;">
-                                    {err or 'Could not retrieve results'}
-                                </div>
-                            </div>
-                        </div>
-                    ''')
+            hide_floating_loading()
+            show_floating_error('Results Fetch Failed', err or 'Could not retrieve results')
             return
 
-        # Clear status and show results
-        status_container_ref.clear()
-        status_container_ref.style('display: none;')
-        report_container_ref.style('display: block;')
+        # Hide loading and show report
+        hide_floating_loading()
+        
+        # Phase 2: Store ranking results in agent_context
+        update_agent_context(
+            stage='results_ready',
+            data={'ranking_results': result}
+        )
 
         # Add success message to chat
-        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">check_circle</span> <span style="font-weight: 600;">Analysis Complete!</span> Your spectral ranking analysis has finished successfully. Displaying the complete analysis report below.')
+        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">check_circle</span> <span style="font-weight: 600;">Analysis Complete!</span> Your spectral ranking analysis has finished successfully. Displaying the complete analysis report now.')
 
-        # Add question prompt
-        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">chat</span> You can now ask me questions about your analysis results! Try asking about specific rankings, methods, or interpretations.')
+        # Add suggested questions (Phase 2)
+        ui.timer(0.5, lambda: add_suggested_questions(messages_container, api_key_str=api_key), once=True)
 
-        with report_container_ref:
-            show_results(result)
-
-        # Scroll to the report
-        ui.run_javascript('document.querySelector("#results").scrollIntoView({behavior: "smooth"});')
+        # Show report in floating modal
+        show_main_report(result)
 
     except Exception as e:
         print(f"Error in direct agent analysis: {e}")
         try:
-            if status_container_ref:
-                status_container_ref.clear()
-                with status_container_ref:
-                    with ui.element('div').classes('status-card info-card error').style('''
-                        background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
-                        border-left: 5px solid var(--error-500);
-                    '''):
-                        ui.html(f'''
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <div style="font-size: 1.5rem;">❌</div>
-                                <div>
-                                    <div style="color: var(--error-600); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">
-                                        Unexpected Error
-                                    </div>
-                                    <div style="color: var(--gray-700); font-size: 0.95rem;">
-                                        {str(e)}
-                                    </div>
-                                </div>
-                            </div>
-                        ''')
+            hide_floating_loading()
+            show_floating_error('Unexpected Error', str(e))
         except:
             add_message_to_chat(messages_container, 'assistant', f'❌ Unexpected error: {str(e)}')
 
@@ -5771,19 +6315,98 @@ async def process_agent_analysis_async(message, messages_container, typing_indic
     state['_analysis_completed'] = True
     return True
 
+def reset_report_state():
+    """Reset all report-related state variables"""
+    global report_displayed, current_report_result, start_ranking_button_ref, floating_report_modal_ref
+    global ranking_preview_panel, start_ranking_button
+    
+    # Reset report state variables
+    report_displayed = False
+    current_report_result = None
+    
+    # Hide floating report modal if visible
+    if floating_report_modal_ref is not None:
+        modal_container = floating_report_modal_ref['container']
+        ui.run_javascript('''
+            (function() {
+                const modalContainer = document.getElementById('floating-report-modal');
+                if (modalContainer) {
+                    modalContainer.style.display = 'none';
+                }
+            })();
+        ''')
+        modal_container.style('display: none;')
+    
+    # Reset button text to "Start Ranking" if button exists
+    # Use JavaScript first for immediate update, then Python as backup
+    ui.run_javascript('''
+        (function() {
+            const buttons = document.querySelectorAll('button');
+            for (let btn of buttons) {
+                const text = btn.textContent || btn.innerText || '';
+                if (text.includes('Show Report') || text.includes('Hide Report') || text.includes('Start Ranking')) {
+                    btn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">play_arrow</span> Start Ranking';
+                    break;
+                }
+            }
+        })();
+    ''')
+    
+    # Also try Python method if button ref exists (as backup)
+    if start_ranking_button_ref is not None:
+        try:
+            start_ranking_button_ref.clear()
+            with start_ranking_button_ref:
+                ui.html('<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">play_arrow</span> Start Ranking')
+            
+            # Note: Event handlers (start_ranking or on_query) are preserved as they're bound to the button element
+            # Both handlers check current_report_result (which is now None), so they will execute normal ranking logic
+        except Exception as e:
+            print(f"Error resetting button text via Python: {e}")
+    
+    # Note: We don't reset ranking_preview_panel and start_ranking_button here
+    # because they are UI elements that will be recreated when show_workflow_modal is called again
+    # However, we need to ensure that when a new file is uploaded, the workflow modal
+    # will recreate these elements properly
+
 def reset_agent_upload_state():
     """Reset the agent upload state"""
+    global ranking_preview_panel, start_ranking_button
+    
     state = get_client_state()
     state['current_agent_file_id'] = None
     state['agent_conversation_history'] = []
+    state['_analysis_completed'] = False
+    
+    # Reset agent context to ensure fresh analysis
+    state['agent_context'] = {
+        'conversation_history': [],
+        'current_stage': 'awaiting_upload',
+        'user_preferences': {},
+        'data_insights': {},
+        'last_activity': None,
+    }
+    
+    # Reset global UI references for workflow modal so that a fresh
+    # Ranking Preview panel is created when file is re-uploaded
+    ranking_preview_panel = None
+    start_ranking_button = None
+    
+    # Reset report state when file is deleted
+    reset_report_state()
 
 def reset_manual_upload_state():
     """Reset the manual upload state"""
     state = get_client_state()
     state['manual_uploaded_file'] = None
+    
+    # Reset report state when file is deleted
+    reset_report_state()
 
 def reset_all_page_state():
     """Reset all page state variables on page refresh - client-specific"""
+    global report_displayed, current_report_result, start_ranking_button_ref
+
     state = get_client_state()
 
     # Reset API key confirmation
@@ -5809,6 +6432,15 @@ def reset_all_page_state():
 
     # Reset manual upload state
     state['manual_uploaded_file'] = None
+
+    # Reset floating report state
+    report_displayed = False
+    current_report_result = None
+    start_ranking_button_ref = None
+
+    # Hide floating report modal if visible
+    if floating_report_modal_ref is not None:
+        floating_report_modal_ref['container'].style('display: none;')
 
     # Reset chat state
     state['chat_state'] = {
@@ -5861,8 +6493,12 @@ def reset_all_page_state():
         # If button is not ready or already disposed, fail silently
         pass
 
-async def check_agent_job_status(messages_container, job_id):
+async def check_agent_job_status(messages_container, job_id, api_key_input=None):
     """Enhanced job status checking with better progress feedback"""
+    # Use global API key input if not provided
+    if api_key_input is None:
+        api_key_input = global_api_key_input
+    
     try:
         async with aiohttp.ClientSession() as session:
             # Check status
@@ -5883,6 +6519,12 @@ async def check_agent_job_status(messages_container, job_id):
                                 if results_resp.status == 200:
                                     results = await results_resp.json()
 
+                                    # Phase 2: Store ranking results in agent_context
+                                    update_agent_context(
+                                        stage='results_ready',
+                                        data={'ranking_results': results}
+                                    )
+
                                     # Add success message with summary
                                     summary_msg = '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">check_circle</span> <span style="font-weight: 600;">Analysis Complete!</span> Your spectral ranking analysis has finished successfully. '
                                     if 'methods' in results:
@@ -5892,14 +6534,18 @@ async def check_agent_job_status(messages_container, job_id):
                                     summary_msg += 'Displaying the complete analysis report now.'
                                     add_message_to_chat(messages_container, 'assistant', summary_msg)
 
-                                    # Add question prompt
-                                    ui.timer(0.5, lambda: add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">chat</span> You can now ask me questions about your analysis results! Try asking about specific rankings, methods, or interpretations.'), once=True)
+                                    # Add suggested questions (Phase 2)
+                                    ui.timer(0.5, lambda: add_suggested_questions(messages_container, api_key_input), once=True)
 
                                     # Scroll to bottom
                                     ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
 
                                     # Show report using the same mechanism as manual mode
                                     ui.timer(1.0, lambda: show_main_report(results), once=True)
+                                    
+                                    # Phase 2: Auto-summarize results (optional, delayed to let report display first)
+                                    if api_key_input:
+                                        ui.timer(2.0, lambda: auto_summarize_results_frontend(results, messages_container, api_key_input), once=True)
                                     break
 
                                 elif results_resp.status == 404:
@@ -5967,412 +6613,1235 @@ async def check_agent_job_status(messages_container, job_id):
         # Retry on errors
         ui.timer(3.0, lambda: check_agent_job_status(messages_container, job_id), once=True)
 
-def show_main_report(result):
-    """Display analysis report in the main report container (used by both agent and manual modes)."""
+
+async def auto_summarize_results_frontend(ranking_results, messages_container, api_key_input):
+    """Phase 2: Auto-generate summary of ranking results using Agent"""
     try:
-        # Check if report container is initialized
-        if report_container_ref is None or status_container_ref is None:
-            print(f"Report containers not initialized yet. report_container_ref: {report_container_ref}, status_container_ref: {status_container_ref}")
-            # Retry after a short delay
-            ui.timer(0.5, lambda: show_main_report(result), once=True)
+        if not ranking_results or not ranking_results.get('methods'):
             return
+        
+        summary_request = "Please provide a concise summary of the ranking results. Highlight the top 3-5 methods and any key findings."
+        
+        state = get_client_state()
+        conversation_history = state['agent_conversation_history']
+        
+        # Prepare messages
+        messages = []
+        messages.append({
+            'role': 'user',
+            'content': summary_request
+        })
+        
+        # Call API with ranking_results
+        api_key = api_key_input.value.strip() if hasattr(api_key_input, 'value') else ""
+        if not api_key:
+            return  # Skip if no API key
+        
+        async with aiohttp.ClientSession() as session:
+            payload = {
+                'messages': messages, 
+                'api_key': api_key,
+                'ranking_results': ranking_results  # Pass ranking results for Phase 2
+            }
+            async with session.post(f'{API_BASE_URL}/api/agent/chat', json=payload, timeout=30) as resp:
+                if resp.status == 200:
+                    result = await resp.json()
+                    assistant_message = result.get('assistant_message', {})
+                    content = assistant_message.get('content', '')
+                    
+                    if content:
+                        # Display summary
+                        add_message_to_chat(messages_container, 'assistant', 
+                                          f'<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">summarize</span> {content}')
+                        
+                        # Update conversation history
+                        state = get_client_state()
+                        state['agent_conversation_history'].append({
+                            'role': 'user',
+                            'content': summary_request
+                        })
+                        state['agent_conversation_history'].append({
+                            'role': 'assistant',
+                            'content': content
+                        })
+                        
+                        # Scroll to bottom
+                        ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
+    except Exception as e:
+        logger.error(f"Auto summarize error: {e}")
+        # Silently fail - don't show error to user for auto-summary
 
-        # Clear previous content and show the report in main container
-        report_container_ref.clear()
-        status_container_ref.clear()
 
-        # Make containers visible
-        status_container_ref.style('display: none;')
-        report_container_ref.style('display: block;')
+def create_floating_report_modal():
+    """Create and return a floating report modal that overlays the data preview."""
+    global floating_report_modal_ref
 
-        with report_container_ref:
-            show_results(result)
+    if floating_report_modal_ref is not None:
+        return floating_report_modal_ref
 
-        # Scroll to the report
-        ui.run_javascript('document.querySelector("#results").scrollIntoView({behavior: "smooth"});')
+    # Create modal container that will be positioned over the data preview
+    # No overlay - just a floating container that matches data preview size
+    modal_container = ui.element('div').style('''
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: var(--radius-lg);
+        border: 2px solid #011f5b;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        z-index: 1000;
+        display: none;
+        flex-direction: column;
+    ''').props('id="floating-report-modal"')
+
+    with modal_container:
+        # Add html2pdf.js library
+        ui.add_head_html('''
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+        ''')
+        
+        # PDF export button in top-left corner
+        def pdf_export_handler():
+            from datetime import datetime
+            global current_report_result
+            current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            job_id = 'report'
+            # Try to get job_id from the report if available
+            try:
+                if current_report_result and isinstance(current_report_result, dict) and 'job_id' in current_report_result:
+                    job_id = str(current_report_result['job_id'])
+            except:
+                pass
+            
+            safe_filename = f'ranking_report_{job_id}_{current_time}.pdf'
+            
+            ui.run_javascript(f'''
+                (function() {{
+                    // Find the report card element inside the modal
+                    const modal = document.getElementById('floating-report-modal');
+                    if (!modal) {{
+                        console.error('Could not find floating report modal');
+                        return;
+                    }}
+                    
+                    const reportCard = modal.querySelector('.report-card');
+                    if (!reportCard) {{
+                        console.error('Could not find report card');
+                        return;
+                    }}
+                    
+                    // Find PDF button and show loading state
+                    const pdfButton = document.getElementById('pdf-export-btn');
+                    if (pdfButton) {{
+                        const originalHTML = pdfButton.innerHTML;
+                        pdfButton.innerHTML = '<span class="material-symbols-outlined" style="font-size: 1.3rem; color: white; pointer-events: none;">hourglass_empty</span>';
+                        pdfButton.disabled = true;
+                        pdfButton.style.opacity = '0.6';
+                        
+                        // Configure PDF options
+                        const opt = {{
+                            margin: [10, 10, 10, 10],
+                            filename: '{safe_filename}',
+                            image: {{ type: 'jpeg', quality: 0.98 }},
+                            html2canvas: {{ 
+                                scale: 2,
+                                useCORS: true,
+                                logging: false,
+                                letterRendering: true,
+                                windowWidth: reportCard.scrollWidth,
+                                windowHeight: reportCard.scrollHeight
+                            }},
+                            jsPDF: {{ 
+                                unit: 'mm', 
+                                format: 'a4', 
+                                orientation: 'portrait' 
+                            }}
+                        }};
+                        
+                        // Generate PDF
+                        html2pdf().set(opt).from(reportCard).save().then(function() {{
+                            // Restore button state
+                            pdfButton.innerHTML = originalHTML;
+                            pdfButton.disabled = false;
+                            pdfButton.style.opacity = '1';
+                        }}).catch(function(error) {{
+                            console.error('PDF generation error:', error);
+                            alert('Error generating PDF. Please try again or use the browser print function (Ctrl+P / Cmd+P).');
+                            pdfButton.innerHTML = originalHTML;
+                            pdfButton.disabled = false;
+                            pdfButton.style.opacity = '1';
+                        }});
+                    }}
+                }})();
+            ''')
+        
+        pdf_button = ui.button('', on_click=pdf_export_handler).style('''
+            position: absolute;
+            top: 0.75rem;
+            left: 0.75rem;
+            z-index: 1001;
+            background: rgba(1, 31, 91, 0.9) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            min-height: 36px;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+            pointer-events: auto;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        ''').props('flat id="pdf-export-btn"')
+
+        with pdf_button:
+            ui.html('<span class="material-symbols-outlined" style="font-size: 1.3rem; color: white; pointer-events: none;">picture_as_pdf</span>')
+        
+        # Close button in top-right corner (no header, just floating button)
+        def close_handler():
+            hide_floating_report()
+        
+        close_button = ui.button('', on_click=close_handler).style('''
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            z-index: 1001;
+            background: rgba(1, 31, 91, 0.9) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            min-height: 36px;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+            pointer-events: auto;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        ''').props('flat')
+
+        with close_button:
+            ui.html('<span class="material-symbols-outlined" style="font-size: 1.3rem; color: white; pointer-events: none;">close</span>')
+        
+        # Add hover effects via JavaScript for both buttons
+        ui.run_javascript('''
+            (function() {
+                const modal = document.getElementById('floating-report-modal');
+                if (!modal) return;
+                
+                const buttons = modal.querySelectorAll('button');
+                buttons.forEach(function(btn) {
+                    btn.addEventListener('mouseenter', function() {
+                        this.style.background = 'rgba(1, 31, 91, 1)';
+                    });
+                    btn.addEventListener('mouseleave', function() {
+                        this.style.background = 'rgba(1, 31, 91, 0.9)';
+                    });
+                });
+            })();
+        ''')
+
+        # Content area for the report
+        report_content_area = ui.element('div').style('''
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+            padding: 0;
+        ''')
+
+    floating_report_modal_ref = {
+        'container': modal_container,
+        'report_area': report_content_area,
+        'close_button': close_button,
+        'pdf_button': pdf_button
+    }
+
+    return floating_report_modal_ref
+
+def create_floating_loading_modal():
+    """Create and return a floating loading modal that overlays the left side area."""
+    global floating_loading_modal_ref
+
+    if floating_loading_modal_ref is not None:
+        return floating_loading_modal_ref
+
+    # Create modal container that will be positioned over the left side area
+    modal_container = ui.element('div').style('''
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: var(--radius-lg);
+        border: 2px solid #011f5b;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        z-index: 999;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    ''').props('id="floating-loading-modal"')
+
+    with modal_container:
+        # Loading content area
+        loading_content_area = ui.element('div').style('''
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        ''')
+
+    floating_loading_modal_ref = {
+        'container': modal_container,
+        'content_area': loading_content_area
+    }
+
+    return floating_loading_modal_ref
+
+def show_floating_loading():
+    """Show the loading animation in the floating modal overlay positioned above left side area."""
+    global loading_displayed, floating_loading_modal_ref
+
+    modal = create_floating_loading_modal()
+
+    # Clear previous content
+    modal['content_area'].clear()
+
+    # Show the loading content with enhanced loading animation
+    with modal['content_area']:
+        with ui.element('div').classes('enhanced-loading-container'):
+            with ui.element('div').classes('enhanced-loading-card'):
+                # Animated icon container
+                with ui.element('div').classes('enhanced-loading-icon-container'):
+                    ui.html('<span class="material-symbols-outlined enhanced-loading-icon">analytics</span>')
+                    # Animated dots
+                    ui.html('<div class="enhanced-loading-dots"><span></span><span></span><span></span></div>')
+
+                # Loading text with animation
+                with ui.element('div').classes('enhanced-loading-text-container'):
+                    ui.html('<div class="enhanced-loading-title">Performing Robust Ranking Analysis</div>')
+                    ui.html('<div class="enhanced-loading-subtitle">Running spectral ranking algorithm...</div>')
+                    ui.html('<div class="enhanced-loading-note">Please wait while we process your report</div>')
+
+                # Progress indicator
+                with ui.element('div').classes('enhanced-loading-progress'):
+                    ui.html('<div class="enhanced-loading-bar"></div>')
+
+    # Position the modal over the entire left side area (shared_data_area) using JavaScript
+    ui.run_javascript('''
+        (function() {
+            // Find the shared_data_area container (left side area with upload + preview)
+            const targetArea = document.getElementById('shared-data-area');
+            const modalContainer = document.getElementById('floating-loading-modal');
+            
+            if (!targetArea || !modalContainer) {
+                console.error('Could not find shared-data-area or floating-loading-modal');
+                return;
+            }
+            
+            // Ensure modal is appended to body for fixed positioning to work correctly
+            if (modalContainer.parentElement !== document.body) {
+                document.body.appendChild(modalContainer);
+            }
+            
+            // Function to position modal over target area
+            function positionModal() {
+                // Get the position and size of the entire left side area relative to viewport
+                const rect = targetArea.getBoundingClientRect();
+                
+                // Use fixed positioning to position relative to viewport
+                modalContainer.style.position = 'fixed';
+                modalContainer.style.top = rect.top + 'px';
+                modalContainer.style.left = rect.left + 'px';
+                modalContainer.style.width = rect.width + 'px';
+                modalContainer.style.height = rect.height + 'px';
+                modalContainer.style.zIndex = '999';
+                modalContainer.style.pointerEvents = 'auto';
+            }
+            
+            // Position modal initially
+            positionModal();
+            
+            // Show the modal
+            modalContainer.style.display = 'flex';
+            
+            // Handle window resize and scroll to reposition modal
+            function repositionModal() {
+                if (modalContainer.style.display === 'flex' && targetArea) {
+                    positionModal();
+                }
+            }
+            
+            // Remove old listeners if exist
+            if (window._floatingLoadingResizeHandler) {
+                window.removeEventListener('resize', window._floatingLoadingResizeHandler);
+                window.removeEventListener('scroll', window._floatingLoadingResizeHandler, true);
+            }
+            
+            // Add resize and scroll listeners
+            window._floatingLoadingResizeHandler = repositionModal;
+            window.addEventListener('resize', window._floatingLoadingResizeHandler);
+            window.addEventListener('scroll', window._floatingLoadingResizeHandler, true);
+            
+            // Also listen to scroll on the target area's parent containers
+            let parent = targetArea.parentElement;
+            while (parent && parent !== document.body) {
+                parent.addEventListener('scroll', repositionModal, { passive: true });
+                parent = parent.parentElement;
+            }
+        })();
+    ''')
+
+    loading_displayed = True
+    
+    # Disable Start Ranking button while loading
+    set_start_ranking_button_enabled(False)
+
+def hide_floating_loading():
+    """Hide the floating loading modal."""
+    global loading_displayed, floating_loading_modal_ref
+
+    if floating_loading_modal_ref is not None:
+        modal_container = floating_loading_modal_ref['container']
+        # Use JavaScript to ensure it's hidden
+        ui.run_javascript('''
+            (function() {
+                const modalContainer = document.getElementById('floating-loading-modal');
+                if (modalContainer) {
+                    modalContainer.style.display = 'none';
+                }
+            })();
+        ''')
+        # Also set via Python style
+        modal_container.style('display: none;')
+
+    loading_displayed = False
+    
+    # Re-enable Start Ranking button after loading completes
+    set_start_ranking_button_enabled(True)
+
+def show_floating_error(title: str, message: str):
+    """Show an error message in the floating modal overlay positioned above left side area."""
+    global floating_loading_modal_ref
+
+    modal = create_floating_loading_modal()
+
+    # Clear previous content
+    modal['content_area'].clear()
+
+    # Show the error content
+    with modal['content_area']:
+        with ui.element('div').classes('status-card info-card error').style('''
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+            border-left: 5px solid var(--error-500);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+        '''):
+            ui.html(f'''
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="font-size: 1.5rem;">❌</div>
+                    <div>
+                        <div style="color: var(--error-600); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">
+                            {title}
+                        </div>
+                        <div style="color: var(--gray-700); font-size: 0.95rem;">
+                            {message}
+                        </div>
+                    </div>
+                </div>
+            ''')
+
+    # Position the modal over the entire left side area (shared_data_area) using JavaScript
+    ui.run_javascript('''
+        (function() {
+            // Find the shared_data_area container (left side area with upload + preview)
+            const targetArea = document.getElementById('shared-data-area');
+            const modalContainer = document.getElementById('floating-loading-modal');
+            
+            if (!targetArea || !modalContainer) {
+                console.error('Could not find shared-data-area or floating-loading-modal');
+                return;
+            }
+            
+            // Ensure modal is appended to body for fixed positioning to work correctly
+            if (modalContainer.parentElement !== document.body) {
+                document.body.appendChild(modalContainer);
+            }
+            
+            // Function to position modal over target area
+            function positionModal() {
+                // Get the position and size of the entire left side area relative to viewport
+                const rect = targetArea.getBoundingClientRect();
+                
+                // Use fixed positioning to position relative to viewport
+                modalContainer.style.position = 'fixed';
+                modalContainer.style.top = rect.top + 'px';
+                modalContainer.style.left = rect.left + 'px';
+                modalContainer.style.width = rect.width + 'px';
+                modalContainer.style.height = rect.height + 'px';
+                modalContainer.style.zIndex = '999';
+                modalContainer.style.pointerEvents = 'auto';
+            }
+            
+            // Position modal initially
+            positionModal();
+            
+            // Show the modal
+            modalContainer.style.display = 'flex';
+            
+            // Handle window resize and scroll to reposition modal
+            function repositionModal() {
+                if (modalContainer.style.display === 'flex' && targetArea) {
+                    positionModal();
+                }
+            }
+            
+            // Remove old listeners if exist
+            if (window._floatingLoadingResizeHandler) {
+                window.removeEventListener('resize', window._floatingLoadingResizeHandler);
+                window.removeEventListener('scroll', window._floatingLoadingResizeHandler, true);
+            }
+            
+            // Add resize and scroll listeners
+            window._floatingLoadingResizeHandler = repositionModal;
+            window.addEventListener('resize', window._floatingLoadingResizeHandler);
+            window.addEventListener('scroll', window._floatingLoadingResizeHandler, true);
+            
+            // Also listen to scroll on the target area's parent containers
+            let parent = targetArea.parentElement;
+            while (parent && parent !== document.body) {
+                parent.addEventListener('scroll', repositionModal, { passive: true });
+                parent = parent.parentElement;
+            }
+        })();
+    ''')
+
+def show_floating_report(result):
+    """Show the report in the floating modal overlay positioned above data preview."""
+    global report_displayed, floating_report_modal_ref, current_report_result
+
+    modal = create_floating_report_modal()
+
+    # Clear previous content
+    modal['report_area'].clear()
+
+    # Show the report content
+    with modal['report_area']:
+        show_report(result)
+
+    # Position the modal over the entire left side area (shared_data_area) using JavaScript
+    # This ensures it covers both upload area and data preview area
+    ui.run_javascript('''
+        (function() {
+            // Find the shared_data_area container (left side area with upload + preview)
+            const targetArea = document.getElementById('shared-data-area');
+            const modalContainer = document.getElementById('floating-report-modal');
+            
+            if (!targetArea || !modalContainer) {
+                console.error('Could not find shared-data-area or floating-report-modal');
+                return;
+            }
+            
+            // Ensure modal is appended to body for fixed positioning to work correctly
+            if (modalContainer.parentElement !== document.body) {
+                document.body.appendChild(modalContainer);
+            }
+            
+            // Function to position modal over target area
+            function positionModal() {
+                // Get the position and size of the entire left side area relative to viewport
+                const rect = targetArea.getBoundingClientRect();
+                
+                // Use fixed positioning to position relative to viewport
+                // This ensures it covers the target area exactly regardless of scroll
+                modalContainer.style.position = 'fixed';
+                modalContainer.style.top = rect.top + 'px';
+                modalContainer.style.left = rect.left + 'px';
+                modalContainer.style.width = rect.width + 'px';
+                modalContainer.style.height = rect.height + 'px';
+                modalContainer.style.zIndex = '1000';
+                modalContainer.style.pointerEvents = 'auto';
+                
+                // Ensure close button is clickable
+                const closeBtn = modalContainer.querySelector('button');
+                if (closeBtn) {
+                    closeBtn.style.pointerEvents = 'auto';
+                    closeBtn.style.zIndex = '1001';
+                }
+            }
+            
+            // Position modal initially
+            positionModal();
+            
+            // Show the modal
+            modalContainer.style.display = 'flex';
+            
+            // Handle window resize and scroll to reposition modal
+            function repositionModal() {
+                if (modalContainer.style.display === 'flex' && targetArea) {
+                    positionModal();
+                }
+            }
+            
+            // Remove old listeners if exist
+            if (window._floatingReportResizeHandler) {
+                window.removeEventListener('resize', window._floatingReportResizeHandler);
+                window.removeEventListener('scroll', window._floatingReportResizeHandler, true);
+            }
+            
+            // Add resize and scroll listeners
+            window._floatingReportResizeHandler = repositionModal;
+            window.addEventListener('resize', window._floatingReportResizeHandler);
+            // Use capture phase to catch scroll events on any element
+            window.addEventListener('scroll', window._floatingReportResizeHandler, true);
+            
+            // Also listen to scroll on the target area's parent containers
+            let parent = targetArea.parentElement;
+            while (parent && parent !== document.body) {
+                parent.addEventListener('scroll', repositionModal, { passive: true });
+                parent = parent.parentElement;
+            }
+        })();
+    ''')
+
+    report_displayed = True
+    current_report_result = result
+    
+    # Update button text to "Hide Report" when report is displayed
+    update_report_button_text()
+
+def hide_floating_report():
+    """Hide the floating report modal."""
+    global report_displayed, floating_report_modal_ref, current_report_result
+
+    if floating_report_modal_ref is not None:
+        modal_container = floating_report_modal_ref['container']
+        # Use JavaScript to ensure it's hidden
+        ui.run_javascript('''
+            (function() {
+                const modalContainer = document.getElementById('floating-report-modal');
+                if (modalContainer) {
+                    modalContainer.style.display = 'none';
+                }
+            })();
+        ''')
+        # Also set via Python style
+        modal_container.style('display: none;')
+
+    # Don't clear current_report_result - keep it so button can show report again
+    report_displayed = False
+    
+    # Update button text to "Show Report" when report is hidden
+    update_report_button_text()
+
+def toggle_floating_report():
+    """Toggle the floating report visibility."""
+    global report_displayed, current_report_result
+
+    if report_displayed:
+        hide_floating_report()
+    elif current_report_result is not None:
+        show_floating_report(current_report_result)
+
+def set_start_ranking_button_enabled(enabled: bool):
+    """Enable or disable the Start Ranking button."""
+    global start_ranking_button_ref
+    
+    if start_ranking_button_ref is not None:
+        try:
+            if enabled:
+                # Enable button
+                start_ranking_button_ref.style('cursor: pointer; opacity: 1; pointer-events: auto;')
+                start_ranking_button_ref.props(remove='disabled')
+            else:
+                # Disable button
+                start_ranking_button_ref.style('cursor: not-allowed; opacity: 0.5; pointer-events: none;')
+                start_ranking_button_ref.props('disabled')
+        except Exception as e:
+            print(f"Error setting button enabled state: {e}")
+            # Fallback: use JavaScript to enable/disable button
+            disabled_str = 'true' if not enabled else 'false'
+            ui.run_javascript(f'''
+                (function() {{
+                    // Try to find Start Ranking button in DOM
+                    const buttons = document.querySelectorAll('button');
+                    for (let btn of buttons) {{
+                        const text = btn.textContent || btn.innerText || '';
+                        if (text.includes('Start Ranking') || text.includes('Show Report') || text.includes('Hide Report')) {{
+                            // Update button disabled state
+                            btn.disabled = {disabled_str};
+                            if ({disabled_str} === 'true') {{
+                                btn.style.cursor = 'not-allowed';
+                                btn.style.opacity = '0.5';
+                                btn.style.pointerEvents = 'none';
+                            }} else {{
+                                btn.style.cursor = 'pointer';
+                                btn.style.opacity = '1';
+                                btn.style.pointerEvents = 'auto';
+                            }}
+                            break;
+                        }}
+                    }}
+                }})();
+            ''')
+    else:
+        # If button ref is None, try to find it via JavaScript and update
+        disabled_str = 'true' if not enabled else 'false'
+        ui.run_javascript(f'''
+            (function() {{
+                // Try to find Start Ranking button in DOM
+                const buttons = document.querySelectorAll('button');
+                for (let btn of buttons) {{
+                    const text = btn.textContent || btn.innerText || '';
+                    if (text.includes('Start Ranking') || text.includes('Show Report') || text.includes('Hide Report')) {{
+                        // Update button disabled state
+                        btn.disabled = {disabled_str};
+                        if ({disabled_str} === 'true') {{
+                            btn.style.cursor = 'not-allowed';
+                            btn.style.opacity = '0.5';
+                            btn.style.pointerEvents = 'none';
+                        }} else {{
+                            btn.style.cursor = 'pointer';
+                            btn.style.opacity = '1';
+                            btn.style.pointerEvents = 'auto';
+                        }}
+                        break;
+                    }}
+                }}
+            }})();
+        ''')
+
+def update_report_button_text():
+    """Update the report button text based on current report display state."""
+    global start_ranking_button_ref, report_displayed, current_report_result
+    
+    # Determine button text based on report display state
+    button_text = 'Hide Report' if report_displayed else 'Show Report'
+    
+    if start_ranking_button_ref is not None:
+        try:
+            # Use JavaScript to update button text without clearing content
+            # This preserves event handlers
+            ui.run_javascript(f'''
+                (function() {{
+                    // Find the button by its reference
+                    const buttons = document.querySelectorAll('button');
+                    for (let btn of buttons) {{
+                        const text = btn.textContent || btn.innerText || '';
+                        if (text.includes('Show Report') || text.includes('Hide Report') || text.includes('Start Ranking')) {{
+                            // Update button text
+                            btn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">analytics</span> {button_text}';
+                            break;
+                        }}
+                    }}
+                }})();
+            ''')
+        except Exception as e:
+            print(f"Error updating button text: {e}")
+            # Fallback: try to update via Python clear and recreate
+            try:
+                start_ranking_button_ref.clear()
+                with start_ranking_button_ref:
+                    ui.html(f'<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">analytics</span> {button_text}')
+                
+                # Re-bind the click handler
+                def show_report_handler():
+                    global report_displayed, current_report_result
+                    if report_displayed:
+                        hide_floating_report()
+                    elif current_report_result is not None:
+                        show_floating_report(current_report_result)
+                
+                start_ranking_button_ref.on('click', show_report_handler)
+            except Exception as e2:
+                print(f"Error in fallback update: {e2}")
+    else:
+        # If button ref is None, try to find it via JavaScript and update
+        ui.run_javascript(f'''
+            (function() {{
+                // Try to find report button in DOM
+                const buttons = document.querySelectorAll('button');
+                for (let btn of buttons) {{
+                    const text = btn.textContent || btn.innerText || '';
+                    if (text.includes('Show Report') || text.includes('Hide Report') || text.includes('Start Ranking')) {{
+                        // Update button text
+                        btn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">analytics</span> {button_text}';
+                        break;
+                    }}
+                }}
+            }})();
+        ''')
+
+def update_start_ranking_button_to_show_report(result):
+    """Update the Start Ranking button to Show Report button after analysis is complete."""
+    global start_ranking_button_ref, report_displayed, current_report_result
+
+    # Store the result for later use
+    current_report_result = result
+
+    # Determine button text based on current report display state
+    button_text = 'Hide Report' if report_displayed else 'Show Report'
+
+    if start_ranking_button_ref is not None:
+        try:
+            # Use JavaScript to update button text without clearing content
+            # This preserves the original start_ranking event handler
+            ui.run_javascript(f'''
+                (function() {{
+                    // Find the Start Ranking button in DOM
+                    const buttons = document.querySelectorAll('button');
+                    for (let btn of buttons) {{
+                        const text = btn.textContent || btn.innerText || '';
+                        if (text.includes('Start Ranking') || text.includes('Show Report') || text.includes('Hide Report')) {{
+                            // Update button text
+                            btn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">analytics</span> {button_text}';
+                            break;
+                        }}
+                    }}
+                }})();
+            ''')
+            
+            # The original start_ranking handler will handle the toggle functionality
+            # because it checks for current_report_result at the beginning
+        except Exception as e:
+            print(f"Error updating button: {e}")
+            # Fallback: clear and recreate if JavaScript fails
+            try:
+                start_ranking_button_ref.clear()
+                with start_ranking_button_ref:
+                    ui.html(f'<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">analytics</span> {button_text}')
+                
+                # Re-bind the click handler
+                def show_report_handler():
+                    global report_displayed, current_report_result
+                    if report_displayed:
+                        hide_floating_report()
+                    elif current_report_result is not None:
+                        show_floating_report(current_report_result)
+                
+                start_ranking_button_ref.on('click', show_report_handler)
+            except Exception as e2:
+                print(f"Error in fallback update: {e2}")
+        except Exception as e:
+            print(f"Error updating button: {e}")
+            # Fallback: use JavaScript to update button
+            button_text = 'Hide Report' if report_displayed else 'Show Report'
+            ui.run_javascript(f'''
+                (function() {{
+                    // Try to find Start Ranking button in DOM
+                    const buttons = document.querySelectorAll('button');
+                    for (let btn of buttons) {{
+                        const text = btn.textContent || btn.innerText || '';
+                        if (text.includes('Start Ranking') || text.includes('Show Report') || text.includes('Hide Report')) {{
+                            // Update button text
+                            btn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">analytics</span> {button_text}';
+                            break;
+                        }}
+                    }}
+                }})();
+            ''')
+    else:
+        # If button ref is None, try to find it via JavaScript and update
+        # This handles cases where button ref might not be set yet
+        button_text = 'Hide Report' if report_displayed else 'Show Report'
+        ui.run_javascript(f'''
+            (function() {{
+                // Try to find Start Ranking button in DOM
+                const buttons = document.querySelectorAll('button');
+                for (let btn of buttons) {{
+                    const text = btn.textContent || btn.innerText || '';
+                    if (text.includes('Start Ranking') || text.includes('Show Report') || text.includes('Hide Report')) {{
+                        // Update button text
+                        btn.innerHTML = '<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">analytics</span> {button_text}';
+                        break;
+                    }}
+                }}
+            }})();
+        ''')
+
+def show_main_report(result):
+    """Display analysis report in the floating modal overlay."""
+    try:
+        # Show the report in floating modal
+        show_floating_report(result)
+
+        # Update the Start Ranking button to Show Report if it exists
+        update_start_ranking_button_to_show_report(result)
 
     except Exception as e:
         print(f"Error displaying main report: {e}")
         ui.notify(f'Error displaying report: {str(e)}', type='negative')
 
 def show_report(report):
-    with ui.element('div').classes('report-card').style('max-width: 1400px; margin: 0 auto; width: 100%;'):
-        # Enhanced Report Header with Card Structure
-        with ui.element('div').classes('report-header'):
-            with ui.element('div').classes('card-header').style('justify-content: center; flex-direction: column; text-align: center; margin-bottom: 2rem;'):
-                with ui.element('div').classes('card-icon-container').style('margin: 0 auto 1rem; width: 80px; height: 80px;'):
-                    ui.html('<span class="material-symbols-outlined card-icon" style="font-size: 3rem;">analytics</span>')
-                ui.html(f'<h1 class="card-title" style="font-size: 2.5rem; margin-bottom: 1rem;">Genetic Analysis Report</h1>')
-                ui.html('<p class="card-description" style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem;">Comprehensive genomic analysis with personalized risk assessment and phenotype associations</p>')
-
-                # User and Job Info with Metric Cards
-                with ui.element('div').style('display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 1rem;'):
-                    with ui.element('div').classes('metric-card').style('min-width: 150px;'):
-                        ui.html(f'<div class="metric-value" style="font-size: 1.5rem;">👤 {report["user_id"]}</div>')
-                        ui.html('<div class="metric-label">User ID</div>')
-                    with ui.element('div').classes('metric-card').style('min-width: 150px;'):
-                        ui.html(f'<div class="metric-value" style="font-size: 1.5rem;">🔬 {report["job_id"]}</div>')
-                        ui.html('<div class="metric-label">Job ID</div>')
-
-        # Enhanced Container for Tabs and Content
-        with ui.element('div').style('padding: 2rem;'):
-            # Enhanced Modern Tabs
-                with ui.element('div').classes('modern-tabs').style('''
-                    background: var(--gray-100);
-                    border-radius: var(--radius-xl);
-                    padding: 1rem;
-                    margin: 0 0 3rem 0;
-                    box-shadow: var(--shadow-sm);
-                '''):
-                    with ui.tabs().classes('w-full') as tabs:
-                        one = ui.tab('🧬 Genetic Risk Analysis').classes('modern-tab').style('''
-                            padding: 1.25rem 2rem;
-                            font-weight: 700;
-                            font-size: 1rem;
-                            border-radius: var(--radius-lg);
-                            transition: var(--transition-base);
-                        ''')
-                        two = ui.tab('🎯 Integrated Risk Profile').classes('modern-tab').style('''
-                            padding: 1.25rem 2rem;
-                            font-weight: 700;
-                            font-size: 1rem;
-                            border-radius: var(--radius-lg);
-                            transition: var(--transition-base);
-                        ''')
-                        three = ui.tab('🔬 PheWAS Analysis').classes('modern-tab').style('''
-                            padding: 1.25rem 2rem;
-                            font-weight: 700;
-                            font-size: 1rem;
-                            border-radius: var(--radius-lg);
-                            transition: var(--transition-base);
-                        ''')
-
-                with ui.tab_panels(tabs, value=one).classes('w-full'):
-                    # Enhanced Genetic Risk Tab
-                    with ui.tab_panel(one):
-                        with ui.element('div').classes('section-title').style('margin-bottom: 2.5rem;'):
-                            ui.label('🧬 Genetic Risk Assessment')
-
-                        explanation = report['explanations']['genetic_risk']
-
-                        # Enhanced Statistical Summary
-                        statistical_summary = explanation.get('statistical_summary')
-                    if statistical_summary:
-                        with ui.element('div').classes('info-card genetic-risk').style('''
-                            background: linear-gradient(135deg, var(--primary-50) 0%, rgba(255,255,255,0.9) 100%);
-                            border: 1px solid var(--primary-200);
-                            border-left: 6px solid var(--primary-600);
-                            margin-bottom: 2rem;
-                        '''):
-                            with ui.element('div').classes('card-header'):
-                                with ui.element('div').classes('card-icon-container'):
-                                    ui.html('<span class="material-symbols-outlined card-icon">analytics</span>')
-                                ui.html('<h3 class="card-title">Statistical Summary</h3>')
-                            for line in statistical_summary:
-                                ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1rem; border-left: 4px solid var(--primary-400);">• {line}</div>')
-
-                    # Enhanced Interpretation & Advice
-                    with ui.element('div').classes('info-card genetic-risk').style('''
-                        background: linear-gradient(135deg, var(--primary-100) 0%, rgba(255,255,255,0.9) 100%);
-                        border: 1px solid var(--primary-300);
-                        border-left: 6px solid var(--primary-700);
-                        margin-bottom: 2rem;
-                    '''):
-                        with ui.element('div').classes('card-header'):
-                            with ui.element('div').classes('card-icon-container'):
-                                ui.html('<span class="material-symbols-outlined card-icon">lightbulb</span>')
-                            ui.html('<h3 class="card-title">Clinical Interpretation & Recommendations</h3>')
+    """
+    Display user-friendly Spectral Ranking Analysis Report.
+    Shows ranking results in an intuitive table format at the top, matching data preview style.
+    """
+    from datetime import datetime
+    
+    # Extract data from report structure
+    job_id = report.get('job_id', 'N/A')
+    methods = report.get('methods', [])
+    params = report.get('params', {})
+    metadata = report.get('metadata', {})
+    
+    # Calculate summary statistics
+    n_methods = len(methods)
+    n_samples = metadata.get('n_samples', 'N/A')
+    runtime_sec = metadata.get('runtime_sec', 'N/A')
+    k_methods = metadata.get('k_methods', 'N/A')
+    
+    # Extract parameters
+    bigbetter_raw = params.get('bigbetter', None)
+    # Handle both boolean and string values
+    if isinstance(bigbetter_raw, bool):
+        bigbetter = bigbetter_raw
+    elif isinstance(bigbetter_raw, str):
+        bigbetter = bigbetter_raw.lower() in ('true', '1', 'yes')
+    else:
+        bigbetter = None
+    B = params.get('B', 'N/A')
+    seed = params.get('seed', 'N/A')
+    
+    # Sort methods by rank for display
+    sorted_methods = sorted(methods, key=lambda x: x.get('rank', 999))
+    
+    # Report container
+    with ui.element('div').classes('report-card').style('max-width: 1400px; margin: 0 auto; width: 100%; padding: 1.5rem 1.5rem 1rem 1.5rem; background: white;'):
+        
+        # Add print/PDF styles and tooltip styles
+        ui.html('''
+            <style>
+                @media print {
+                    .report-card {
+                        max-width: 100% !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                    }
+                    .no-print {
+                        display: none !important;
+                    }
+                }
+                .report-watermark {
+                    background: white;
+                    color: #011f5b;
+                    padding: 1.5rem;
+                    margin-top: 1rem;
+                    margin-bottom: 0;
+                    border-radius: 8px;
+                }
+                .tooltip-container {
+                    position: relative;
+                    display: inline-flex;
+                    align-items: center;
+                }
+                .tooltip-container .tooltip-text {
+                    white-space: normal;
+                    visibility: hidden;
+                    width: 260px;
+                    background-color: #1f2937;
+                    color: #fff;
+                    text-align: left;
+                    border-radius: 6px;
+                    padding: 10px 12px;
+                    position: absolute;
+                    z-index: 1010;
+                    top: 140%;
+                    left: 50%;
+                    margin-left: -130px;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                    font-size: 0.875rem;
+                    font-weight: 400;
+                    line-height: 1.6;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                }
+                .tooltip-container:hover .tooltip-text {
+                    visibility: visible;
+                    opacity: 1;
+                }
+                .tooltip-container .tooltip-text::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 100%;
+                    left: 50%;
+                    margin-left: -5px;
+                    border-width: 5px;
+                    border-style: solid;
+                    border-color: transparent transparent #1f2937 transparent;
+                }
+                /* Adjust tooltip position for the last two columns to prevent overflow */
+                .report-table thead th:nth-last-child(1) .tooltip-container .tooltip-text,
+                .report-table thead th:nth-last-child(2) .tooltip-container .tooltip-text {
+                    left: auto;
+                    right: 0;
+                    margin-left: 0;
+                }
+                .report-table thead th:nth-last-child(1) .tooltip-container .tooltip-text::after,
+                .report-table thead th:nth-last-child(2) .tooltip-container .tooltip-text::after {
+                    left: auto;
+                    right: 20px;
+                }
+            </style>
+        ''')
+        
+        # Simple Header
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with ui.element('div').style('margin-bottom: 2rem; text-align: center;'):
                         ui.html(f'''
-                            <div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">
-                                <div style="margin-bottom: 1rem;"><strong style="color: var(--primary-800);">Summary:</strong> {explanation.get("summary", "N/A")}</div>
-                                <div style="margin-bottom: 1rem;"><strong style="color: var(--primary-800);">Clinical Details:</strong> {explanation.get("details", "N/A")}</div>
-                                <div><strong style="color: var(--primary-800);">Medical Advice:</strong> {explanation.get("advice", "N/A")}</div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 0.5rem;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Shield_of_the_University_of_Pennsylvania.svg" 
+                         alt="UPenn" style="height: 2.5rem; width: auto;"/>
+                    <h1 style="margin: 0; font-size: 1.75rem; font-weight: 700; color: #011f5b;">
+                        SpectralRank Results
+                    </h1>
+                    <img src="https://static.cdnlogo.com/logos/w/18/washington-university-in-st-louis.svg" 
+                         alt="WUSTL" style="height: 3rem; width: auto;"/>
                             </div>
-                        ''')
-                    
-                    # Enhanced Raw Text Section
-                    raw_text = explanation.get('raw_text')
-                    if raw_text:
-                        with ui.expansion('📄 View Raw Analysis Results', icon='description').classes('w-full').style('''
-                            background: rgba(255,255,255,0.8);
-                            border: 1px solid var(--gray-200);
-                            border-radius: var(--radius-lg);
-                            margin-bottom: 2rem;
-                        '''):
-                            with ui.element('div').classes('info-card').style('background: transparent; box-shadow: none; border: none; padding: 1rem;'):
-                                for line in raw_text:
-                                    ui.html(f'<div class="highlight-box" style="margin: 0.5rem 0; padding: 0.75rem; font-family: monospace; font-size: 0.9rem;">• {line}</div>')
-                    
-                    # Enhanced Visualizations Section
-                    with ui.element('div').classes('section-title').style('margin: 3rem 0 2rem 0; display: flex; align-items: center; gap: 1rem;'):
-                        with ui.element('div').classes('card-icon-container').style('width: 60px; height: 60px;'):
-                            ui.html('<span class="material-symbols-outlined card-icon">bar_chart</span>')
-                        ui.html('<h3 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.5rem;">Risk Distribution Visualizations</h3>')
-                    
-                    with ui.row().classes('w-full gap-6'):
-                        prs_dist_fig = report['visualizations'].get('prs_distribution')
-                        if prs_dist_fig:
-                            with ui.element('div').classes('plot-container').style('width: 100%; display: flex; justify-content: center; align-items: center;'):
-                                ui.plotly(prs_dist_fig).classes('w-full').style('max-width: 900px;')
-                        
-                        prs_curve_fig = report['visualizations'].get('prs_curve')
-                        if prs_curve_fig:
-                            with ui.element('div').classes('plot-container').style('width: 100%; display: flex; justify-content: center; align-items: center;'):
-                                ui.plotly(prs_curve_fig).classes('w-full').style('max-width: 900px;')
+                <p style="margin: 0.25rem 0 0 0; font-size: 0.9rem; color: #666;">
+                    Analysis completed on {current_time} | Job ID: {job_id}
+                </p>
+            ''')
+        
+        # Run Parameters Section - Compact style
+        ranking_direction = "Higher is Better" if bigbetter is True else "Lower is Better" if bigbetter is False else "N/A"
+        with ui.element('div').style('margin-bottom: 0.75rem;'):
+            ui.html(f'''
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; line-height: 1.2;">
+                    <div style="font-weight: 600; color: #011f5b;">
+                        <span class="material-symbols-outlined" style="font-size: 1rem; margin-right: 0.25rem; vertical-align: middle; color: #011f5b;">settings</span>
+                        Run Parameters
+                    </div>
+                    <div style="display: flex; gap: 1.5rem; color: var(--gray-600); font-size: 0.75rem;">
+                        <span><strong>Ranking Direction:</strong> {ranking_direction}</span>
+                        <span><strong>Bootstrap Iterations:</strong> {B}</span>
+                        <span><strong>Random Seed:</strong> {seed}</span>
+                    </div>
+                </div>
+            ''')
+        
+        # Metadata Section - Compact style
+        runtime_display = runtime_sec if runtime_sec == "N/A" else f"{runtime_sec}s"
+        with ui.element('div').style('margin-bottom: 1rem;'):
+            ui.html(f'''
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; line-height: 1.2;">
+                    <div style="font-weight: 600; color: #011f5b;">
+                        <span class="material-symbols-outlined" style="font-size: 1rem; margin-right: 0.25rem; vertical-align: middle; color: #011f5b;">info</span>
+                        Metadata
+                    </div>
+                    <div style="display: flex; gap: 1.5rem; color: var(--gray-600); font-size: 0.75rem;">
+                        <span><strong>Sample Count:</strong> {n_samples}</span>
+                        <span><strong>Method Count:</strong> {k_methods}</span>
+                        <span><strong>Runtime:</strong> {runtime_display}</span>
+                    </div>
+                </div>
+            ''')
+        
+        # Ranking Results Table - Using data preview style, shown FIRST
+        with ui.element('div').style('margin-bottom: 2rem;'):
+            # Table header info
+            ui.html(f'''
+                <div style="margin-bottom: 0.75rem; font-size: 0.85rem;">
+                    <div style="font-weight: 600; color: #011f5b;">
+                        <span class="material-symbols-outlined" style="font-size: 1rem; margin-right: 0.25rem; vertical-align: middle; color: #011f5b;">leaderboard</span>
+                        Ranking Results
+                    </div>
+                </div>
+            ''')
+            
+            # Build ranking table using data preview style
+            table_html = '<div class="data-preview-table-scroll" style="overflow-x: auto; overflow-y: visible; width: 100%; border-radius: 8px; -webkit-overflow-scrolling: touch; position: relative;">'
+            table_html += '<table class="report-table" style="border-collapse: collapse; font-size: 0.75rem; line-height: 1.2; width: max-content; min-width: 100%; table-layout: auto;">'
+            
+            # Define headers with tooltips
+            header_configs = [
+                {'label': 'Rank', 'tooltip': 'The final ranking position calculated by the Spectral Ranking algorithm. Rank 1 is the best performing method.'},
+                {'label': 'Name', 'tooltip': 'The name of the method or model being ranked.'},
+                {'label': '95% CI', 'tooltip': 'The 95% two-sided confidence interval for the rank. For example, an interval of [1, 3] means we are 95% confident the method\'s true rank is between 1 and 3.'},
+                {'label': 'Uniform CI', 'tooltip': 'A more conservative, uniform one-sided confidence interval for the rank that holds simultaneously for all methods with 95% confidence.'},
+                {'label': 'Left CI', 'tooltip': 'The left endpoint of the one-sided confidence interval for the rank.'},
+                {'label': 'θ-hat Score', 'tooltip': 'The estimated performance score (theta-hat) from the Spectral Ranking algorithm. Higher scores indicate better performance.'}
+            ]
+            
+            # Table header with tooltips
+            table_html += '<thead><tr style="background: #011f5b;">'
+            for header_config in header_configs:
+                header_label = header_config['label']
+                tooltip_text = header_config['tooltip']
+                table_html += f'''<th style="padding: 0.4rem 0.3rem; text-align: left; border: 1px solid var(--gray-200); font-weight: 600; color: white; min-width: 80px;">
+                    <span class="tooltip-container">
+                        {header_label}
+                        <span class="tooltip-text">{tooltip_text}</span>
+                    </span>
+                </th>'''
+            table_html += '</tr></thead><tbody>'
 
-                # Enhanced Integrated Risk Tab
-                with ui.tab_panel(two):
-                    with ui.element('div').classes('section-title').style('margin-bottom: 2.5rem;'):
-                        ui.label('🎯 Integrated Disease Risk Assessment')
-                    
-                    explanation = report['explanations']['integrated_risk']
+            # Table rows - all left-aligned, no special styling for top 3
+            for method in sorted_methods:
+                rank = method.get('rank', 'N/A')
+                name = method.get('name', 'Unknown')
+                theta_hat = method.get('theta_hat', 0)
+                ci_two = method.get('ci_two_sided', [None, None])
+                ci_left = method.get('ci_left', 'N/A')
+                ci_uniform_left = method.get('ci_uniform_left', 'N/A')
 
-                    # Enhanced Statistical Summary for Integrated Risk
-                    statistical_summary_integrated = explanation.get('statistical_summary')
-                    if statistical_summary_integrated:
-                        with ui.element('div').classes('info-card integrated-risk').style('''
-                            background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(255,255,255,0.9) 100%);
-                            border: 1px solid rgba(59, 130, 246, 0.2);
-                            border-left: 6px solid var(--primary-600);
-                            margin-bottom: 2rem;
-                        '''):
-                            with ui.element('div').classes('card-header'):
-                                with ui.element('div').classes('card-icon-container'):
-                                    ui.html('<span class="material-symbols-outlined card-icon">analytics</span>')
-                                ui.html('<h3 class="card-title">Statistical Summary</h3>')
-                            for line in statistical_summary_integrated:
-                                ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1rem; border-left: 4px solid var(--primary-500);">• {line}</div>')
+                # Format confidence interval
+                if ci_two and len(ci_two) == 2 and ci_two[0] is not None and ci_two[1] is not None:
+                    ci_display = f"[{ci_two[0]}, {ci_two[1]}]"
+                else:
+                    ci_display = "N/A"
 
-                    # Enhanced Interpretation & Advice for Integrated Risk
-                    with ui.element('div').classes('info-card integrated-risk').style('''
-                        background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(255,255,255,0.9) 100%);
-                        border: 1px solid rgba(59, 130, 246, 0.3);
-                        border-left: 6px solid var(--primary-700);
-                        margin-bottom: 2rem;
-                    '''):
-                        with ui.element('div').classes('card-header'):
-                            with ui.element('div').classes('card-icon-container'):
-                                ui.html('<span class="material-symbols-outlined card-icon">lightbulb</span>')
-                            ui.html('<h3 class="card-title">Clinical Interpretation & Recommendations</h3>')
-                        ui.html(f'''
-                            <div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">
-                                <div style="margin-bottom: 1rem;"><strong style="color: var(--primary-800);">Overall Summary:</strong> {explanation.get("summary", "N/A")}</div>
-                                <div style="margin-bottom: 1rem;"><strong style="color: var(--primary-800);">Risk Details:</strong> {explanation.get("details", "N/A")}</div>
-                                <div><strong style="color: var(--primary-800);">Clinical Recommendations:</strong> {explanation.get("advice", "N/A")}</div>
-                            </div>
-                        ''')
-
-                    # Enhanced Raw Text Section for Integrated Risk
-                    raw_text_integrated = report['explanations']['integrated_risk'].get('raw_text')
-                    if raw_text_integrated:
-                        with ui.expansion('📄 View Raw Integration Results', icon='integration_instructions').classes('w-full').style('''
-                            background: rgba(255,255,255,0.8);
-                            border: 1px solid var(--gray-200);
-                            border-radius: var(--radius-lg);
-                            margin-bottom: 2rem;
-                        '''):
-                            with ui.element('div').classes('info-card').style('background: transparent; box-shadow: none; border: none; padding: 1rem;'):
-                                for line in raw_text_integrated:
-                                    ui.html(f'<div class="highlight-box" style="margin: 0.5rem 0; padding: 0.75rem; font-family: monospace; font-size: 0.9rem;">• {line}</div>')
-
-                    # Enhanced Visualizations Section for Integrated Risk
-                    ui.html('''
-                        <div style="margin: 3rem 0 2rem 0;">
-                            <div class="section-title" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
-                                <div style="font-size: 2rem;">📈</div>
-                                <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.5rem;">
-                                    Integrated Risk Visualizations
-                                </h4>
-                            </div>
+                table_html += f'<tr style="background: white;">'
+                table_html += f'<td style="padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px; text-align: left;">{rank}</td>'
+                table_html += f'<td style="padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px; text-align: left;">{name}</td>'
+                table_html += f'<td style="padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px; text-align: left; font-family: monospace;">{ci_display}</td>'
+                table_html += f'<td style="padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px; text-align: left; font-family: monospace;">{ci_uniform_left}</td>'
+                table_html += f'<td style="padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px; text-align: left; font-family: monospace;">{ci_left}</td>'
+                table_html += f'<td style="padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px; text-align: left; font-family: monospace;">{theta_hat:.4f}</td>'
+                table_html += '</tr>'
+            
+            table_html += '</tbody></table></div>'
+            
+            ui.html(table_html)
+        
+        # Ranking Interpretation & Analysis Section
+        top_3_methods = sorted_methods[:3] if len(sorted_methods) >= 3 else sorted_methods
+        with ui.element('div').style('margin-bottom: 1rem;'):
+            # Section header - matching Ranking Results style
+            ui.html('''
+                <div style="margin-bottom: 0.75rem; font-size: 0.85rem;">
+                    <div style="font-weight: 600; color: #011f5b;">
+                        <span class="material-symbols-outlined" style="font-size: 1rem; margin-right: 0.25rem; vertical-align: middle; color: #011f5b;">analytics</span>
+                        Ranking Interpretation & Analysis
+                    </div>
+                </div>
+            ''')
+            
+            # Content with light gray background
+            with ui.element('div').style('padding: 1rem; background: #f8f9fa; border-radius: 8px;'):
+                ui.html('<div style="line-height: 1.6; font-size: 0.75rem; color: #333;">')
+                
+                # Top performers analysis
+                if top_3_methods:
+                    ui.html('<div style="margin-bottom: 0.75rem;"><strong style="color: #011f5b; font-size: 0.75rem;">Top Performers:</strong>')
+                    for idx, method in enumerate(top_3_methods, 1):
+                        name = method.get('name', 'Unknown')
+                        theta_hat = method.get('theta_hat', 0)
+                        ci_two = method.get('ci_two_sided', [None, None])
+                        if ci_two and len(ci_two) == 2 and ci_two[0] is not None and ci_two[1] is not None:
+                            ci_width = ci_two[1] - ci_two[0]
+                            stability = "highly stable" if ci_width <= 2 else "moderately stable" if ci_width <= 5 else "less stable"
+                            ui.html(f'''
+                                <p style="margin: 0.25rem 0 0.25rem 1.5rem; font-size: 0.75rem;">
+                                    <strong>Rank {idx}:</strong> {name} achieved a performance score of {theta_hat:.4f}. This ranking is {stability}, meaning if we repeated the evaluation multiple times, we are 95% confident that this method's true rank would fall between rank {ci_two[0]:.1f} and rank {ci_two[1]:.1f}.
+                                </p>
+                            ''')
+                        else:
+                            ui.html(f'''
+                                <p style="margin: 0.25rem 0 0.25rem 1.5rem; font-size: 0.75rem;">
+                                    <strong>Rank {idx}:</strong> {name} achieved a performance score of {theta_hat:.4f}.
+                                </p>
+                            ''')
+                    ui.html('</div>')
+                
+                # Confidence interval interpretation
+                ui.html('''
+                    <div style="margin-bottom: 0.75rem;">
+                        <strong style="color: #011f5b; font-size: 0.75rem;">Confidence Intervals:</strong>
+                        <p style="margin: 0.25rem 0 0.25rem 1.5rem; font-size: 0.75rem;">
+                            Shows the range of possible ranks (like a "margin of error"). Narrower intervals mean more reliable rankings. Overlapping intervals indicate the methods may not be truly different.
+                        </p>
+                    </div>
+                ''')
+                
+                # Statistical significance
+                ui.html('''
+                    <div style="margin-bottom: 0.75rem;">
+                        <strong style="color: #011f5b; font-size: 0.75rem;">Reliability:</strong>
+                        <p style="margin: 0.25rem 0 0.25rem 1.5rem; font-size: 0.75rem;">
+                            Rankings are calculated using bootstrap resampling ({B} iterations) to measure uncertainty. Non-overlapping intervals indicate statistically significant differences. Uniform intervals are more conservative for multiple comparisons.
+                        </p>
+                    </div>
+                '''.format(B=B))
+                
+                # Score interpretation
+                direction_text = "Higher scores indicate better performance" if bigbetter else "Lower scores indicate better performance" if bigbetter is False else "Scores represent relative performance"
+                ui.html(f'''
+                    <div>
+                        <strong style="color: #011f5b; font-size: 0.75rem;">Performance Scores:</strong>
+                        <p style="margin: 0.25rem 0 0.25rem 1.5rem; font-size: 0.75rem;">
+                            {direction_text}. Larger score differences indicate bigger performance gaps. Scores are calculated using Spectral Ranking, which considers all pairwise comparisons.
+                        </p>
+                    </div>
+                ''')
+                
+                ui.html('</div>')
+        
+        # Visualizations Section (if available)
+        visualizations = report.get('visualizations', {})
+        if visualizations:
+            with ui.element('div').style('margin: 2rem 0;'):
+                ui.html('''
+                    <h3 style="margin: 0 0 1rem 0; font-size: 1.1rem; font-weight: 600; color: #011f5b;">
+                        Visualizations
+                    </h3>
+                ''')
+                
+                # Add visualization plots if available
+                for viz_name, viz_data in visualizations.items():
+                    if viz_data:
+                        with ui.element('div').style('margin: 1.5rem 0;'):
+                            ui.plotly(viz_data).classes('w-full').style('max-width: 100%;')
+        
+        # Watermark Footer - Similar to main page
+        with ui.element('div').classes('report-watermark'):
+            ui.html('''
+                <div style="text-align: center;">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Shield_of_the_University_of_Pennsylvania.svg" 
+                             alt="UPenn" style="height: 2rem; width: auto;"/>
+                        <span style="font-weight: 700; font-size: 1.2rem; color: #011f5b;">SpectralRank</span>
+                        <img src="https://static.cdnlogo.com/logos/w/18/washington-university-in-st-louis.svg" 
+                             alt="WUSTL" style="height: 2.5rem; width: auto;"/>
+                                            </div>
+                    <p style="color: #666; margin-bottom: 1rem; font-size: 0.95rem;">
+                        A Robust Statistical Framework for Ranking and Uncertainty Quantification
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin: 1rem 0; font-size: 0.85rem;">
+                        <div>
+                            <strong style="color: #011f5b;">Based on Published Research:</strong><br>
+                            <a href="https://doi.org/10.1287/opre.2023.0439" target="_blank" style="color: #1e3a8a; text-decoration: none;">
+                                doi.org/10.1287/opre.2023.0439
+                            </a>
+                                            </div>
+                        <div>
+                            <strong style="color: #011f5b;">Source Code:</strong><br>
+                            <a href="https://github.com/MaxineYu/Spectral_Ranking" target="_blank" style="color: #1e3a8a; text-decoration: none;">
+                                GitHub Repository
+                            </a>
                         </div>
-                    ''')
-                    
-                    with ui.row().classes('w-full gap-6'):
-                        risk_score_dist_fig = report['visualizations'].get('risk_score_distribution')
-                        if risk_score_dist_fig:
-                            with ui.element('div').classes('plot-container').style('width: 100%; display: flex; justify-content: center; align-items: center;'):
-                                ui.plotly(risk_score_dist_fig).classes('w-full').style('max-width: 900px;')
-
-                        risk_curve_fig = report['visualizations'].get('risk_curve')
-                        if risk_curve_fig:
-                            with ui.element('div').classes('plot-container').style('width: 100%; display: flex; justify-content: center; align-items: center;'):
-                                ui.plotly(risk_curve_fig).classes('w-full').style('max-width: 900px;')
-
-                # Enhanced PheWAS Tab
-                with ui.tab_panel(three):
-                    with ui.element('div').classes('section-title').style('margin-bottom: 2.5rem;'):
-                        ui.label('🔬 Phenome-Wide Association Study (PheWAS)')
-                    
-                    phewas_exp = report['explanations'].get('phewas')
-                    if phewas_exp and isinstance(phewas_exp, dict):
-                        # Enhanced Summary Section
-                        with ui.element('div').classes('info-card phewas').style('''
-                            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(255,255,255,0.9) 100%);
-                            border: 1px solid rgba(16, 185, 129, 0.2);
-                            border-left: 6px solid var(--accent-500);
-                            margin-bottom: 2rem;
-                        '''):
-                            with ui.element('div').classes('card-header'):
-                                with ui.element('div').classes('card-icon-container'):
-                                    ui.html('<span class="material-symbols-outlined card-icon">assignment</span>')
-                                ui.html('<h3 class="card-title">PheWAS Analysis Summary</h3>')
-                            ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">{phewas_exp.get("summary", "N/A")}</div>')
-                        
-                        # Enhanced Methodology Section
-                        with ui.element('div').classes('info-card').style('''
-                            background: linear-gradient(135deg, var(--gray-50) 0%, rgba(255,255,255,0.9) 100%);
-                            border: 1px solid var(--gray-200);
-                            border-left: 6px solid var(--gray-600);
-                            margin-bottom: 2rem;
-                        '''):
-                            with ui.element('div').classes('card-header'):
-                                with ui.element('div').classes('card-icon-container'):
-                                    ui.html('<span class="material-symbols-outlined card-icon">science</span>')
-                                ui.html('<h3 class="card-title">Analysis Methodology</h3>')
-                            ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">{phewas_exp.get("methodology", "N/A")}</div>')
-                        
-                        # Enhanced Significant Findings Section
-                        significant_findings = phewas_exp.get('significant_findings', [])
-                        if significant_findings:
-                            with ui.element('div').classes('info-card warning').style('''
-                                background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(255,255,255,0.9) 100%);
-                                border: 1px solid rgba(245, 158, 11, 0.2);
-                                border-left: 6px solid var(--warning-500);
-                                margin-bottom: 2rem;
-                            '''):
-                                with ui.element('div').classes('card-header'):
-                                    with ui.element('div').classes('card-icon-container'):
-                                        ui.html('<span class="material-symbols-outlined card-icon">warning</span>')
-                                    ui.html('<h3 class="card-title">Significant Genetic Associations</h3>')
-                                for finding in significant_findings:
-                                    ui.html(f'''
-                                        <div class="highlight-box" style="margin: 1.5rem 0; padding: 1.5rem; border-left: 4px solid var(--warning-500); background: rgba(255,255,255,0.8); border-radius: var(--radius-lg);">
-                                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                                                <div style="font-size: 1.2rem; font-weight: 700; color: var(--warning-600);">{finding.get("phenotype", "Unknown")}</div>
-                                                <div class="badge warning" style="font-size: 0.75rem;">{finding.get("effect_direction", "N/A")}</div>
-                                            </div>
-                                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.95rem;">
-                                                <div><strong style="color: var(--gray-700);">P-value:</strong> {finding.get("p_value", "N/A")}</div>
-                                                <div><strong style="color: var(--gray-700);">Clinical Relevance:</strong> {finding.get("clinical_relevance", "N/A")}</div>
-                                            </div>
+                    </div>
+                    <p style="color: #666; font-size: 0.8rem; margin-top: 1rem;">
+                        © 2024 SpectralRank Framework | University of Pennsylvania & Washington University in St. Louis
+                    </p>
                                         </div>
                                     ''')
-                        else:
-                            with ui.element('div').classes('info-card phewas').style('''
-                                background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(255,255,255,0.9) 100%);
-                                border: 1px solid rgba(16, 185, 129, 0.2);
-                                border-left: 6px solid var(--accent-500);
-                                margin-bottom: 2rem;
-                            '''):
-                                ui.html('''
-                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                        <div style="font-size: 2rem;">✅</div>
-                                        <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                            Genetic Association Results
-                                        </h4>
-                                    </div>
-                                ''')
-                                ui.html('<div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">No statistically significant associations identified after multiple testing correction.</div>')
-                        
-                        # Enhanced Clinical Implications
-                        with ui.element('div').classes('info-card').style('''
-                            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(255,255,255,0.9) 100%);
-                            border: 1px solid rgba(59, 130, 246, 0.15);
-                            border-left: 6px solid var(--primary-500);
-                            margin-bottom: 2rem;
-                        '''):
-                            ui.html('''
-                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                    <div style="font-size: 2rem;">🏥</div>
-                                    <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                        Clinical Implications
-                                    </h4>
-                                </div>
-                            ''')
-                            ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">{phewas_exp.get("clinical_implications", "N/A")}</div>')
-                        
-                        # Enhanced Recommendations
-                        recommendations = phewas_exp.get('recommendations', [])
-                        if recommendations:
-                            with ui.element('div').classes('info-card phewas').style('''
-                                background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(255,255,255,0.9) 100%);
-                                border: 1px solid rgba(16, 185, 129, 0.2);
-                                border-left: 6px solid var(--accent-500);
-                                margin-bottom: 2rem;
-                            '''):
-                                ui.html('''
-                                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                        <div style="font-size: 2rem;">💊</div>
-                                        <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                            Clinical Recommendations
-                                        </h4>
-                                    </div>
-                                ''')
-                                for rec in recommendations:
-                                    ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1rem; border-left: 4px solid var(--accent-400);">• {rec}</div>')
-                        
-                        # Enhanced Limitations Section
-                        with ui.element('div').classes('info-card error').style('''
-                            background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(255,255,255,0.9) 100%);
-                            border: 1px solid rgba(239, 68, 68, 0.15);
-                            border-left: 6px solid var(--error-500);
-                            margin-bottom: 2rem;
-                        '''):
-                            ui.html('''
-                                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-                                    <div style="font-size: 2rem;">⚠️</div>
-                                    <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.25rem;">
-                                        Important Study Limitations
-                                    </h4>
-                                </div>
-                            ''')
-                            ui.html(f'<div class="highlight-box" style="margin: 1rem 0; padding: 1.5rem; background: rgba(255,255,255,0.7); border-radius: var(--radius-lg);">{phewas_exp.get("limitations", "N/A")}</div>')
-                            
-                    elif phewas_exp:
-                        # Fallback for old string format
-                        with ui.element('div').classes('info-card'):
-                            ui.html(f'<div class="highlight-box">{phewas_exp}</div>')
-                    else:
-                        with ui.element('div').classes('info-card'):
-                            ui.html('<div class="highlight-box">No PheWAS analysis available.</div>')
-                    
-                    # Enhanced Data Visualization Section
-                    ui.html('''
-                        <div style="margin: 3rem 0 2rem 0;">
-                            <div class="section-title" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
-                                <div style="font-size: 2rem;">📊</div>
-                                <h4 style="margin: 0; color: var(--primary-900); font-weight: 800; font-size: 1.5rem;">
-                                    PheWAS Results Visualization
-                                </h4>
-                            </div>
-                        </div>
-                    ''')
-                    
-                    # Enhanced PheWAS Table
-                    phewas_table = report['visualizations'].get('phewas_table')
-                    if phewas_table:
-                        with ui.expansion('📊 View Detailed PheWAS Results Table', icon='table_view').classes('w-full').style('''
-                            background: rgba(255,255,255,0.9);
-                            border: 1px solid var(--gray-200);
-                            border-radius: var(--radius-lg);
-                            margin-bottom: 2rem;
-                            box-shadow: var(--shadow-sm);
-                        '''):
-                            ui.table(columns=[{'name': k, 'label': k.replace('_', ' ').title(), 'field': k, 'sortable': True} for k in phewas_table[0].keys()],
-                                     rows=phewas_table,
-                                     pagination=10).classes('w-full modern-table').style('''
-                                border-radius: var(--radius-md);
-                                overflow: hidden;
-                                /* Ensure table header background is visible on scroll */
-                                position: relative;
-                                z-index: 1;
-                            ''')
-
-                    # Enhanced PheWAS Plot
-                    phewas_plot_fig = report['visualizations'].get('phewas_plot')
-                    if phewas_plot_fig:
-                        with ui.element('div').classes('plot-container').style('width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 2rem;'):
-                            ui.plotly(phewas_plot_fig).classes('w-full').style('max-width: 1200px;')
 
 # Mobile navigation handler
 def toggle_mobile_nav():
@@ -6602,13 +8071,14 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 # Main layout: Left 2/3 for shared data upload/preview, Right 1/3 for dynamic cards
                 with ui.element('div').classes('unified-layout').style('display: flex; height: 100%; gap: 1rem;'):
                     # Left side: Shared data upload and preview area (2/3 width)
-                    shared_data_area = ui.element('div').style('''
+                    shared_data_area = ui.element('div').props('id="shared-data-area"').style('''
                         flex: 2;
                         background: rgba(255,255,255,0.95);
                         border-radius: var(--radius-lg);
                         padding: 1.5rem;
                         display: flex;
                         flex-direction: column;
+                        position: relative;
                         gap: 1rem;
                         border: 1px solid var(--gray-200);
                         overflow: hidden;
@@ -6818,6 +8288,8 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                                 cursor: pointer;
                                 text-transform: none;
                             ''')
+                            # Save reference for manual mode button
+                            start_ranking_button_ref = query_button
                             with query_button:
                                 ui.html('<span class="material-symbols-outlined" style="font-size: 1.2rem; vertical-align: middle;">play_arrow</span> Start Ranking')
 
@@ -7417,32 +8889,22 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
     
         async def on_query():
             """Create ranking job, poll status, then fetch and render results."""
+            global current_report_result, report_displayed
+            
+            # Check if button has been converted to "Show Report" button
+            # If current_report_result exists, this button should only toggle report visibility
+            if current_report_result is not None:
+                # Button should be "Show Report" - toggle report visibility instead
+                if report_displayed:
+                    hide_floating_report()
+                else:
+                    show_floating_report(current_report_result)
+                return
+            
             try:
-                # Clear previous content and show enhanced loading status
-                report_container.clear()
-                status_container.clear()
-                # Make containers visible
-                status_container.style('display: block;')
-                report_container.style('display: none;')
-                
-                # Enhanced loading animation
-                with status_container:
-                    with ui.element('div').classes('status-card').style('''
-                        background: linear-gradient(135deg, rgba(1, 31, 91, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
-                        border: 1px solid rgba(1, 31, 91, 0.1);
-                        backdrop-filter: blur(15px);
-                    '''):
-                        ui.html('''
-                            <div style="display: flex; align-items: center; gap: 1.5rem; justify-content: center;">
-                                <div class="loading-spinner"></div>
-                                <div style="color: var(--primary-900); font-weight: 700; font-size: 1.1rem;">
-                                    🔍 Performing robust ranking analysis...
-                                </div>
-                            </div>
-                            <div style="margin-top: 1rem; text-align: center; color: var(--gray-600); font-size: 0.9rem;">
-                                Please wait while we process your report
-                            </div>
-                        ''')
+                # Hide report and show loading animation in floating modal
+                hide_floating_report()
+                show_floating_loading()
                 
                 # Validate input file (check both agent and manual mode files)
                 state = get_client_state()
@@ -7452,6 +8914,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 manual_file_available = bool(manual_uploaded_file)
 
                 if not agent_file_available and not manual_file_available:
+                    hide_floating_loading()
                     ui.notify('🚨 Please upload a CSV file', type='negative')
                     status_container.clear()
                     return
@@ -7472,10 +8935,12 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                                 else:
                                     raise Exception(f"Server returned status {resp.status}")
                     except Exception as e:
+                        hide_floating_loading()
                         ui.notify(f'🚨 Failed to access uploaded file: {str(e)}', type='negative')
                         status_container.clear()
                         return
                 else:
+                    hide_floating_loading()
                     ui.notify('🚨 No valid file found for analysis', type='negative')
                     status_container.clear()
                     return
@@ -7491,41 +8956,28 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 if err or not job_id:
                     logger.error(f"Create job failed: {err}")
                     ui.notify(f'🚨 Analysis Failed: {err}', type='negative')
-                    with status_container:
-                        with ui.element('div').classes('status-card info-card error').style('''
-                            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
-                            border-left: 5px solid var(--error-500);
-                        '''):
-                            ui.html(f'''
-                                <div style="display: flex; align-items: center; gap: 1rem;">
-                                    <div style="font-size: 1.5rem;">❌</div>
-                                    <div>
-                                        <div style="color: var(--error-600); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">
-                                            Analysis Failed
-                                        </div>
-                                        <div style="color: var(--gray-700); font-size: 0.95rem;">
-                                            {err or 'Job creation failed'}
-                                        </div>
-                                    </div>
-                                </div>
-                            ''')
+                    hide_floating_loading()
+                    show_floating_error('Analysis Failed', err or 'Job creation failed')
                     return
 
                 # Poll status
                 status = await poll_status_async(job_id)
                 if status.get('status') != 'succeeded':
                     ui.notify(f'🚨 Analysis Failed: {status.get("message","Unknown error")}', type='negative')
+                    hide_floating_loading()
+                    show_floating_error('Analysis Failed', status.get("message","Unknown error"))
                     return
 
                 # Fetch results
                 result, err = await fetch_results_async(job_id)
                 if err or not result:
                     ui.notify(f'🚨 Fetch Results Failed: {err}', type='negative')
+                    hide_floating_loading()
+                    show_floating_error('Fetch Results Failed', err or 'Could not retrieve results')
                     return
 
-                status_container.clear()
-                status_container.style('display: none;')
-                report_container.style('display: block;')
+                # Hide loading and show report
+                hide_floating_loading()
 
                 with status_container:
                         with ui.element('div').classes('status-card info-card phewas').style('''
@@ -7546,29 +8998,15 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                                 </div>
                             ''')
 
-                with report_container:
-                    show_results(result)
+                # Show report in floating modal instead of main container
+                show_main_report(result)
                         
             except Exception as e:
                 error_msg = f"Unexpected system error: {str(e)}"
                 logger.error(error_msg)
                 ui.notify(f'🚨 System Error: {error_msg}', type='negative')
-                status_container.clear()
-                with status_container:
-                    with ui.element('div').classes('status-card info-card error'):
-                        ui.html(f'''
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <div style="font-size: 1.5rem;">💥</div>
-                                <div>
-                                    <div style="color: var(--error-600); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">
-                                        System Error
-                                    </div>
-                                    <div style="color: var(--gray-700); font-size: 0.95rem;">
-                                        {error_msg}
-                                    </div>
-                                </div>
-                            </div>
-                        ''')
+                hide_floating_loading()
+                show_floating_error('System Error', error_msg)
     
         # Use the enhanced async handler for the button click
         query_button.on('click', on_query)
