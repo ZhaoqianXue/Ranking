@@ -9,6 +9,8 @@ import sys
 import os
 import markdown
 import re
+import io
+import pandas as pd
 
 # Add the current directory to the path to import dashboard
 sys.path.append(os.path.dirname(__file__))
@@ -76,6 +78,18 @@ _status_panel_css_added = False
 @ui.page('/dashboard')
 def dashboard_page():
     """Dashboard page for LLM performance visualization"""
+    # Reset global report state on page load/refresh to prevent stale state issues
+    global current_report_result, report_displayed, floating_report_modal_ref, ranking_preview_panel
+    current_report_result = None
+    report_displayed = False
+    floating_report_modal_ref = None
+    ranking_preview_panel = None
+    
+    # Reset client-specific UI references to ensure clean state on refresh
+    state = get_client_state()
+    if 'dialog_refs' in state:
+        state['dialog_refs'] = {}
+    
     # Initialize API base URL for dashboard page
     ui.add_head_html(f'''
     <script>
@@ -4877,6 +4891,296 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
         # If still None after recreation, return early
         if ranking_preview_panel is None:
             return None
+    # Create the dialog only once if it doesn't exist
+    # Access client state to store/retrieve dialog references
+    state = get_client_state()
+    if 'dialog_refs' not in state:
+        state['dialog_refs'] = {}
+    
+    dialog_refs = state['dialog_refs']
+    
+    # Create the dialog only if it doesn't exist for this client
+    if 'ranking_config_dialog' not in dialog_refs:
+        # Use a more consistent style with the website (Manual Mode style)
+        with ui.dialog() as ranking_config_dialog, ui.card().style('min-width: 600px; padding: 2rem; border-radius: 1rem; box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);'):
+            
+            # Header
+            with ui.element('div').style('display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 0.5rem; color: #011f5b; width: 100%;'):
+                ui.icon('settings').style('font-size: 1.5rem;')
+                ui.html('<h4 style="color: #011f5b; margin: 0; font-weight: 800; font-size: 1.1rem;"><b>Edit Ranking Configuration</b></h4>')
+            
+            ui.html('<p style="color: #6b7280; margin-bottom: 2rem; text-align: center; width: 100%;">Configure ranking items and algorithm settings</p>')
+
+            with ui.row().style('width: 100%; gap: 2rem; align-items: flex-start;'):
+                
+                # Left Column: Ranking Items (Checkboxes)
+                with ui.column().style('flex: 1; gap: 1rem;'):
+                    ui.label('Ranking Items').style('color: #011f5b; font-weight: 600; font-size: 0.95rem;')
+                    
+                    # Scrollable container for checkboxes
+                    with ui.scroll_area().style('height: 300px; width: 100%; border: 1px solid rgba(1,31,91,0.15); border-radius: 0.5rem; padding: 0.5rem; background: #f8fafc;'):
+                        # Container for dynamic checkboxes
+                        items_container = ui.column().style('gap: 0.25rem; width: 100%;')
+
+                # Right Column: Parameters (Manual Mode Style)
+                with ui.column().style('flex: 1; gap: 1.5rem;'):
+                    # Ranking Direction (Toggle Buttons)
+                    with ui.element('div').style('width: 100%;'):
+                        ui.label('Ranking Direction').style('color: #011f5b; font-weight: 600; font-size: 0.95rem; display: block; margin-bottom: 0.5rem; text-align: center;')
+                        
+                        # Hidden state storage for direction
+                        direction_store = ui.label().style('display: none;')
+                        
+                        with ui.column().style('width: 100%; gap: 0.5rem;'):
+                            # Higher is Better
+                            with ui.button('Higher Values are Better').style('width: 100%; font-size: 0.9rem; text-transform: none;') as btn_higher:
+                                ui.tooltip('Use for metrics like Accuracy, where a higher number is better.')
+                                
+                            # Lower is Better
+                            with ui.button('Lower Values are Better').style('width: 100%; font-size: 0.9rem; text-transform: none;') as btn_lower:
+                                ui.tooltip('Use for metrics like Error Rate, where a lower number is better.')
+                        
+                        # Apply toggle styling logic
+                        btn_higher.props('rounded-t-lg rounded-b-none flat')
+                        btn_lower.props('rounded-t-none rounded-b-lg flat')
+
+                        def set_direction_ui(val):
+                            direction_store.text = val
+                            if val == 'higher':
+                                btn_higher.props('color=primary')
+                                btn_higher.style('border: 2px solid #011f5b; background: #011f5b !important; color: white !important; opacity: 1.0 !important;')
+                                btn_lower.props('color=grey-4')
+                                btn_lower.style('border: 2px solid #d1d5db; background: #f9fafb !important; color: #9ca3af !important; opacity: 0.6;')
+                            else:
+                                btn_lower.props('color=primary')
+                                btn_lower.style('border: 2px solid #011f5b; background: #011f5b !important; color: white !important; opacity: 1.0 !important;')
+                                btn_higher.props('color=grey-4')
+                                btn_higher.style('border: 2px solid #d1d5db; background: #f9fafb !important; color: #9ca3af !important; opacity: 0.6;')
+                        
+                        btn_higher.on('click', lambda: set_direction_ui('higher'))
+                        btn_lower.on('click', lambda: set_direction_ui('lower'))
+
+                    # Advanced Settings (Expansion) - Compact Style
+                    # Advanced Settings (Expansion) - Compact Style
+                    with ui.expansion('Advanced Settings', icon='settings').classes('w-full').props('dense header-class="text-xs p-1"').style('''
+                        background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(248,250,252,0.9) 100%);
+                        border: 1px solid rgba(1,31,91,0.15);
+                        border-radius: 0.5rem;
+                        color: #011f5b;
+                        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+                        font-size: 0.8rem !important;
+                        min-height: 24px;
+                    '''):
+                        with ui.column().style('gap: 0.5rem; padding: 0.5rem; width: 100%;'):
+                            # Bootstrap Iterations
+                            with ui.element('div').style('width: 100%;'):
+                                with ui.row().style('align-items: center; gap: 0.25rem; margin-bottom: 0.125rem;'):
+                                    ui.label('Bootstrap Iterations').style('color: #011f5b; font-weight: 600; font-size: 0.7rem;')
+                                    ui.icon('help_outline', size='xs').style('font-size: 0.8rem;').tooltip('Number of bootstrap samples.')
+                                
+                                with ui.element('div').style('background: white; border: 1px solid rgba(1,31,91,0.2); border-radius: 0.25rem; padding: 0.125rem 0.25rem;'):
+                                    # Use dense prop for smaller input
+                                    bootstrap_input = ui.number('', value=2000, min=100, step=100).props('dense borderless').style('width: 100%; font-size: 0.75rem;')
+                            
+                            # Random Seed
+                            with ui.element('div').style('width: 100%;'):
+                                with ui.row().style('align-items: center; gap: 0.25rem; margin-bottom: 0.125rem;'):
+                                    ui.label('Random Seed').style('color: #011f5b; font-weight: 600; font-size: 0.7rem;')
+                                    ui.icon('help_outline', size='xs').style('font-size: 0.8rem;').tooltip('Fixed number for reproducibility.')
+                                
+                                with ui.element('div').style('background: white; border: 1px solid rgba(1,31,91,0.2); border-radius: 0.25rem; padding: 0.125rem 0.25rem;'):
+                                    # Use dense prop for smaller input
+                                    seed_input = ui.number('', value=42, min=0, step=1).props('dense borderless').style('width: 100%; font-size: 0.75rem;')
+
+            # Helper definitions that use the captured state/refs
+            async def close_dialog_preserve_scroll():
+                # Capture BOTH window and container scroll to be safe
+                try:
+                    scroll_pos = await ui.run_javascript('''
+                        (function() {
+                            const el = document.querySelector(".chat-messages");
+                            return {
+                                chat: el ? el.scrollTop : 0,
+                                win: window.scrollY || document.documentElement.scrollTop
+                            };
+                        })()
+                    ''')
+                except:
+                    scroll_pos = {'chat': 0, 'win': 0}
+                
+                ranking_config_dialog.close()
+                
+                # Restore BOTH
+                if scroll_pos:
+                    ui.run_javascript(f'''
+                        (function() {{
+                            const el = document.querySelector(".chat-messages");
+                            if(el && {scroll_pos['chat']} > 0) el.scrollTop = {scroll_pos['chat']};
+                            if({scroll_pos['win']} > 0) window.scrollTo(0, {scroll_pos['win']});
+                        }})()
+                    ''')
+
+            async def save_ranking_config():
+                # IMPROVED: Capture BOTH window and container scroll
+                try:
+                    scroll_pos = await ui.run_javascript('''
+                        (function() {
+                            const el = document.querySelector(".chat-messages");
+                            return {
+                                chat: el ? el.scrollTop : 0,
+                                win: window.scrollY || document.documentElement.scrollTop
+                            };
+                        })()
+                    ''')
+                except:
+                    scroll_pos = {'chat': 0, 'win': 0}
+
+                state = get_client_state()
+                local_refs = state.get('dialog_refs', {})
+                context = state['agent_context']
+                insights = context.get('data_insights', {})
+                
+                if insights and 'items_container' in local_refs:
+                    # Retrieve inputs
+                    checkboxes = local_refs.get('checkboxes', [])
+                    selected_items = [cb.text for cb in checkboxes if cb.value]
+                    
+                    # Default logic if nothing selected
+                    if not selected_items and checkboxes:
+                         pass
+
+                    insights['columns'] = selected_items
+                    
+                    if 'infer_direction' not in insights:
+                        insights['infer_direction'] = {}
+                    
+                    direction_val = local_refs['direction_store'].text
+                    insights['infer_direction']['direction'] = direction_val
+                    
+                    insights['infer_direction']['error'] = None
+                    insights['infer_direction']['data_quality_warning'] = False
+                    
+                    insights['user_config'] = {
+                        'bootstrap_iterations': int(local_refs['bootstrap_input'].value),
+                        'random_seed': int(local_refs['seed_input'].value)
+                    }
+                    
+                    context['data_insights'] = insights
+                    local_refs['ranking_config_dialog'].close()
+                    # Refresh the preview panel
+                    show_workflow_modal(messages_container, on_complete, api_key_input)
+                    
+                    # Re-enable the start button since we are just updating config
+                    # Use a timer to ensure the element is ready in the DOM
+                    def enable_start_button():
+                        if start_ranking_button:
+                            start_ranking_button.style('display: flex !important;')
+                    ui.timer(0.1, enable_start_button, once=True)
+                
+                # Restore BOTH
+                if scroll_pos:
+                    ui.run_javascript(f'''
+                        (function() {{
+                            const el = document.querySelector(".chat-messages");
+                            if(el && {scroll_pos['chat']} > 0) el.scrollTop = {scroll_pos['chat']};
+                            if({scroll_pos['win']} > 0) window.scrollTo(0, {scroll_pos['win']});
+                        }})()
+                    ''')
+
+            # Footer Actions
+            with ui.row().style('width: 100%; justify-content: flex-end; gap: 1rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;'):
+                # Cancel button: Gray text and border
+                ui.button('Cancel', on_click=close_dialog_preserve_scroll).style('''
+                    color: #6b7280 !important;
+                    border: 1px solid #d1d5db !important;
+                    background: transparent !important;
+                    text-transform: none;
+                    font-weight: 500;
+                    border-radius: 6px;
+                    padding: 6px 16px;
+                    font-size: 0.875rem;
+                ''')
+                
+                # Save button: Matching "Start Ranking" style exactly
+                ui.button('Save Changes', on_click=save_ranking_config).style('''
+                    color: #011f5b !important;
+                    background-color: rgba(1, 31, 91, 0.05) !important;
+                    border: 1px solid #011f5b !important;
+                    border-radius: 6px !important;
+                    padding: 6px 16px !important;
+                    font-weight: 500 !important;
+                    font-size: 0.875rem !important;
+                    min-height: 32px !important;
+                    transition: all 0.2s ease !important;
+                    text-transform: none;
+                    box-shadow: none;
+                ''')
+        
+            # Store references
+            dialog_refs['ranking_config_dialog'] = ranking_config_dialog
+            dialog_refs['items_container'] = items_container
+            dialog_refs['direction_store'] = direction_store
+            dialog_refs['set_direction_ui'] = set_direction_ui 
+            dialog_refs['bootstrap_input'] = bootstrap_input
+            dialog_refs['seed_input'] = seed_input
+            dialog_refs['checkboxes'] = []
+
+    def open_edit_dialog():
+        state = get_client_state()
+        local_refs = state.get('dialog_refs', {})
+        if 'ranking_config_dialog' not in local_refs:
+            return 
+            
+        # Get components
+        items_container = local_refs['items_container']
+        set_direction_ui = local_refs['set_direction_ui']
+        b_input = local_refs['bootstrap_input']
+        s_input = local_refs['seed_input']
+        dialog = local_refs['ranking_config_dialog']
+        
+        data_insights = state['agent_context'].get('data_insights', {})
+        
+        # 1. Populate Checkboxes
+        all_available_cols = data_insights.get('all_columns_list', [])
+        current_cols = data_insights.get('columns', [])
+        if not all_available_cols:
+             all_available_cols = current_cols
+        
+        # Clear previous checkboxes
+        items_container.clear()
+        local_refs['checkboxes'] = []
+        
+        with items_container:
+            for col in all_available_cols:
+                # Create styled checkbox
+                is_checked = col in current_cols
+                # Checkbox style: Custom SVG color mapping is hard in NiceGUI, 
+                # but we can force the Quasar color to be close to our theme.
+                # deep-purple-10 or visually similar.
+                # User wants "Save Changes" style: #011f5b. 
+                # We'll use a custom style injection or just valid Quasar usage.
+                # 'color' prop in Quasar takes a color name or hex (sometimes). 
+                # Let's try matching the text color and using a dark toggle color.
+                cb = ui.checkbox(col, value=is_checked).props('dense size="xs" color="blue-10" keep-color').style('''
+                    font-size: 0.85rem;
+                    color: #011f5b;
+                    padding: 0;
+                    margin-bottom: 2px;
+                ''')
+                local_refs['checkboxes'].append(cb)
+        
+        # 2. Set Direction
+        direction = data_insights.get('infer_direction', {}).get('direction', 'higher')
+        set_direction_ui('lower' if direction == 'lower' else 'higher')
+            
+        # 3. Set Numbers
+        user_config = data_insights.get('user_config', {})
+        b_input.value = user_config.get('bootstrap_iterations', 2000)
+        s_input.value = user_config.get('random_seed', 42)
+        
+        dialog.open()
+
+
     with ranking_preview_panel:
                     # Header with title and expand icon
                     with ui.element('div').style('''
@@ -4887,7 +5191,10 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                         text-align: left;
                 '''):
                         ui.html('<span style="font-weight: 600; font-size: 0.8rem; color: #333; text-align: left;">Ranking Preview</span>')
-                        ui.html('<span class="material-symbols-outlined" style="font-size: 1.2rem; color: #011f5b; cursor: pointer; user-select: none;">open_in_new</span>')
+                        # Make icon actionable and store ref
+                        edit_icon = ui.icon('open_in_new').style('font-size: 1.2rem; color: #011f5b; cursor: pointer;')
+                        edit_icon.on('click', open_edit_dialog)
+                        dialog_refs['edit_icon'] = edit_icon
                     
                     # Workflow steps container with connecting line
                     with ui.element('div').style('position: relative;'):
@@ -4922,6 +5229,11 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                         direction = infer_direction_result.get('direction', 'unsure')
                         direction_error = infer_direction_result.get('error')
                         direction_warning = infer_direction_result.get('data_quality_warning', False)
+                        
+                        # Get user config overrides
+                        user_config = data_insights.get('user_config', {})
+                        bootstrap_val = user_config.get('bootstrap_iterations', 2000)
+                        seed_val = user_config.get('random_seed', 42)
                         
                         # Format direction display
                         if direction_error or direction_warning:
@@ -4958,8 +5270,8 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                                 'name': 'ParameterSetup',
                                 'items': [
                                     {'label': 'Ranking direction', 'value': direction_display},
-                                    {'label': 'Bootstrap iterations', 'value': '2000'},
-                                    {'label': 'Random seed', 'value': '42'}
+                                    {'label': 'Bootstrap iterations', 'value': str(bootstrap_val)},
+                                    {'label': 'Random seed', 'value': str(seed_val)}
                                 ]
                             }
                         ]
@@ -5163,8 +5475,8 @@ def add_suggested_questions(messages_container, api_key_input=None, api_key_str=
                                 # Don't add user message here - send_agent_message will add it
                                 # This prevents duplicate messages
                                 
-                                # Scroll to bottom
-                                ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
+                                # Scroll removed to prevent jump
+                                # ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
                                 
                                 # Create a mock hidden input object
                                 class MockHiddenInput:
@@ -5200,8 +5512,8 @@ def add_suggested_questions(messages_container, api_key_input=None, api_key_str=
                         
                         question_button.on('click', make_question_handler(question))
     
-    # Scroll to bottom
-    ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
+    # Scroll removed to prevent jump
+    # ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
 
 
 def render_markdown(content):
@@ -6149,10 +6461,51 @@ async def direct_agent_analysis(file_id: str, messages_container, api_key: str):
 
                 file_bytes = await resp.read()
 
-        # Use default parameters for Agent mode
-        bigbetter = True  # higher is better by default
-        B = 2000  # bootstrap samples
-        seed = 1
+        # Use parameters from agent_context (set by configuration modal)
+        state = get_client_state()
+        data_insights = state['agent_context'].get('data_insights', {})
+        
+        # FIXED: Filter CSV content to only include selected columns + necessary identifier columns
+        # This ensures the user's selection in the UI is respected by the backend
+        try:
+            # Load original CSV
+            df = pd.read_csv(io.BytesIO(file_bytes))
+            
+            # Get selected ranking columns
+            selected_columns = data_insights.get('columns', [])
+            
+            # Get excluded columns (identifiers) to keep them for context/identification
+            # We want to keep them so the results still have meaningful labels
+            analysis_summary = data_insights.get('analysis_summary', {})
+            excluded_columns = analysis_summary.get('excluded_columns', [])
+            
+            # If no selection (edge case), use all columns or fallback to logic
+            if selected_columns:
+                # Combine columns to keep (Selection + Identifiers)
+                # Ensure we only ask for columns that actually exist in the DF
+                available_cols = set(df.columns)
+                cols_to_keep = [c for c in (selected_columns + excluded_columns) if c in available_cols]
+                
+                if cols_to_keep:
+                    # Create filtered dataframe
+                    df_filtered = df[cols_to_keep]
+                    # Convert back to CSV bytes
+                    file_bytes = df_filtered.to_csv(index=False).encode('utf-8')
+                    logger.info(f"Filtered agent file: kept {len(cols_to_keep)} columns from {len(available_cols)} total")
+        except Exception as e:
+            logger.error(f"Failed to filter CSV columns: {e}")
+            # Fallback to original file_bytes if filtering fails
+            pass
+        
+        # 1. Direction
+        direction_config = data_insights.get('infer_direction', {})
+        direction = direction_config.get('direction', 'higher')
+        bigbetter = (direction == 'higher')
+        
+        # 2. Bootstrap & Seed
+        user_config = data_insights.get('user_config', {})
+        B = user_config.get('bootstrap_iterations', 2000)
+        seed = user_config.get('random_seed', 1)
 
         # Create job
         file_name = 'agent_data.csv'
@@ -6203,9 +6556,20 @@ async def direct_agent_analysis(file_id: str, messages_container, api_key: str):
             stage='results_ready',
             data={'ranking_results': result}
         )
+        
+        # Disable edit icon after success
+        state = get_client_state()
+        dialog_refs = state.get('dialog_refs', {})
+        if 'edit_icon' in dialog_refs:
+            # Disable the icon to prevent changes
+            # Note: props('disabled') might not work on ui.icon directly if not a button, 
+            # so we use style to make it look disabled and remove click event listener ideally, 
+            # but ui.icon doesn't support 'off'. 
+            # We can just hide pointer events.
+            dialog_refs['edit_icon'].style('cursor: not-allowed; opacity: 0.3; pointer-events: none;')
 
-        # Add success message to chat
-        add_message_to_chat(messages_container, 'assistant', '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">check_circle</span> <span style="font-weight: 600;">Analysis Complete!</span> Your spectral ranking analysis has finished successfully. Displaying the complete analysis report now.')
+        # Add success message to chat with Layout Fix (Flexbox)
+        add_message_to_chat(messages_container, 'assistant', '<div style="display: flex; align-items: flex-start; gap: 0.5rem;"><div><span class="material-symbols-outlined" style="font-size: 1.1rem; vertical-align: text-top; color: #22c55e;">check_circle</span></div><div><span style="font-weight: 600;">Analysis Complete!</span> Your spectral ranking analysis has finished successfully. Displaying the complete analysis report now.</div></div>')
 
         # Add suggested questions (Phase 2)
         ui.timer(0.5, lambda: add_suggested_questions(messages_container, api_key_str=api_key), once=True)
@@ -6608,13 +6972,19 @@ async def check_agent_job_status(messages_container, job_id, api_key_input=None)
                                         data={'ranking_results': results}
                                     )
 
-                                    # Add success message with summary
-                                    summary_msg = '<span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem;">check_circle</span> <span style="font-weight: 600;">Analysis Complete!</span> Your spectral ranking analysis has finished successfully. '
+                                    # Disable edit icon after success (if present)
+                                    state = get_client_state()
+                                    dialog_refs = state.get('dialog_refs', {})
+                                    if 'edit_icon' in dialog_refs:
+                                        dialog_refs['edit_icon'].style('cursor: not-allowed; opacity: 0.3; pointer-events: none;')
+
+                                    # Add success message with summary (Flex Layout Fix)
+                                    summary_msg = '<div style="display: flex; align-items: flex-start; gap: 0.5rem;"><div><span class="material-symbols-outlined" style="font-size: 1.1rem; vertical-align: text-top; color: #22c55e;">check_circle</span></div><div><span style="font-weight: 600;">Analysis Complete!</span> Your spectral ranking analysis has finished successfully. '
                                     if 'methods' in results:
                                         num_rankings = len(results.get('methods', []))
                                         summary_msg += f'Generated {num_rankings} ranking results. '
 
-                                    summary_msg += 'Displaying the complete analysis report now.'
+                                    summary_msg += 'Displaying the complete analysis report now.</div></div>'
                                     add_message_to_chat(messages_container, 'assistant', summary_msg)
 
                                     # Add suggested questions (Phase 2)
@@ -6757,10 +7127,14 @@ async def auto_summarize_results_frontend(ranking_results, messages_container, a
 
 def create_floating_report_modal():
     """Create and return a floating report modal that overlays the data preview."""
-    global floating_report_modal_ref
-
-    if floating_report_modal_ref is not None:
-        return floating_report_modal_ref
+    # Use client state instead of global to prevent stale references on refresh
+    state = get_client_state()
+    if 'dialog_refs' not in state:
+        state['dialog_refs'] = {}
+    dialog_refs = state['dialog_refs']
+    
+    if 'floating_report_modal' in dialog_refs and dialog_refs['floating_report_modal'] is not None:
+        return dialog_refs['floating_report_modal']
 
     # Create modal container that will be positioned over the data preview
     # No overlay - just a floating container that matches data preview size
@@ -6943,14 +7317,16 @@ def create_floating_report_modal():
             padding: 0;
         ''')
 
-    floating_report_modal_ref = {
+    new_modal_ref = {
         'container': modal_container,
         'report_area': report_content_area,
         'close_button': close_button,
         'pdf_button': pdf_button
     }
+    
+    dialog_refs['floating_report_modal'] = new_modal_ref
 
-    return floating_report_modal_ref
+    return new_modal_ref
 
 def create_floating_loading_modal():
     """Create and return a floating loading modal that overlays the left side area."""
@@ -7217,8 +7593,12 @@ def show_floating_error(title: str, message: str):
 
 def show_floating_report(result):
     """Show the report in the floating modal overlay positioned above data preview."""
-    global report_displayed, floating_report_modal_ref, current_report_result
-
+    global report_displayed, current_report_result
+    
+    # Use client state
+    # state = get_client_state() # Already called inside create_floating_report_modal if needed,
+    # but create_floating_report_modal accesses state directly.
+    
     modal = create_floating_report_modal()
 
     # Clear previous content
@@ -7311,7 +7691,11 @@ def show_floating_report(result):
 
 def hide_floating_report():
     """Hide the floating report modal."""
-    global report_displayed, floating_report_modal_ref, current_report_result
+    global report_displayed, current_report_result
+    
+    state = get_client_state()
+    refs = state.get('dialog_refs', {})
+    floating_report_modal_ref = refs.get('floating_report_modal')
 
     if floating_report_modal_ref is not None:
         modal_container = floating_report_modal_ref['container']
