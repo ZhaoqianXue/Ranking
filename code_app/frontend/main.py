@@ -4720,9 +4720,15 @@ def add_status_panel_to_chat(messages_container, api_key_input=None):
                         with icon_container:
                             ui.html('<span class="material-symbols-outlined" style="font-size: 0.8rem; color: #22c55e;">check</span>')
 
-                    # Show the Start Ranking button
+                    # Show the Start Ranking button and enable edit icon
                     if start_ranking_button is not None:
                         start_ranking_button.style('display: flex !important;')
+                        
+                    # Also enable the edit icon if it exists
+                    state = get_client_state()
+                    dialog_refs = state.get('dialog_refs', {})
+                    if 'edit_icon' in dialog_refs:
+                         dialog_refs['edit_icon'].style('cursor: pointer; opacity: 1.0; pointer-events: auto;')
 
                 # Sequential loading: update each status item one by one
                 def update_status_item(index: int):
@@ -5075,6 +5081,10 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                     def enable_start_button():
                         if start_ranking_button:
                             start_ranking_button.style('display: flex !important;')
+                            # Also ensure edit icon is enabled
+                            local_refs = state.get('dialog_refs', {})
+                            if 'edit_icon' in local_refs:
+                                local_refs['edit_icon'].style('cursor: pointer; opacity: 1.0; pointer-events: auto;')
                     ui.timer(0.1, enable_start_button, once=True)
                 
                 # Restore BOTH
@@ -5191,8 +5201,8 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                         text-align: left;
                 '''):
                         ui.html('<span style="font-weight: 600; font-size: 0.8rem; color: #333; text-align: left;">Ranking Preview</span>')
-                        # Make icon actionable and store ref
-                        edit_icon = ui.icon('open_in_new').style('font-size: 1.2rem; color: #011f5b; cursor: pointer;')
+                        # Make icon actionable and store ref - initially disabled (enabled when Start Ranking appears)
+                        edit_icon = ui.icon('open_in_new').style('font-size: 1.2rem; color: #011f5b; cursor: not-allowed; opacity: 0.3; pointer-events: none;')
                         edit_icon.on('click', open_edit_dialog)
                         dialog_refs['edit_icon'] = edit_icon
                     
@@ -5456,8 +5466,16 @@ def add_suggested_questions(messages_container, api_key_input=None, api_key_str=
                     text-align: left;
                     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
                 '''):
-                    # Prompt text
-                    ui.html('<div style="margin-bottom: 0.75rem; color: #374151;"><span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-right: 0.25rem; color: #011f5b;">chat</span>You can now ask me questions about your analysis results! Try one of these:</div>')
+                    # Combined Success Header and Prompt text
+                    ui.html('''
+                        <div style="display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <div><span class="material-symbols-outlined" style="font-size: 1.1rem; vertical-align: text-top; color: #22c55e;">check_circle</span></div>
+                            <div style="color: #374151;">
+                                <span style="font-weight: 600;">Analysis Complete!</span> 
+                                Your spectral ranking analysis has finished successfully. You can now ask me questions about your analysis results! Try one of these:
+                            </div>
+                        </div>
+                    ''')
                     
                     # Create buttons for each suggested question
                     for i, question in enumerate(suggested_questions):
@@ -6568,8 +6586,7 @@ async def direct_agent_analysis(file_id: str, messages_container, api_key: str):
             # We can just hide pointer events.
             dialog_refs['edit_icon'].style('cursor: not-allowed; opacity: 0.3; pointer-events: none;')
 
-        # Add success message to chat with Layout Fix (Flexbox)
-        add_message_to_chat(messages_container, 'assistant', '<div style="display: flex; align-items: flex-start; gap: 0.5rem;"><div><span class="material-symbols-outlined" style="font-size: 1.1rem; vertical-align: text-top; color: #22c55e;">check_circle</span></div><div><span style="font-weight: 600;">Analysis Complete!</span> Your spectral ranking analysis has finished successfully. Displaying the complete analysis report now.</div></div>')
+        # Merged with suggested questions below
 
         # Add suggested questions (Phase 2)
         ui.timer(0.5, lambda: add_suggested_questions(messages_container, api_key_str=api_key), once=True)
