@@ -3364,71 +3364,36 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div style="font-size: 0.8rem; color: var(--gray-600); margin-bottom: 1rem;">
                             Spectral Ranking supports <strong>2 data formats</strong>. Click the cards below to see data details and run an example.
                         </div>
-                        <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 800px; margin: 0 auto;">
-                            <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
-                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,197,253,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
+                            <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: left; transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; position: relative; overflow: hidden; height: 100%; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.03) 0%, rgba(147,197,253,0.01) 100%); opacity: 0; transition: opacity 0.2s ease;"></div>
 
                                 <!-- Card Header Structure -->
-                                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
+                                <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                     <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">analytics</span>
-                                    <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data</div>
+                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data Schema</div>
                                 </div>
 
                                 <!-- Card Description -->
-                                <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
-                                    <p><strong>AUC Performance Dataset:</strong> 164 samples × 6 models with sample identifiers and descriptions. Dense format with complete performance scores across all models.</p>
-                                    <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
-                                            <div><strong>Data Structure:</strong> Traditional matrix format where each row contains complete performance data for all models.</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                            <div><strong>sample_id:</strong> Unique sample identifier (e.g., sample_001, sample_002).</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">analytics</span>
-                                            <div><strong>model_1 to model_6:</strong> AUC performance scores for 6 different models (0.0-1.0 range).</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">description</span>
-                                            <div><strong>description:</strong> Human-readable description for each sample (e.g., "description of sample_001").</div>
-                                        </li>
-                                    </ul>
+                                <div style="font-size: 0.8rem; line-height: 1.4; color: #4b5563; position: relative; z-index: 1; text-align: left;">
+                                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.2rem; font-size: 0.85rem;">Standard Matrix Format</div>
+                                    <div style="color: #6b7280; font-size: 0.75rem;">Best for complete performance benchmarks where every model has a score for every sample.</div>
                                 </div>
                             </div>
 
                             <!-- Arena Style Example Data Card -->
-                            <div class="example-data-card example-data-card-arena" onclick="loadExampleData('arena')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
-                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(5,150,105,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
+                            <div class="example-data-card example-data-card-arena" onclick="loadExampleData('arena')" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: left; transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; position: relative; overflow: hidden; height: 100%; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(16,185,129,0.03) 0%, rgba(5,150,105,0.01) 100%); opacity: 0; transition: opacity 0.2s ease;"></div>
 
                                 <!-- Card Header Structure -->
-                                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
+                                <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                     <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">leaderboard</span>
-                                    <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data</div>
+                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data Schema</div>
                                 </div>
 
                                 <!-- Card Description -->
-                                <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
-                                    <p><strong>Arena Comparison Dataset:</strong> 999 samples × 6 models with pairwise comparison results. Sparse format representing head-to-head battles, ideal for spectral ranking.</p>
-                                    <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
-                                            <div><strong>Data Structure:</strong> Each row represents one comparison. Only one model gets 1.0 (winner), others get 0.0 or NaN.</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                            <div><strong>Task:</strong> Task category (e.g., "code", "math").</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">adjust</span>
-                                            <div><strong>Model Columns:</strong> Your Model, ChatGPT, Claude, Gemini, Llama, Qwen (1.0 = winner, 0.0 = loser, NaN = not compared).</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">insights</span>
-                                            <div><strong>Perfect for Spectral Ranking:</strong> Captures tournament-style comparisons ideal for spectral algorithms.</div>
-                                        </li>
-                                    </ul>
+                                <div style="font-size: 0.8rem; line-height: 1.4; color: #4b5563; position: relative; z-index: 1; text-align: left;">
+                                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.2rem; font-size: 0.85rem;">Pairwise Comparison Format</div>
+                                    <div style="color: #6b7280; font-size: 0.75rem;">Best for large arenas or incomplete data where models battle head-to-head (A vs B).</div>
                                 </div>
                             </div>
                         </div>
@@ -3562,70 +3527,36 @@ document.addEventListener('DOMContentLoaded', function() {
                             Spectral Ranking supports <strong>2 data formats</strong>. Click the cards below to see data details and run an example.
                         </div>
                         <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 800px; margin: 0 auto;">
-                            <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
-                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,197,253,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
+                            <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: left; transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; position: relative; overflow: hidden; height: 100%; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.03) 0%, rgba(147,197,253,0.01) 100%); opacity: 0; transition: opacity 0.2s ease;"></div>
 
                                 <!-- Card Header Structure -->
-                                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
+                                <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                     <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">analytics</span>
-                                    <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data</div>
+                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data Schema</div>
                                 </div>
 
                                 <!-- Card Description -->
-                                <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
-                                    <p><strong>AUC Performance Dataset:</strong> 164 samples × 6 models with sample identifiers and descriptions. Dense format with complete performance scores across all models.</p>
-                                    <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
-                                            <div><strong>Data Structure:</strong> Traditional matrix format where each row contains complete performance data for all models.</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                            <div><strong>sample_id:</strong> Unique sample identifier (e.g., sample_001, sample_002).</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">analytics</span>
-                                            <div><strong>model_1 to model_6:</strong> AUC performance scores for 6 different models (0.0-1.0 range).</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">description</span>
-                                            <div><strong>description:</strong> Human-readable description for each sample (e.g., "description of sample_001").</div>
-                                        </li>
-                                    </ul>
+                                <div style="font-size: 0.8rem; line-height: 1.4; color: #4b5563; position: relative; z-index: 1; text-align: left;">
+                                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.2rem; font-size: 0.85rem;">Standard Matrix Format</div>
+                                    <div style="color: #6b7280; font-size: 0.75rem;">Best for complete performance benchmarks where every model has a score for every sample.</div>
                                 </div>
                             </div>
 
                             <!-- Arena Style Example Data Card -->
-                            <div class="example-data-card example-data-card-arena" onclick="loadExampleData('arena')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
-                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(5,150,105,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
+                            <div class="example-data-card example-data-card-arena" onclick="loadExampleData('arena')" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: left; transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; position: relative; overflow: hidden; height: 100%; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(16,185,129,0.03) 0%, rgba(5,150,105,0.01) 100%); opacity: 0; transition: opacity 0.2s ease;"></div>
 
                                 <!-- Card Header Structure -->
-                                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
+                                <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                     <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">leaderboard</span>
-                                    <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data</div>
+                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data Schema</div>
                                 </div>
 
                                 <!-- Card Description -->
-                                <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
-                                    <p><strong>Arena Comparison Dataset:</strong> 999 samples × 6 models with pairwise comparison results. Sparse format representing head-to-head battles, ideal for spectral ranking.</p>
-                                    <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
-                                            <div><strong>Data Structure:</strong> Each row represents one comparison. Only one model gets 1.0 (winner), others get 0.0 or NaN.</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                            <div><strong>Task:</strong> Task category (e.g., "code", "math").</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">adjust</span>
-                                            <div><strong>Model Columns:</strong> Your Model, ChatGPT, Claude, Gemini, Llama, Qwen (1.0 = winner, 0.0 = loser, NaN = not compared).</div>
-                                        </li>
-                                        <li style="display: flex; align-items: flex-start;">
-                                            <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">insights</span>
-                                            <div><strong>Perfect for Spectral Ranking:</strong> Captures tournament-style comparisons ideal for spectral algorithms.</div>
-                                        </li>
-                                    </ul>
+                                <div style="font-size: 0.8rem; line-height: 1.4; color: #4b5563; position: relative; z-index: 1; text-align: left;">
+                                    <div style="font-weight: 600; color: #374151; margin-bottom: 0.2rem; font-size: 0.85rem;">Pairwise Comparison Format</div>
+                                    <div style="color: #6b7280; font-size: 0.75rem;">Best for large arenas or incomplete data where models battle head-to-head (A vs B).</div>
                                 </div>
                             </div>
                         </div>
@@ -4133,8 +4064,71 @@ async def handle_manual_example_data_load(dataset: str):
             }}
         ''')
 
+        # Define description based on dataset
+        description = None
+        if dataset == 'aou':
+            description = """
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
+                <div style="margin-bottom: 0.75rem; text-align: left;">
+                    <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Dense Example Data Schema</div>
+                    <div style="font-size: 0.8rem; color: #64748b; line-height: 1.3;">
+                        Dense format with complete performance scores.
+                    </div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                        <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Structure</span>
+                        <span style="color: #475569; line-height: 1.3;">Standard matrix where each row contains scores for all models.</span>
+                    </div>
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                        <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">sample_id</span>
+                        <span style="color: #475569; line-height: 1.3;">Unique identifier for each sample (e.g., sample_001).</span>
+                    </div>
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                        <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">model_1...6</span>
+                        <span style="color: #475569; line-height: 1.3;">AUC performance scores (0.0-1.0 range).</span>
+                    </div>
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                        <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">description</span>
+                        <span style="color: #475569; line-height: 1.3;">Human-readable description for context.</span>
+                    </div>
+                </div>
+            </div>
+            """
+        elif dataset == 'arena':
+            description = """
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
+                <div style="margin-bottom: 0.75rem; text-align: left;">
+                    <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Sparse Example Data Schema</div>
+                    <div style="font-size: 0.8rem; color: #64748b; line-height: 1.3;">
+                        Pairwise comparison format (Head-to-Head).
+                    </div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                        <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Structure</span>
+                        <span style="color: #475569; line-height: 1.3;">One comparison per row. Winner=1.0, others=0.0 or NaN.</span>
+                    </div>
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                        <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Task</span>
+                        <span style="color: #475569; line-height: 1.3;">Task/Category label (e.g., "code", "math").</span>
+                    </div>
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                        <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Model Cols</span>
+                        <span style="color: #475569; line-height: 1.3;">Your Model, ChatGPT, etc. (1.0=win, 0.0=loss, NaN=n/a).</span>
+                    </div>
+                    <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                        <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Fit For</span>
+                        <span style="color: #475569; line-height: 1.3;">Perfect for Spectral Ranking algorithms on incomplete data.</span>
+                    </div>
+                </div>
+            </div>
+            """
+
         # Update data preview
-        update_data_preview(content, filename)
+        update_data_preview(content, filename, description)
 
         # Reset loading state
         ui.run_javascript('''
@@ -4391,8 +4385,71 @@ async def handle_example_data_load(dataset, messages_container, input_field, api
                     # Show status panel instead of text message
                     add_status_panel_to_chat(messages_container, api_key_input)
 
+                    # Define detailed descriptions for the preview
+                    description = None
+                    if dataset == 'aou':
+                        description = """
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
+                            <div style="margin-bottom: 0.75rem; text-align: left;">
+                                <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Dense Example Data Schema</div>
+                                <div style="font-size: 0.8rem; color: #64748b; line-height: 1.3;">
+                                    Dense format with complete performance scores.
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                                    <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Structure</span>
+                                    <span style="color: #475569; line-height: 1.3;">Standard matrix where each row contains scores for all models.</span>
+                                </div>
+                                <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                                    <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">sample_id</span>
+                                    <span style="color: #475569; line-height: 1.3;">Unique identifier for each sample (e.g., sample_001).</span>
+                                </div>
+                                <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                                    <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">model_1...6</span>
+                                    <span style="color: #475569; line-height: 1.3;">AUC performance scores (0.0-1.0 range).</span>
+                                </div>
+                                <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                                    <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">description</span>
+                                    <span style="color: #475569; line-height: 1.3;">Human-readable description for context.</span>
+                                </div>
+                            </div>
+                        </div>
+                        """
+                    elif dataset == 'arena':
+                        description = """
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
+                            <div style="margin-bottom: 0.75rem; text-align: left;">
+                                <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Sparse Example Data Schema</div>
+                                <div style="font-size: 0.8rem; color: #64748b; line-height: 1.3;">
+                                    Pairwise comparison format (Head-to-Head).
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                                    <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Structure</span>
+                                    <span style="color: #475569; line-height: 1.3;">One comparison per row. Winner=1.0, others=0.0 or NaN.</span>
+                                </div>
+                                <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                                    <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Task</span>
+                                    <span style="color: #475569; line-height: 1.3;">Task/Category label (e.g., "code", "math").</span>
+                                </div>
+                                <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                                    <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Model Cols</span>
+                                    <span style="color: #475569; line-height: 1.3;">Your Model, ChatGPT, etc. (1.0=win, 0.0=loss, NaN=n/a).</span>
+                                </div>
+                                <div style="display: flex; align-items: baseline; gap: 0.5rem; font-size: 0.8rem;">
+                                    <span style="background: white; border: 1px solid #cbd5e1; padding: 0.1rem 0.4rem; border-radius: 6px; font-weight: 600; color: #334155; font-family: monospace; font-size: 0.7rem; min-width: 80px; text-align: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Fit For</span>
+                                    <span style="color: #475569; line-height: 1.3;">Perfect for Spectral Ranking algorithms on incomplete data.</span>
+                                </div>
+                            </div>
+                        </div>
+                        """
+
                     # Update data preview (exactly like handle_agent_file_upload)
-                    update_data_preview(content, filename)
+                    update_data_preview(content, filename, description)
 
                     # Store file_id in client state and reset conversation history (exactly like handle_agent_file_upload)
                     state = get_client_state()
@@ -4433,7 +4490,7 @@ async def handle_example_data_load(dataset, messages_container, input_field, api
             });
         ''')
 
-def update_data_preview(content, filename):
+def update_data_preview(content, filename, description=None):
     """Update the data preview in the left panel"""
     try:
         # Parse CSV content
@@ -4464,10 +4521,16 @@ def update_data_preview(content, filename):
             data_rows = rows[1:]  # Show all data rows for scrolling functionality
 
             # Build compact preview table with file info at top
-            table_html = f'<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; font-size: 0.85rem;">'
+            table_html = f'<div style="display: flex; flex-direction: column; margin-bottom: 0.75rem;">'
+            
+            # Add description if provided
+            if description:
+                table_html += f'<div style="background: rgba(1, 31, 91, 0.03); border: 1px solid rgba(1, 31, 91, 0.1); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">{description}</div>'
+            
+            table_html += f'<div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">'
             table_html += f'<div style="font-weight: 600; color: #011f5b;"><span class="material-symbols-outlined" style="font-size: 1rem; margin-right: 0.25rem; vertical-align: middle; color: #011f5b;">analytics</span> {filename}</div>'
             table_html += f'<div style="color: var(--gray-600);">{len(rows)-1} rows × {len(headers)} cols</div>'
-            table_html += '</div>'
+            table_html += '</div></div>'
 
             # More compact table styling with horizontal scroll support
             table_html += '<div class="data-preview-table-scroll" style="overflow-x: auto; overflow-y: visible; width: 100%; border-radius: 8px; -webkit-overflow-scrolling: touch; position: relative;"><table style="border-collapse: collapse; font-size: 0.75rem; line-height: 1.2; width: max-content; min-width: 100%; table-layout: auto;">'
@@ -8591,70 +8654,36 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                                                 Spectral Ranking supports <strong>2 data formats</strong>. Click the cards below to see data details and run an example.
                                             </div>
                                             <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 800px; margin: 0 auto;">
-                                                <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
-                                                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,197,253,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
+                                                <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: left; transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; position: relative; overflow: hidden; height: 100%; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                                                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.03) 0%, rgba(147,197,253,0.01) 100%); opacity: 0; transition: opacity 0.2s ease;"></div>
 
                                                     <!-- Card Header Structure -->
-                                                    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
+                                                    <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                                         <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">analytics</span>
-                                                        <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data</div>
+                                                        <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data Schema</div>
                                                     </div>
 
                                                     <!-- Card Description -->
-                                                    <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
-                                                        <p><strong>AUC Performance Dataset:</strong> 164 samples × 6 models with sample identifiers and descriptions. Dense format with complete performance scores across all models.</p>
-                                                        <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
-                                                            <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
-                                                                <div><strong>Data Structure:</strong> Traditional matrix format where each row contains complete performance data for all models.</div>
-                                                            </li>
-                                                            <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                                                <div><strong>sample_id:</strong> Unique sample identifier (e.g., sample_001, sample_002).</div>
-                                                            </li>
-                                                            <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">analytics</span>
-                                                                <div><strong>model_1 to model_6:</strong> AUC performance scores for 6 different models (0.0-1.0 range).</div>
-                                                            </li>
-                                                            <li style="display: flex; align-items: flex-start;">
-                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">description</span>
-                                                                <div><strong>description:</strong> Human-readable description for each sample (e.g., "description of sample_001").</div>
-                                                            </li>
-                                                        </ul>
+                                                    <div style="font-size: 0.8rem; line-height: 1.4; color: #4b5563; position: relative; z-index: 1; text-align: left;">
+                                                        <div style="font-weight: 600; color: #374151; margin-bottom: 0.2rem; font-size: 0.85rem;">Standard Matrix Format</div>
+                                                        <div style="color: #6b7280; font-size: 0.75rem;">Best for complete performance benchmarks where every model has a score for every sample.</div>
                                                     </div>
                                                 </div>
 
                                                 <!-- Arena Style Example Data Card -->
-                                                <div class="example-data-card example-data-card-arena" onclick="loadExampleData('arena')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
-                                                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(5,150,105,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
+                                                <div class="example-data-card example-data-card-arena" onclick="loadExampleData('arena')" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; text-align: left; transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-start; position: relative; overflow: hidden; height: 100%; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                                                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(16,185,129,0.03) 0%, rgba(5,150,105,0.01) 100%); opacity: 0; transition: opacity 0.2s ease;"></div>
 
                                                     <!-- Card Header Structure -->
-                                                    <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0.75rem; position: relative; z-index: 1;">
+                                                    <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                                         <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">leaderboard</span>
-                                                        <div style="font-size: 0.9rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data</div>
+                                                        <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data Schema</div>
                                                     </div>
 
                                                     <!-- Card Description -->
-                                                    <div style="font-size: 0.75rem; line-height: 1.4; color: #6b7280; position: relative; z-index: 1; text-align: left;">
-                                                        <p><strong>Arena Comparison Dataset:</strong> 999 samples × 6 models with pairwise comparison results. Sparse format representing head-to-head battles, ideal for spectral ranking.</p>
-                                                        <ul style="margin-top: 0.75rem; padding-left: 0; list-style: none;">
-                                                            <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">table</span>
-                                                                <div><strong>Data Structure:</strong> Each row represents one comparison. Only one model gets 1.0 (winner), others get 0.0 or NaN.</div>
-                                                            </li>
-                                                            <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">label</span>
-                                                                <div><strong>Task:</strong> Task category (e.g., "code", "math").</div>
-                                                            </li>
-                                                            <li style="display: flex; align-items: flex-start; margin-bottom: 0.5rem;">
-                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">adjust</span>
-                                                                <div><strong>Model Columns:</strong> Your Model, ChatGPT, Claude, Gemini, Llama, Qwen (1.0 = winner, 0.0 = loser, NaN = not compared).</div>
-                                                            </li>
-                                                            <li style="display: flex; align-items: flex-start;">
-                                                                <span class="material-symbols-outlined" style="font-size: 1rem; color: #011f5b; margin-right: 0.5rem; flex-shrink: 0; margin-top: 1px;">insights</span>
-                                                                <div><strong>Perfect for Spectral Ranking:</strong> Captures tournament-style comparisons ideal for spectral algorithms.</div>
-                                                            </li>
-                                                        </ul>
+                                                    <div style="font-size: 0.8rem; line-height: 1.4; color: #4b5563; position: relative; z-index: 1; text-align: left;">
+                                                        <div style="font-weight: 600; color: #374151; margin-bottom: 0.2rem; font-size: 0.85rem;">Pairwise Comparison Format</div>
+                                                        <div style="color: #6b7280; font-size: 0.75rem;">Best for large arenas or incomplete data where models battle head-to-head (A vs B).</div>
                                                     </div>
                                                 </div>
                                             </div>
