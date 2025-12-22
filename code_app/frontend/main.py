@@ -11,6 +11,7 @@ import markdown
 import re
 import io
 import pandas as pd
+import html
 
 # Add the current directory to the path to import dashboard
 sys.path.append(os.path.dirname(__file__))
@@ -2697,6 +2698,121 @@ body.scrolling ::-webkit-scrollbar-track {
   overflow: hidden;
 }
 
+/* FAQ Accordion Styles */
+.faq-accordion {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background-color: #ffffff;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.faq-item:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-color: #cbd5e1;
+}
+
+.faq-item.active {
+  border-color: var(--primary-900);
+  box-shadow: 0 2px 8px rgba(1, 31, 91, 0.15);
+}
+
+.faq-header {
+  padding: 0.625rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.faq-header:hover {
+  background-color: #f8fafc;
+}
+
+.faq-item.active .faq-header {
+  background-color: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.faq-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary-900);
+  margin: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.faq-title-icon {
+  font-size: 1.1rem;
+  color: var(--primary-900);
+}
+
+.faq-toggle {
+  font-size: 1.1rem;
+  color: var(--primary-900);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+.faq-item.active .faq-toggle {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 1rem;
+}
+
+.faq-item.active .faq-content {
+  max-height: 1000px;
+  padding: 0.625rem 1rem;
+}
+
+.faq-answer {
+  color: #475569;
+  line-height: 1.5;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .faq-header {
+    padding: 0.5rem 0.875rem;
+  }
+  
+  .faq-title {
+    font-size: 0.85rem;
+  }
+  
+  .faq-item.active .faq-content {
+    padding: 0.5rem 0.875rem;
+  }
+  
+  .faq-content {
+    padding: 0 0.875rem;
+  }
+  
+  .faq-answer {
+    font-size: 0.8rem;
+  }
+}
+
 /* Upload Area State Transitions */
 #agent-upload-area, #manual-upload-area {
   transition: all 0.3s ease;
@@ -3231,7 +3347,7 @@ document.addEventListener('DOMContentLoaded', function() {
     sections.forEach(section => {
         const id = section.getAttribute('id');
         // Only observe relevant sections
-        if (id && (id === 'mode-selection' || id === 'results' || id === 'documentation' || id === 'about' || id === 'hero-section')) {
+        if (id && (id === 'mode-selection' || id === 'results' || id === 'faqs' || id === 'hero-section')) {
             observer.observe(section);
         }
     });
@@ -8423,17 +8539,8 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                         <a href="/dashboard#compare-with-your-model">Rank My LLM</a>
                     </div>
                 ''')
-            with ui.element('li').classes('nav-item dropdown'):
-                ui.html('''
-                    <a href="javascript:void(0)" class="nav-link" style="gap: 2px;">
-                        Documentation
-                        <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 0;">arrow_drop_down</span>
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="#documentation">Help</a>
-                        <a href="#about">About</a>
-                    </div>
-                ''')
+            with ui.element('li').classes('nav-item'):
+                ui.html('<a href="#faqs" class="nav-link">FAQs</a>')
         
         # Right side actions
         with ui.element('div').classes('navbar-actions'):
@@ -8456,9 +8563,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 with ui.element('li').classes('nav-item'):
                     ui.html('<a href="/dashboard#compare-with-your-model" class="nav-link">Rank My LLM</a>')
                 with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="#documentation" class="nav-link">Help</a>')
-                with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="#about" class="nav-link">About</a>')
+                    ui.html('<a href="#faqs" class="nav-link">FAQs</a>')
             
             with ui.element('div').classes('navbar-actions'):
                 ui.html('<a href="https://github.com/MaxineYu/Spectral_Ranking" class="nav-button primary" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="height: 1rem; width: auto; display: inline-block; margin-right: 0.5rem; vertical-align: middle;"/>GitHub</a>')
@@ -8542,38 +8647,26 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
             ''')
             
             # New Feature Highlights
-            ui.html('''
-                <div class="hero-features">
-                    <div class="hero-feature">
-                        <span class="material-symbols-outlined hero-feature-icon">warning</span>
-                        <div class="hero-feature-title">Traditional Ranking Limited</div>
-                        <div class="hero-feature-description">
-                            Most ranking methods require homogeneous, complete data and uniform comparison patterns. But real-world data involves heterogeneous comparisons, missing information, and varying scenarios. Traditional approaches fail to handle these practical decision-making challenges effectively.
-                        </div>
-                    </div>
-                    <div class="hero-feature">
-                        <span class="material-symbols-outlined hero-feature-icon">trending_up</span>
-                        <div class="hero-feature-title">Spectral Ranking Advantage</div>
-                        <div class="hero-feature-description">
-                            Effectively analyze diverse comparison data—whether complete or partial. Produce reliable rankings that adjust to actual complexities, offering efficient computation and proven reliability for informed decisions free from limiting model assumptions.
-                        </div>
-                    </div>
-                    <div class="hero-feature">
-                        <span class="material-symbols-outlined hero-feature-icon">biotech</span>
-                        <div class="hero-feature-title">Handles Any Data Type</div>
-                        <div class="hero-feature-description">
-                            Accommodate various forms of comparison data—from pairwise matchups and multi-item selections to partial datasets with absent entries. Operates smoothly without needing strict model requirements that constrain conventional ranking techniques and their practical use.
-                        </div>
-                    </div>
-                    <div class="hero-feature">
-                        <span class="material-symbols-outlined hero-feature-icon">query_stats</span>
-                        <div class="hero-feature-title">Trustworthy Ranking Results</div>
-                        <div class="hero-feature-description">
-                            Obtain rankings accompanied by detailed uncertainty measures and reliability ranges. Identify meaningful ranking distinctions from those that remain uncertain, delivering more dependable understanding compared to basic rankings lacking any uncertainty assessment.
-                        </div>
-                    </div>
-                </div>
-            ''')
+            with ui.element('div').classes('hero-features').style('display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;'):
+                with ui.element('div').classes('hero-feature').style('cursor: pointer;'):
+                    ui.html('<span class="material-symbols-outlined hero-feature-icon">warning</span>')
+                    ui.html('<h3 class="hero-feature-title">Traditional Ranking Limited</h3>')
+                    ui.html('<p class="hero-feature-description">Traditional ranking tools need perfect, uniform data without gaps. Real-world data often includes mixed comparisons, missing info, and varied situations. These tools struggle to handle challenges effectively.</p>')
+
+                with ui.element('div').classes('hero-feature').style('cursor: pointer;'):
+                    ui.html('<span class="material-symbols-outlined hero-feature-icon">trending_up</span>')
+                    ui.html('<h3 class="hero-feature-title">Spectral Ranking Advantage</h3>')
+                    ui.html('<p class="hero-feature-description">Analyze all kinds of comparison data, whether full or incomplete. Create reliable rankings that adapt to real situations, with fast processing and proven results, without rigid rules holding you back.</p>')
+
+                with ui.element('div').classes('hero-feature').style('cursor: pointer;'):
+                    ui.html('<span class="material-symbols-outlined hero-feature-icon">biotech</span>')
+                    ui.html('<h3 class="hero-feature-title">Handles Any Data Type</h3>')
+                    ui.html('<p class="hero-feature-description">Supports different comparison formats, from one-on-one matches and group selections to incomplete data with missing parts. Runs easily without the strict limits that hinder older ranking methods.</p>')
+
+                with ui.element('div').classes('hero-feature').style('cursor: pointer;'):
+                    ui.html('<span class="material-symbols-outlined hero-feature-icon">query_stats</span>')
+                    ui.html('<h3 class="hero-feature-title">Trustworthy Ranking Results</h3>')
+                    ui.html('<p class="hero-feature-description">Get rankings with clear uncertainty checks and confidence ranges. Spot true differences from unsure ones, providing better insights than simple rankings without any reliability measures.</p>')
             
             # Call-to-Action
             ui.html('''
@@ -9540,7 +9633,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
         query_button.on('click', on_query)
         
         # Shared Status and Report Containers (used by both agent and manual modes)
-        # Placed after analysis sections but before documentation for proper layout
+        # Placed after analysis sections but before FAQs for proper layout
         status_container = ui.element('div').props('id="status-container"').style('max-width: 1400px; margin: 0 auto; width: 100%; position: relative; z-index: 10; display: none;')
         report_container = ui.column().classes('w-full').style('max-width: 1200px; margin: 0 auto; position: relative; background: white; border-radius: var(--radius-2xl); padding: 2rem; margin-bottom: 0; box-shadow: var(--shadow-md); display: none;').props('id="results"')
 
@@ -9551,57 +9644,98 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
         except Exception:
             pass
 
-    # Documentation & Help section moved here, margin removed for tight spacing
-    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 1rem auto; padding: 0 2rem;').props('id="documentation"'):
-        ui.html('<h2 class="section-title"><span class="material-symbols-outlined" style="font-size: 1.75rem;">menu_book</span>How to Use This Tool</h2>')
-        with ui.element('div').classes('grid-container').style('grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));'):
-            with ui.element('div').classes('step-card'):
-                with ui.element('div').classes('card-header'):
-                    with ui.element('div').classes('card-icon-container'):
-                        ui.html('<span class="material-symbols-outlined card-icon">counter_1</span>')
-                    ui.html('<h3 class="card-title">Upload Data</h3>')
-                ui.html('<p class="card-description">Upload a CSV file where rows represent samples and columns represent the methods to be ranked.</p>')
-            with ui.element('div').classes('step-card'):
-                with ui.element('div').classes('card-header'):
-                    with ui.element('div').classes('card-icon-container'):
-                        ui.html('<span class="material-symbols-outlined card-icon">counter_2</span>')
-                    ui.html('<h3 class="card-title">Set Parameters</h3>')
-                ui.html('<p class="card-description">Specify whether higher or lower values indicate better performance. Adjust advanced settings if needed.</p>')
-            with ui.element('div').classes('step-card'):
-                with ui.element('div').classes('card-header'):
-                    with ui.element('div').classes('card-icon-container'):
-                        ui.html('<span class="material-symbols-outlined card-icon">counter_3</span>')
-                    ui.html('<h3 class="card-title">Generate Report</h3>')
-                ui.html('<p class="card-description">Click the "Generate Report" button to receive your ranking analysis with confidence intervals.</p>')
-
-    # About PRSAgent section moved here, margin removed for tight spacing
-    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 1rem auto 4rem auto; padding: 0 2rem;').props('id="about"'):
-        ui.html('<h2 class="section-title"><span class="material-symbols-outlined" style="font-size: 1.75rem;">lightbulb</span>About This Framework</h2>')
-        with ui.element('div').classes('grid-container').style('grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));'):
-            with ui.element('div').classes('step-card'):
-                with ui.element('div').classes('card-header'):
-                    with ui.element('div').classes('card-icon-container'):
-                        ui.html('<span class="material-symbols-outlined card-icon">target</span>')
-                    ui.html('<h3 class="card-title">General Fixed Graph</h3>')
-                ui.html('<p class="card-description">Circumvents restrictive assumptions, allowing for flexible, real-world comparison structures.</p>')
-            with ui.element('div').classes('step-card'):
-                with ui.element('div').classes('card-header'):
-                    with ui.element('div').classes('card-icon-container'):
-                        ui.html('<span class="material-symbols-outlined card-icon">science</span>')
-                    ui.html('<h3 class="card-title">Asymptotic Efficiency</h3>')
-                ui.html('<p class="card-description">Our two-step spectral method can achieve the same asymptotic efficiency as the MLE.</p>')
-            with ui.element('div').classes('step-card'):
-                with ui.element('div').classes('card-header'):
-                    with ui.element('div').classes('card-icon-container'):
-                        ui.html('<span class="material-symbols-outlined card-icon">analytics</span>')
-                    ui.html('<h3 class="card-title">Ranking Inferences</h3>')
-                ui.html('<p class="card-description">Provides a comprehensive framework for both one-sample and two-sample ranking inferences.</p>')
-            with ui.element('div').classes('step-card'):
-                with ui.element('div').classes('card-header'):
-                    with ui.element('div').classes('card-icon-container'):
-                        ui.html('<span class="material-symbols-outlined card-icon">verified</span>')
-                    ui.html('<h3 class="card-title">Proven Methodology</h3>')
-                ui.html('<p class="card-description">Validated through comprehensive simulations and applied to real-world datasets.</p>')
+    # FAQs section with accordion style
+    with ui.element('section').style('width: 100%; max-width: 1400px; margin: 1rem auto 4rem auto; padding: 0 2rem;').props('id="faqs"'):
+        ui.html('<h2 class="section-title"><span class="material-symbols-outlined" style="font-size: 1.75rem;">quiz</span>Frequently Asked Questions</h2>')
+        
+        # FAQ items data
+        faq_items = [
+            {
+                'question': 'What is SpectralRank?',
+                'answer': 'SpectralRank is a simple online tool that helps you rank items—like products, teams, or options—based on comparison data. It handles real-life messy data (like incomplete lists or mixed matchups) and gives you reliable rankings with built-in checks for how sure the results are. Unlike basic tools, it uses a clever pattern-spotting approach (called spectral ranking) to make sense of varied information without strict rules. It\'s great for anyone needing quick, trustworthy insights without being a stats expert.',
+                'icon': 'info'
+            },
+            {
+                'question': 'How do I get started with SpectralRank?',
+                'answer': 'First, choose a mode: Agent Mode for AI help in setting things up (it chats with you for suggestions), or Manual Mode for full control. Then, upload your data as a CSV file—think of it like a spreadsheet where rows are examples (samples) and columns are the things you\'re ranking (methods). Enter an OpenAI API key if using Agent Mode (you can get one from OpenAI\'s site). Set basic options, like if higher or lower numbers mean better, and click "Generate Report" to see your results.',
+                'icon': 'play_arrow'
+            },
+            {
+                'question': 'What kind of data can I use?',
+                'answer': 'You can upload CSV files in two easy formats. The "dense" one is like a full grid—perfect for complete scores where every item has a value for every test (e.g., benchmark tests). The "sparse" one is for pairwise comparisons, like head-to-head matches in games or arenas, even if some info is missing. Click the example cards on the site to see samples and try them out. No need for perfect data; the tool handles gaps and variety smoothly.',
+                'icon': 'description'
+            },
+            {
+                'question': 'What\'s the difference between Agent Mode and Manual Mode?',
+                'answer': 'Agent Mode is like having a smart assistant: It uses AI to guide you through setup, answer questions, and suggest options via chat—ideal if you\'re new or want quick tips. Manual Mode gives you total control to tweak every setting yourself, great for precise adjustments. Both lead to the same reliable rankings, but Agent needs an OpenAI API key. Pick based on whether you want help or hands-on freedom.',
+                'icon': 'compare_arrows'
+            },
+            {
+                'question': 'Do I need any special keys or software?',
+                'answer': 'For Agent Mode, you\'ll need a free OpenAI API key (sign up at openai.com and paste it in the box—it\'s secure and just for AI features). No other software required; everything runs in your browser. Manual Mode doesn\'t need the key. The tool works on any device with internet, and you don\'t need coding or stats knowledge—just your data in a simple CSV file.',
+                'icon': 'key'
+            },
+            {
+                'question': 'How do I set parameters and generate a report?',
+                'answer': 'After uploading, tell the tool if higher numbers (like scores) or lower ones (like error rates) mean better performance. You can adjust advanced options if you want, but defaults work fine for most. Then hit "Generate Report." You\'ll get a clear analysis: ranked list of your items, plus confidence ranges showing how reliable each ranking is (like "this one\'s definitely top, but these two are close"). It\'s quick and includes visuals for easy understanding.',
+                'icon': 'settings'
+            },
+            {
+                'question': 'What makes SpectralRank better than other ranking tools?',
+                'answer': 'Regular tools need perfect, uniform data and often ignore real-world mess like missing info or mixed comparisons—they can give shaky results without warnings. SpectralRank skips those limits using a flexible structure (like a general graph) that adapts to any data. It matches top stats methods in accuracy (as good as maximum likelihood estimation, but simpler) and adds uncertainty checks to spot sure winners vs. ties. It\'s tested on simulations and real data, making it trustworthy for everyday decisions.',
+                'icon': 'star'
+            },
+            {
+                'question': 'Is SpectralRank based on proven methods and suitable for me?',
+                'answer': 'Yes, it\'s built on solid, tested ideas: A two-step process for one-group or two-group rankings, validated through lots of computer tests and real-world examples. No deep math needed—it\'s designed for non-experts like managers or teachers who just want reliable ranks without hassle. If you\'re dealing with comparisons (e.g., best products or team standings), it\'s perfect. For beginners, start with Agent Mode; pros can dive into Manual.',
+                'icon': 'verified'
+            }
+        ]
+        
+        # Add JavaScript for accordion functionality
+        ui.add_head_html('''
+        <script>
+        function toggleFaq(itemId) {
+            const item = document.getElementById(itemId);
+            if (!item) return;
+            
+            const isActive = item.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+        </script>
+        ''')
+        
+        # Create accordion container
+        with ui.element('div').classes('faq-accordion'):
+            for idx, faq in enumerate(faq_items):
+                faq_id = f'faq-{idx}'
+                # Escape HTML special characters safely
+                question_escaped = html.escape(faq['question'])
+                answer_escaped = html.escape(faq['answer'])
+                icon_escaped = html.escape(faq['icon'])
+                ui.html(f'''
+                    <div class="faq-item" id="{faq_id}">
+                        <div class="faq-header" onclick="toggleFaq('{faq_id}')">
+                            <h3 class="faq-title">
+                                <span class="material-symbols-outlined faq-title-icon">{icon_escaped}</span>
+                                <span>{question_escaped}</span>
+                            </h3>
+                            <span class="material-symbols-outlined faq-toggle">expand_more</span>
+                        </div>
+                        <div class="faq-content">
+                            <p class="faq-answer">{answer_escaped}</p>
+                        </div>
+                    </div>
+                ''')
 
     # Footer
     with ui.element('footer').classes('footer-section').style('margin: 0 -1rem; width: calc(100% + 2rem); background: linear-gradient(135deg, #1e3a8a 0%, #011f5b 40%, #000d26 80%, #00071a 100%); color: white; padding: 3rem 2rem 2rem; position: relative; overflow: hidden;'):

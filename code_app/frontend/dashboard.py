@@ -3796,17 +3796,8 @@ def create_dashboard():
                             <a href="#compare-with-your-model">Rank My LLM</a>
                         </div>
                     ''')
-                with ui.element('li').classes('nav-item dropdown'):
-                    ui.html('''
-                        <a href="javascript:void(0)" class="nav-link" style="gap: 2px;">
-                            Documentation
-                            <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 0;">arrow_drop_down</span>
-                        </a>
-                        <div class="dropdown-content">
-                            <a href="#documentation" onclick="window.location.href='/#documentation'">Help</a>
-                            <a href="#about" onclick="window.location.href='/#about'">About</a>
-                        </div>
-                    ''')
+                with ui.element('li').classes('nav-item'):
+                    ui.html('<a href="#faqs" onclick="window.location.href=\'/#faqs\'" class="nav-link">FAQs</a>')
 
             # Right side actions
             with ui.element('div').classes('navbar-actions'):
@@ -3829,9 +3820,7 @@ def create_dashboard():
                     with ui.element('li').classes('nav-item'):
                         ui.html('<a href="#compare-with-your-model" class="nav-link">Rank My LLM</a>')
                     with ui.element('li').classes('nav-item'):
-                        ui.html('<a href="#documentation" onclick="window.location.href=\'/#documentation\'" class="nav-link">Help</a>')
-                    with ui.element('li').classes('nav-item'):
-                        ui.html('<a href="#about" onclick="window.location.href=\'/#about\'" class="nav-link">About</a>')
+                        ui.html('<a href="#faqs" onclick="window.location.href=\'/#faqs\'" class="nav-link">FAQs</a>')
 
                 with ui.element('div').classes('navbar-actions'):
                     ui.html('<a href="https://github.com/MaxineYu/Spectral_Ranking" class="nav-button primary" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" style="height: 1rem; width: auto; display: inline-block; margin-right: 0.5rem; vertical-align: middle; filter: brightness(0) invert(1);"/>GitHub</a>')
