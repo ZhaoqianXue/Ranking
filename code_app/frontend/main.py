@@ -3361,7 +3361,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="font-size: 0.8rem; margin-bottom: 1.5rem;">Click above to upload CSV file</div>
 
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
-                        <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">Or try with example data:</div>
+                        <div style="font-size: 0.8rem; color: var(--gray-600); margin-bottom: 1rem;">
+                            Spectral Ranking supports <strong>2 data formats</strong>. Click the cards below to see data details and run an example.
+                        </div>
                         <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 800px; margin: 0 auto;">
                             <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
                                 <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,197,253,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
@@ -3556,7 +3558,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div style="font-size: 0.8rem; margin-bottom: 1.5rem;">Click above to upload CSV file</div>
 
                     <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
-                        <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">Or try with example data:</div>
+                        <div style="font-size: 0.8rem; color: var(--gray-600); margin-bottom: 1rem;">
+                            Spectral Ranking supports <strong>2 data formats</strong>. Click the cards below to see data details and run an example.
+                        </div>
                         <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 800px; margin: 0 auto;">
                             <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
                                 <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,197,253,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
@@ -8233,11 +8237,11 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
 
                                 with ui.row().props('no-wrap').style('width: 100%; display: flex; justify-content: center; flex-direction: column; gap: 0.5rem; align-items: center;'):
                                     # "Higher is Better" button (now on top)
-                                    with ui.button('Higher Values are Better').style('width: 100%; max-width: 280px;') as btn_higher:
+                                    with ui.button('Higher Values are Better').style('width: 100%; max-width: 280px; font-size: 0.9rem; text-transform: none;') as btn_higher:
                                         ui.tooltip('Use for metrics like Accuracy, where a higher number is better.')
 
                                     # "Lower is Better" button (now on bottom)
-                                    with ui.button('Lower Values are Better').style('width: 100%; max-width: 280px;') as btn_lower:
+                                    with ui.button('Lower Values are Better').style('width: 100%; max-width: 280px; font-size: 0.9rem; text-transform: none;') as btn_lower:
                                         ui.tooltip('Use for metrics like Error Rate, where a lower number is better.')
 
                                 # Apply styles to look like a toggle (vertical layout)
@@ -8251,15 +8255,15 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                                     if value == 'True':
                                         # Higher is better selected
                                         btn_higher.props('color=primary')
-                                        btn_higher.style('border: 2px solid #011f5b; background: #011f5b !important; color: white !important; opacity: 1.0 !important;')
+                                        btn_higher.style('border: 2px solid #011f5b; background: #011f5b !important; color: white !important; opacity: 1.0 !important; font-size: 0.9rem; text-transform: none;')
                                         btn_lower.props('color=grey-4')
-                                        btn_lower.style('border: 2px solid #d1d5db; background: #f9fafb !important; color: #9ca3af !important; opacity: 0.6;')
+                                        btn_lower.style('border: 2px solid #d1d5db; background: #f9fafb !important; color: #9ca3af !important; opacity: 0.6; font-size: 0.9rem; text-transform: none;')
                                     else:
                                         # Lower is better selected
                                         btn_lower.props('color=primary')
-                                        btn_lower.style('border: 2px solid #011f5b; background: #011f5b !important; color: white !important; opacity: 1.0 !important;')
+                                        btn_lower.style('border: 2px solid #011f5b; background: #011f5b !important; color: white !important; opacity: 1.0 !important; font-size: 0.9rem; text-transform: none;')
                                         btn_higher.props('color=grey-4')
-                                        btn_higher.style('border: 2px solid #d1d5db; background: #f9fafb !important; color: #9ca3af !important; opacity: 0.6;')
+                                        btn_higher.style('border: 2px solid #d1d5db; background: #f9fafb !important; color: #9ca3af !important; opacity: 0.6; font-size: 0.9rem; text-transform: none;')
 
                                 btn_higher.on('click', lambda: update_styles('True'))
                                 btn_lower.on('click', lambda: update_styles('False'))
@@ -8583,7 +8587,9 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                                         <div style="font-size: 0.8rem; margin-bottom: 1.5rem;">Click above to upload CSV file</div>
 
                                         <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200);">
-                                            <div style="font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">Or try with example data:</div>
+                                            <div style="font-size: 0.8rem; color: var(--gray-600); margin-bottom: 1rem;">
+                                                Spectral Ranking supports <strong>2 data formats</strong>. Click the cards below to see data details and run an example.
+                                            </div>
                                             <div class="example-data-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 800px; margin: 0 auto;">
                                                 <div class="example-data-card example-data-card-example" onclick="loadExampleData('aou')" style="background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.8) 100%); border: 2px solid rgba(148,163,184,0.3); border-radius: 12px; padding: 1rem; text-align: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
                                                     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, rgba(147,197,253,0.02) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
