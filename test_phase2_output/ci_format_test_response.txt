@@ -1,0 +1,14 @@
+Based on your ranking analysis results:
+
+**Top Ranked Methods:**
+1. model_4 ranks #1 with θ=1.5739 (95% CI: [1, 2])
+2. model_3 ranks #2 with θ=1.3358 (95% CI: [1, 2])
+3. model_1 ranks #3 with θ=0.6969 (95% CI: [3, 3])
+4. model_6 ranks #4 with θ=-0.2113 (95% CI: [4, 4])
+5. model_2 ranks #5 with θ=-0.7705 (95% CI: [5, 5])
+
+The ranking direction being "higher-is-better" means that methods with higher θ (ranking score) are considered to perform better according to this evaluation. In this dataset, model_4 has the highest score, indicating it is the best performing method among all six. Model_3 closely follows, with a slightly lower score, but still within the top performance range. The confidence intervals for the top three methods are narrow, indicating a high certainty around their rankings, with the top two methods confidently in positions 1 and 2. 
+
+The performance gap between #1 (model_4) and #2 (model_3) is 0.2381, which is a 15.1% relative difference, signifying a significant performance difference between the leading method and the second best. Lower-ranked models, such as model_6 and model_2, have negative scores and are considered to have poorer performance, with their confidence intervals showing they are firmly in those lower positions, specifically rank 4 and rank 5 respectively. 
+
+Overall, this ranking emphasizes that model_4 outperforms all others, especially when considering the statistical confidence and the relative performance gap.

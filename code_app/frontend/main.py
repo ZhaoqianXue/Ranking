@@ -4478,7 +4478,23 @@ def update_data_preview(content, filename):
             for row in data_rows:
                 table_html += '<tr style="background: white;">'
                 for cell in row:  # Show all columns with horizontal scrolling
-                    table_html += f'<td style="padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px; text-align: left;">{cell}</td>'
+                    # Format float numbers to 4 decimal places, but keep integers as is
+                    display_cell = cell
+                    try:
+                        val = float(cell)
+                        # If it's effectively an integer (e.g. 2023.0 or 2023), keep original cell string
+                        # This preserves "2023" as "2023" (avoiding 2023.0000)
+                        # And preserves "001" as "001" (avoiding 1)
+                        if val.is_integer():
+                             display_cell = cell
+                        else:
+                             # It's a float with non-zero decimal part, format to 4 places
+                             display_cell = f'{val:.4f}'
+                    except ValueError:
+                        # Not a number, keep original text
+                        pass
+                        
+                    table_html += f'<td style="padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px; text-align: left;">{display_cell}</td>'
                 table_html += '</tr>'
             table_html += '</tbody></table></div>'
 

@@ -2304,10 +2304,10 @@ def create_average_ranking_table(data):
             'model': model,
             'rank': i + 1,
             'avg_rank': i + 1,  # Same as rank since we're already sorted by average
-            'avg_score': f'{avg_score:.2f}'
+            'avg_score': f'{avg_score:.4f}'
         }
         for j, benchmark in enumerate(data['benchmarks']):
-            row[benchmark] = f'{scores[j]:.2f}'
+            row[benchmark] = f'{scores[j]:.4f}'
         table_data.append(row)
 
     ui.table(columns=columns, rows=table_data).classes('modern-table').style('width: 100%')
