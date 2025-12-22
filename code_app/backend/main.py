@@ -145,6 +145,8 @@ async def create_ranking_job(
     bigbetter: bool = Form(...),
     B: int = Form(...),
     seed: int = Form(...),
+    indicator_column: str = Form(None),
+    selected_indicators: str = Form(None),  # JSON string of list
 ):
     job_id = str(uuid.uuid4())
     job_dir = os.path.join(JOBS_DIR, job_id)
@@ -160,12 +162,57 @@ async def create_ranking_job(
     with open(input_csv_path, 'wb') as f:
         content = await file.read()
         f.write(content)
+    
+    # NEW: Filter data based on selected indicators
+    if indicator_column and selected_indicators:
+        try:
+            selected_indicators_list = json.loads(selected_indicators)
+            if selected_indicators_list:
+                # Read the CSV
+                import csv
+                filtered_rows = []
+                with open(input_csv_path, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    header = reader.fieldnames
+                    
+                    # Filter rows based on indicator values
+                    for row in reader:
+                        if indicator_column in row and row[indicator_column] in selected_indicators_list:
+                            filtered_rows.append(row)
+                
+                # Write filtered data back to the file
+                if filtered_rows:
+                    with open(input_csv_path, 'w', encoding='utf-8', newline='') as f:
+                        writer = csv.DictWriter(f, fieldnames=header)
+                        writer.writeheader()
+                        writer.writerows(filtered_rows)
+                    logger.info(f"Filtered data: {len(filtered_rows)} rows remain after filtering by {indicator_column}={selected_indicators_list}")
+                else:
+                    logger.warning(f"No rows matched the selected indicators: {selected_indicators_list}")
+        except Exception as e:
+            logger.error(f"Failed to filter data by indicators: {str(e)}")
+            # Continue with unfiltered data
         
     # Save parameters
     params = {'bigbetter': bigbetter, 'B': B, 'seed': seed}
     params_path = os.path.join(job_dir, 'params.json')
     with open(params_path, 'w') as f:
         json.dump(params, f)
+    
+    # Save metadata (including indicator information)
+    metadata = {}
+    if indicator_column:
+        metadata['indicator_column'] = indicator_column
+    if selected_indicators:
+        try:
+            metadata['selected_indicators'] = json.loads(selected_indicators)
+        except:
+            metadata['selected_indicators'] = []
+    
+    if metadata:
+        metadata_path = os.path.join(job_dir, 'metadata.json')
+        with open(metadata_path, 'w') as f:
+            json.dump(metadata, f)
         
     # Set initial status
     status_path = os.path.join(job_dir, 'status.json')
@@ -197,6 +244,7 @@ async def get_job_results(job_id: str):
     job_dir = os.path.join(JOBS_DIR, job_id)
     status_path = os.path.join(job_dir, 'status.json')
     results_path = os.path.join(job_dir, 'output', 'ranking_results.json')
+    metadata_path = os.path.join(job_dir, 'metadata.json')
     
     if not os.path.exists(status_path):
         raise HTTPException(status_code=404, detail="Job not found")
@@ -216,6 +264,16 @@ async def get_job_results(job_id: str):
         
         with open(results_path, 'r') as f:
             results = json.load(f)
+        
+        # Add indicator metadata if available
+        if os.path.exists(metadata_path):
+            with open(metadata_path, 'r') as f:
+                metadata_info = json.load(f)
+            # Merge metadata into results.metadata
+            if 'metadata' not in results:
+                results['metadata'] = {}
+            results['metadata'].update(metadata_info)
+        
         return results
     
     raise HTTPException(status_code=500, detail=f"Unknown job status: {status.get('status')}")
@@ -482,6 +540,12 @@ async def tool_inspect_dataset(file_id: str, max_rows: int = 10, api_key: str = 
         ranking_columns = analysis_result.get('ranking_columns', [])
         excluded_columns = analysis_result.get('excluded_columns', [])
 
+        # NEW: Analyze indicators using LLM
+        indicator_result = await _analyze_indicators_with_llm(header, sample_data[:10], api_key)  # Use first 10 rows for indicator analysis
+        indicator_column = indicator_result.get('indicator_column')
+        indicator_values = indicator_result.get('indicator_values', [])
+        logger.info(f"DEBUG BACKEND: Indicator analysis result - column: {indicator_column}, values: {indicator_values}, full result: {indicator_result}")
+
         # Calculate missing ratios for analysis
         missing_per_col = [0] * len(header)
         numeric_counts = [0] * len(header)
@@ -534,6 +598,8 @@ async def tool_inspect_dataset(file_id: str, max_rows: int = 10, api_key: str = 
             "columns": header,
             "ranking_columns": ranking_columns,
             "excluded_columns": excluded_columns,
+            "indicator_column": indicator_column,
+            "indicator_values": indicator_values,
             "missing_ratio_sample": missing_ratio,
             "analysis_summary": analysis_summary,
             "inspection_status": "success"
@@ -647,6 +713,160 @@ Return your analysis in this exact JSON format:
             "ranking_columns": ranking_cols,
             "excluded_columns": excluded_cols,
             "reasoning": f"OpenAI API failed ({str(e)}), used fallback logic"
+        }
+
+
+async def _analyze_indicators_with_llm(header: List[str], sample_data: List[List[str]], api_key: str = None) -> Dict[str, Any]:
+    """Use OpenAI API to identify indicator columns that can be used for filtering/grouping"""
+    
+    # Build the data sample for LLM
+    data_sample = []
+    for i, row in enumerate(sample_data):
+        if i >= 10:  # Limit to 10 rows for better analysis
+            break
+        row_data = {}
+        for j, val in enumerate(row):
+            if j < len(header):
+                row_data[header[j]] = val
+        data_sample.append(row_data)
+    
+    prompt = f"""You are analyzing a CSV file to identify indicator columns that represent categorical groupings or filters.
+
+COLUMNS: {', '.join(header)}
+
+SAMPLE DATA (first {len(data_sample)} rows):
+{json.dumps(data_sample, indent=2)}
+
+TASK: Identify which column (if any) represents a categorical indicator that groups or categorizes the data. An indicator column typically:
+- Contains categorical text values (like 'code', 'math', 'easy', 'hard', 'type_a', 'type_b')
+- Represents different task types, categories, difficulty levels, or data groupings
+- Has a small number of unique values that repeat across rows
+- Is NOT a model/method name column (those change per comparison)
+- Is NOT a purely numeric ranking column
+
+Examples of indicator columns:
+- "Task" column with values like "code", "math", "reasoning"
+- "Category" column with values like "easy", "medium", "hard"
+- "Type" column with values like "classification", "regression"
+- "Domain" column with values like "medical", "financial", "general"
+
+Common column names to look for: Task, Category, Type, Group, Domain, Difficulty, Level, Class
+
+IMPORTANT:
+- Only identify ONE primary indicator column (the most important grouping)
+- Extract ALL unique values from that column in the sample data
+- If no clear indicator column exists, return null for indicator_column
+- Do NOT confuse model/method name columns with indicator columns
+
+Return your analysis in this exact JSON format:
+{{
+    "indicator_column": "column_name_or_null",
+    "indicator_values": ["list", "of", "unique", "values"],
+    "reasoning": "brief explanation of your decision"
+}}"""
+
+    try:
+        import aiohttp
+        
+        async with aiohttp.ClientSession() as session:
+            async with session.post(
+                "https://api.openai.com/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {api_key or OPENAI_API_KEY}",
+                    "Content-Type": "application/json"
+                },
+                json={
+                    "model": OPENAI_MODEL,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "temperature": 0.1,
+                    "max_tokens": 800
+                }
+            ) as response:
+                if response.status == 200:
+                    result = await response.json()
+                    content = result['choices'][0]['message']['content']
+                    logger.info(f"DEBUG BACKEND: Indicator LLM raw response: {content[:500]}")
+                    
+                    # Try to parse JSON response with multiple strategies
+                    parsed = None
+                    
+                    # Strategy 1: Try direct JSON parse
+                    try:
+                        parsed = json.loads(content)
+                        logger.info(f"DEBUG BACKEND: Successfully parsed JSON directly")
+                    except json.JSONDecodeError:
+                        logger.warning(f"DEBUG BACKEND: Direct JSON parse failed")
+                    
+                    # Strategy 2: Extract JSON from markdown code blocks
+                    if not parsed:
+                        import re
+                        json_match = re.search(r'```(?:json)?\s*(\{.*?\})\s*```', content, re.DOTALL)
+                        if json_match:
+                            try:
+                                parsed = json.loads(json_match.group(1))
+                                logger.info(f"DEBUG BACKEND: Successfully parsed JSON from code block")
+                            except json.JSONDecodeError:
+                                logger.warning(f"DEBUG BACKEND: Code block JSON parse failed")
+                    
+                    # Strategy 3: Find JSON object in text
+                    if not parsed:
+                        json_match = re.search(r'\{[^{}]*"indicator_column"[^{}]*\}', content, re.DOTALL)
+                        if json_match:
+                            try:
+                                parsed = json.loads(json_match.group(0))
+                                logger.info(f"DEBUG BACKEND: Successfully parsed JSON from regex match")
+                            except json.JSONDecodeError:
+                                logger.warning(f"DEBUG BACKEND: Regex JSON parse failed")
+                    
+                    if parsed:
+                        logger.info(f"DEBUG BACKEND: Parsed indicator result: {parsed}")
+                        return parsed
+                    else:
+                        # Fallback: look for common indicator column names
+                        logger.warning(f"DEBUG BACKEND: All JSON parsing failed, using keyword fallback")
+                        indicator_keywords = ['task', 'category', 'type', 'group', 'domain', 'difficulty', 'level', 'class']
+                        for col in header:
+                            if col.lower() in indicator_keywords:
+                                # Extract unique values from sample data
+                                col_idx = header.index(col)
+                                unique_vals = list(set([row[col_idx] for row in sample_data if col_idx < len(row) and row[col_idx]]))
+                                logger.info(f"DEBUG BACKEND: Found indicator column by keyword: {col}, values: {unique_vals}")
+                                return {
+                                    "indicator_column": col,
+                                    "indicator_values": unique_vals,
+                                    "reasoning": f"LLM parsing failed, used keyword matching. Found '{col}' column."
+                                }
+                        logger.warning(f"DEBUG BACKEND: No indicator column found by keywords")
+                        return {
+                            "indicator_column": None,
+                            "indicator_values": [],
+                            "reasoning": "No clear indicator column found"
+                        }
+                else:
+                    error_text = await response.text()
+                    raise Exception(f"OpenAI API error: {response.status} - {error_text}")
+    
+    except Exception as e:
+        # Fallback to keyword-based detection
+        logger.warning(f"DEBUG BACKEND: Exception in indicator analysis: {str(e)}, using fallback")
+        indicator_keywords = ['task', 'category', 'type', 'group', 'domain', 'difficulty', 'level', 'class']
+        for col in header:
+            if col.lower() in indicator_keywords:
+                # Extract unique values from sample data
+                col_idx = header.index(col)
+                unique_vals = list(set([row[col_idx] for row in sample_data if col_idx < len(row) and row[col_idx]]))
+                logger.info(f"DEBUG BACKEND: Exception fallback found indicator: {col}, values: {unique_vals}")
+                return {
+                    "indicator_column": col,
+                    "indicator_values": unique_vals,
+                    "reasoning": f"OpenAI API failed ({str(e)}), used keyword matching"
+                }
+        
+        logger.warning(f"DEBUG BACKEND: Exception fallback found no indicators")
+        return {
+            "indicator_column": None,
+            "indicator_values": [],
+            "reasoning": f"OpenAI API failed ({str(e)}), no indicator column found"
         }
 
 
@@ -774,31 +994,43 @@ SAMPLE DATA ROWS (first 15 rows, showing all ranking columns together):
 
 TASK: Analyze the ENTIRE dataset to determine the optimization direction:
 
-1. HIGHER values are better (e.g., accuracy, F1, AUC, R², precision, recall, success rate, score)
+1. HIGHER values are better (e.g., accuracy, F1, AUC, R², precision, recall, success rate, score, win rate)
 2. LOWER values are better (e.g., loss, error, RMSE, MAE, cost, distance, perplexity)
 
-IMPORTANT: Look at the dataset as a WHOLE, not individual columns in isolation. Consider:
-- What type of metrics these appear to be (are they all losses, all scores, or mixed?)
-- The range and scale of values across all ranking columns
-- Whether this looks like a typical machine learning evaluation dataset
-- Common patterns: datasets usually have consistent direction (all higher-better OR all lower-better)
+IMPORTANT PATTERNS TO RECOGNIZE:
 
-For example:
-- If all values are small positive numbers (typically 0-1 or 0-10), this suggests loss/error metrics where lower is better
-- If all values are percentages or scores, this suggests higher is better
-- Mixed directions within a single dataset are very rare and usually indicate data quality issues
+**BINARY COMPARISON DATA (Arena-style):**
+- If values are ONLY 0 and 1 (or mostly 0/1 with some empty values), this is binary comparison data
+- In binary comparisons: 1 = win/success, 0 = loss/failure
+- Direction: HIGHER is better (you want more 1s, not more 0s)
+- Example: Pairwise model comparisons where 1 indicates the model won
+
+**SCORE/PERFORMANCE METRICS:**
+- Values in range 0-1 or 0-100 that represent percentages, probabilities, or normalized scores
+- Typically have variety of decimal values (not just 0 and 1)
+- Direction: HIGHER is better
+
+**LOSS/ERROR METRICS:**
+- Small positive numbers representing errors, losses, or costs
+- Keywords: loss, error, RMSE, MAE, cost, distance
+- Direction: LOWER is better
+
+CRITICAL CHECK:
+1. First check if values are ONLY 0 and 1 → This is binary comparison data → HIGHER is better
+2. If not binary, then check for score vs loss patterns
 
 Return your analysis in this exact JSON format:
 ```json
 {
     "direction": "higher",
-    "confidence": 0.8,
-    "reason": "explanation of your decision based on overall dataset analysis",
-    "recommendation": "overall recommendation based on dataset characteristics"
+    "confidence": 0.9,
+    "reason": "explanation of your decision based on dataset analysis",
+    "recommendation": "overall recommendation based on dataset characteristics",
+    "method": "llm_analysis"
 }
 ```
 
-Only set direction to "mixed" if you're absolutely certain the dataset contains fundamentally different types of metrics that should be optimized in opposite directions."""
+Only set direction to "mixed" if you're absolutely certain the dataset contains fundamentally different types of metrics."""
 
         import aiohttp
 
@@ -1158,7 +1390,7 @@ async def tool_estimate_runtime(n_samples: int, k_methods: int, B: int) -> Dict[
         }
 
 
-async def tool_create_job(file_id: str, bigbetter: bool, B: int, seed: int) -> Dict[str, Any]:
+async def tool_create_job(file_id: str, bigbetter: bool, B: int, seed: int, indicator_column: str = None, selected_indicators: list = None) -> Dict[str, Any]:
     """Enhanced job creation with better validation and error handling"""
     path = _get_agent_file_path(file_id)
     if not os.path.exists(path):
@@ -1184,6 +1416,12 @@ async def tool_create_job(file_id: str, bigbetter: bool, B: int, seed: int) -> D
             form.add_field('bigbetter', 'true' if bigbetter else 'false')
             form.add_field('B', str(B))
             form.add_field('seed', str(seed))
+            
+            # Add indicator parameters if provided
+            if indicator_column:
+                form.add_field('indicator_column', indicator_column)
+            if selected_indicators:
+                form.add_field('selected_indicators', json.dumps(selected_indicators))
 
             async with aiohttp.ClientSession() as session:
                 async with session.post(url, data=form, timeout=60) as resp:

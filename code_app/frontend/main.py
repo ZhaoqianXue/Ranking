@@ -56,7 +56,10 @@ def get_client_state():
                 'messages': [{'role': 'assistant', 'content': 'Welcome to SpectralRank! I\'m SpectralRank Agent — here to help you navigate and use this platform. I can answer questions, perform ranking analysis, and analyze results. Let me know what you need help with!'}],
                 'uploaded_file_id': None,
                 'current_job_id': None
-            }
+            },
+            # Report display state - moved from globals to fix refresh issue
+            'report_displayed': False,
+            'current_report_result': None
         }
     return _client_states[client_id]
 
@@ -79,15 +82,15 @@ _status_panel_css_added = False
 @ui.page('/dashboard')
 def dashboard_page():
     """Dashboard page for LLM performance visualization"""
-    # Reset global report state on page load/refresh to prevent stale state issues
-    global current_report_result, report_displayed, floating_report_modal_ref, ranking_preview_panel
-    current_report_result = None
-    report_displayed = False
+    # Reset client-specific state on page load/refresh to prevent stale state issues
+    global floating_report_modal_ref, ranking_preview_panel
     floating_report_modal_ref = None
     ranking_preview_panel = None
     
-    # Reset client-specific UI references to ensure clean state on refresh
+    # Reset client-specific UI references and report state to ensure clean state on refresh
     state = get_client_state()
+    state['report_displayed'] = False
+    state['current_report_result'] = None
     if 'dialog_refs' in state:
         state['dialog_refs'] = {}
     
@@ -997,10 +1000,9 @@ agent_data_preview_ref = None
 # Floating report modal related globals
 floating_report_modal_ref = None
 floating_loading_modal_ref = None
-report_displayed = False
 loading_displayed = False
 start_ranking_button_ref = None
-current_report_result = None
+# Note: report_displayed and current_report_result moved to client state
 
 # Enhanced CSS styling with #011f5b theme
 ui.add_head_html('''
@@ -5035,14 +5037,23 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
 
             with ui.row().style('width: 100%; gap: 2rem; align-items: flex-start;'):
                 
-                # Left Column: Ranking Items (Checkboxes)
+                # Left Column: Ranking Items + Indicators (Checkboxes)
                 with ui.column().style('flex: 1; gap: 1rem;'):
+                    # Section 1: Ranking Items
                     ui.label('Ranking Items').style('color: #011f5b; font-weight: 600; font-size: 0.95rem;')
                     
-                    # Scrollable container for checkboxes
-                    with ui.scroll_area().style('height: 300px; width: 100%; border: 1px solid rgba(1,31,91,0.15); border-radius: 0.5rem; padding: 0.5rem; background: #f8fafc;'):
+                    # Scrollable container for ranking items checkboxes
+                    with ui.scroll_area().style('height: 200px; width: 100%; border: 1px solid rgba(1,31,91,0.15); border-radius: 0.5rem; padding: 0.5rem; background: #f8fafc;'):
                         # Container for dynamic checkboxes
                         items_container = ui.column().style('gap: 0.25rem; width: 100%;')
+                    
+                    # Section 2: Ranking Indicators (NEW)
+                    ui.label('Ranking Indicators').style('color: #011f5b; font-weight: 600; font-size: 0.95rem; margin-top: 0.5rem;')
+                    
+                    # Scrollable container for indicator checkboxes
+                    with ui.scroll_area().style('height: 120px; width: 100%; border: 1px solid rgba(1,31,91,0.15); border-radius: 0.5rem; padding: 0.5rem; background: #f8fafc;'):
+                        # Container for dynamic indicator checkboxes
+                        indicators_container = ui.column().style('gap: 0.25rem; width: 100%;')
 
                 # Right Column: Parameters (Manual Mode Style)
                 with ui.column().style('flex: 1; gap: 1.5rem;'):
@@ -5163,7 +5174,7 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                 insights = context.get('data_insights', {})
                 
                 if insights and 'items_container' in local_refs:
-                    # Retrieve inputs
+                    # Retrieve ranking items inputs
                     checkboxes = local_refs.get('checkboxes', [])
                     selected_items = [cb.text for cb in checkboxes if cb.value]
                     
@@ -5172,6 +5183,11 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                          pass
 
                     insights['columns'] = selected_items
+                    
+                    # NEW: Retrieve selected indicators
+                    indicators_checkboxes = local_refs.get('indicators_checkboxes', [])
+                    selected_indicators = [cb.text for cb in indicators_checkboxes if cb.value]
+                    insights['selected_indicators'] = selected_indicators
                     
                     if 'infer_direction' not in insights:
                         insights['infer_direction'] = {}
@@ -5245,11 +5261,13 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
             # Store references
             dialog_refs['ranking_config_dialog'] = ranking_config_dialog
             dialog_refs['items_container'] = items_container
+            dialog_refs['indicators_container'] = indicators_container
             dialog_refs['direction_store'] = direction_store
             dialog_refs['set_direction_ui'] = set_direction_ui 
             dialog_refs['bootstrap_input'] = bootstrap_input
             dialog_refs['seed_input'] = seed_input
             dialog_refs['checkboxes'] = []
+            dialog_refs['indicators_checkboxes'] = []
 
     def open_edit_dialog():
         state = get_client_state()
@@ -5259,6 +5277,7 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
             
         # Get components
         items_container = local_refs['items_container']
+        indicators_container = local_refs['indicators_container']
         set_direction_ui = local_refs['set_direction_ui']
         b_input = local_refs['bootstrap_input']
         s_input = local_refs['seed_input']
@@ -5266,7 +5285,7 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
         
         data_insights = state['agent_context'].get('data_insights', {})
         
-        # 1. Populate Checkboxes
+        # 1. Populate Ranking Items Checkboxes
         all_available_cols = data_insights.get('all_columns_list', [])
         current_cols = data_insights.get('columns', [])
         if not all_available_cols:
@@ -5280,13 +5299,6 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
             for col in all_available_cols:
                 # Create styled checkbox
                 is_checked = col in current_cols
-                # Checkbox style: Custom SVG color mapping is hard in NiceGUI, 
-                # but we can force the Quasar color to be close to our theme.
-                # deep-purple-10 or visually similar.
-                # User wants "Save Changes" style: #011f5b. 
-                # We'll use a custom style injection or just valid Quasar usage.
-                # 'color' prop in Quasar takes a color name or hex (sometimes). 
-                # Let's try matching the text color and using a dark toggle color.
                 cb = ui.checkbox(col, value=is_checked).props('dense size="xs" color="blue-10" keep-color').style('''
                     font-size: 0.85rem;
                     color: #011f5b;
@@ -5294,6 +5306,37 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                     margin-bottom: 2px;
                 ''')
                 local_refs['checkboxes'].append(cb)
+        
+        # 1b. Populate Ranking Indicators Checkboxes (NEW)
+        indicator_column = data_insights.get('indicator_column')
+        indicator_values = data_insights.get('indicator_values', [])
+        selected_indicators = data_insights.get('selected_indicators', [])
+        
+        # Clear previous indicator checkboxes
+        indicators_container.clear()
+        local_refs['indicators_checkboxes'] = []
+        
+        with indicators_container:
+            if indicator_column and indicator_values:
+                # Show indicator checkboxes
+                for indicator_val in indicator_values:
+                    # Default: all indicators selected if none specified
+                    is_checked = indicator_val in selected_indicators if selected_indicators else True
+                    cb = ui.checkbox(indicator_val, value=is_checked).props('dense size="xs" color="blue-10" keep-color').style('''
+                        font-size: 0.85rem;
+                        color: #011f5b;
+                        padding: 0;
+                        margin-bottom: 2px;
+                    ''')
+                    local_refs['indicators_checkboxes'].append(cb)
+            else:
+                # No indicators found - show message
+                ui.label('No categorical indicators detected in this dataset.').style('''
+                    font-size: 0.8rem;
+                    color: #6b7280;
+                    font-style: italic;
+                    padding: 0.5rem;
+                ''')
         
         # 2. Set Direction
         direction = data_insights.get('infer_direction', {}).get('direction', 'higher')
@@ -5350,6 +5393,12 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                         items_num = str(len(all_columns)) if all_columns else '<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>'
                         items_names = ', '.join(all_columns) if all_columns else '<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>'
 
+                        # NEW: Get indicator information
+                        indicator_column = data_insights.get('indicator_column')
+                        indicator_values = data_insights.get('indicator_values', [])
+                        selected_indicators = data_insights.get('selected_indicators', [])
+                        print(f"DEBUG FRONTEND: indicator_column={indicator_column}, indicator_values={indicator_values}, selected_indicators={selected_indicators}")
+
                         # Step 3: ParameterSetup - get direction from infer_direction result
                         infer_direction_result = data_insights.get('infer_direction', {}) or {}
                         direction = infer_direction_result.get('direction', 'unsure')
@@ -5386,10 +5435,17 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                             {
                                 'number': 2,
                                 'name': 'RankingConfig',
-                                'items': [
-                                    {'label': 'Ranking items number', 'value': items_num},
-                                    {'label': 'Ranking items name', 'value': items_names}
-                                ]
+                                'items': (
+                                    [
+                                        {'label': 'Ranking items number', 'value': items_num},
+                                        {'label': 'Ranking items name', 'value': items_names}
+                                    ] + (
+                                        [
+                                            {'label': 'Indicator column', 'value': indicator_column},
+                                            {'label': 'Selected indicators', 'value': ', '.join(selected_indicators) if selected_indicators else ', '.join(indicator_values)}
+                                        ] if indicator_column and indicator_values else []
+                                    )
+                                )
                             },
                             {
                                 'number': 3,
@@ -5450,16 +5506,16 @@ def show_workflow_modal(messages_container, on_complete=None, api_key_input=None
                     with ui.element('div').style('margin-top: 1rem; width: 100%;'):
                         async def start_ranking():
                             """Start ranking analysis by calling direct_agent_analysis"""
-                            global current_report_result, report_displayed
+                            state = get_client_state()
                             
                             # Check if button has been converted to "Show Report" button
                             # If current_report_result exists, this button should only toggle report visibility
-                            if current_report_result is not None:
+                            if state.get('current_report_result') is not None:
                                 # Button should be "Show Report" - toggle report visibility instead
-                                if report_displayed:
+                                if state.get('report_displayed', False):
                                     hide_floating_report()
                                 else:
-                                    show_floating_report(current_report_result)
+                                    show_floating_report(state['current_report_result'])
                                 return
                             
                             if not current_agent_file_id:
@@ -6075,6 +6131,11 @@ async def send_agent_message(hidden_input, messages_container, status_area, api_
                                             insights_update['missing_ratio_sample'] = parsed.get('missing_ratio_sample') or {}
                                         if 'analysis_summary' in parsed:
                                             insights_update['analysis_summary'] = parsed.get('analysis_summary') or {}
+                                        # NEW: Extract indicator information
+                                        if 'indicator_column' in parsed:
+                                            insights_update['indicator_column'] = parsed.get('indicator_column')
+                                        if 'indicator_values' in parsed:
+                                            insights_update['indicator_values'] = parsed.get('indicator_values', [])
                                         # Extract ranking columns from LLM analysis
                                         if 'ranking_columns' in parsed:
                                             ranking_cols = parsed.get('ranking_columns', [])
@@ -6404,6 +6465,11 @@ async def send_initial_analysis_request(messages_container, file_id, api_key_inp
                                                 insights_update['missing_ratio_sample'] = parsed.get('missing_ratio_sample') or {}
                                             if 'analysis_summary' in parsed:
                                                 insights_update['analysis_summary'] = parsed.get('analysis_summary') or {}
+                                            # NEW: Extract indicator information
+                                            if 'indicator_column' in parsed:
+                                                insights_update['indicator_column'] = parsed.get('indicator_column')
+                                            if 'indicator_values' in parsed:
+                                                insights_update['indicator_values'] = parsed.get('indicator_values', [])
                                             # Extract ranking columns from LLM analysis
                                             if 'ranking_columns' in parsed:
                                                 ranking_cols = parsed.get('ranking_columns', [])
@@ -6895,27 +6961,48 @@ async def process_agent_analysis_async(message, messages_container, typing_indic
     state['_analysis_completed'] = True
     return True
 
-def reset_report_state():
-    """Reset all report-related state variables"""
-    global report_displayed, current_report_result, start_ranking_button_ref, floating_report_modal_ref
-    global ranking_preview_panel, start_ranking_button
+def hide_all_modals():
+    """Hide all modals and overlays."""
+    global start_ranking_button_ref, floating_report_modal_ref
+    
+    # Reset report display state in client state
+    state = get_client_state()
+    state['report_displayed'] = False
     
     # Reset report state variables
     report_displayed = False
     current_report_result = None
     
+def reset_report_state():
+    """Reset all report-related state variables"""
+    global start_ranking_button_ref, floating_report_modal_ref
+    global ranking_preview_panel, start_ranking_button
+    
+    # Reset report state in client state
+    state = get_client_state()
+    state['report_displayed'] = False
+    state['current_report_result'] = None
+    
     # Hide floating report modal if visible
-    if floating_report_modal_ref is not None:
-        modal_container = floating_report_modal_ref['container']
-        ui.run_javascript('''
-            (function() {
-                const modalContainer = document.getElementById('floating-report-modal');
-                if (modalContainer) {
-                    modalContainer.style.display = 'none';
-                }
-            })();
-        ''')
-        modal_container.style('display: none;')
+    state_refs = state.get('dialog_refs', {})
+    floating_report_modal_ref_state = state_refs.get('floating_report_modal')
+    if floating_report_modal_ref_state is not None:
+        try:
+            modal_container = floating_report_modal_ref_state['container']
+            modal_container.style('display: none;')
+        except:
+            pass
+    
+    # Clear global UI references
+    floating_report_modal_ref = None
+    
+    # Reset Start Ranking button if it exists
+    if start_ranking_button_ref is not None:
+        try:
+            # Reset button to initial state
+            start_ranking_button_ref.style('cursor: pointer; opacity: 1; pointer-events: auto;')
+        except:
+            pass
     
     # Reset button text to "Start Ranking" if button exists
     # Use JavaScript first for immediate update, then Python as backup
@@ -6985,7 +7072,7 @@ def reset_manual_upload_state():
 
 def reset_all_page_state():
     """Reset all page state variables on page refresh - client-specific"""
-    global report_displayed, current_report_result, start_ranking_button_ref
+    global start_ranking_button_ref
 
     state = get_client_state()
 
@@ -7009,6 +7096,10 @@ def reset_all_page_state():
 
     # Reset mode
     state['current_mode'] = 'agent'
+
+    # Reset report display state
+    state['report_displayed'] = False
+    state['current_report_result'] = None
 
     # Reset manual upload state
     state['manual_uploaded_file'] = None
@@ -7090,14 +7181,17 @@ async def check_agent_job_status(messages_container, job_id, api_key_input=None)
 
                     if status == 'succeeded':
                         # Show progress message
+                        logger.info(f"DEBUG: Job {job_id} succeeded, adding completion message")
                         add_message_to_chat(messages_container, 'assistant', '📊 Analysis completed! Retrieving results...')
 
                         # Get results with retry logic
                         max_retries = 3
                         for attempt in range(max_retries):
                             async with session.get(f'{API_BASE_URL}/api/ranking/jobs/{job_id}/results', timeout=60) as results_resp:
+                                logger.info(f"DEBUG: Results response status: {results_resp.status}, attempt {attempt+1}/{max_retries}")
                                 if results_resp.status == 200:
                                     results = await results_resp.json()
+                                    logger.info(f"DEBUG: Got results, keys: {results.keys() if isinstance(results, dict) else 'not a dict'}")
 
                                     # Phase 2: Store ranking results in agent_context
                                     update_agent_context(
@@ -7120,14 +7214,18 @@ async def check_agent_job_status(messages_container, job_id, api_key_input=None)
                                     summary_msg += 'Displaying the complete analysis report now.</div></div>'
                                     add_message_to_chat(messages_container, 'assistant', summary_msg)
 
+                                    logger.info("DEBUG: About to schedule add_suggested_questions timer")
                                     # Add suggested questions (Phase 2)
                                     ui.timer(0.5, lambda: add_suggested_questions(messages_container, api_key_input), once=True)
 
                                     # Scroll to bottom
                                     ui.run_javascript('document.querySelector(".chat-messages").scrollTop = document.querySelector(".chat-messages").scrollHeight;')
 
+                                    logger.info("DEBUG: About to schedule show_main_report timer")
                                     # Show report using the same mechanism as manual mode
                                     ui.timer(1.0, lambda: show_main_report(results), once=True)
+                                    
+                                    logger.info("DEBUG: Timer scheduled, will execute show_main_report in 1 second")
                                     
                                     # Phase 2: Auto-summarize results (optional, delayed to let report display first)
                                     if api_key_input:
@@ -7266,26 +7364,41 @@ def create_floating_report_modal():
         state['dialog_refs'] = {}
     dialog_refs = state['dialog_refs']
     
+    # Check if modal exists and is still valid (not stale from previous page load)
     if 'floating_report_modal' in dialog_refs and dialog_refs['floating_report_modal'] is not None:
-        return dialog_refs['floating_report_modal']
+        try:
+            # Try to access the modal container to verify it's still valid
+            existing_modal = dialog_refs['floating_report_modal']
+            # If we can access it without error, it's still valid
+            _ = existing_modal['container']
+            logger.info("DEBUG: Reusing existing modal")
+            return existing_modal
+        except:
+            # Modal reference is stale, need to create new one
+            logger.info("DEBUG: Modal reference is stale, creating new one")
+            dialog_refs['floating_report_modal'] = None
+
+    logger.info("DEBUG: Creating new floating report modal")
 
     # Create modal container that will be positioned over the data preview
-    # No overlay - just a floating container that matches data preview size
-    modal_container = ui.element('div').style('''
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: white;
-        border-radius: var(--radius-lg);
-        border: 2px solid #011f5b;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        overflow: hidden;
-        z-index: 1000;
-        display: none;
-        flex-direction: column;
-    ''').props('id="floating-report-modal"')
+    # IMPORTANT: Create at root level to ensure it's always accessible
+    # Use a context manager to add it to the page root, not nested in current context
+    with ui.context.client:
+        modal_container = ui.element('div').style('''
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 2px solid #011f5b;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        ''').props('id="floating-report-modal"')
 
     with modal_container:
         # Add html2pdf.js library
@@ -7296,11 +7409,12 @@ def create_floating_report_modal():
         # PDF export button in top-left corner
         def pdf_export_handler():
             from datetime import datetime
-            global current_report_result
+            state = get_client_state()
             current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             job_id = 'report'
             # Try to get job_id from the report if available
             try:
+                current_report_result = state.get('current_report_result')
                 if current_report_result and isinstance(current_report_result, dict) and 'job_id' in current_report_result:
                     job_id = str(current_report_result['job_id'])
             except:
@@ -7469,23 +7583,25 @@ def create_floating_loading_modal():
         return floating_loading_modal_ref
 
     # Create modal container that will be positioned over the left side area
-    modal_container = ui.element('div').style('''
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: white;
-        border-radius: var(--radius-lg);
-        border: 2px solid #011f5b;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        overflow: hidden;
-        z-index: 999;
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    ''').props('id="floating-loading-modal"')
+    # IMPORTANT: Use ui.context.client to ensure it's created at page root level
+    with ui.context.client:
+        modal_container = ui.element('div').style('''
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 2px solid #011f5b;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            z-index: 999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        ''').props('id="floating-loading-modal"')
 
     with modal_container:
         # Loading content area
@@ -7726,13 +7842,18 @@ def show_floating_error(title: str, message: str):
 
 def show_floating_report(result):
     """Show the report in the floating modal overlay positioned above data preview."""
-    global report_displayed, current_report_result
+    # Use client state
+    state = get_client_state()
+    
+    logger.info("DEBUG: show_floating_report called")
     
     # Use client state
     # state = get_client_state() # Already called inside create_floating_report_modal if needed,
     # but create_floating_report_modal accesses state directly.
     
     modal = create_floating_report_modal()
+    
+    logger.info(f"DEBUG: Modal created/retrieved, keys: {modal.keys() if modal else 'None'}")
 
     # Clear previous content
     modal['report_area'].clear()
@@ -7740,22 +7861,31 @@ def show_floating_report(result):
     # Show the report content
     with modal['report_area']:
         show_report(result)
+    
+    logger.info("DEBUG: Report content added to modal")
 
     # Position the modal over the entire left side area (shared_data_area) using JavaScript
     # This ensures it covers both upload area and data preview area
     ui.run_javascript('''
         (function() {
+            console.log('DEBUG JS: Starting modal positioning');
             // Find the shared_data_area container (left side area with upload + preview)
             const targetArea = document.getElementById('shared-data-area');
             const modalContainer = document.getElementById('floating-report-modal');
             
+            console.log('DEBUG JS: targetArea found:', !!targetArea);
+            console.log('DEBUG JS: modalContainer found:', !!modalContainer);
+            
             if (!targetArea || !modalContainer) {
                 console.error('Could not find shared-data-area or floating-report-modal');
+                console.error('targetArea:', targetArea);
+                console.error('modalContainer:', modalContainer);
                 return;
             }
             
             // Ensure modal is appended to body for fixed positioning to work correctly
             if (modalContainer.parentElement !== document.body) {
+                console.log('DEBUG JS: Appending modal to body');
                 document.body.appendChild(modalContainer);
             }
             
@@ -7763,6 +7893,8 @@ def show_floating_report(result):
             function positionModal() {
                 // Get the position and size of the entire left side area relative to viewport
                 const rect = targetArea.getBoundingClientRect();
+                
+                console.log('DEBUG JS: Target area rect:', rect);
                 
                 // Use fixed positioning to position relative to viewport
                 // This ensures it covers the target area exactly regardless of scroll
@@ -7773,6 +7905,8 @@ def show_floating_report(result):
                 modalContainer.style.height = rect.height + 'px';
                 modalContainer.style.zIndex = '1000';
                 modalContainer.style.pointerEvents = 'auto';
+                
+                console.log('DEBUG JS: Modal positioned');
                 
                 // Ensure close button is clickable
                 const closeBtn = modalContainer.querySelector('button');
@@ -7786,7 +7920,9 @@ def show_floating_report(result):
             positionModal();
             
             // Show the modal
+            console.log('DEBUG JS: Setting modal display to flex');
             modalContainer.style.display = 'flex';
+            console.log('DEBUG JS: Modal display set, current value:', modalContainer.style.display);
             
             // Handle window resize and scroll to reposition modal
             function repositionModal() {
@@ -7813,19 +7949,20 @@ def show_floating_report(result):
                 parent.addEventListener('scroll', repositionModal, { passive: true });
                 parent = parent.parentElement;
             }
+            
+            console.log('DEBUG JS: Modal setup complete');
         })();
     ''')
 
-    report_displayed = True
-    current_report_result = result
+    state['report_displayed'] = True
+    state['current_report_result'] = result
     
     # Update button text to "Hide Report" when report is displayed
     update_report_button_text()
 
 def hide_floating_report():
     """Hide the floating report modal."""
-    global report_displayed, current_report_result
-    
+    # Use client state
     state = get_client_state()
     refs = state.get('dialog_refs', {})
     floating_report_modal_ref = refs.get('floating_report_modal')
@@ -7845,19 +7982,20 @@ def hide_floating_report():
         modal_container.style('display: none;')
 
     # Don't clear current_report_result - keep it so button can show report again
-    report_displayed = False
+    state['report_displayed'] = False
     
     # Update button text to "Show Report" when report is hidden
     update_report_button_text()
 
 def toggle_floating_report():
     """Toggle the floating report visibility."""
-    global report_displayed, current_report_result
+    state = get_client_state()
 
-    if report_displayed:
+    if state.get('report_displayed', False):
         hide_floating_report()
-    elif current_report_result is not None:
-        show_floating_report(current_report_result)
+    elif state.get('current_report_result') is not None:
+        show_floating_report(state['current_report_result'])
+
 
 def set_start_ranking_button_enabled(enabled: bool):
     """Enable or disable the Start Ranking button."""
@@ -7929,10 +8067,11 @@ def set_start_ranking_button_enabled(enabled: bool):
 
 def update_report_button_text():
     """Update the report button text based on current report display state."""
-    global start_ranking_button_ref, report_displayed, current_report_result
+    global start_ranking_button_ref
+    state = get_client_state()
     
     # Determine button text based on report display state
-    button_text = 'Hide Report' if report_displayed else 'Show Report'
+    button_text = 'Hide Report' if state.get('report_displayed', False) else 'Show Report'
     
     if start_ranking_button_ref is not None:
         try:
@@ -7962,11 +8101,11 @@ def update_report_button_text():
                 
                 # Re-bind the click handler
                 def show_report_handler():
-                    global report_displayed, current_report_result
-                    if report_displayed:
+                    state = get_client_state()
+                    if state.get('report_displayed', False):
                         hide_floating_report()
-                    elif current_report_result is not None:
-                        show_floating_report(current_report_result)
+                    elif state.get('current_report_result') is not None:
+                        show_floating_report(state['current_report_result'])
                 
                 start_ranking_button_ref.on('click', show_report_handler)
             except Exception as e2:
@@ -7990,13 +8129,14 @@ def update_report_button_text():
 
 def update_start_ranking_button_to_show_report(result):
     """Update the Start Ranking button to Show Report button after analysis is complete."""
-    global start_ranking_button_ref, report_displayed, current_report_result
+    global start_ranking_button_ref
+    state = get_client_state()
 
     # Store the result for later use
-    current_report_result = result
+    state['current_report_result'] = result
 
     # Determine button text based on current report display state
-    button_text = 'Hide Report' if report_displayed else 'Show Report'
+    button_text = 'Hide Report' if state.get('report_displayed', False) else 'Show Report'
 
     if start_ranking_button_ref is not None:
         try:
@@ -8029,11 +8169,11 @@ def update_start_ranking_button_to_show_report(result):
                 
                 # Re-bind the click handler
                 def show_report_handler():
-                    global report_displayed, current_report_result
-                    if report_displayed:
+                    state = get_client_state()
+                    if state.get('report_displayed', False):
                         hide_floating_report()
-                    elif current_report_result is not None:
-                        show_floating_report(current_report_result)
+                    elif state.get('current_report_result') is not None:
+                        show_floating_report(state['current_report_result'])
                 
                 start_ranking_button_ref.on('click', show_report_handler)
             except Exception as e2:
@@ -8041,7 +8181,7 @@ def update_start_ranking_button_to_show_report(result):
         except Exception as e:
             print(f"Error updating button: {e}")
             # Fallback: use JavaScript to update button
-            button_text = 'Hide Report' if report_displayed else 'Show Report'
+            button_text = 'Hide Report' if state.get('report_displayed', False) else 'Show Report'
             ui.run_javascript(f'''
                 (function() {{
                     // Try to find Start Ranking button in DOM
@@ -8059,7 +8199,7 @@ def update_start_ranking_button_to_show_report(result):
     else:
         # If button ref is None, try to find it via JavaScript and update
         # This handles cases where button ref might not be set yet
-        button_text = 'Hide Report' if report_displayed else 'Show Report'
+        button_text = 'Hide Report' if state.get('report_displayed', False) else 'Show Report'
         ui.run_javascript(f'''
             (function() {{
                 // Try to find Start Ranking button in DOM
@@ -8078,13 +8218,20 @@ def update_start_ranking_button_to_show_report(result):
 def show_main_report(result):
     """Display analysis report in the floating modal overlay."""
     try:
+        logger.info(f"DEBUG: show_main_report called with result keys: {result.keys() if isinstance(result, dict) else 'not a dict'}")
+        
         # Show the report in floating modal
         show_floating_report(result)
+        
+        logger.info("DEBUG: show_floating_report completed")
 
         # Update the Start Ranking button to Show Report if it exists
         update_start_ranking_button_to_show_report(result)
+        
+        logger.info("DEBUG: update_start_ranking_button_to_show_report completed")
 
     except Exception as e:
+        logger.error(f"Error displaying main report: {e}", exc_info=True)
         print(f"Error displaying main report: {e}")
         ui.notify(f'Error displaying report: {str(e)}', type='negative')
 
@@ -8236,19 +8383,33 @@ def show_report(report):
                 </div>
             ''')
         
-        # Metadata Section - Compact style
+        # Metadata Section - Compact style with indicator info
         runtime_display = runtime_sec if runtime_sec == "N/A" else f"{runtime_sec}s"
+        
+        # Get indicator information from metadata
+        indicator_column = metadata.get('indicator_column')
+        selected_indicators = metadata.get('selected_indicators', [])
+        
         with ui.element('div').style('margin-bottom: 1rem;'):
+            metadata_items = [
+                f'<span><strong>Sample Count:</strong> {n_samples}</span>',
+                f'<span><strong>Method Count:</strong> {k_methods}</span>',
+                f'<span><strong>Runtime:</strong> {runtime_display}</span>'
+            ]
+            
+            # Add indicator info if available
+            if indicator_column and selected_indicators:
+                indicators_display = ', '.join(selected_indicators)
+                metadata_items.append(f'<span><strong>Selected Indicators:</strong> {indicators_display} ({indicator_column})</span>')
+            
             ui.html(f'''
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; line-height: 1.2;">
                     <div style="font-weight: 600; color: #011f5b;">
                         <span class="material-symbols-outlined" style="font-size: 1rem; margin-right: 0.25rem; vertical-align: middle; color: #011f5b;">info</span>
                         Metadata
                     </div>
-                    <div style="display: flex; gap: 1.5rem; color: var(--gray-600); font-size: 0.75rem;">
-                        <span><strong>Sample Count:</strong> {n_samples}</span>
-                        <span><strong>Method Count:</strong> {k_methods}</span>
-                        <span><strong>Runtime:</strong> {runtime_display}</span>
+                    <div style="display: flex; gap: 1.5rem; color: var(--gray-600); font-size: 0.75rem; flex-wrap: wrap;">
+                        {' '.join(metadata_items)}
                     </div>
                 </div>
             ''')
@@ -9510,16 +9671,16 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
     
         async def on_query():
             """Create ranking job, poll status, then fetch and render results."""
-            global current_report_result, report_displayed
+            state = get_client_state()
             
             # Check if button has been converted to "Show Report" button
             # If current_report_result exists, this button should only toggle report visibility
-            if current_report_result is not None:
+            if state.get('current_report_result') is not None:
                 # Button should be "Show Report" - toggle report visibility instead
-                if report_displayed:
+                if state.get('report_displayed', False):
                     hide_floating_report()
                 else:
-                    show_floating_report(current_report_result)
+                    show_floating_report(state['current_report_result'])
                 return
             
             try:
