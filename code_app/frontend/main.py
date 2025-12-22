@@ -7869,6 +7869,68 @@ def toggle_mobile_nav():
 # Main UI Layout
 with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; padding: 0; margin: 0;'):
     
+    # Add dropdown styles
+    ui.add_head_html('''
+    <style>
+      /* Navbar Layout Overrides */
+      .top-navbar {
+        justify-content: flex-start !important;
+        gap: 2rem;
+      }
+      .navbar-actions {
+        margin-left: auto !important;
+      }
+      .navbar-nav {
+         gap: 0.5rem !important;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+        height: 100%;
+        align-content: center;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.95);
+        min-width: 200px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        z-index: 2001;
+        top: 100%;
+        left: 0;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(1, 31, 91, 0.1);
+        padding: 0.5rem;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .dropdown:hover .dropdown-content {
+        display: flex;
+      }
+      .dropdown-content a {
+        color: rgba(1, 31, 91, 0.8) !important;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        display: block;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        border-radius: 0.5rem;
+      }
+      .dropdown-content a:hover {
+        background-color: rgba(1, 31, 91, 0.1);
+        color: #011f5b !important;
+        transform: translateX(4px);
+      }
+      /* Ensure nav-item handles overflow for dropdown */
+      .nav-item.dropdown {
+        overflow: visible !important;
+      }
+    </style>
+    ''')
+
     # Top Navigation Bar - similar to biomni.stanford.edu
     with ui.element('nav').classes('top-navbar'):
         # Brand/Logo section
@@ -7881,15 +7943,29 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
             with ui.element('li').classes('nav-item'):
                 ui.html('<a href="#hero-section" class="nav-link active">Home</a>')
             with ui.element('li').classes('nav-item'):
-                ui.html('<a href="#mode-selection" class="nav-link">Start Spectral Rank</a>')
-            with ui.element('li').classes('nav-item'):
-                ui.html('<a href="/dashboard" class="nav-link">LLM Leaderboard</a>')
-            with ui.element('li').classes('nav-item'):
-                ui.html('<a href="/dashboard#compare-with-your-model" class="nav-link">Rank My LLM</a>')
-            with ui.element('li').classes('nav-item'):
-                ui.html('<a href="#documentation" class="nav-link">Help</a>')
-            with ui.element('li').classes('nav-item'):
-                ui.html('<a href="#about" class="nav-link">About</a>')
+                ui.html('<a href="#mode-selection" class="nav-link">Start Spectral Ranking</a>')
+            with ui.element('li').classes('nav-item dropdown'):
+                ui.html('''
+                    <a href="javascript:void(0)" class="nav-link" style="gap: 2px;">
+                        LLM Ranking 
+                        <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 0;">arrow_drop_down</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="/dashboard">LLM Leaderboard</a>
+                        <a href="/dashboard#compare-with-your-model">Rank My LLM</a>
+                    </div>
+                ''')
+            with ui.element('li').classes('nav-item dropdown'):
+                ui.html('''
+                    <a href="javascript:void(0)" class="nav-link" style="gap: 2px;">
+                        Documentation
+                        <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 0;">arrow_drop_down</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#documentation">Help</a>
+                        <a href="#about">About</a>
+                    </div>
+                ''')
         
         # Right side actions
         with ui.element('div').classes('navbar-actions'):

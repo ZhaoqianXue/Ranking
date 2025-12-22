@@ -234,6 +234,65 @@ TABLE_STYLES = '''
 .sortable-header:hover .sort-icons .material-symbols-outlined {
     color: #94a3b8; /* Hover color */
 }
+:root {
+    --primary-950: #001127;
+
+  /* Navbar Layout Overrides */
+  .top-navbar {
+    justify-content: flex-start !important;
+    gap: 2rem;
+  }
+  .navbar-actions {
+    margin-left: auto !important;
+  }
+  .navbar-nav {
+    gap: 0.5rem !important;
+  }
+}
+
+/* Dropdown Menu Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    align-content: center;
+}
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(1, 31, 91, 0.95);
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    z-index: 2001;
+    top: 100%;
+    left: 0;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .dropdown:hover .dropdown-content {
+    display: flex;
+  }
+  .dropdown-content a {
+    color: rgba(255, 255, 255, 0.8) !important;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-radius: 0.5rem;
+  }
+  .dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white !important;
+    transform: translateX(4px);
+  }
+
+/* Extended color palette */
 .sortable-header.sorted-asc .sort-icon-up,
 .sortable-header.sorted-desc .sort-icon-down {
     color: #334155; /* Active sort color */
@@ -3378,7 +3437,7 @@ def create_arena_content(data):
                     example_meta_count = f'<div class="example-arena-meta meta-count-only"><span class="meta-count">{row_count} rows × {col_count} cols</span></div>'
                     example_meta_tasks = f'<div class="example-arena-meta meta-tasks"><span class="meta-pill">Tasks: {task_label}</span></div>' if task_label else ''
                     headers = example_df.columns.tolist()
-                    rows = example_df.replace({np.nan: '--'}).astype(str).values.tolist()
+                    rows = example_df.replace({np.nan: ''}).astype(str).values.tolist()
                     table_parts = []
                     table_parts.append('<div class="data-preview-table-scroll" style="overflow-x: auto; overflow-y: visible; width: 100%; border-radius: 8px; -webkit-overflow-scrolling: touch; position: relative;">')
                     table_parts.append('<table style="border-collapse: collapse; font-size: 0.75rem; line-height: 1.2; width: max-content; min-width: 100%; table-layout: auto;">')
@@ -3389,7 +3448,23 @@ def create_arena_content(data):
                     for row in rows:
                         table_parts.append('<tr style="background: white;">')
                         for cell in row:
-                            cell_val = cell if cell not in (None, '') else '--'
+                            cell_val = cell if cell not in (None, 'nan') else ''
+                            # Pandas astype(str) converts np.nan or None to 'nan' sometimes or 'None'
+                            # replace({np.nan: ''}) should handle it, but let's be safe.
+                            if cell_val == 'nan': cell_val = ''
+                            
+                            try:
+                                # Try to convert to float for formatting
+                                if cell_val != '':
+                                    val = float(cell_val)
+                                    if val.is_integer():
+                                         # Convert "1.0" to "1"
+                                         cell_val = str(int(val))
+                                    else:
+                                         cell_val = f'{val:.4f}'
+                            except ValueError:
+                                pass
+                            
                             table_parts.append(f'<td style="padding: 0.4rem 0.3rem; border: 1px solid var(--gray-200); min-width: 80px; text-align: left;">{cell_val}</td>')
                         table_parts.append('</tr>')
                     table_parts.append('</tbody></table></div>')
@@ -3424,9 +3499,9 @@ def create_arena_content(data):
                 ''')
                 with ui.element('div').classes('card-footer').style('margin-top: 1rem;'):
                     ui.button(
-                        'Upload & Run Ranking',
+                        'Go to Ranking Page (Use Example or Upload Data)',
                         on_click=lambda: ui.run_javascript('window.location.href="/#mode-selection"')
-                    ).classes('primary-btn').style('text-transform: none;')
+                    ).style('color: #011f5b !important; background-color: rgba(1, 31, 91, 0.05) !important; border: 1px solid #011f5b !important; border-radius: 6px !important; padding: 8px 16px !important; font-weight: 500 !important; font-size: 0.875rem !important; min-height: 36px !important; transition: all 0.2s ease !important; text-transform: none;').props('outline')
 
     # Arena-specific information - Data Processing Steps
     with ui.element('section').style('width: 100%; max-width: 1400px; margin: 2rem auto; padding: 0 2rem;'):
@@ -3709,15 +3784,29 @@ def create_dashboard():
                 with ui.element('li').classes('nav-item'):
                     ui.html('<a href="/" onclick="window.location.href=\'/#hero-section\'" class="nav-link">Home</a>')
                 with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="#mode-selection" onclick="window.location.href=\'/#mode-selection\'" class="nav-link">Start Spectral Rank</a>')
-                with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="/dashboard" class="nav-link active">LLM Leaderboard</a>')
-                with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="#compare-with-your-model" class="nav-link">Rank My LLM</a>')
-                with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="#documentation" onclick="window.location.href=\'/#documentation\'" class="nav-link">Help</a>')
-                with ui.element('li').classes('nav-item'):
-                    ui.html('<a href="#about" onclick="window.location.href=\'/#about\'" class="nav-link">About</a>')
+                    ui.html('<a href="#mode-selection" onclick="window.location.href=\'/#mode-selection\'" class="nav-link">Start Spectral Ranking</a>')
+                with ui.element('li').classes('nav-item dropdown'):
+                    ui.html('''
+                        <a href="javascript:void(0)" class="nav-link" style="gap: 2px;">
+                            LLM Ranking 
+                            <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 0;">arrow_drop_down</span>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="/dashboard">LLM Leaderboard</a>
+                            <a href="#compare-with-your-model">Rank My LLM</a>
+                        </div>
+                    ''')
+                with ui.element('li').classes('nav-item dropdown'):
+                    ui.html('''
+                        <a href="javascript:void(0)" class="nav-link" style="gap: 2px;">
+                            Documentation
+                            <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; margin-left: 0;">arrow_drop_down</span>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="#documentation" onclick="window.location.href='/#documentation'">Help</a>
+                            <a href="#about" onclick="window.location.href='/#about'">About</a>
+                        </div>
+                    ''')
 
             # Right side actions
             with ui.element('div').classes('navbar-actions'):
