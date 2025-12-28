@@ -3502,7 +3502,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <!-- Card Header Structure -->
                                 <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                     <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">analytics</span>
-                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data Schema</div>
+                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Format 1</div>
                                 </div>
 
                                 <!-- Card Description -->
@@ -3519,7 +3519,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <!-- Card Header Structure -->
                                 <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                     <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">leaderboard</span>
-                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data Schema</div>
+                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Format 2</div>
                                 </div>
 
                                 <!-- Card Description -->
@@ -3665,7 +3665,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <!-- Card Header Structure -->
                                 <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                     <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">analytics</span>
-                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data Schema</div>
+                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Format 1</div>
                                 </div>
 
                                 <!-- Card Description -->
@@ -3682,7 +3682,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <!-- Card Header Structure -->
                                 <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                     <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">leaderboard</span>
-                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data Schema</div>
+                                    <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Format 2</div>
                                 </div>
 
                                 <!-- Card Description -->
@@ -3752,10 +3752,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 ''')
 
-async def create_job_async(file_name: str, file_bytes: bytes, bigbetter: bool, B: int, seed: int):
+async def create_job_async(file_name: str, file_bytes: bytes, bigbetter: bool, B: int, seed: int, indicator_column: str = None, selected_indicators: list = None):
     """Create a ranking job by uploading CSV and parameters."""
     url = f'{API_BASE}/jobs'
     logger.info(f"Creating ranking job: {url}")
+    logger.info(f"Indicator filtering - column: {indicator_column}, selected: {selected_indicators}")
     try:
         async with aiohttp.ClientSession() as session:
             form = aiohttp.FormData()
@@ -3763,6 +3764,13 @@ async def create_job_async(file_name: str, file_bytes: bytes, bigbetter: bool, B
             form.add_field('bigbetter', 'true' if bigbetter else 'false')
             form.add_field('B', str(B))
             form.add_field('seed', str(seed))
+            
+            # Add indicator parameters if provided
+            if indicator_column:
+                form.add_field('indicator_column', indicator_column)
+            if selected_indicators:
+                form.add_field('selected_indicators', json.dumps(selected_indicators))
+            
             async with session.post(url, data=form, timeout=60) as resp:
                 if resp.status == 200:
                     data = await resp.json()
@@ -4202,7 +4210,7 @@ async def handle_manual_example_data_load(dataset: str):
             description = """
             <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
                 <div style="margin-bottom: 0.75rem; text-align: left;">
-                    <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Dense Example Data Schema</div>
+                    <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Format 1</div>
                     <div style="font-size: 0.8rem; color: #64748b; line-height: 1.3;">
                         Dense format with complete performance scores.
                     </div>
@@ -4232,7 +4240,7 @@ async def handle_manual_example_data_load(dataset: str):
             description = """
             <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
                 <div style="margin-bottom: 0.75rem; text-align: left;">
-                    <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Sparse Example Data Schema</div>
+                    <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Format 2</div>
                     <div style="font-size: 0.8rem; color: #64748b; line-height: 1.3;">
                         Pairwise comparison format (Head-to-Head).
                     </div>
@@ -4523,7 +4531,7 @@ async def handle_example_data_load(dataset, messages_container, input_field, api
                         description = """
                         <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
                             <div style="margin-bottom: 0.75rem; text-align: left;">
-                                <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Dense Example Data Schema</div>
+                                <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Format 1</div>
                                 <div style="font-size: 0.8rem; color: #64748b; line-height: 1.3;">
                                     Dense format with complete performance scores.
                                 </div>
@@ -4553,7 +4561,7 @@ async def handle_example_data_load(dataset, messages_container, input_field, api
                         description = """
                         <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; margin-bottom: 1rem;">
                             <div style="margin-bottom: 0.75rem; text-align: left;">
-                                <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Sparse Example Data Schema</div>
+                                <div style="font-weight: 700; font-size: 0.9rem; color: #1e293b; margin-bottom: 0.2rem;">Format 2</div>
                                 <div style="font-size: 0.8rem; color: #64748b; line-height: 1.3;">
                                     Pairwise comparison format (Head-to-Head).
                                 </div>
@@ -6707,9 +6715,22 @@ async def direct_agent_analysis(file_id: str, messages_container, api_key: str):
         B = user_config.get('bootstrap_iterations', 2000)
         seed = user_config.get('random_seed', 1)
 
-        # Create job
+        # 3. Indicator information for filtering
+        indicator_column = data_insights.get('indicator_column')
+        selected_indicators = data_insights.get('selected_indicators', [])
+        logger.info(f"Agent analysis - indicator_column: {indicator_column}, selected_indicators: {selected_indicators}")
+
+        # Create job with indicator parameters
         file_name = 'agent_data.csv'
-        job_id, err = await create_job_async(file_name, file_bytes, bigbetter, B, seed)
+        job_id, err = await create_job_async(
+            file_name, 
+            file_bytes, 
+            bigbetter, 
+            B, 
+            seed, 
+            indicator_column=indicator_column,
+            selected_indicators=selected_indicators
+        )
         if err or not job_id:
             logger.error(f"Create job failed: {err}")
             hide_floating_loading()
@@ -9315,7 +9336,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                                                     <!-- Card Header Structure -->
                                                     <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                                         <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">analytics</span>
-                                                        <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Dense Example Data Schema</div>
+                                                        <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Format 1</div>
                                                     </div>
 
                                                     <!-- Card Description -->
@@ -9332,7 +9353,7 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                                                     <!-- Card Header Structure -->
                                                     <div style="display: flex; align-items: center; justify-content: flex-start; margin-bottom: 0.75rem; position: relative; z-index: 1;">
                                                         <span class="material-symbols-outlined" style="font-size: 1.5rem; color: #1f2937; margin-right: 0.5rem;">leaderboard</span>
-                                                        <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Sparse Example Data Schema</div>
+                                                        <div style="font-size: 0.95rem; font-weight: 700; color: #1f2937; margin: 0;">Format 2</div>
                                                     </div>
 
                                                     <!-- Card Description -->
@@ -9733,8 +9754,25 @@ with ui.element('div').style('min-height: 100vh; width: 100vw; display: flex; fl
                 seed_value = manual_params['seed_value']
                 ranking_direction = manual_params['ranking_direction']
 
-                # Create job
-                job_id, err = await create_job_async(file_name, file_bytes, ranking_direction, b_value, seed_value)
+                # Get indicator information from data_insights (agent context)
+                indicator_column = None
+                selected_indicators = None
+                data_insights = state.get('agent_context', {}).get('data_insights', {})
+                if data_insights:
+                    indicator_column = data_insights.get('indicator_column')
+                    selected_indicators = data_insights.get('selected_indicators', [])
+                    logger.info(f"Retrieved from data_insights - indicator_column: {indicator_column}, selected_indicators: {selected_indicators}")
+
+                # Create job with indicator parameters
+                job_id, err = await create_job_async(
+                    file_name, 
+                    file_bytes, 
+                    ranking_direction, 
+                    b_value, 
+                    seed_value,
+                    indicator_column=indicator_column,
+                    selected_indicators=selected_indicators
+                )
                 if err or not job_id:
                     logger.error(f"Create job failed: {err}")
                     ui.notify(f'🚨 Analysis Failed: {err}', type='negative')
